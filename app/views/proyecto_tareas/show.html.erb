@@ -1,0 +1,13 @@
+<p>
+  <b>Proyecto:</b>
+  <%=h @proyecto_tarea.proyecto %>
+</p>
+
+<p>
+  <b>Tarea:</b>
+  <%=h @proyecto_tarea.tarea %>
+</p>
+
+
+<%= link_to 'Edit', edit_proyecto_tarea_path(@proyecto_tarea) %> |
+<%= link_to 'Back', proyecto_tareas_path %>

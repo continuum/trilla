@@ -1,0 +1,9 @@
+	<p style="width:250px;">
+	<%=@tempo.proyecto.cliente.descripcion %> / <b><%=@tempo.proyecto.descripcion %></b><br>
+	<%=@tempo.tarea.descripcion %>
+	</p>
+	<p style="width:120px;" id="panel-display-<%=@tempo.id %>"><%=@tempo.display('update') %></p>
+	<p style="width:400px;"><%=@tempo.descripcion %></p>
+	<a id="lnk_borrar_timesheet-<%=@tempo.id %>" class="lnk_borrar_timesheet accion" href="javascript:;">Borrar</a>
+	<a id="lnk_editar_timesheet-<%=@tempo.id %>" class="lnk_editar_timesheet accion" href="javascript:;">Editar</a>
+	<span id="json_editar_timesheet-<%=@tempo.id %>" style="display:none;"><%=@tempo.to_json%></span>

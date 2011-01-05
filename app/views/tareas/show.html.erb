@@ -1,0 +1,11 @@
+<p>
+  <b>Descripcion:</b>
+  <%=h @tarea.descripcion %>
+</p>
+<p>
+  <b>Tipo:</b>
+  <%=h @tarea.tipo %>
+</p>
+
+<%= link_to 'Edit', edit_tarea_path(@tarea) %> |
+<%= link_to 'Back', tareas_path %>

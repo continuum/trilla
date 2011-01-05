@@ -1,0 +1,22 @@
+<h1>Listing proyecto_tareas</h1>
+
+<table>
+  <tr>
+    <th>Proyecto</th>
+    <th>Tarea</th>
+  </tr>
+
+<% @proyecto_tareas.each do |proyecto_tarea| %>
+  <tr>
+    <td><%=h proyecto_tarea.proyecto %></td>
+    <td><%=h proyecto_tarea.tarea %></td>
+    <td><%= link_to 'Show', proyecto_tarea %></td>
+    <td><%= link_to 'Edit', edit_proyecto_tarea_path(proyecto_tarea) %></td>
+    <td><%= link_to 'Destroy', proyecto_tarea, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New proyecto_tarea', new_proyecto_tarea_path %>

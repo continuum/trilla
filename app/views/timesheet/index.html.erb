@@ -1,0 +1,127 @@
+<div class="component-message-result">
+	<p><b>Planilla de: </b><%= @usuario.nombres.capitalize %></p>
+	<%if @usuario.perfil == 'ADMIN'%>
+	<a href="/admin" class="accion">Admin</a>
+	<%end%>
+	<a href="/usuarios/<%=@usuario.id%>" class="accion">Perfil</a>
+</div>
+
+<div id="div-msg-salud" style="width:100%; text-align:center; font-size:14px; font-weight:bold; color:#ED1605;"></div>
+
+<div class="component-standar-grid">
+	<h3>
+		<a href="/timesheet"><b><%=Time.now.strftime("%a %b %d, %Y")%></b></a>
+		<!--
+		<a href="/timesheet"><b><%=Time.now%> | <%=Time.zone%></b></a>
+		-->
+		<div style="float:right;">
+			<input type="text" id="datepicker" value="<%=@fecha%>" style="width: 80px; margin-top: -10px; border: 0px solid; background-color:#D7DEDB !important;">
+		</div>
+	</h3>
+</div>
+
+<div class="component-timesheet-header">
+	<p style="width:250px;"><b>Cliente/Proyecto</b></p>
+	<p style="width:120px;"><b>Tiempo</b></p>
+	<p><b>Descripci&oacute;n</b></p>
+	<a href="javascript:;" class="lnk-nuevo-timesheet accion"><b>Nuevo</b></a>
+</div>
+
+<div id="container-temporizadores">
+	<% @temporizadores.each do |tempo| %>	
+	<div id="tr_timesheet-<%=tempo.id %>" class="component-timesheet">
+		<p style="width:250px;">
+		<%=tempo.proyecto.cliente.descripcion %> / <b><%=tempo.proyecto.descripcion %></b><br>
+		<%=tempo.tarea.descripcion %>
+		</p>
+		<p style="width:120px;" id="panel-display-<%=tempo.id %>"><%=tempo.display('list') %></p>
+		<p style="width:400px;"><%=tempo.descripcion %></p>
+		<a id="lnk_borrar_timesheet-<%=tempo.id %>" class="lnk_borrar_timesheet accion" href="javascript:;">Borrar</a>
+		<a id="lnk_editar_timesheet-<%=tempo.id %>" class="lnk_editar_timesheet accion" href="javascript:;">Editar</a>
+		<span id="json_editar_timesheet-<%=tempo.id %>" style="display:none;"><%=tempo.to_json%></span>
+	</div>
+	<% end %>
+</div>
+
+<!--
+<div class="component-search-actions" >
+	<button class="lnk-nuevo-timesheet"><div><span>Nuevo</span></div></button>
+</div>
+-->
+<div id="div-nuevo-timesheet" style="display:none;" class="component-container">
+	
+	<div style="height:120px;">
+	<form id="form-nuevo" action="timesheet/create">
+
+		<div style="width: 250px; height:120px; float:left; padding:5px;">
+			<p>
+				<div>
+					<label for="temporizador_proyecto_id"><b>Cliente/Proyecto</b></label>
+					<select id="temporizador_proyecto_id" name="temporizador[proyecto_id]" style="width:240px;">	
+					<% @clientesProyectos.each do |cli| %>
+					  
+					  <OPTGROUP LABEL="<%=cli.descripcion %>">
+					  
+					  	<% cli.proyectos.each do |pro| %>
+					  	<OPTION value="<%=pro.id %>"><%=pro.descripcion %></OPTION>
+						<% end %>
+					  
+					  </OPTGROUP>
+					  
+					<% end %>
+					</select>
+				</div>
+				<div style="margin-top:5px;">
+					<label for="temporizador_tarea_id"><b>Actividad</b></label><br>
+					<select id="temporizador_tarea_id" name="temporizador[tarea_id]" style="width:240px;">	
+					
+						  <OPTGROUP LABEL="Facturable">
+						  	<% @tareas_facturables.each do |t| %>
+						  	<OPTION value="<%=t.id %>"><%=t.descripcion %></OPTION>
+							<% end %>
+						  </OPTGROUP>
+						  
+						  <OPTGROUP LABEL="No Facturable">
+						  	<% @tareas_no_facturables.each do |t| %>
+						  	<OPTION value="<%=t.id %>"><%=t.descripcion %></OPTION>
+							<% end %>
+						  </OPTGROUP>
+						
+					</select>
+				</div>		
+			</p>
+		</div>
+		
+		<div style="width: 150px; height:120px; float: left; padding:5px;">
+			<p>
+				<label for="temporizador_tiempo_base">Horas:Minutos</label>
+				<input id="temporizador_tiempo_base" name="tiempo_base" maxlength="5" class="timer" style="border:solid 1px; font-size: 38px; width: 140px; height:64px;">
+			</p>	
+		</div>
+		
+		<div style="width: 400px; height:120px; float: left; padding:5px;">
+			<p>
+				<textarea id="temporizador_descripcion" name="temporizador[descripcion]" 
+						  cols="60"  maxlength="500" style="height:65px; border:solid 1px; margin-top:15px;"></textarea>
+			</p>
+			<input type="hidden" id="temporizador_usuario_id" name="temporizador[usuario_id]" value="<%=@usuario.id %>">
+			<input type="hidden" id="temporizador_id" name="id" value="-1">
+		</div>
+		
+	</form>
+	</div>
+	
+	<div class="component-search-actions">
+		<button id="lnk-guardar-timesheet"><div><span id="lnk-span-guardar-timesheet">Iniciar</span></div></button>
+		<button id="lnk-cancelar-timesheet"><div><span id="lnk-span-cancelar-timesheet">Cancelar</span></div></button>
+	</div>
+
+</div>
+
+<div id="form-submit-timesheet" >
+<% form_remote_tag :url => { :action => 'index'} do %>
+<input type="hidden" name="fecha">
+<% end %>
+</div>
+
+<script type="text/javascript" src="/harv/js/today.js"></script>

@@ -1,0 +1,22 @@
+<h3>Listado de proyectos</h3>
+
+<table>
+  <tr>
+    <th>Descripcion</th>
+    <th>Cliente</th>
+  </tr>
+
+<% @proyectos.each do |proyecto| %>
+  <tr>
+    <td><%=h proyecto.descripcion %></td>
+    <td><%=h proyecto.cliente.descripcion %></td>
+    <td><%= link_to 'Show', proyecto %></td>
+    <td><%= link_to 'Edit', edit_proyecto_path(proyecto) %></td>
+    <td><%= link_to 'Destroy', proyecto, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nuevo proyecto', new_proyecto_path %>
