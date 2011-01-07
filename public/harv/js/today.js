@@ -24,10 +24,11 @@ var idInterval = -1;
 				otrosKeys.push(58);
 			}
 
-			if(jQuery.inArray(event.which, otrosKeys) == -1 && (event.which < 48 || event.which > 57) || event.which == 13) {
+			if($.inArray(event.which, otrosKeys) == -1 && (event.which < 48 || event.which > 57) || event.which == 13) {
 				event.preventDefault();
 			    return false;
 			}
+			
 		}).keyup(function(e){
 			if ($(this).val() === '') {
 				$('#lnk-span-guardar-timesheet').text('Iniciar');
@@ -110,7 +111,7 @@ var idInterval = -1;
 		 * @param {Object} event
 		 */
 		$('#lnk-guardar-timesheet').click(function(event){
-			create_update(-1);
+			create_update();
 			event.preventDefault();
 		});
 			
@@ -137,6 +138,7 @@ var idInterval = -1;
 			
 				var reloj_running = $('#reloj-running');
 			
+				//si existe un reloj corriendo
 				if (reloj_running.attr('id') != undefined) {
 				
 					if (StringUtils.isBlank(tiempo_base)) {
@@ -231,6 +233,7 @@ var idInterval = -1;
 					
 					var reloj_running = $('#reloj-running');
 				
+					//si existe un reloj corriendo, lo detiene
 					if (reloj_running.attr('id') != undefined) {
 						
 						var params = {
@@ -242,6 +245,7 @@ var idInterval = -1;
 						update(params);
 					}
 					
+					//inicia el reloj seleccionado
 					var params = {
 						accion: 'start',
 						id: id,
@@ -256,6 +260,7 @@ var idInterval = -1;
 					
 				} else {
 					
+					//detiene el reloj seleccionado
 					var reloj_running = $('#reloj-running');
 					var params = {
 						accion: 'stop',
@@ -299,14 +304,6 @@ var idInterval = -1;
 				
 				if (relojRunning.attr('id') != undefined) {
 				
-					relojRunning.text(hora + ':' + minuto + ':' + segundo + ':' + dia);
-					console.info(relojRunning.text());
-					
-					var s = (hora.toString().length == 1 ? '0' + hora : hora) + ':' +
-							(minuto.toString().length == 1 ? '0' + minuto : minuto);
-					
-					$('#reloj-running-display').text(s);
-					
 					segundo++;
 					
 					if (segundo > 59) {
@@ -329,6 +326,14 @@ var idInterval = -1;
 						segundo = 0;
 						minuto = 0;
 					}
+				
+					relojRunning.text(hora + ':' + minuto + ':' + segundo + ':' + dia);
+					//console.info(relojRunning.text());
+					
+					var s = (hora.toString().length == 1 ? '0' + hora : hora) + ':' +
+							(minuto.toString().length == 1 ? '0' + minuto : minuto);
+					
+					$('#reloj-running-display').text(s);
 				}
 				
 			}, 1000);
@@ -353,6 +358,68 @@ var idInterval = -1;
 				form.attr('action','timesheet');
 				form.submit();
 			}
+		});
+		
+		/**
+		 * este codigo lo invente yo, no aseguro que funcione con otra version de jquery
+		 * @param {Object} accion
+		 */
+		function changeDate(accion){
+			
+			var fecha = $( "#datepicker" ).val().split('-');
+			var dia = Number(fecha[2]);
+			var mes = Number(fecha[1]);
+			var anio = Number(fecha[0]);
+			
+			if (accion === 'next') {
+				dia++;
+			} else {
+				dia--;	
+			}
+
+			var fechaActual = new Date().toIntDate();
+			
+			var d = dia.toString();
+			var m = mes.toString();
+			
+			if (d.length == 1) {
+				d = '0' + d;
+			}
+			
+			if (m.length == 1) {
+				m = '0' + m;
+			}
+			
+			var fechaElegida = Number(anio + m + d);
+			
+			var td = undefined;
+			
+			if (fechaElegida <= fechaActual)
+				td = $('<td class="ui-datepicker-current-day"><a href="#" class="ui-state-default ui-state-active">' + dia + '</a></td>');
+			else {
+				td = $('<td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">' + dia + '</span></td>');
+			}
+			
+			$.datepicker._selectDay('#datepicker',mes-1,anio, td);
+		}
+		
+		
+		/**
+		 * 
+		 * @param {Object} event
+		 */
+		$('#prev-day').click(function(event){
+			console.info('before-day',$( "#datepicker" ).val());	
+			changeDate('prev');
+		});
+		
+		/**
+		 * 
+		 * @param {Object} event
+		 */
+		$('#next-day').click(function(event){
+			console.info('after-day',$( "#datepicker" ).val());	
+			changeDate('next');
 		});
 	});	
 	

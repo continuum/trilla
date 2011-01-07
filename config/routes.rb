@@ -3,10 +3,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :tareas
 
-  map.resources :tareas
-
-  map.resources :tareas
-
   map.resources :temporizadors
 
   map.resources :proyecto_tareas

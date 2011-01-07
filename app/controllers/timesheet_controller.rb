@@ -35,18 +35,18 @@ class TimesheetController < ApplicationController
     
     iniciado = params[:iniciado]
 
-    timeActual = Temporizador.fechaActual()
+    fechaActual = Temporizador.fechaActual()
 
     @tempo = Temporizador.new(params[:temporizador])
     @tempo.iniciado = iniciado
-    @tempo.start = timeActual
-    @tempo.stop = timeActual
+    @tempo.start = fechaActual
+    @tempo.stop = fechaActual
     @tempo.save
     
     @fecha = params[:fecha]
     
     if (@fecha.nil? || @fecha == '')
-      @fecha = timeActual.to_date()
+      @fecha = fechaActual.to_date()
     end
 
     @usuario = session[:usuario]
@@ -61,12 +61,12 @@ class TimesheetController < ApplicationController
     @tempo = Temporizador.find(params[:id])
     @tempo.update_attributes(params[:temporizador])
     
-    timeActual = Temporizador.fechaActual()
+    fechaActual = Temporizador.fechaActual()
     
     @fecha = params[:fecha]
     
     if (@fecha.nil? || @fecha == '')
-      @fecha = timeActual.to_date()
+      @fecha = fechaActual.to_date()
     end
 
     @usuario = session[:usuario]
@@ -81,9 +81,9 @@ class TimesheetController < ApplicationController
     @tempo = Temporizador.find(params[:id])
     
     begin
-      
+
       tiempos = params[:time].to_s.split(':')
-      stop = @tempo.start + tiempos[0].to_i.hours + tiempos[1].to_i.minutes + tiempos[2].to_i.seconds + tiempos[3].to_i.days 
+      stop = @tempo.start + (tiempos[0].to_i.hours + tiempos[1].to_i.minutes + tiempos[2].to_i.seconds + tiempos[3].to_i.days) 
       
       if (params[:accion] == 'start') 
         @tempo.update_attributes({:stop => stop, :iniciado => 1})

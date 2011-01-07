@@ -1,0 +1,24 @@
+<p>
+  <b>Rut:</b>
+  <%=h @usuario.rut %>
+</p>
+
+<p>
+  <b>Nombres:</b>
+  <%=h @usuario.nombres %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @usuario.email %>
+</p>
+
+<p>
+  <b>Perfil:</b>
+  <%=h @usuario.perfil %>
+</p>
+
+<%= link_to 'Edit', edit_usuario_path(@usuario) %> 
+<%if( @usuario_sesion.perfil == 'ADMIN')%>
+| <%= link_to 'Back', usuarios_path %>
+<%end%>

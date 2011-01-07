@@ -23,7 +23,18 @@ class Temporizador < ActiveRecord::Base
     if (accion == 'list')
     
       if self.iniciado == 1
-        segundos = (Temporizador.fechaActual - self.start).to_i 
+        
+        f = Temporizador.fechaActual
+        
+        if (self.start == self.stop)
+          segundos = (f - self.start).to_i
+        else
+          
+          segundos1 = (f - self.start).to_i
+          segundos2 = (f - self.stop).to_i
+          segundos = (segundos1 - segundos2) + (f - self.updated_at).to_i;
+
+        end 
       else
         segundos = (self.stop - self.start).to_i
       end

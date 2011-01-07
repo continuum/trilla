@@ -24,14 +24,7 @@
   </p>
 <% end %>
 
-<%if( @isPerfil.nil?)%>
-
-	<%= link_to 'Show', @usuario %>
-
-	<%if( @usuario_sesion.perfil == 'ADMIN')%>
-	| <%= link_to 'Back', usuarios_path %>
-	<%end%>
-	
-<%else%>
-	<a href="/usuarios/<%=@usuario.id%>?p=1">Back</a>
+<%= link_to 'Show', @usuario %>
+<%if( @usuario_sesion.perfil == 'ADMIN')%>
+| <%= link_to 'Back', usuarios_path %>
 <%end%>

@@ -15,6 +15,9 @@ class UsuariosController < AdminController
   def show
     @usuario = Usuario.find(params[:id])
 
+    @usuario_sesion = session[:usuario]
+    @isPerfil = params[:p]
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @usuario }
@@ -35,6 +38,8 @@ class UsuariosController < AdminController
   # GET /usuarios/1/edit
   def edit
     @usuario = Usuario.find(params[:id])
+    @usuario_sesion = session[:usuario]
+    @isPerfil = params[:p]
   end
 
   # POST /usuarios

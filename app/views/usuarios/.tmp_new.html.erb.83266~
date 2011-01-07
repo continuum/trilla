@@ -1,4 +1,4 @@
-<h1>Editing usuario</h1>
+<h1>New usuario</h1>
 
 <% form_for(@usuario) do |f| %>
   <%= f.error_messages %>
@@ -20,18 +20,16 @@
     <%= f.password_field :password %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+	<%= f.label :perfil %><br />
+	
+	<select name="usuario[perfil]" id="usuario_perfil">
+		<option>USUARIO</option>
+		<option>ADMIN</option>
+	</select> 
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%if( @isPerfil.nil?)%>
-
-	<%= link_to 'Show', @usuario %>
-
-	<%if( @usuario_sesion.perfil == 'ADMIN')%>
-	| <%= link_to 'Back', usuarios_path %>
-	<%end%>
-	
-<%else%>
-	<a href="/usuarios/<%=@usuario.id%>?p=1">Back</a>
-<%end%>
+<%= link_to 'Back', usuarios_path %>

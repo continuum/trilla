@@ -18,5 +18,15 @@
   <%=h @usuario.perfil %>
 </p>
 
-<%= link_to 'Edit', edit_usuario_path(@usuario) %> |
-<%= link_to 'Back', usuarios_path %>
+<%if( @isPerfil.nil?)%>
+
+	<%= link_to 'Edit', edit_usuario_path(@usuario) %>
+
+	<%if( @usuario_sesion.perfil == 'ADMIN')%>
+	| <%= link_to 'Back', usuarios_path %>
+	<%end%>
+	
+<%else%>
+	<a href="/usuarios/<%=@usuario.id%>/edit?p=<%=@isPerfil%>">Edit</a>
+	| <a href="/timesheet">Back</a>
+<%end%>

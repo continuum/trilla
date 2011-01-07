@@ -1,9 +1,9 @@
 <div class="component-message-result">
-	<p><b>Planilla de: </b><a href="/usuarios/<%=@usuario.id%>?p=1"><%= @usuario.nombres.capitalize %></a></p>
+	<p><b>Planilla de: </b><%= @usuario.nombres.capitalize %></p>
 	<%if @usuario.perfil == 'ADMIN'%>
 	<a href="/admin" class="accion">Admin</a>
 	<%end%>
-	<a href="/usuarios/<%=@usuario.id%>?p=1" class="accion">Perfil</a>
+	<a href="/usuarios/<%=@usuario.id%>" class="accion">Perfil</a>
 </div>
 
 <div id="div-msg-salud" style="width:100%; text-align:center; font-size:14px; font-weight:bold; color:#ED1605;"></div>
@@ -15,9 +15,7 @@
 		<a href="/timesheet"><b><%=Time.now%> | <%=Time.zone%></b></a>
 		-->
 		<div style="float:right;">
-		<a id="prev-day" href="javascript:;"><<<</a>
 			<input type="text" id="datepicker" value="<%=@fecha%>" style="width: 80px; margin-top: -10px; border: 0px solid; background-color:#D7DEDB !important;">
-		<a id="next-day" href="javascript:;">>>></a>
 		</div>
 	</h3>
 </div>
