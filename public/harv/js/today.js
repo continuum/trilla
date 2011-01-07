@@ -12,6 +12,9 @@ var idInterval = -1;
 			$('#temporizador_descripcion').val(temporizador.descripcion);
 			$('#temporizador_proyecto_id').selectedValue(temporizador.proyecto_id);
 			$('#temporizador_tarea_id').selectedValue(temporizador.tarea_id);
+			
+			var span = $('#lnk_reloj-' + temporizador.id).find('span');
+			$('#temporizador_tiempo_base').val($(span[1]).text());
 		}
 		
 		$('#temporizador_descripcion').addValidateMaxLength();
@@ -395,12 +398,12 @@ var idInterval = -1;
 			var td = undefined;
 			
 			if (fechaElegida <= fechaActual)
-				td = $('<td class="ui-datepicker-current-day"><a href="#" class="ui-state-default ui-state-active">' + dia + '</a></td>');
+				td = '<td class="ui-datepicker-current-day"><a href="#" class="ui-state-default ui-state-active">' + dia + '</a></td>';
 			else {
-				td = $('<td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">' + dia + '</span></td>');
+				td = '<td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">' + dia + '</span></td>';
 			}
 			
-			$.datepicker._selectDay('#datepicker',mes-1,anio, td);
+			$.datepicker._selectDay('#datepicker', mes-1, anio, $(td));
 		}
 		
 		
@@ -411,6 +414,7 @@ var idInterval = -1;
 		$('#prev-day').click(function(event){
 			console.info('before-day',$( "#datepicker" ).val());	
 			changeDate('prev');
+			event.preventDefault();
 		});
 		
 		/**
@@ -420,7 +424,18 @@ var idInterval = -1;
 		$('#next-day').click(function(event){
 			console.info('after-day',$( "#datepicker" ).val());	
 			changeDate('next');
+			event.preventDefault();
 		});
+		
+		/**
+		 * 
+		 * @param {Object} event
+		 */
+		$('.lnk-perfil-usuario').click(function(event){
+			location.href = $('#path-perfil-usuario').text();
+			event.preventDefault();
+		});
+		
 	});	
 	
 })(jQuery);		

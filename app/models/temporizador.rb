@@ -22,7 +22,7 @@ class Temporizador < ActiveRecord::Base
 
     if (accion == 'list')
     
-      if self.iniciado == 1
+      if (self.iniciado == 1)
         
         f = Temporizador.fechaActual
         
