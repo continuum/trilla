@@ -1,0 +1,45 @@
+GEM
+  remote: http://rubygems.org/
+  remote: http://rubygems.org/
+  remote: http://rubygems.org/
+  remote: http://gems.rubyforge.org/
+  remote: http://rubygems.org/
+  remote: http://gemcutter.org/
+  specs:
+    actionmailer (2.3.4)
+      actionpack (= 2.3.4)
+    actionpack (2.3.4)
+      activesupport (= 2.3.4)
+      rack (~> 1.0.0)
+    activerecord (2.3.4)
+      activesupport (= 2.3.4)
+    activeresource (2.3.4)
+      activesupport (= 2.3.4)
+    activesupport (2.3.4)
+    gdata (1.1.1)
+    oauth (0.4.4)
+    rack (1.0.1)
+    rack-openid (1.1.2)
+      rack (>= 0.4)
+      ruby-openid (>= 2.0.3)
+    rails (2.3.4)
+      actionmailer (= 2.3.4)
+      actionpack (= 2.3.4)
+      activerecord (= 2.3.4)
+      activeresource (= 2.3.4)
+      activesupport (= 2.3.4)
+      rake (>= 0.8.3)
+    rake (0.8.7)
+    ruby-openid (2.1.8)
+    sqlite3-ruby (1.2.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  gdata (= 1.1.1)
+  oauth (= 0.4.4)
+  rack-openid
+  rails (= 2.3.4)
+  ruby-openid
+  sqlite3-ruby (= 1.2.5)
