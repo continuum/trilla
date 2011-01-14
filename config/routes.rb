@@ -14,7 +14,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :proyectos
 
   map.resources :clientes
-
+  
+  #map.root :controller => 'timesheet'
+    
+  map.resource :sessions
+    
+ 
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

@@ -1,7 +1,6 @@
 class TimesheetController < ApplicationController
-  
-  before_filter :authorize, :only => [ :index, :create, :update, :delete ]
-  
+  before_filter :ensure_signed_in  
+
   def index
     
     @clientesProyectos = Array.new

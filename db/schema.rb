@@ -9,12 +9,31 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101112125323) do
+ActiveRecord::Schema.define(:version => 20110114130442) do
 
   create_table "clientes", :force => true do |t|
     t.string   "descripcion"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "open_id_authentication_associations", :force => true do |t|
+    t.binary  "server_url"
+    t.string  "handle"
+    t.binary  "secret"
+    t.integer "issued"
+    t.integer "lifetime"
+    t.string  "assoc_type"
+  end
+
+  create_table "open_id_authentication_nonces", :force => true do |t|
+    t.string  "nonce"
+    t.integer "created"
+  end
+
+  create_table "open_id_authentication_settings", :force => true do |t|
+    t.string "setting"
+    t.binary "value"
   end
 
   create_table "proyecto_tareas", :force => true do |t|
@@ -58,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20101112125323) do
   end
 
   create_table "usuarios", :force => true do |t|
-    t.string   "rut"
     t.string   "nombres"
     t.string   "email"
     t.string   "password"
