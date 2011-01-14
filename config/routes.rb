@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :usuarios
 
   map.resources :proyectos
+  map.archive_proyecto 'proyectos/:id/archive', :controller => 'proyectos', :action => 'archive'
 
   map.resources :clientes
   
