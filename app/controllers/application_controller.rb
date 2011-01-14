@@ -3,5 +3,6 @@
 
 class ApplicationController < ActionController::Base
   include AuthenticationHelper
+  before_filter :ensure_signed_in
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 end

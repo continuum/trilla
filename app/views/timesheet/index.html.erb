@@ -1,10 +1,8 @@
 <div class="component-message-result">
 	<p><b>Planilla de: </b><a href="javascript:;" class="lnk-perfil-usuario"><%= @usuario.nombres.capitalize %></a></p>
-	<%if @usuario.perfil == 'ADMIN'%>
-	<a href="/admin" class="accion">Admin</a>
-	<%end%>
-	<a href="javascript:;"class="accion lnk-perfil-usuario">Perfil</a>
-	<span id="path-perfil-usuario" style="display:none;">/usuarios/<%=@usuario.id%>?p=1</span>
+ <a href="/sessions/destroy"class="accion">Salir</a>
+ 	<a href="/admin" class="accion">Admin</a>
+ 	<a href="/usuarios/<%=@usuario.id%>?p=1"class="accion">Mi Perfil</a>
 </div>
 
 <div id="div-msg-salud" style="width:100%; text-align:center; font-size:14px; font-weight:bold; color:#ED1605;"></div>

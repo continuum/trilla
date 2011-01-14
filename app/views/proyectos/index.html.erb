@@ -1,22 +1,37 @@
+<%= render(:partial => "shared/header") %>
 <h3>Listado de proyectos</h3>
 
-<table>
+<div class="component-standar-grid">
+<table border="0" cellspacing="0" cellpadding="0" class="standar-grid-model">
+	<col width="">
+	<col width="">
+	<col width="200px">
+	<col width="180px">
+  <tbody>
   <tr>
     <th>Descripcion</th>
     <th>Cliente</th>
+	<th>Creado el</th>
+	<th></th>
   </tr>
 
 <% @proyectos.each do |proyecto| %>
   <tr>
-    <td><%=h proyecto.descripcion %></td>
+    <td><%= link_to proyecto.descripcion, proyecto %></td>
     <td><%=h proyecto.cliente.descripcion %></td>
-    <td><%= link_to 'Show', proyecto %></td>
-    <td><%= link_to 'Edit', edit_proyecto_path(proyecto) %></td>
-    <td><%= link_to 'Destroy', proyecto, :confirm => 'Are you sure?', :method => :delete %></td>
+	<td><%=h proyecto.created_at %> <%=h proyecto.archivado %></td>
+    <td>&nbsp;
+   		<%= link_to 'Editar', edit_proyecto_path(proyecto) %>&nbsp;
+    	<%= link_to 'Eliminar', proyecto, :confirm => 'Está seguro?', :method => :delete %>&nbsp;
+   		<%= link_to 'Archivar', archive_proyecto_path(proyecto) %>&nbsp;		
+		</td>
   </tr>
 <% end %>
+
+	</tbody>
 </table>
 
+</div>
 <br />
 
 <%= link_to 'Nuevo proyecto', new_proyecto_path %>

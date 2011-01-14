@@ -72,6 +72,26 @@ class ProyectosController < AdminController
       end
     end
   end
+  
+  # PUT /proyectos/1
+  # PUT /proyectos/1.xml
+  def archive
+    @proyecto = Proyecto.find(params[:id])
+    respond_to do |format|
+       archivado = true
+       archivado = false if @proyecto.archivado
+         
+      if @proyecto.update_attributes({:archivado => archivado})
+       @proyectos = Proyecto.all
+        format.html { render :action => "index" }
+        format.xml  { render :xml => @proyectos }
+      else
+        format.html { render :action => "index" }
+        format.xml  { render :xml => @proyecto.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+      
 
   # DELETE /proyectos/1
   # DELETE /proyectos/1.xml

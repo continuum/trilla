@@ -1,14 +1,17 @@
+<% usuario = session[:usuario] %>
 <div class="component-message-result">
-	<p><b>Administraci&oacute;n: </b><%= @usuario.nombres.capitalize %></p>
+	<p><b>Administraci&oacute;n: </b><%= usuario.nombres.capitalize %></p>
 	<a href="/timesheet" class="accion">Timesheet</a>
 </div>
 
 <div id="tab" class="component-navigator-tabs">
 	<ul>
-		<li class="tab-select first"><a href="javascript:;" class="tab-mantenedor" title="<%=clientes_path%>" id="tab-clientes">Clientes</a></li>
-		<li class="tab-unselect"><a href="javascript:;" class="tab-mantenedor" title="<%=proyectos_path%>">Proyectos</a></li>
-		<li class="tab-unselect"><a href="javascript:;" class="tab-mantenedor" title="<%=usuarios_path%>">Usuarios</a></li>
-		<li class="tab-unselect last"><a href="javascript:;" class="tab-mantenedor" title="<%=tareas_path%>">Tareas</a></li>
+		<li class="tab-select first"><a href="javascript:;" class="tab-mantenedor" id="tab-proyectos" title="<%=proyectos_path%>">Proyectos</a></li>
+		<% if usuario.perfil == 'ADMIN'  %>
+			<li class="tab-unselect"><a href="javascript:;" class="tab-mantenedor" title="<%=usuarios_path%>">Usuarios</a></li>
+			<li class="tab-unselect"><a href="javascript:;" class="tab-mantenedor" title="<%=clientes_path%>" id="tab-clientes">Clientes</a></li>
+			<li class="tab-unselect last"><a href="javascript:;" class="tab-mantenedor" title="<%=tareas_path%>">Tareas</a></li>
+		<%  end %>
 		<li class="clearfix"></li>
 	</ul>
 </div>
@@ -35,7 +38,7 @@
 			event.preventDefault();
 		});
 		
-		$('#tab-clientes').click();
+		$('#tab-proyectos').click();
 	});	
 	
 })(jQuery);		
