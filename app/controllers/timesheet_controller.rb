@@ -20,7 +20,7 @@ class TimesheetController < ApplicationController
 
     @fecha = params[:fecha]
     
-    if (@fecha.nil? || @fecha == '')
+    if @fecha.blank?
       @fecha = Temporizador.fechaActual().to_date()
     end
 
@@ -43,7 +43,7 @@ class TimesheetController < ApplicationController
     
     @fecha = params[:fecha]
     
-    if (@fecha.nil? || @fecha == '')
+    if @fecha.blank?
       @fecha = fechaActual.to_date()
     end
 
@@ -63,7 +63,7 @@ class TimesheetController < ApplicationController
     
     @fecha = params[:fecha]
     
-    if (@fecha.nil? || @fecha == '')
+    if @fecha.blank?
       @fecha = fechaActual.to_date()
     end
 
