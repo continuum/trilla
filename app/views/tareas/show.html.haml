@@ -1,0 +1,9 @@
+%p
+  %b Descripcion:
+  = h @tarea.descripcion
+%p
+  %b Tipo:
+  = h @tarea.tipo
+= link_to 'Edit', edit_tarea_path(@tarea)
+|
+\#{link_to 'Back', tareas_path}

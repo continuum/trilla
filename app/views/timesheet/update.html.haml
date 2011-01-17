@@ -1,0 +1,11 @@
+%p{:style => "width:250px;"}
+  = @tempo.proyecto.cliente.descripcion
+  \/
+  %b= @tempo.proyecto.descripcion
+  %br/
+  = @tempo.tarea.descripcion
+%p{:id => "panel-display-#{@tempo.id}", :style => "width:120px;"}= @tempo.display('update')
+%p{:style => "width:400px;"}= @tempo.descripcion
+%a.lnk_borrar_timesheet.accion{:href => "javascript:;", :id => "lnk_borrar_timesheet-#{@tempo.id}"} Borrar
+%a.lnk_editar_timesheet.accion{:href => "javascript:;", :id => "lnk_editar_timesheet-#{@tempo.id}"} Editar
+%span{:id => "json_editar_timesheet-#{@tempo.id}", :style => "display:none;"}= @tempo.to_json

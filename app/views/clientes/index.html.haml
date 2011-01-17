@@ -1,0 +1,13 @@
+= render(:partial => "shared/header")
+%h3 Listado de clientes
+%table
+  %tr
+    %th Descripcion
+  - @clientes.each do |cliente|
+    %tr
+      %td= h cliente.descripcion
+      %td= link_to 'Show', cliente
+      %td= link_to 'Edit', edit_cliente_path(cliente)
+      %td= link_to 'Destroy', cliente, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'Nuevo cliente', new_cliente_path

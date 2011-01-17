@@ -1,0 +1,15 @@
+%h1 New proyecto
+- form_for(@proyecto) do |f|
+  = f.error_messages
+  %p
+    = f.label :descripcion
+    %br/
+    = f.text_field :descripcion
+  %p
+    = f.label :cliente
+    %br/
+    - clientes_array = Cliente.all.map { |cli| [cli.descripcion, cli.id] }
+    = select_tag(:cliente, options_for_select(clientes_array))
+  %p
+    = f.submit 'Create'
+= link_to 'Back', proyectos_path

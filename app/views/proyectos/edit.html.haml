@@ -1,0 +1,17 @@
+%h1 Editing proyecto
+- form_for(@proyecto) do |f|
+  = f.error_messages
+  %p
+    = f.label :descripcion
+    %br/
+    = f.text_field :descripcion
+  %p
+    = f.label :cliente
+    %br/
+    - clientes_array = Cliente.all.map { |cli| [cli.descripcion, cli.id] }
+    = select_tag(:cliente, options_for_select(clientes_array))
+  %p
+    = f.submit 'Update'
+= link_to 'Show', @proyecto
+|
+\#{link_to 'Back', proyectos_path}

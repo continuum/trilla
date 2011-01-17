@@ -1,0 +1,17 @@
+= render(:partial => "shared/header")
+%h3 Listado usuarios
+%table
+  %tr
+    %th Nombres
+    %th Email
+    %th Perfil
+  - @usuarios.each do |usuario|
+    %tr
+      %td= h usuario.nombres
+      %td= h usuario.email
+      %td= h usuario.perfil
+      %td= link_to 'Show', usuario
+      %td= link_to 'Edit', edit_usuario_path(usuario)
+      %td= link_to 'Destroy', usuario, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'Nuevo usuario', new_usuario_path

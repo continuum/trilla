@@ -1,0 +1,28 @@
+%h1 New usuario
+- form_for(@usuario) do |f|
+  = f.error_messages
+  %p
+    = f.label :rut
+    %br/
+    = f.text_field :rut
+  %p
+    = f.label :nombres
+    %br/
+    = f.text_field :nombres
+  %p
+    = f.label :email
+    %br/
+    = f.text_field :email
+  %p
+    = f.label :password
+    %br/
+    = f.password_field :password
+  %p
+    = f.label :perfil
+    %br/
+    %select#usuario_perfil{:name => "usuario[perfil]"}
+      %option USUARIO
+      %option ADMIN
+  %p
+    = f.submit 'Create'
+= link_to 'Back', usuarios_path

@@ -1,0 +1,9 @@
+%p
+  %b Proyecto:
+  = h @proyecto_tarea.proyecto
+%p
+  %b Tarea:
+  = h @proyecto_tarea.tarea
+= link_to 'Edit', edit_proyecto_tarea_path(@proyecto_tarea)
+|
+\#{link_to 'Back', proyecto_tareas_path}

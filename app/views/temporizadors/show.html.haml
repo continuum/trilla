@@ -1,0 +1,21 @@
+%p
+  %b Descripcion:
+  = h @temporizador.descripcion
+%p
+  %b Start:
+  = h @temporizador.start
+%p
+  %b Stop:
+  = h @temporizador.stop
+%p
+  %b Proyecto:
+  = h @temporizador.proyecto
+%p
+  %b Tarea:
+  = h @temporizador.tarea
+%p
+  %b Usuario:
+  = h @temporizador.usuario
+= link_to 'Edit', edit_temporizador_path(@temporizador)
+|
+\#{link_to 'Back', temporizadors_path}

@@ -1,0 +1,16 @@
+%h1 New tarea
+- form_for(@tarea) do |f|
+  = f.error_messages
+  %p
+    = f.label :descripcion
+    %br/
+    = f.text_field :descripcion
+  %p
+    = f.label :tipo
+    %br/
+    %select#tarea_tipo{:name => "tarea[tipo]"}
+      %option Facturable
+      %option No Facturable
+  %p
+    = f.submit 'Create'
+= link_to 'Back', tareas_path

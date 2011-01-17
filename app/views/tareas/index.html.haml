@@ -1,0 +1,15 @@
+= render(:partial => "shared/header")
+%h3 Listado de tareas
+%table
+  %tr
+    %th Descripcion
+    %th Tipo
+  - @tareas.each do |tarea|
+    %tr
+      %td= h tarea.descripcion
+      %td= h tarea.tipo
+      %td= link_to 'Show', tarea
+      %td= link_to 'Edit', edit_tarea_path(tarea)
+      %td= link_to 'Destroy', tarea, :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'Nueva tarea', new_tarea_path

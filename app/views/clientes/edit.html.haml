@@ -1,0 +1,12 @@
+%h1 Editing cliente
+- form_for(@cliente) do |f|
+  = f.error_messages
+  %p
+    = f.label :descripcion
+    %br/
+    = f.text_field :descripcion
+  %p
+    = f.submit 'Update'
+= link_to 'Show', @cliente
+|
+\#{link_to 'Back', clientes_path}

@@ -1,0 +1,17 @@
+%p
+  %b Nombres:
+  = h @usuario.nombres
+%p
+  %b Email:
+  = h @usuario.email
+%p
+  %b Perfil:
+  = h @usuario.perfil
+- if( @isPerfil.nil?)
+  = link_to 'Edit', edit_usuario_path(@usuario)
+  - if( @usuario_sesion.perfil == 'ADMIN')
+    | #{link_to 'Back', usuarios_path}
+- else
+  %a{:href => "/usuarios/#{@usuario.id}/edit?p=#{@isPerfil}"} Edit
+  |
+  %a{:href => "/timesheet"} Back

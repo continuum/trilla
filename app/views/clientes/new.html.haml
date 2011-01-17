@@ -1,0 +1,10 @@
+%h1 New cliente
+- form_for(@cliente) do |f|
+  = f.error_messages
+  %p
+    = f.label :descripcion
+    %br/
+    = f.text_field :descripcion
+  %p
+    = f.submit 'Create'
+= link_to 'Back', clientes_path

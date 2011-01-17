@@ -1,0 +1,16 @@
+%h1 Editing proyecto_tarea
+- form_for(@proyecto_tarea) do |f|
+  = f.error_messages
+  %p
+    = f.label :proyecto
+    %br/
+    = f.text_field :proyecto
+  %p
+    = f.label :tarea
+    %br/
+    = f.text_field :tarea
+  %p
+    = f.submit 'Update'
+= link_to 'Show', @proyecto_tarea
+|
+\#{link_to 'Back', proyecto_tareas_path}

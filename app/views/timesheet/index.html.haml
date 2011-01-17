@@ -1,0 +1,89 @@
+.component-message-result
+  %p
+    %b Planilla de:
+    %a.lnk-perfil-usuario{:href => "javascript:;"}= @usuario.nombres.capitalize
+  %a.accion{:href => "/sessions/destroy"} Salir
+  %a.accion{:href => "/admin"} Admin
+  %a.accion{:href => "/usuarios/#{@usuario.id}?p=1"} Mi Perfil
+#div-msg-salud{:style => "width:100%; text-align:center; font-size:14px; font-weight:bold; color:#ED1605;"}
+.component-standar-grid
+  %h3
+    %a{:href => "/timesheet"}
+      %b= Time.now.strftime("%a %b %d, %Y")
+    /
+      <a href="/timesheet"><b><haml:loud>Time.now</haml:loud> | <haml:loud>Time.zone</haml:loud></b></a>
+    %div{:style => "float:right;"}
+      %a#prev-day{:href => "javascript:;"} <<<
+      %input#datepicker{:style => "width: 80px; margin-top: -10px; border: 0px solid; background-color:#D7DEDB !important;", :type => "text", :value => @fecha}/
+      %a#next-day{:href => "javascript:;"} >>>
+.component-timesheet-header
+  %p{:style => "width:250px;"}
+    %b Cliente/Proyecto
+  %p{:style => "width:120px;"}
+    %b Tiempo
+  %p
+    %b Descripci&oacute;n
+  %a.lnk-nuevo-timesheet.accion{:href => "javascript:;"}
+    %b Nuevo
+#container-temporizadores
+  - @temporizadores.each do |tempo|
+    .component-timesheet{:id => "tr_timesheet-#{tempo.id}"}
+      %p{:style => "width:250px;"}
+        = tempo.proyecto.cliente.descripcion
+        \/
+        %b= tempo.proyecto.descripcion
+        %br/
+        = tempo.tarea.descripcion
+      %p{:id => "panel-display-#{tempo.id}", :style => "width:120px;"}= tempo.display('list')
+      %p{:style => "width:400px;"}= tempo.descripcion
+      %a.lnk_borrar_timesheet.accion{:href => "javascript:;", :id => "lnk_borrar_timesheet-#{tempo.id}"} Borrar
+      %a.lnk_editar_timesheet.accion{:href => "javascript:;", :id => "lnk_editar_timesheet-#{tempo.id}"} Editar
+      %span{:id => "json_editar_timesheet-#{tempo.id}", :style => "display:none;"}= tempo.to_json
+/
+  <div class="component-search-actions" >
+  <button class="lnk-nuevo-timesheet"><div><span>Nuevo</span></div></button>
+  </div>
+#div-nuevo-timesheet.component-container{:style => "display:none;"}
+  %div{:style => "height:120px;"}
+    %form#form-nuevo{:action => "timesheet/create"}
+      %div{:style => "width: 250px; height:120px; float:left; padding:5px;"}
+        %p
+          %div
+            %label{:for => "temporizador_proyecto_id"}
+              %b Cliente/Proyecto
+            %select#temporizador_proyecto_id{:name => "temporizador[proyecto_id]", :style => "width:240px;"}
+              - @clientesProyectos.each do |cli|
+                %optgroup{:label => cli.descripcion}
+                  - cli.proyectos.each do |pro|
+                    %option{:value => pro.id}= pro.descripcion
+          %div{:style => "margin-top:5px;"}
+            %label{:for => "temporizador_tarea_id"}
+              %b Actividad
+            %br/
+            %select#temporizador_tarea_id{:name => "temporizador[tarea_id]", :style => "width:240px;"}
+              %optgroup{:label => "Facturable"}
+                - @tareas_facturables.each do |t|
+                  %option{:value => t.id}= t.descripcion
+              %optgroup{:label => "No Facturable"}
+                - @tareas_no_facturables.each do |t|
+                  %option{:value => t.id}= t.descripcion
+      %div{:style => "width: 150px; height:120px; float: left; padding:5px;"}
+        %p
+          %label{:for => "temporizador_tiempo_base"} Horas:Minutos
+          %input#temporizador_tiempo_base.timer{:maxlength => "5", :name => "tiempo_base", :style => "border:solid 1px; font-size: 38px; width: 140px; height:64px;"}/
+      %div{:style => "width: 400px; height:120px; float: left; padding:5px;"}
+        %p
+          %textarea#temporizador_descripcion{:cols => "60", :maxlength => "500", :name => "temporizador[descripcion]", :style => "height:65px; border:solid 1px; margin-top:15px;"}
+        %input#temporizador_usuario_id{:name => "temporizador[usuario_id]", :type => "hidden", :value => @usuario.id}/
+        %input#temporizador_id{:name => "id", :type => "hidden", :value => "-1"}/
+  .component-search-actions
+    %button#lnk-guardar-timesheet
+      %div
+        %span#lnk-span-guardar-timesheet Iniciar
+    %button#lnk-cancelar-timesheet
+      %div
+        %span#lnk-span-cancelar-timesheet Cancelar
+#form-submit-timesheet
+  - form_remote_tag :url => { :action => 'index'} do
+    %input{:name => "fecha", :type => "hidden"}/
+%script{:src => "/harv/js/today.js", :type => "text/javascript"}

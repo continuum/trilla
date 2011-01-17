@@ -1,0 +1,12 @@
+%h1 Editing tarea
+- form_for(@tarea) do |f|
+  = f.error_messages
+  %p
+    = f.label :descripcion
+    %br/
+    = f.text_field :descripcion
+  %p
+    = f.submit 'Update'
+= link_to 'Show', @tarea
+|
+\#{link_to 'Back', tareas_path}
