@@ -1,17 +1,7 @@
 class Tarea < ActiveRecord::Base
-
-  def self.find_order
-    find(:all, :order => "tipo" )
-  end
-  
-  def self.find_facturables
-    find(:all, :conditions => ["tipo = 'Facturable'"] )
-  end
-  
-  def self.find_no_facturables
-    find(:all, :conditions => ["tipo = 'No Facturable'"] )
-  end
-
+  named_scope :facturables, :conditions => "tipo = 'Facturable'"
+  named_scope :no_facturables, :conditions => "tipo = 'No Facturable'"
+  named_scope :ordered_by_tipo, :order => "tipo"
 end
 
 class TareaOrder

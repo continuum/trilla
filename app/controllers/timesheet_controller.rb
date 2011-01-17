@@ -15,8 +15,8 @@ class TimesheetController < ApplicationController
       
     end
 
-    @tareas_facturables = Tarea.find_facturables()
-    @tareas_no_facturables = Tarea.find_no_facturables()
+    @tareas_facturables = Tarea.facturables
+    @tareas_no_facturables = Tarea.no_facturables
 
     @fecha = params[:fecha]
     
