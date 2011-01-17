@@ -17,6 +17,7 @@ GEM
       activesupport (= 2.3.4)
     activesupport (2.3.4)
     gdata (1.1.1)
+    haml (3.0.25)
     oauth (0.4.4)
     rack (1.0.1)
     rack-openid (1.1.2)
@@ -38,6 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   gdata (= 1.1.1)
+  haml (= 3.0.25)
   oauth (= 0.4.4)
   rack-openid
   rails (= 2.3.4)
