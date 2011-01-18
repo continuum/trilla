@@ -37,16 +37,16 @@ class ProyectosController < ApplicationController
     end
   end
   
+  def restore
+    @proyecto = @proyecto = Proyecto.find(params[:id])
+    @proyecto.restore
+    redirect_to(proyectos_url)
+  end 
+
   def archive
     @proyecto = Proyecto.find(params[:id])
-    archivado = true
-    archivado = false if @proyecto.archivado
-    if @proyecto.update_attributes({:archivado => archivado})
-      @proyectos = Proyecto.all
-      render :action => "index"
-    else
-      render :action => "index"
-    end
+    @proyecto.archive
+    redirect_to(proyectos_url)
   end
       
   def destroy

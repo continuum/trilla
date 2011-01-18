@@ -20,6 +20,6 @@
           %td
             \&nbsp;
             \#{link_to 'Eliminar', proyecto, :confirm => 'Está seguro?', :method => :delete}&nbsp;
-            \#{link_to proyecto.archivado ? "Recuperar" : "Archivar", archive_proyecto_path(proyecto)}&nbsp;
+            \#{link_to proyecto.archivado ? "Recuperar" : "Archivar", proyecto.archivado ? restore_proyecto_path(proyecto) : archive_proyecto_path(proyecto)}&nbsp;
 %br/
 = link_to 'Nuevo proyecto', new_proyecto_path
