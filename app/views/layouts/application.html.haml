@@ -3,15 +3,30 @@
   %head
     %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
     %title
-      Administrador #{controller.action_name}
+      Continuum Jarbest
+    %link{:href => "/harv/css/jquery-ui-1.8.6.custom.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/harv/css/componentes.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/harv/css/general.css", :rel => "stylesheet", :type => "text/css"}/
     / jQuery
     %script{:src => "/harv/js/jquery/core/jquery.min.js", :type => "text/javascript"}
     %script{:src => "/harv/js/jquery/ui/jquery-ui.min.js", :type => "text/javascript"}
+    / utils
+    %script{:src => "/harv/js/utils/utils_all.min.js", :type => "text/javascript"}
+    / utils extra
+    %script{:src => "/harv/js/utils/utils_extra_all.min.js", :type => "text/javascript"}
+    / jquery - continuum plugins
+    %script{:src => "/harv/js/cplugins/jquery/continuum_plugins_all.min.js", :type => "text/javascript"}
   %body
+    - usuario = session[:usuario]
     .app
+      .component-message-result
+        %p
+          %b Continuum JarBest
+        %a.accion{:href => "/sessions/destroy"} Salir
+        %a.accion{:href => "/usuarios/#{usuario.id}?p=1"} #{usuario.nombres.capitalize}
       = yield
+
 %script{:src => "/harv/js/jquery.tablednd_0_5.js", :type => "text/javascript"}
 %script{:src => "/harv/js/controles-achs.js", :type => "text/javascript"}
 %script{:src => "/harv/js/jquery.bgiframe.min.js", :type => "text/javascript"}
+

@@ -1,0 +1,17 @@
+#tab.component-navigator-tabs
+  %ul
+    %li.tab-unselect.first
+      %a#tab-timesheet{:href => root_path} Timesheet
+    %li.tab-select.last
+      %a#tab-admin{:href => proyectos_path} Admin
+    %li.clearfix
+
+%h4 
+  %a.accion{:href => proyectos_path} Proyectos   
+  %a.accion{:href => tareas_path} Tareas 
+  %a.accion{:href => usuarios_path} Usuarios
+  - if session[:usuario].perfil == 'ADMIN'
+    %a.accion{:href => clientes_path} Clientes 
+    
+
+

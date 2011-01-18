@@ -1,10 +1,5 @@
-.component-message-result
-  %p
-    %b Planilla de:
-    %a.lnk-perfil-usuario{:href => "javascript:;"}= @usuario.nombres.capitalize
-  %a.accion{:href => "/sessions/destroy"} Salir
-  %a.accion{:href => "/admin"} Admin
-  %a.accion{:href => "/usuarios/#{@usuario.id}?p=1"} Mi Perfil
+= render(:partial => "shared/timesheetmenu")
+
 #div-msg-salud{:style => "width:100%; text-align:center; font-size:14px; font-weight:bold; color:#ED1605;"}
 .component-standar-grid
   %h3

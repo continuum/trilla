@@ -28,10 +28,6 @@ h1 {
 	letter-spacing:-1px;
 }
 
-a {
-	color:#333;
-}
-
 ul {
 	list-style:none;
 	padding:0;
@@ -230,6 +226,8 @@ ul {
 	text-shadow: #fff 0 0 4px;
 }
 
+
+
 .component-timesheet-header {
 	background:#D7DEDB;
 	font-family:Helvetica, Arial, sans-serif;
@@ -258,3 +256,16 @@ ul {
 	margin-top:5px;
 	text-shadow: #fff 0 0 4px;
 }
+
+a.accion {
+	display:inline;
+	color:#1ca21c;
+	text-decoration:none;
+	padding-left:10px;
+	background:url(../images/icons/green-arrow.gif) no-repeat 0 2px;
+	margin-left:20px;
+	margin-top:5px;
+	text-shadow: #fff 0 0 4px;
+}
+
+
