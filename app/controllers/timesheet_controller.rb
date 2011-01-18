@@ -4,7 +4,7 @@ class TimesheetController < ApplicationController
       ClienteObj.new.tap do |c|
         c.id = cli.id
         c.descripcion = cli.descripcion
-        c.proyectos = Proyecto.find(:all, :conditions => ["cliente_id = ?", cli.id])
+        c.proyectos = Proyecto.find(:all, :conditions => ["cliente_id = ? and not archivado = ?", cli.id, true])
       end
     end
     @tareas_facturables = Tarea.facturables

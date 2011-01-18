@@ -1,4 +1,4 @@
-class TareasController < AdminController
+class TareasController < ApplicationController
   def index
     @tareas = Tarea.all
   end

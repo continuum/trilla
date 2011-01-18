@@ -1,4 +1,4 @@
-class ProyectosController < AdminController
+class ProyectosController < ApplicationController
   def index
     @proyectos = Proyecto.all
   end
