@@ -1,18 +1,19 @@
 = render(:partial => "shared/adminmenu")
-%h3 Editar Proyecto
-- form_for(@proyecto) do |f|
-  = f.error_messages
-  %p
-    = f.label :descripcion
-    %br/
-    = f.text_field :descripcion
-  %p
-    = f.label :cliente
-    %br/
-    - clientes_array = Cliente.all.map { |cli| [cli.descripcion, cli.id] }
-    = select_tag(:cliente, options_for_select(clientes_array))
-  %p
-    = f.submit 'Update'
-= link_to 'Show', @proyecto
-|
-\#{link_to 'Back', proyectos_path}
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Editar Proyecto
+    %li.clearfix
+
+.component-search
+  - form_for(@proyecto) do |f|
+    .component-search-forms.forms-two-cols
+      = f.error_messages
+      = render :partial => 'fields', :locals => { :f => f, :tareas => @tareas, :usuarios => @usuarios}  
+      .clearfix
+    .component-search-actions
+      = f.submit 'Actualizar'
+      = link_to 'Ver', @proyecto
+      |
+      \#{link_to 'Atrás', proyectos_path}
+     

@@ -851,7 +851,6 @@ button.cancel-btn div span {
 
 /* Componente DataTable */
 .component-datatable {
-	width:963px;
 	border:1px solid #d2d2d2;
 	-webkit-border-bottom-right-radius: 6px;
 	-webkit-border-bottom-left-radius: 6px;
@@ -973,6 +972,13 @@ a,
 	height:18px;
 }
 
+.icono-eliminar {
+	width:18px;
+	display:inline-block;
+	*display:block;
+	height:18px;
+}
+
 .help-link,
 .icono-help{
 	background:url(../images/icons/pregunta-ayuda.gif) no-repeat right 2px;
@@ -1001,7 +1007,10 @@ a,
 .icono-advertencia{
 	background:url(../images/icons/auxi_alert_a.gif) no-repeat right 2px;
 }
-
+.linkEliminar,
+.icono-eliminar{
+	background:url(../images/icons/eliminar-icon.gif) no-repeat right 2px;
+}
 .link-search{
 	background:url(../images/icons/icon-search.gif) no-repeat right 0;
 	padding-right:22px;

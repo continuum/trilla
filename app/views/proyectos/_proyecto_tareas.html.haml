@@ -1,0 +1,12 @@
+.fields
+  %table.grid-selection{:cellpadding => 0, :cellspacing => 0}
+    %col{:width => 200}
+    %tr
+      %td
+        %span
+          -if !f.object.new_record?
+            = @tarea.descripcion 
+        = f.hidden_field :tarea_id
+      %td
+        = remove_child_link "Eliminar", f 
+ 

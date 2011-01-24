@@ -1,0 +1,67 @@
+= error_messages_for :project
+%ol.forms-structure-rows
+  %li
+    .forms-row-single-division.left 
+      = f.label :descripcion
+    .forms-row-single-division.right 
+      = f.text_field :descripcion
+  %li
+    .forms-row-single-division.left 
+      = f.label :codigo 
+    .forms-row-single-division.right 
+      = f.text_field :codigo
+  %li
+    .forms-row-single-division.left 
+      = f.label :estimacion 
+    .forms-row-single-division.right 
+      = f.text_field :estimacion    
+  %li
+    .forms-row-single-division.left 
+      = f.label :archivado
+    .forms-row-single-division.right 
+      = f.check_box :archivado    
+  %li
+    .forms-row-single-division.left 
+      = f.label :cliente
+      - clientes_array = Cliente.all.map { |cli| [cli.descripcion, cli.id] }
+    .forms-row-single-division.right 
+      = select_tag(:cliente, options_for_select(clientes_array))
+  %li
+    .content-table
+      %h4
+        %table.two-columns
+          %tr
+            %td 
+              Personas
+              - if (usuarios)
+                ="(" + usuarios.all.size.to_s + ")"
+    - f.fields_for :proyecto_usuarios do |proyecto_usuarios_form|
+      - if (usuarios)
+        - @usuario =  usuarios.find(id = proyecto_usuarios_form.object.usuario_id)
+      = render :partial => 'proyecto_usuarios', :locals => { :f => proyecto_usuarios_form}
+    .forms-row-single-division.wide
+      - usuarios_array = Usuario.all.map { |usr| [usr.nombres, usr.id] }
+      = select_tag(:proyecto_usuarios_select, options_for_select(usuarios_array))
+      = add_child_link "Agregar Persona", f, :proyecto_usuarios
+
+%ol.forms-structure-rows
+  %li
+    .content-table
+      %h4
+        %table.two-columns
+          %tr
+            %td 
+              Tareas
+              - if (tareas)
+                ="(" + tareas.all.size.to_s + ")"
+    - f.fields_for :proyecto_tareas do |proyecto_tareas_form|
+      - if (tareas)
+        - @tarea =  tareas.find(id = proyecto_tareas_form.object.tarea_id)
+      = render :partial => 'proyecto_tareas', :locals => { :f => proyecto_tareas_form}
+    .forms-row-single-division.wide
+      - tareas_array = Tarea.all.map { |tarea| [tarea.descripcion, tarea.id] }
+      = select_tag(:proyecto_tareas_select, options_for_select(tareas_array))
+      = add_child_link "Agregar Tarea", f, :proyecto_tareas
+  
+
+    

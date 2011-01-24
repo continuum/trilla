@@ -1,4 +1,4 @@
-class ProyectoAgregarArchivado < ActiveRecord::Migration
+class AddProyectoArchivado < ActiveRecord::Migration
   def self.up
     add_column :proyectos, :archivado, :boolean
   end

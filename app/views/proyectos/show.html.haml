@@ -1,10 +1,17 @@
 = render(:partial => "shared/adminmenu")
-%p
-  %b Descripcion:
-  = h @proyecto.descripcion
-%p
-  %b Cliente:
-  = h @proyecto.cliente.descripcion
-= link_to 'Edit', edit_proyecto_path(@proyecto)
-|
-\#{link_to 'Back', proyectos_path}
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Proyecto
+    %li.clearfix
+.component-search
+  .component-search-forms.forms-two-cols
+    %p 
+      %b Descripcion:
+      = h @proyecto.descripcion
+    %p
+      %b Cliente:
+      = h @proyecto.cliente.descripcion
+    = link_to 'Edit', edit_proyecto_path(@proyecto)
+    |
+    \#{link_to 'Back', proyectos_path}

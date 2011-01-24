@@ -6,7 +6,6 @@
 body {
 	padding:0;
 	margin:0;
-	background:#999;
 	font-family:Helvetica, Arial, sans-serif;
 }
 
@@ -18,54 +17,11 @@ form {
 	outline:0px;
 }
 
-/* T�tulos */
-
-h1 {
-	font-size:28px;
-	margin:0;
-	color:#FFF;
-	text-shadow: -1px -1px 6px #000000;
-	letter-spacing:-1px;
-}
-
-ul {
-	list-style:none;
-	padding:0;
-	margin:0;
-}
-
-/* Aplicacion */
-
-.header-app {
-	width:980px;
-	margin:0 auto;
-	font-size:12px;
-	padding:50px 0 15px 0;
-	background:url(../images/achs-logo.png) no-repeat 926px 30px;
-}
-
-.footer-app {
-	width:980px;
-	margin:0 auto;
-	color:#3C0;
-}
-
-.footer-app h6 {
-	margin:10px 5px;
-	text-align:right;
-	color:#fff;
-}
-
 .app {
 	width:980px;
 	margin:0 auto;
 	font-size:12px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	-moz-box-shadow:0 0 20px #000;
-	box-shadow:0 0 20px #000;
-	-webkit-box-shadow:0 0 20px #000;
+	 
 	background:#FFF;
 	overflow:hidden;
 	background:url(../images/sidebar-bg.gif) repeat-y 282px 0 #fff;

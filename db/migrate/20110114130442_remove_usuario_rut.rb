@@ -1,4 +1,4 @@
-class EliminaRut < ActiveRecord::Migration
+class RemoveUsuarioRut < ActiveRecord::Migration
   def self.up
     remove_column :usuarios, :rut
   end

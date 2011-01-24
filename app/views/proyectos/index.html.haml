@@ -1,25 +1,30 @@
 = render(:partial => "shared/adminmenu")
-%h3 Mis Proyectos
-.component-standar-grid
-  %table.standar-grid-model{:border => "0", :cellpadding => "0", :cellspacing => "0"}
-    %col{:width => ""}/
-    %col{:width => ""}/
-    %col{:width => "200px"}/
-    %col{:width => "180px"}/
-    %tbody
-      %tr
-        %th Descripcion
-        %th Cliente
-        %th Creado el
-        %th
-      - @proyectos.each do |proyecto|
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Mis Proyectos
+    %li.clearfix
+.component-datatable
+  .component-standar-grid
+    %table.standar-grid-model{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+      %col{:width => ""}/
+      %col{:width => ""}/
+      %col{:width => "200px"}/
+      %col{:width => "180px"}/
+      %tbody
         %tr
-          %td #{link_to proyecto.descripcion, edit_proyecto_path(proyecto)}
-          %td= h proyecto.cliente.descripcion
-          %td= h proyecto.created_at
-          %td
-            \&nbsp;
-            \#{link_to 'Eliminar', proyecto, :confirm => 'Está seguro?', :method => :delete}&nbsp;
-            \#{link_to proyecto.archivado ? "Recuperar" : "Archivar", proyecto.archivado ? restore_proyecto_path(proyecto) : archive_proyecto_path(proyecto)}&nbsp;
-%br/
-= link_to 'Nuevo proyecto', new_proyecto_path
+          %th Descripcion
+          %th Cliente
+          %th Creado el
+          %th
+        - @proyectos.each do |proyecto|
+          %tr
+            %td #{link_to proyecto.descripcion, edit_proyecto_path(proyecto)}
+            %td= h proyecto.cliente.descripcion
+            %td= h proyecto.created_at
+            %td
+              \&nbsp;
+              \#{link_to 'Eliminar', proyecto, :confirm => 'Está seguro?', :method => :delete}&nbsp;
+              \#{link_to proyecto.archivado ? "Recuperar" : "Archivar", proyecto.archivado ? restore_proyecto_path(proyecto) : archive_proyecto_path(proyecto)}&nbsp;
+  %br/
+  = link_to 'Nuevo proyecto', new_proyecto_path

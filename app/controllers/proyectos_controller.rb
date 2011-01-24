@@ -9,10 +9,14 @@ class ProyectosController < ApplicationController
 
   def new
     @proyecto = Proyecto.new
+    @tareas = @proyecto.tareas
+    @usuarios = @proyecto.usuarios
   end
 
   def edit
     @proyecto = Proyecto.find(params[:id])
+    @tareas = @proyecto.tareas
+    @usuarios = @proyecto.usuarios
   end
 
   def create
