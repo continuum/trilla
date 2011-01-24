@@ -19,11 +19,19 @@ class ProyectosController < ApplicationController
     @usuarios = @proyecto.usuarios
   end
 
+  
+  def email_sent(proyecto)
+    proyecto.usuarios.all.each do |usuario|
+      Notifier::deliver_mail(usuario.email, url_for(proyecto))   
+    end
+  end
+
   def create
     @proyecto = Proyecto.new(params[:proyecto])
     @proyecto.cliente_id = params[:cliente]
     if @proyecto.save
       flash[:notice] = 'Proyecto was successfully created.'
+      email_sent(@proyecto)
       redirect_to(@proyecto)
     else
       render :action => "new"
@@ -35,6 +43,7 @@ class ProyectosController < ApplicationController
     @proyecto.cliente_id = params[:cliente]
     if @proyecto.update_attributes(params[:proyecto])
       flash[:notice] = 'Proyecto was successfully updated.'
+      email_sent(@proyecto)
       redirect_to(@proyecto)
     else
       render :action => "edit"
