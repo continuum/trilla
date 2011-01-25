@@ -1,17 +1,28 @@
 = render(:partial => "shared/adminmenu")
-%h3 Listado usuarios
-%table
-  %tr
-    %th Nombres
-    %th Email
-    %th Perfil
-  - @usuarios.each do |usuario|
-    %tr
-      %td= h usuario.nombres
-      %td= h usuario.email
-      %td= h usuario.perfil
-      %td= link_to 'Show', usuario
-      %td= link_to 'Edit', edit_usuario_path(usuario)
-      %td= link_to 'Destroy', usuario, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'Nuevo usuario', new_usuario_path
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Usuarios
+    %li.clearfix
+.component-datatable
+  .component-standar-grid
+    %table.standar-grid-model{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+      %col{:width => ""}/
+      %col{:width => ""}/
+      %col{:width => "180px"}/
+      %tbody
+        %tr
+          %th Nombres
+          %th Email
+          %th Perfil
+          %th
+        - @usuarios.each do |usuario|
+          %tr
+            %td #{link_to usuario.nombres, edit_usuario_path(usuario)}
+            %td= h usuario.email
+            %td= h usuario.perfil
+            %td
+              \&nbsp;
+              = link_to 'Eliminar', usuario, :confirm => 'Está seguro?', :method => :delete
+  %br/
+  = link_to 'Nuevo Usuario', new_usuario_path

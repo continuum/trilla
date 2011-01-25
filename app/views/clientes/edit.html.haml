@@ -1,14 +1,16 @@
 = render(:partial => "shared/adminmenu")
-
-%h1 Editing cliente
-- form_for(@cliente) do |f|
-  = f.error_messages
-  %p
-    = f.label :descripcion
-    %br/
-    = f.text_field :descripcion
-  %p
-    = f.submit 'Update'
-= link_to 'Show', @cliente
-|
-\#{link_to 'Back', clientes_path}
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Editar Cliente
+    %li.clearfix
+.component-search
+  - form_for(@cliente) do |f|
+    = f.error_messages
+    .component-search-forms.forms-two-cols    
+      = render :partial => 'fields', :locals => { :f => f}   
+      .clearfix
+    .component-search-actions
+      = f.submit 'Actualizar'
+      |
+      \#{link_to 'Cancelar', clientes_path}

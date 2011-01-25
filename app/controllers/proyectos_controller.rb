@@ -32,7 +32,7 @@ class ProyectosController < ApplicationController
     if @proyecto.save
       flash[:notice] = 'Proyecto was successfully created.'
       email_sent(@proyecto)
-      redirect_to(@proyecto)
+      redirect_to(proyectos_url)
     else
       render :action => "new"
     end
@@ -44,7 +44,7 @@ class ProyectosController < ApplicationController
     if @proyecto.update_attributes(params[:proyecto])
       flash[:notice] = 'Proyecto was successfully updated.'
       email_sent(@proyecto)
-      redirect_to(@proyecto)
+      redirect_to(proyectos_url)
     else
       render :action => "edit"
     end

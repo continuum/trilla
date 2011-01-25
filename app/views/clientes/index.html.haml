@@ -1,13 +1,29 @@
 = render(:partial => "shared/adminmenu")
-%h3 Listado de clientes
-%table
-  %tr
-    %th Descripcion
-  - @clientes.each do |cliente|
-    %tr
-      %td= h cliente.descripcion
-      %td= link_to 'Show', cliente
-      %td= link_to 'Edit', edit_cliente_path(cliente)
-      %td= link_to 'Destroy', cliente, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'Nuevo cliente', new_cliente_path
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Clientes
+    %li.clearfix
+.component-datatable
+  .component-standar-grid
+    %table.standar-grid-model{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+      %col{:width => ""}/
+      %col{:width => "180px"}/
+      %tbody
+        %tr
+          %th Nombre
+          %th Contacto
+          %th Fono
+          %th
+        - @clientes.each do |cliente|
+          %tr
+            %td #{link_to cliente.descripcion, edit_cliente_path(cliente)}
+            %td 
+              = h cliente.contacto
+            %td
+              = h cliente.fono
+            %td
+              \&nbsp;
+              = link_to 'Eliminar', cliente, :confirm => 'Está seguro?', :method => :delete
+  %br/
+  = link_to 'Nuevo cliente', new_cliente_path

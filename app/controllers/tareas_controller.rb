@@ -19,7 +19,7 @@ class TareasController < ApplicationController
     @tarea = Tarea.new(params[:tarea])
     if @tarea.save
       flash[:notice] = 'Tarea was successfully created.'
-      redirect_to(@tarea)
+      redirect_to(tareas_url)
     else
       render :action => "new"
     end
@@ -29,7 +29,7 @@ class TareasController < ApplicationController
     @tarea = Tarea.find(params[:id])
     if @tarea.update_attributes(params[:tarea])
       flash[:notice] = 'Tarea was successfully updated.'
-      redirect_to(@tarea)
+      redirect_to(tareas_url)
     else
       render :action => "edit"
     end

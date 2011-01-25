@@ -1,10 +1,17 @@
 = render(:partial => "shared/adminmenu")
-%p
-  %b Descripcion:
-  = h @tarea.descripcion
-%p
-  %b Tipo:
-  = h @tarea.tipo
-= link_to 'Edit', edit_tarea_path(@tarea)
-|
-\#{link_to 'Back', tareas_path}
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Tareas
+    %li.clearfix
+.component-search
+  .component-search-forms.forms-two-cols
+    %p
+      %b Descripcion:
+      = h @tarea.descripcion
+    %p
+      %b Tipo:
+      = h @tarea.tipo
+    = link_to 'Editar', edit_tarea_path(@tarea)
+    |
+    \#{link_to 'Listado', tareas_path}

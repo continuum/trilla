@@ -4,16 +4,14 @@
     %li.tab-select 
       %a#tab-form{:href => "javascript:void(0)"} Editar Proyecto
     %li.clearfix
-
 .component-search
   - form_for(@proyecto) do |f|
+    = f.error_messages
     .component-search-forms.forms-two-cols
-      = f.error_messages
       = render :partial => 'fields', :locals => { :f => f, :tareas => @tareas, :usuarios => @usuarios}  
       .clearfix
     .component-search-actions
       = f.submit 'Actualizar'
-      = link_to 'Ver', @proyecto
       |
-      \#{link_to 'Atrás', proyectos_path}
+      \#{link_to 'Cancelar', proyectos_path}
      

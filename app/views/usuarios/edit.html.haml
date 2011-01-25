@@ -1,24 +1,16 @@
 = render(:partial => "shared/adminmenu")
-%h1 Editing usuario
-- form_for(@usuario) do |f|
-  = f.error_messages
-  %p
-    = f.label :nombres
-    %br/
-    = f.text_field :nombres
-  %p
-    = f.label :email
-    %br/
-    = f.text_field :email
-  %p
-    = f.label :password
-    %br/
-    = f.password_field :password
-  %p
-    = f.submit 'Update'
-- if( @isPerfil.nil?)
-  = link_to 'Show', @usuario
-  - if( @usuario_sesion.perfil == 'ADMIN')
-    | #{link_to 'Back', usuarios_path}
-- else
-  %a{:href => "/usuarios/#{@usuario.id}?p=1"} Back
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Editar Usuario
+    %li.clearfix
+.component-search
+  - form_for(@usuario) do |f|
+    = f.error_messages
+    .component-search-forms.forms-two-cols    
+      = render :partial => 'fields', :locals => { :f => f}   
+      .clearfix
+    .component-search-actions
+      = f.submit 'Actualizar'
+      |
+      \#{link_to 'Cancelar', usuarios_path}

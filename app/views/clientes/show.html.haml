@@ -1,7 +1,14 @@
 = render(:partial => "shared/adminmenu")
-%p
-  %b Descripcion:
-  = h @cliente.descripcion
-= link_to 'Edit', edit_cliente_path(@cliente)
-|
-\#{link_to 'Back', clientes_path}
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Cliente
+    %li.clearfix
+.component-search
+  .component-search-forms.forms-two-cols
+    %p
+      %b Descripcion:
+      = h @cliente.descripcion
+    = link_to 'Editar', edit_cliente_path(@cliente)
+    |
+    \#{link_to 'Listado', clientes_path}

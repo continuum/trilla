@@ -19,7 +19,7 @@ class ClientesController < ApplicationController
     @cliente = Cliente.new(params[:cliente])
     if @cliente.save
       flash[:notice] = 'Cliente was successfully created.'
-      redirect_to(@cliente)
+      redirect_to(clientes_url)
     else
       render :action => "new"
     end
@@ -29,7 +29,7 @@ class ClientesController < ApplicationController
     @cliente = Cliente.find(params[:id])
     if @cliente.update_attributes(params[:cliente])
       flash[:notice] = 'Cliente was successfully updated.'
-      redirect_to(@cliente)
+      redirect_to(clientes_url)
     else
       render :action => "edit"
     end

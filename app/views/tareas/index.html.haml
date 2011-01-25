@@ -1,15 +1,26 @@
 = render(:partial => "shared/adminmenu")
-%h3 Listado de tareas
-%table
-  %tr
-    %th Descripcion
-    %th Tipo
-  - @tareas.each do |tarea|
-    %tr
-      %td= h tarea.descripcion
-      %td= h tarea.tipo
-      %td= link_to 'Show', tarea
-      %td= link_to 'Edit', edit_tarea_path(tarea)
-      %td= link_to 'Destroy', tarea, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'Nueva tarea', new_tarea_path
+.component-navigator-tabs
+  %ul
+    %li.tab-select 
+      %a#tab-form{:href => "javascript:void(0)"} Tareas
+    %li.clearfix
+.component-datatable
+  .component-standar-grid
+    %table.standar-grid-model{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+      %col{:width => ""}/
+      %col{:width => ""}/
+      %col{:width => "180px"}/
+      %tbody
+        %tr
+          %th Descripcion
+          %th Tipo
+          %th
+        - @tareas.each do |tarea|
+          %tr
+            %td #{link_to tarea.descripcion, edit_tarea_path(tarea)}
+            %td= h tarea.tipo
+            %td
+              \&nbsp;
+              = link_to 'Eliminar', tarea, :confirm => 'Está seguro?', :method => :delete
+  %br/
+  = link_to 'Nueva tarea', new_tarea_path

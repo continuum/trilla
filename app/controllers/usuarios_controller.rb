@@ -33,7 +33,7 @@ class UsuariosController < ApplicationController
     @usuario = Usuario.new(params[:usuario])
     if @usuario.save
       flash[:notice] = 'Usuario was successfully created.'
-      redirect_to(@usuario)
+      redirect_to(usuarios_url)
     else
       render :action => "new"
     end
@@ -43,7 +43,7 @@ class UsuariosController < ApplicationController
     @usuario = Usuario.find(params[:id])
     if @usuario.update_attributes(params[:usuario])
       flash[:notice] = 'Usuario was successfully updated.'
-      redirect_to(@usuario)
+      redirect_to(usuarios_url)
     else
       render :action => "edit"
     end

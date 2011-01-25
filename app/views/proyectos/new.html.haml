@@ -6,10 +6,10 @@
     %li.clearfix
 .component-search
   - form_for(@proyecto) do |f|
+    = f.error_messages
     .component-search-forms.forms-two-cols
-      = f.error_messages
       = render :partial => 'fields', :locals => { :f => f, :tareas => @tareas, :usuarios => @usuarios}
       .clearfix
     .component-search-actions
       = f.submit 'Crear'
-      = link_to 'Volver', proyectos_path
+      = link_to 'Cancelar', proyectos_path
