@@ -1,227 +1,162 @@
-/* Controles UI ACHS */
-/* CSS de la Aplicaci�n de Componentes */
-/* Desarrollado por Continuum Lltda. 2010 */
-/*=============================*/
-
+/* Controles UI
+ * Desarrollado por Continuum Lltda. 2010 */
 body {
-	padding:0;
-	margin:0;
-	font-family:Helvetica, Arial, sans-serif;
-}
-
-/* Forms */
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif; }
 
 form {
-	padding:0;
-	margin:0;
-	outline:0px;
-}
+  padding: 0;
+  margin: 0;
+  outline: 0px; }
 
 .app {
-	width:980px;
-	margin:0 auto;
-	font-size:12px;
-	 
-	background:#FFF;
-	overflow:hidden;
-	background:url(../images/sidebar-bg.gif) repeat-y 282px 0 #fff;
-}
-
-.app .sidebar {
-	width:250px;
-	float:left;
-	padding:10px 25px;
-}
-
-.app .sidebar ul {
-	margin-bottom:25px;
-}
-
-.app .sidebar ul li {
-	text-decoration:none;
-}
-
-.app .sidebar a {
-	text-decoration:none;
-	padding:8px 6px;
-	border-bottom:1px solid #eee;
-	display:block;
-	outline:0px;
-	color:#666;
-}
-
-.app .sidebar a:hover {
-	background:#E9EFFF;
-}
-
-.app .content {
-	width:630px;
-	float:left;
-	padding:10px 20px;
-	border-left:1px dotted #ccc;
-	min-height:675px;
-}
-
-.app .content h2 {
-	font-size:24px;
-	color:#006600;
-	margin:0;
-	padding:18px 0 0 0;
-	display:block;
-}
-
-.app .content p {
-	line-height:18px;
-}
-
-.app .sidebar h3 {
-	font-size:18px;
-	margin:0;
-	padding:18px 0;
-	display:block;
-}
+  width: 980px;
+  margin: 0 auto;
+  font-size: 12px;
+  background: white;
+  overflow: hidden;
+  background: url(../images/sidebar-bg.gif) repeat-y 282px 0 white; }
+  .app .sidebar {
+    width: 250px;
+    float: left;
+    padding: 10px 25px; }
+    .app .sidebar ul {
+      margin-bottom: 25px; }
+      .app .sidebar ul li {
+        text-decoration: none; }
+    .app .sidebar a {
+      text-decoration: none;
+      padding: 8px 6px;
+      border-bottom: 1px solid #eeeeee;
+      display: block;
+      outline: 0px;
+      color: #a96d0f; }
+      .app .sidebar a:hover {
+        background: #a96d0f; }
+  .app .content {
+    width: 630px;
+    float: left;
+    padding: 10px 20px;
+    border-left: 1px dotted #cccccc;
+    min-height: 675px; }
+    .app .content h2 {
+      font-size: 24px;
+      color: #006600;
+      margin: 0;
+      padding: 18px 0 0 0;
+      display: block; }
+    .app .content p {
+      line-height: 18px; }
+  .app .sidebar h3 {
+    font-size: 18px;
+    margin: 0;
+    padding: 18px 0;
+    display: block; }
 
 .detalle-componente {
-	color:#666;
-	line-height:18px;
-	margin:18px 0;
-}
+  color: #666666;
+  line-height: 18px;
+  margin: 18px 0; }
 
 .codigo-componente {
-	margin:15px 0 30px 0;
-	border-top:1px solid #eee;
-	padding-top:10px;
-}
-
-.codigo-componente pre {
-	background-color:#F1F1F1;
-	overflow:auto;
-	padding:10px;
-}
+  margin: 15px 0 30px 0;
+  border-top: 1px solid #eeeeee;
+  padding-top: 10px; }
+  .codigo-componente pre {
+    background-color: #f1f1f1;
+    overflow: auto;
+    padding: 10px; }
 
 .app .content h4 {
-	font-weight:bold;
-	font-size:18px;
-	margin-bottom:12px;
-	margin-top:30px;
-	display:block;
-}
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 12px;
+  margin-top: 30px;
+  display: block; }
 
 .codigo-componente .classList li {
-	margin:3px 0;
-}
-
+  margin: 3px 0; }
 .codigo-componente .doc-nav {
-	overflow:hidden;
-	background:#ddd;
-	margin:2px 0
-}
-
-.codigo-componente .doc-nav li {
-	float:left;
-}
-
+  overflow: hidden;
+  background: #dddddd;
+  margin: 2px 0; }
+  .codigo-componente .doc-nav li {
+    float: left; }
 .codigo-componente .datePickerBox {
-	float:none;
-}
-
+  float: none; }
 .codigo-componente .component-search .datePickerBox {
-	float:left;
-}
+  float: left; }
 
 .componente a {
-	color:#090;
-	text-decoration:none;
-}
+  color: #a96d0f;
+  text-decoration: none; }
+  .componente a:hover {
+    color: #a96d0f;
+    text-decoration: underline; }
 
-.componente a:hover{
-	color:#0c0;
-	text-decoration:underline;
-}
-
-
-/* Mensajes*/
-
+/* Mensajes */
 .component-container {
-	background:#e3e7e5;
-	font-family:Helvetica, Arial, sans-serif;
-	font-size:12px;
-	margin:1px 5px 2px 5px;
-	overflow:hidden;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
+  background: #eeeeee;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  margin: 1px 5px 2px 5px;
+  overflow: hidden;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
 
 .component-timesheet {
-	background:#e3e7e5;
-	font-family:Helvetica, Arial, sans-serif;
-	font-size:12px;
-	margin:1px 5px 2px 5px;
-	overflow:hidden;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
-
-.component-timesheet p {
-	padding:5px;
-	margin:0;
-	float:left;
-}
-
-.component-timesheet a.accion {
-	display:block;
-	float:right;
-	color:#1ca21c;
-	text-decoration:none;
-	padding-left:10px;
-	background:url(../images/icons/green-arrow.gif) no-repeat 0 2px;
-	margin-right:20px;
-	margin-top:14px;
-	text-shadow: #fff 0 0 4px;
-}
-
-
+  background: #eeeeee;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  margin: 1px 5px 2px 5px;
+  overflow: hidden;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+  .component-timesheet p {
+    padding: 5px;
+    margin: 0;
+    float: left; }
+  .component-timesheet a.accion {
+    display: block;
+    float: right;
+    color: #a96d0f;
+    text-decoration: none;
+    padding-left: 10px;
+    margin-right: 20px;
+    margin-top: 14px;
+    text-shadow: white 0 0 4px; }
 
 .component-timesheet-header {
-	background:#D7DEDB;
-	font-family:Helvetica, Arial, sans-serif;
-	font-size:12px;
-	margin:0px 5px 0px 5px;
-	overflow:hidden;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
-
-.component-timesheet-header p {
-	padding:5px;
-	margin:0;
-	float:left;
-}
-
-.component-timesheet-header a.accion {
-	display:block;
-	float:right;
-	color:#1ca21c;
-	text-decoration:none;
-	padding-left:10px;
-	background:url(../images/icons/green-arrow.gif) no-repeat 0 2px;
-	margin-right:20px;
-	margin-top:5px;
-	text-shadow: #fff 0 0 4px;
-}
+  background: #eeeeee;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  margin: 0px 5px 0px 5px;
+  overflow: hidden;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+  .component-timesheet-header p {
+    padding: 5px;
+    margin: 0;
+    float: left; }
+  .component-timesheet-header a.accion {
+    display: block;
+    float: right;
+    color: #a96d0f;
+    text-decoration: none;
+    padding-left: 10px;
+    margin-right: 20px;
+    margin-top: 5px;
+    text-shadow: white 0 0 4px; }
 
 a.accion {
-	display:inline;
-	color:#1ca21c;
-	text-decoration:none;
-	padding-left:10px;
-	background:url(../images/icons/green-arrow.gif) no-repeat 0 2px;
-	margin-left:20px;
-	margin-top:5px;
-	text-shadow: #fff 0 0 4px;
-}
-
-
+  display: inline;
+  color: #a96d0f;
+  text-decoration: none;
+  padding-left: 10px;
+  margin-left: 20px;
+  margin-top: 5px;
+  text-shadow: white 0 0 4px; }

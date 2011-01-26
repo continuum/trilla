@@ -1,0 +1,1520 @@
+/* Controles UI
+ * CSS Obligatorio para todas las Aplicaciones
+ * Desarrollado por Continuum Lltda. 2010 */
+
+$section-back-color: #EEE
+$section-header-color: #EEE
+$header-color: #F1B961
+$table-color:  #FDF7ED
+$link-color: #A96D0F
+$link-color-hover: #A96D0F
+
+.app
+  width: 975px
+  font-family: Arial
+
+/* Contenidos Generales */
+
+.contenedor-tipo-buscador
+  width: 570px
+
+.grid-eventos-accidente
+  width: 975px
+
+.noVisible
+  display: none !important
+
+.rightFloat
+  float: right !important
+
+.sinmargen
+  margin-right: 0 !important
+
+.clearfix
+  clear: both !important
+  float: none !important
+  display: block
+  height: 0px !important
+  font-size: 0.01em
+  background: none !important
+  padding: 0 !important
+
+table
+  border: none !important
+
+/* Formularios */
+
+form
+  padding: 0
+  margin: 0
+  outline: 0px
+  input
+    margin: 0
+    padding: 0
+    font-size: 12px
+    font-family: Arial
+    &[type=text]
+      height: 20px
+      border: 1px solid #666
+    &[type=radio], &[type=checkbox]
+      margin-right: 6px
+  select
+    height: 22px
+    border: 1px solid #666
+
+.forms-structure-rows
+  list-style: none
+  padding: 0 0 6px 0
+  margin: 0
+  font-size: 12px
+
+.forms-two-cols .forms-structure-rows
+  width: 48%
+  float: left
+  margin-right: 18px
+
+.forms-structure-rows li
+  overflow: hidden
+  display: block
+
+.forms-row-single-division
+  float: left
+  padding: 8px 0
+  &.nospace
+    padding: 2px 0 !important
+  &.left
+    width: 35%
+    margin-right: 5%
+    background: url(../images/item-bottom.gif) repeat-x 0 bottom
+  &.wide
+    width: 100%
+    font-size: 13px
+    background: url(../images/item-bottom.gif) repeat-x 0 bottom
+  &.first
+    border-top: none
+  &.last
+    background: none !important
+  &.right
+    width: 310px
+    padding: 6px 0
+
+.forms-two-cols .forms-row-single-division.right
+  width: inherit
+  padding: 6px 0
+
+.forms-row-single-division
+  label
+    padding: 0 6px 0 0
+    float: left
+    display: block
+    min-width: 40px
+  input, select
+    float: left
+
+
+/* Titulos */
+
+h1, h2, h3, h4, h5, h6
+  font-family: Helvetica, Arial, sans-serif
+  font-weight: normal
+
+h1
+  font-size: 24px
+  a
+    color: #333333
+    font-weight: normal
+    text-decoration: none
+
+.app
+  h1
+    float: left
+  h2
+    font-size: 16px
+    line-height: 18px
+    margin: 10px 0 5px 0
+    padding-left: 5px
+
+.derecho a
+  float: right
+  margin-top: 14px
+  margin-left: 4px
+
+/* Calendario */
+
+.datePickerBox
+  float: left
+  display: block
+  overflow: hidden
+
+.component-search .datePickerBox
+  width: 153px
+
+.datePickerBox
+  label
+    float: left
+    display: block
+    padding: 5px
+    padding-left: 0
+  .boxCalendar
+    float: left
+
+.boxCalendar
+  width: 73px
+
+.popCalendar
+  display: block
+  margin: 4px 9px 0 4px
+  width: 13px
+  height: 14px
+  background: url(../images/icons/calendar.gif) no-repeat 0 0
+  float: left
+  img
+    vertical-align: middle
+    border: none
+
+/* Datepicker JQuery */
+
+.ui-datepicker
+  width: 220px
+  padding: 0
+  font-size: 12px
+  border: 3px solid #9fa5a2
+  display: none
+  font-family: Arial
+  -moz-box-shadow: 0 0 12px #999
+  box-shadow: 0 0 12px #999
+  -webkit-box-shadow: 0 0 12px #999
+  margin-left: 68px
+  margin-top: -22px
+  border-radius: 0 !important
+  -webkit-border-radius: 0 !important
+  -moz-border-radius: 0 !important
+  background: #ddd
+  .ui-datepicker-header
+    position: relative
+    border-bottom: 1px solid #9fa5a2
+    background: url(../images/bg-header-calendar.gif) repeat-x #c2c6c4
+    border-radius: 0 !important
+    -webkit-border-radius: 0 !important
+    -moz-border-radius: 0 !important
+    margin: 0
+  .ui-datepicker-prev, .ui-datepicker-next
+    display: none
+  .ui-datepicker-title
+    text-align: left
+    padding: 1px 4px 0 4px
+    select
+      margin: 1px 0
+      margin-right: 3px
+  select
+    &.ui-datepicker-month-year
+      width: 100%
+    &.ui-datepicker-month, &.ui-datepicker-year
+      width: 35%
+  table
+    width: 219px
+    font-size: 11px
+    border-collapse: collapse
+    margin: 0 0 0 1px
+    background: #e0e3e1
+  th
+    padding: .7em .3em
+    text-align: center
+    font-weight: bold
+    border: 0
+  td
+    border: 0
+    padding: 1px
+    background: $table-color
+    border-top: 1px solid #fff
+    border-left: 1px solid #fff
+    text-align: center
+    line-height: 12px
+    span, a
+      display: block
+      padding: 2px 0
+      text-align: center
+      text-decoration: none
+      color: #000
+      font-weight: bold
+      line-height: inherit
+      height: 13px
+  .ui-datepicker-calendar
+    .ui-state-highlight, .ui-state-hover
+      background: #e0e3e1
+  .ui-datepicker-buttonpane
+    background: $table-color
+    height: 20px
+    border-top: 1px solid #9fa5a2
+    button
+      cursor: pointer
+      position: absolute
+      padding: 0 !important
+      right: 4px
+      top: 4px
+      &.ui-datepicker-current
+        float: left
+        display: none
+      &.ui-datepicker-close
+        border: none
+        text-indent: -10000px
+        background: url(../images/btn-close-calendar.gif) no-repeat
+        height: 15px
+        width: 15px
+
+.ui-datepicker-unselectable, .ui-state-disabled
+  color: #CCC !important
+
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3) */
+
+.ui-datepicker-cover
+  display: none
+  display/**/: block
+  position: absolute
+  z-index: -1
+  filter: mask()
+  top: -4px
+  left: -4px
+  width: 200px
+  height: 200px
+
+/* Botones */
+
+button
+  outline: 0px
+  border: 0
+  cursor: pointer
+  background: transparent
+  padding: 0
+  div
+    font-family: Arial
+    font-size: 12px
+    border: none
+    color: white
+    outline: none
+    padding: 0
+    background: white
+    cursor: pointer
+    background: url(../images/component-button-left.gif) no-repeat 0 0
+    padding-left: 4px
+    margin-top: -1px
+    &.over
+      background-position: 0 -32px
+    &.press
+      background-position: 0 -64px
+  &[disabled] div
+    background-position: 0 -96px
+  div span
+    background: url(../images/component-button-right.gif) no-repeat right 0
+    padding: 8px 23px 8px 18px
+    display: block
+    font-weight: bold
+    text-shadow: #000 0 0 4px
+    &.over
+      background-position: right -32px
+    &.press
+      background-position: right -64px
+  &[disabled] div span
+    background-position: right -96px
+    color: #E8E8E8
+    text-shadow: 1px -1px 0 #999999
+  &.cancel-btn div
+    font-size: 12px
+    color: #029900
+    background: none
+    span
+      background: none
+      text-shadow: none
+      padding: 8px 0
+
+
+/* Navigator Tabs */
+
+.component-navigator-tabs
+  font-family: Arial
+  font-size: 12px
+  color: black
+  background: url(../images/component-background-tabs-end.gif) repeat-x 0 bottom
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+    background: url(../images/component-tab-close-top.gif) no-repeat right bottom
+    display: block
+    height: 41px
+    li
+      margin: 0
+      padding: 0
+      float: left
+      background: url(../images/component-tab-unselect.gif) repeat-x 0 bottom #ececec
+      a
+        display: block
+        text-decoration: none
+        color: #999
+        outline: 0px
+        padding: 14px 20px 13px 20px
+        background: url(../images/component-tab-separator.gif) 0 10px no-repeat
+        &:hover
+          background: url(../images/component-tab-unselect-over.gif) repeat-x 0 bottom #dddddd
+          color: #000
+        em
+          font-style: normal
+  .first a, .sinseparador a
+    background-position: -3px 10px
+  .tab-unselect.first, .tab-select.first
+    -webkit-border-top-left-radius: 6px
+    -moz-border-radius-topleft: 6px
+    border-top-left-radius: 6px
+    a
+      -webkit-border-top-left-radius: 6px
+      -moz-border-radius-topleft: 6px
+      border-top-left-radius: 6px
+      &:hover
+        -webkit-border-top-left-radius: 6px
+        -moz-border-radius-topleft: 6px
+        border-top-left-radius: 6px
+  .tab-unselect.last
+    -webkit-border-top-right-radius: 6px
+    -moz-border-radius-topright: 6px
+    border-top-right-radius: 6px
+    a
+      -webkit-border-top-right-radius: 6px
+      -moz-border-radius-topright: 6px
+      border-top-right-radius: 6px
+      &:hover
+        -webkit-border-top-right-radius: 6px
+        -moz-border-radius-topright: 6px
+        border-top-right-radius: 6px
+  .tab-select
+    &.last
+      -webkit-border-top-right-radius: 6px
+      -moz-border-radius-topright: 6px
+      border-top-right-radius: 6px
+      a
+        -webkit-border-top-right-radius: 6px
+        -moz-border-radius-topright: 6px
+        border-top-right-radius: 6px
+        &:hover
+          -webkit-border-top-right-radius: 6px
+          -moz-border-radius-topright: 6px
+          border-top-right-radius: 6px
+    &.unit
+      -webkit-border-top-right-radius: 6px
+      -moz-border-radius-topright: 6px
+      border-top-right-radius: 6px
+      -webkit-border-top-left-radius: 6px
+      -moz-border-radius-topleft: 6px
+      border-top-left-radius: 6px
+      a
+        -webkit-border-top-right-radius: 6px
+        -moz-border-radius-topright: 6px
+        border-top-right-radius: 6px
+        -webkit-border-top-left-radius: 6px
+        -moz-border-radius-topleft: 6px
+        border-top-left-radius: 6px
+    background: url(../images/component-tab-select-left.gif) no-repeat 0 0
+    a
+      background: url(../images/component-tab-select-right.gif) no-repeat right 0
+      font-weight: bold
+      border: none
+      color: #000
+      &:hover
+        background: url(../images/component-tab-select-right.gif) no-repeat right 0
+        font-weight: bold
+        border: none
+        color: #000
+
+/* Navigator Menu */
+
+.component-navigator-menu
+  font-family: Arial
+  font-size: 12px
+  color: black
+  background: url(../images/component-background-menu-end.gif) repeat-x 0 bottom
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+    background: url(../images/component-menu-close-top.gif) no-repeat right bottom
+    display: block
+    height: 41px
+    li
+      margin: 0
+      padding: 0
+      float: left
+      background: url(../images/component-menu-unselect.gif) repeat-x 0 bottom white
+      a
+        display: block
+        text-decoration: none
+        color: $link-color
+        outline: 0px
+        padding: 13px 20px 13px 20px
+        background: url(../images/component-menu-separator.gif) 0 10px no-repeat
+        &:hover
+          background: none
+          color: #030
+        em
+          font-style: normal
+  .first a, .sinseparador a
+    background-position: -3px 10px
+  .tab-unselect.first, .tab-select.first
+    -webkit-border-top-left-radius: 6px
+    -moz-border-radius-topleft: 6px
+    border-top-left-radius: 6px
+    a
+      -webkit-border-top-left-radius: 6px
+      -moz-border-radius-topleft: 6px
+      border-top-left-radius: 6px
+      &:hover
+        -webkit-border-top-left-radius: 6px
+        -moz-border-radius-topleft: 6px
+        border-top-left-radius: 6px
+  .tab-unselect.last
+    -webkit-border-top-right-radius: 6px
+    -moz-border-radius-topright: 6px
+    border-top-right-radius: 6px
+    a
+      -webkit-border-top-right-radius: 6px
+      -moz-border-radius-topright: 6px
+      border-top-right-radius: 6px
+      &:hover
+        -webkit-border-top-right-radius: 6px
+        -moz-border-radius-topright: 6px
+        border-top-right-radius: 6px
+  .tab-select
+    &.last
+      -webkit-border-top-right-radius: 6px
+      -moz-border-radius-topright: 6px
+      border-top-right-radius: 6px
+      a
+        -webkit-border-top-right-radius: 6px
+        -moz-border-radius-topright: 6px
+        border-top-right-radius: 6px
+        &:hover
+          -webkit-border-top-right-radius: 6px
+          -moz-border-radius-topright: 6px
+          border-top-right-radius: 6px
+    &.unit
+      -webkit-border-top-right-radius: 6px
+      -moz-border-radius-topright: 6px
+      border-top-right-radius: 6px
+      -webkit-border-top-left-radius: 6px
+      -moz-border-radius-topleft: 6px
+      border-top-left-radius: 6px
+      a
+        -webkit-border-top-right-radius: 6px
+        -moz-border-radius-topright: 6px
+        border-top-right-radius: 6px
+        -webkit-border-top-left-radius: 6px
+        -moz-border-radius-topleft: 6px
+        border-top-left-radius: 6px
+    background: url(../images/component-menu-select-left.gif) no-repeat 0 0
+    a
+      background: url(../images/component-menu-select-right.gif) no-repeat right 0
+      font-weight: bold
+      border: none
+      color: #000
+      &:hover
+        background: url(../images/component-menu-select-right.gif) no-repeat right 0
+        font-weight: bold
+        border: none
+        color: #000
+
+/* Buscador */
+
+.component-search
+  font-family: Arial
+  border: 1px solid #d2d2d2
+  -webkit-border-bottom-right-radius: 6px
+  -webkit-border-bottom-left-radius: 6px
+  -moz-border-radius-bottomright: 6px
+  -moz-border-radius-bottomleft: 6px
+  border-bottom-right-radius: 6px
+  border-bottom-left-radius: 6px
+  border-bottom-width: 2px
+  border-top: none
+
+.search-top
+  background: url(../images/component-background-tabs-end.gif) repeat-x 0 bottom
+  height: 10px
+
+.component-search-forms
+  padding: 10px 15px 10px 25px
+  background: $section-back-color
+  font-size: 12px
+  border: 3px solid white
+  -webkit-border-bottom-right-radius: 6px
+  -webkit-border-bottom-left-radius: 6px
+  -moz-border-radius-bottomright: 6px
+  -moz-border-radius-bottomleft: 6px
+  border-bottom-right-radius: 6px
+  border-bottom-left-radius: 6px
+
+.component-search-actions
+  padding: 10px 20px 8px 20px
+  text-align: center
+
+.content-grupo .component-search-actions
+  padding-bottom: 0
+
+.standar-text-box
+  width: 296px
+
+.forms-two-cols .standar-text-box
+  width: 258px
+
+.standar-combo
+  width: 301px
+
+.forms-two-cols .standar-combo
+  width: 260px
+
+.condensed-combo, .condensed-text-box
+  width: 142px
+  margin-right: 9px
+
+.ultra-condensed-combo, .ultra-condensed-text-box
+  width: 125px
+  margin-right: 10px
+
+.forms-structure-rows cite
+  width: 147px
+  float: left
+  display: block
+  font-size: 11px
+  line-height: 11px
+  font-style: normal
+
+/* Separadores */
+
+.separadorTop
+  border-top: 1px solid #ddd
+
+.separadorBottom
+  border-bottom: 1px solid #ddd
+
+/* Standar Grid */
+
+.component-standar-grid
+  padding: 0
+  overflow: auto
+  a
+    color: $link-color
+    font-weight: normal
+    text-decoration: none
+  table
+    font-family: Helvetica, Arial, sans-serif
+    background-color: $table-color
+    width: 100%
+    font-size: 11px
+    border: none
+    th
+      border-right: 1px solid white
+      background-color: $header-color
+      padding: 8px
+      text-align: left
+      font-size: 12px
+    td
+      border: 1px solid white
+      border-bottom: none
+      border-left: none
+      padding: 4px 8px
+      text-align: left
+
+.standar-grid-model
+  a
+    text-decoration: underline !important
+  td a
+    margin: 0 3px
+    color: $link-color
+
+.filters-head-table
+  label
+    margin: 0 5px
+  .left-filter-elements
+    float: left
+    font-weight: normal
+  .right-filter-elements
+    float: right
+    font-weight: normal
+
+.component-standar-grid
+  table tr
+    &.subnivel-th th
+      border-right: 1px solid white
+      background-color: $section-back-color
+      padding: 3px 8px
+      font-size: 11px
+      font-weight: normal
+    &.marked
+      td, th
+        background-color: $section-back-color
+        font-weight: bold
+  tr.selected
+    td, th
+      background-color: #FFC !important
+  table tr.subnivel-filters th
+    background-color: #FFF
+    padding: 6px
+    border-bottom: 1px solid #ccc
+    border-top: 1px solid #ccc
+  h2
+    background-color: $section-back-color !important
+    padding: 6px !important
+    font-size: 14px !important
+    margin: 0 !important
+    border-bottom: 1px solid white !important
+    display: block
+  h3
+    background-color: $section-back-color !important
+    padding: 6px !important
+    font-size: 14px !important
+    margin: 0 !important
+    border-bottom: 1px solid white !important
+    display: block
+    background-color: $section-back-color !important
+    font-size: 12px !important
+
+/* Drag & Drog Tables */
+
+.draggableTable
+  td, th
+    text-align: center !important
+
+.draggableElement
+  td, th
+    padding-top: 10px !important
+    padding-bottom: 10px !important
+
+.draggableTable
+  th.dragIcon
+    text-align: left !important
+  .rowDragHover
+    border-top: 3px solid $link-color !important
+    background-color: #EBEDD0 !important
+    padding-top: 9px !important
+    padding-bottom: 9px !important
+  td.dragIcon
+    background: url(../images/vin-table-left.gif) no-repeat $table-color 6px 8px
+    padding-left: 18px !important
+    text-align: left !important
+
+/* Componente DataTable */
+
+.component-datatable
+  border: 1px solid #d2d2d2
+  -webkit-border-bottom-right-radius: 6px
+  -webkit-border-bottom-left-radius: 6px
+  -moz-border-radius-bottomright: 6px
+  -moz-border-radius-bottomleft: 6px
+  border-bottom-right-radius: 6px
+  border-bottom-left-radius: 6px
+  border-bottom-width: 2px
+  border-top: none
+  padding: 5px
+
+
+/* Mensajes */
+
+.component-message-result
+  background: $section-back-color
+  font-family: Helvetica, Arial, sans-serif
+  font-size: 12px
+  margin: 15px 0 15px 5px
+  overflow: hidden
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+  &.alert
+    background: url(../images/sprite-icons-messages.gif) no-repeat 20px 10px #fffbe0
+    padding-left: 30px
+    border: 1px solid $link-color
+  &.info
+    background: url(../images/sprite-icons-messages.gif) no-repeat 20px -36px #fffbe0
+    padding-left: 30px
+    border: 1px solid $link-color
+  p
+    padding: 14px
+    margin: 0
+    float: left
+    line-height: 14px !important
+  a.accion
+    display: block
+    float: right
+    color: $link-color
+    text-decoration: none
+    padding-left: 10px
+    margin-right: 20px
+    margin-top: 14px
+    text-shadow: #fff 0 0 4px
+
+/* Links */
+
+.links-content
+  font-size: 12px
+  font-family: Helvetica, Arial
+  padding-top: 8px
+  margin: 0 10px
+
+a, .links-content a, .grid-selection a
+  color: $link-color
+  text-decoration: none
+
+#app a:hover, .links-content a:hover, .grid-selection a:hover
+  color: #0c0
+  text-decoration: underline
+
+.component-navigator-tabs a
+  color: #333 !important
+  &:hover
+    color: #333 !important
+    text-decoration: none !important
+
+.component-navigator-menu a:hover
+  color: #333 !important
+  text-decoration: none !important
+
+.links-extra
+  padding: 5px 5px 0 0
+  a
+    color: $link-color !important
+    text-decoration: underline
+
+.links-content
+  .help-link
+    padding: 3px 18px 3px 3px
+    display: block
+  .customize-link
+    padding: 3px 18px 3px 3px
+    display: block
+    background: url(../images/icons/configtools.gif) no-repeat right 2px
+
+.linkPdf, .linkExcel, .linkWord, .linkZip, .linkGlosario, .linkAdvertencia, .help-link
+  padding: 3px 18px 3px 0
+
+.icono-pdf, .icono-excel, .icono-word, .icono-zip, .icono-glosario, .icono-advertencia, .icono-help, .icono-eliminar
+  width: 18px
+  display: inline-block
+  *display: block
+  height: 18px
+
+.help-link, .icono-help
+  background: url(../images/icons/pregunta-ayuda.gif) no-repeat right 2px
+
+.linkPdf, .icono-pdf
+  background: url(../images/icons/pdf.gif) no-repeat right 2px
+
+.linkExcel, .icono-excel
+  background: url(../images/icons/excel.gif) no-repeat right 2px
+
+.linkWord, .icono-word
+  background: url(../images/icons/word.gif) no-repeat right 2px
+
+.linkZip, .icono-zip
+  background: url(../images/icons/zip.gif) no-repeat right 2px
+
+.linkGlosario, .icono-glosario
+  background: url(../images/icons/glos.gif) no-repeat right 2px
+
+.linkAdvertencia, .icono-advertencia
+  background: url(../images/icons/auxi_alert_a.gif) no-repeat right 2px
+
+.linkEliminar, .icono-eliminar
+  background: url(../images/icons/eliminar-icon.gif) no-repeat right 2px
+
+.link-search
+  background: url(../images/icons/icon-search.gif) no-repeat right 0
+  padding-right: 22px
+
+/* Contentendores Componentes CSS3 */
+
+.component-contents
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+  -moz-box-shadow: 0 0 12px #e2e2e2
+  box-shadow: 0 0 12px #e2e2e2
+  -webkit-box-shadow: 0 0 12px #e2e2e2
+  border: 1px solid #ddd
+  background: #FFF
+  overflow: hidden
+  width: 958px
+  margin-left: 6px
+  margin-top: 10px
+  padding: 4px
+  background: #FFF
+
+.component-draggable-two-sides
+  font-family: Helvetica, Arial, Verdana
+  font-size: 12px
+
+.component-draggable-mid
+  width: 472px
+  margin: 0 2px 0 2px
+  float: left
+  overflow: hidden
+  height: 493px
+
+.component-draggable-all
+  width: inherit
+  margin: 0 2px 0 2px
+  float: left
+  overflow: hidden
+  height: inherit !important
+
+.component-draggable-total
+  width: inherit !important
+  float: inherit !important
+  height: inherit !important
+
+.content-draggable
+  font-size: 12px
+  padding-bottom: 16px
+  h4
+    -webkit-border-top-left-radius: 5px
+    -webkit-border-top-right-radius: 5px
+    -moz-border-radius-topleft: 5px
+    -moz-border-radius-topright: 5px
+    border-top-left-radius: 5px
+    border-top-right-radius: 5px
+    background: #c7d0cb
+    padding: 7px 10px
+    font-weight: bold
+    margin: 0
+    display: block
+    font-size: 12px
+
+.content-table
+  h4
+    background: $header-color
+    padding: 6px 10px
+    font-weight: bold
+    margin: 0
+    display: block
+    font-size: 12px
+  h5
+    background: #e3e7e6
+    padding: 7px 10px
+    font-weight: bold
+    margin: 0
+    font-size: 11px
+    border-top: 1px solid #fff
+    border-bottom: 1px solid #fff
+
+.content-draggable .content-table
+  overflow: auto
+  height: 160px
+  border: 1px solid #ccc
+  padding: 1px
+
+.content-table
+  overflow: auto
+  height: 160px
+  border: 1px solid #ccc
+  padding: 1px
+  height: auto
+  border: none
+
+table.grid-selection
+  font-family: Helvetica, Arial, Verdana
+  font-size: 11px
+  color: #666
+  width: 100%
+  border: none
+  td
+    background: $table-color
+    border-bottom: 1px solid #FFF
+    padding: 6px
+    text-align: left
+    padding-left: 18px
+    background: url(../images/vin-table-left.gif) no-repeat $table-color 6px 5px
+  th
+    background: $table-color
+    border-bottom: 1px solid #FFF
+    padding: 6px
+    text-align: left
+    padding-left: 18px
+    background: url(../images/vin-table-left.gif) no-repeat $table-color 6px 5px
+    &.links
+      text-align: right
+      background: $table-color
+      padding-right: 10px
+  td.links
+    text-align: right
+    background: $table-color
+    padding-right: 10px
+
+.content-grupo-encargados table.grid-selection
+  td, th
+    background-image: none
+    padding-left: 28px
+    color: #333
+
+.block-item td
+  color: #ccc
+
+.filters-table
+  padding: 5px 10px
+  font-family: Helvetica, Arial, Verdana
+  font-size: 11px
+  border-right: 1px solid #ccc
+  border-left: 1px solid #ccc
+  select
+    margin-right: 10px
+    height: 17px
+
+.title-filter
+  background: #b6d3b5
+  -webkit-border-top-left-radius: 5px
+  -webkit-border-top-right-radius: 5px
+  -moz-border-radius-topleft: 5px
+  -moz-border-radius-topright: 5px
+  border-top-left-radius: 5px
+  border-top-right-radius: 5px
+  overflow: hidden
+  height: 45px
+  h4
+    padding: 7px 10px
+    font-weight: bold
+    margin: 0
+    font-size: 12px
+    padding: 16px 24px
+    float: left
+
+.action-buttons-right
+  margin-left: 833px
+  position: absolute
+
+.title-filter .add-filter
+  float: right
+  padding: 10px
+  input
+    margin-left: 5px
+
+.content-grupo
+  background: #dbe9da
+  padding: 10px 8px
+
+.content-grupo-collector
+  height: 388px
+  overflow: auto
+  background: #FFF
+
+.content-grupo-encargados
+  min-height: 300px
+  overflow: auto
+  background: #FFF
+
+.content-grupo-collector.empty
+  background: url(../images/zona-arrastre.gif) 20px center no-repeat white
+
+.two-columns
+  width: 100%
+  td
+    width: 50%
+    font-weight: bold
+
+.grid-selection td.cell-mid
+  width: 50%
+  background-image: none
+  padding-left: 1px !important
+
+.content-grupo button
+  padding: 0
+
+.grid-selection .add-encargado
+  float: left
+  margin-right: 5px
+  text-indent: -10000px
+  height: 14px
+  width: 14px
+  background: url(../images/icons/add-min.gif)
+  outline: 0px
+
+addEncargado
+  background: url(../images/icons/add-min.gif)
+  padding-left: 20px
+
+.grid-selection .edit-encargado
+  float: left
+  margin-right: 5px
+  text-indent: -10000px
+  height: 14px
+  width: 14px
+  background: url(../images/icons/encargado-icon.gif)
+  outline: 0px
+
+/* Contenido Popup Modal */
+
+.modalPopup
+  position: absolute !important
+  z-index: 1010
+  background-color: #FFF
+  padding: 5px
+  display: none
+  -webkit-border-radius: 6px
+  -moz-border-radius: 6px
+  border-radius: 6px
+  -moz-box-shadow: 0 0 14px #333
+  box-shadow: 0 0 14px #333
+  -webkit-box-shadow: 0 0 14px #333
+  *border: 1px solid #666
+  margin: -12px 0 0 0
+  font-family: Arial
+  font-size: 12px
+
+.toolTips
+  position: absolute !important
+  z-index: 1010
+  background-color: #FFF
+  padding: 5px
+  display: none
+  -webkit-border-radius: 6px
+  -moz-border-radius: 6px
+  border-radius: 6px
+  -moz-box-shadow: 0 0 14px #333
+  box-shadow: 0 0 14px #333
+  -webkit-box-shadow: 0 0 14px #333
+  *border: 1px solid #666
+  margin: -12px 0 0 0
+  font-family: Arial
+  font-size: 12px
+  p
+    margin: 0
+  h3
+    margin: 2px 0
+    font-size: 13px
+    font-weight: bold
+  h4
+    margin: 2px 0
+    font-size: 12px
+    font-weight: normal
+
+.withClose
+  width: 360px
+  left: 50%
+  margin-left: -180px
+  top: 15%
+  .btn-cerrar
+    position: absolute
+    right: -25px !important
+    top: -25px !important
+    width: 34px
+    margin: 0
+    height: 34px
+    background: url(../images/close-window-blank.png) no-repeat
+    border: none
+    z-index: 2000 !important
+    text-indent: -10000px
+
+.modalPopup
+  h3
+    font-size: 15px
+    margin: 6px 2px
+    display: block
+    padding-left: 22px
+    font-weight: 600
+    &.msj-advertencia
+      background: url(../images/icon-adv-modal.gif) no-repeat 0 0
+    &.msj-error
+      background: url(../images/icon-error-modal.gif) no-repeat 0 0
+    &.msj-generico
+      background: none
+      padding-left: 0
+  .content-modal
+    background: #fff
+    border: none
+    padding: 7px
+    margin-bottom: 5px
+
+.content-modal .all-content
+  padding: 6px
+  a
+    color: $link-color
+
+.modalPopup-puntero
+  display: none
+
+/*=== JQuery UI ===*/
+
+.ui-widget-content
+  border: none
+  color: #333
+
+.ui-widget
+  font-size: inherit
+
+.ui-dialog
+  padding: 12px
+  position: relative
+  background: #ffffcb
+  -moz-box-shadow: 0 0 12px #333
+  box-shadow: 0 0 12px #333
+  -webkit-box-shadow: 0 0 12px #333
+  font-size: 12px
+  font-family: Arial
+  .ui-dialog-title
+    float: none
+    margin: 0
+  .ui-dialog-titlebar
+    position: relative
+    cursor: move
+    background: none
+    text-align: left
+    padding: 0
+
+.ui-widget-header
+  color: #333333
+  font-size: 16px
+  font-weight: bold
+  margin: 5px 0
+  border: none
+
+.ui-dialog .ui-dialog-titlebar-close
+  background: url(../images/close-window.gif) no-repeat 0 0 !important
+  border: none
+  height: 34px
+  margin: 0
+  padding: 0
+  position: absolute
+  right: -39px
+  _right: -25px
+  top: -33px
+  width: 34px
+  z-index: 2000 !important
+  border-radius: 0
+  -moz-border-radius: 0
+  -webkit-border-radius: 0
+  outline: 0px
+  &:hover, &:focus
+    background: url(../images/close-window.gif) no-repeat 0 0 !important
+    border: none
+    height: 34px
+    margin: 0
+    padding: 0
+    position: absolute
+    right: -39px
+    _right: -25px
+    top: -33px
+    width: 34px
+    z-index: 2000 !important
+    border-radius: 0
+    -moz-border-radius: 0
+    -webkit-border-radius: 0
+    outline: 0px
+
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon, .ui-widget-header .ui-icon
+  background: none !important
+
+.ui-dialog .ui-dialog-titlebar-close span
+  margin: 0 !important
+  height: auto !important
+  width: auto !important
+  background: none !important
+
+.ui-widget-content a
+  color: #222222
+
+.ui-corner-all
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+
+.ui-dialog .ui-dialog-content
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+  border: 1px solid #DDDDDD
+  overflow: auto
+  padding: 15px
+  background: #FFF
+
+.ui-widget-shadow
+  -moz-border-radius: 0
+  -webkit-border-radius: 0
+  border-radius: 0
+  background: none
+  margin: 0
+  opacity: 0
+  padding: 0
+
+.ui-widget-overlay
+  background: #333
+  opacity: .6
+  filter: alpha(opacity = 60)
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 2
+
+.ui-widget-content .ui-state-error
+  border: none
+  font-size: 13px
+  font-weight: bold
+  background: none
+
+.ui-dialog .ui-dialog-buttonpane
+  background: none
+  border: 0
+  margin: 0
+  margin-top: 8px
+  padding: 0
+  text-align: center
+  button
+    font-family: Arial
+    font-size: 11px
+    border: none
+    color: white
+    outline: none
+    cursor: pointer
+    background: url(../images/component-button-right.gif) repeat-x 0 0
+    padding: 7px 20px 7px 20px
+    width: auto
+    cursor: pointer
+    float: none
+    margin: 0 2px
+    font-weight: bold
+    text-shadow: #000 0 0 4px
+
+.ui-error-achs
+  -webkit-border-radius: 6px
+  -moz-border-radius: 6px
+  border-radius: 6px
+  background: #FFC
+  display: block
+  padding: 18px 12px
+  h3
+    color: $link-color
+    font-size: 16px
+    font-weight: bold
+    margin-bottom: 4px
+    display: block
+
+.ui-empty-message
+  margin: 0
+  text-align: center
+  padding-top: 50%
+  font-size: 14px
+  background: #F5F5F5
+
+.boxPeriodo
+  width: 60px
+
+/* Wizard */
+
+.component-index-guide
+  max-width: 970px
+  font-family: Arial
+  *width: 970px
+  height: 70px
+  *clear: both
+  font-size: 12px
+  clear: both
+  padding-left: 5px
+  margin-top: 15px
+  span
+    display: block
+    padding: 10px 12px
+    background: url(../images/bg-wizard-select.gif) repeat-x 0 bottom
+    color: #FFF
+    -webkit-border-bottom-right-radius: 6px
+    -webkit-border-bottom-left-radius: 6px
+    -moz-border-radius-bottomright: 6px
+    -moz-border-radius-bottomleft: 6px
+    border-bottom-right-radius: 6px
+    border-bottom-left-radius: 6px
+    text-shadow: 0 0 4px #000000
+    font-weight: bold
+  ul
+    margin: 0
+    padding: 0
+    display: block
+    overflow: hidden
+    list-style: none
+    background: #e2e6e4
+    -webkit-border-top-left-radius: 6px
+    -webkit-border-top-right-radius: 6px
+    -moz-border-radius-topleft: 6px
+    -moz-border-radius-topright: 6px
+    border-top-left-radius: 6px
+    border-top-right-radius: 6px
+    height: 37px
+    li
+      float: left
+      padding: 12px
+      display: block
+      float: left
+      span
+        padding: 12px
+        display: block
+        float: left
+  .first
+    display: block
+    -webkit-border-top-left-radius: 6px
+    -moz-border-radius-topleft: 6px
+    border-top-left-radius: 6px
+  .last
+    display: block
+    -webkit-border-top-right-radius: 6px
+    -moz-border-radius-topright: 6px
+    border-top-right-radius: 6px
+  .current-item
+    color: #FFF
+    background: url(../images/wzr-current.gif) repeat-x
+    text-shadow: #000 0 0 4px
+    padding: 0
+    strong
+      background: url(../images/bg-wizard-pasos.gif) no-repeat right bottom
+      color: #FFF
+      padding: 11px 20px 12px 12px
+      display: block
+    &.last strong
+      background-image: none
+  .next-item
+    background: url(../images/bg-wizard-next.gif) no-repeat right top #d3d9d7
+    padding-right: 21px
+    color: #868988
+    &.last
+      background: url(../images/bg-wizard-next.gif) no-repeat right bottom #d3d9d7
+      padding-right: 21px
+      color: #868988
+  .past-item
+    color: #FFF
+    background: url(../images/bg-wizard-past.gif) no-repeat right top #b8d3b9
+    padding-right: 20px
+    &.prev
+      background-image: url(../images/bg-wizard-pasos.gif)
+    strong
+      color: #FFF
+      background: #bbd6bb
+    span
+      background: url(../images/wzr-current-prev-usado.gif) no-repeat right 0
+
+.eliminarEncargado
+  background: url(../images/icons/eliminar-icon.gif) no-repeat 0 0
+  width: 18px
+  height: 18px
+  display: block
+
+.editarEncargado
+  background: url(../images/icons/editar-icon.gif) no-repeat 0 0
+  width: 18px
+  height: 18px
+  display: none
+
+.cursorDrag
+  cursor: move
+  cursor: url("cursor_crosshair.cur"), url("css/cursor_crosshair.cur"), move
+
+x:-moz-any-link
+  cursor: url("cursor_crosshair.cur"), url("css/cursor_crosshair.cur"), move
+
+table.tablesorter thead tr
+  .headerSortUp
+    background: url(../images/asc.gif) no-repeat $header-color right center !important
+  .headerSortDown
+    background: url(../images/desc.gif) no-repeat $header-color right center !important
+  .header
+    background: url(../images/bg.gif) no-repeat $header-color right center
+
+.disable-event-click
+  background: url() no-repeat $header-color right center !important
+
+.ui-draggable-disabled
+  cursor: not-allowed !important
+  *cursor: no-drop !important
+
+.ui-state-disabled, .ui-widget-content .ui-state-disabled
+  opacity: .35
+  filter: alpha(opacity = 35)
+  background-image: none
+
+/* Paginador Grillas */
+
+.component-pager
+  overflow: hidden
+  *height: 30px
+  font-size: 11px
+  padding: 8px 4px 4px 4px
+  .counter-all
+    float: left
+    padding-top: 4px
+  .counter-pages
+    float: right
+    a
+      display: block
+      float: left
+      padding: 2px 4px
+      margin: 0 2px
+      border: 1px solid #ccc
+      color: $link-color
+      &:hover
+        background: $link-color-hover
+        color: #FFF
+    .current-page
+      background: #090
+      color: #FFF
+
+/* Central Stage */
+
+.component-central_stage
+  background: $table-color
+  -webkit-border-bottom-right-radius: 6px
+  -webkit-border-bottom-left-radius: 6px
+  -moz-border-radius-bottomright: 6px
+  -moz-border-radius-bottomleft: 6px
+  border-bottom-right-radius: 6px
+  border-bottom-left-radius: 6px
+  border-bottom-width: 2px
+  padding: 5px
+
+.stage-cols-three
+  width: 310px
+  float: left
+  margin-right: 8px
+
+/* Checklist */
+
+.checklist-content
+  font-size: 12px
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+  border: 1px solid #ccc
+  padding: 4px
+  background: #fff
+  margin-bottom: 8px
+  .help-link
+    height: 9px
+    float: right
+    margin: 5px 5px 0 0
+  h4
+    margin: 0
+    background: #c8d1cc
+    padding: 8px
+    display: block
+    -webkit-border-top-left-radius: 5px
+    -webkit-border-top-right-radius: 5px
+    -moz-border-radius-topleft: 5px
+    -moz-border-radius-topright: 5px
+    border-top-left-radius: 5px
+    border-top-right-radius: 5px
+    font-weight: bold
+    a
+      float: right
+  .actions
+    margin: 0
+    padding: 5px 8px
+    border-bottom: 1px solid #ccc
+    label
+      margin-right: 5px
+  .checklist
+    margin: 0
+    padding: 4px
+    max-height: 160px
+    overflow: auto
+    ul
+      margin: 0
+      padding: 0
+      list-style: none
+

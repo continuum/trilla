@@ -1,0 +1,173 @@
+/* Controles UI 
+ * Desarrollado por Continuum Lltda. 2010 */
+
+$section-back-color: #EEE
+$section-header-color: #EEE
+$header-color: #F1B961
+$table-color:  #FDF7ED
+$link-color: #A96D0F
+$link-color-hover: #A96D0F
+
+body
+  padding: 0
+  margin: 0
+  font-family: Helvetica, Arial, sans-serif
+
+form
+  padding: 0
+  margin: 0
+  outline: 0px
+
+.app
+  width: 980px
+  margin: 0 auto
+  font-size: 12px
+  background: #FFF
+  overflow: hidden
+  background: url(../images/sidebar-bg.gif) repeat-y 282px 0 white
+  .sidebar
+    width: 250px
+    float: left
+    padding: 10px 25px
+    ul
+      margin-bottom: 25px
+      li
+        text-decoration: none
+    a
+      text-decoration: none
+      padding: 8px 6px
+      border-bottom: 1px solid #eee
+      display: block
+      outline: 0px
+      color: $link-color
+      &:hover
+        background: $link-color-hover
+  .content
+    width: 630px
+    float: left
+    padding: 10px 20px
+    border-left: 1px dotted #ccc
+    min-height: 675px
+    h2
+      font-size: 24px
+      color: #006600
+      margin: 0
+      padding: 18px 0 0 0
+      display: block
+    p
+      line-height: 18px
+  .sidebar h3
+    font-size: 18px
+    margin: 0
+    padding: 18px 0
+    display: block
+
+.detalle-componente
+  color: #666
+  line-height: 18px
+  margin: 18px 0
+
+.codigo-componente
+  margin: 15px 0 30px 0
+  border-top: 1px solid #eee
+  padding-top: 10px
+  pre
+    background-color: #F1F1F1
+    overflow: auto
+    padding: 10px
+
+.app .content h4
+  font-weight: bold
+  font-size: 18px
+  margin-bottom: 12px
+  margin-top: 30px
+  display: block
+
+.codigo-componente
+  .classList li
+    margin: 3px 0
+  .doc-nav
+    overflow: hidden
+    background: #ddd
+    margin: 2px 0
+    li
+      float: left
+  .datePickerBox
+    float: none
+  .component-search .datePickerBox
+    float: left
+
+.componente a
+  color: $link-color
+  text-decoration: none
+  &:hover
+    color: $link-color-hover
+    text-decoration: underline
+
+/* Mensajes */
+
+.component-container
+  background: $section-back-color
+  font-family: Helvetica, Arial, sans-serif
+  font-size: 12px
+  margin: 1px 5px 2px 5px
+  overflow: hidden
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+
+.component-timesheet
+  background: $section-back-color
+  font-family: Helvetica, Arial, sans-serif
+  font-size: 12px
+  margin: 1px 5px 2px 5px
+  overflow: hidden
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+  p
+    padding: 5px
+    margin: 0
+    float: left
+  a.accion
+    display: block
+    float: right
+    color: $link-color
+    text-decoration: none
+    padding-left: 10px
+    margin-right: 20px
+    margin-top: 14px
+    text-shadow: #fff 0 0 4px
+
+.component-timesheet-header
+  background: $section-header-color
+  font-family: Helvetica, Arial, sans-serif
+  font-size: 12px
+  margin: 0px 5px 0px 5px
+  overflow: hidden
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+  p
+    padding: 5px
+    margin: 0
+    float: left
+  a.accion
+    display: block
+    float: right
+    color: $link-color
+    text-decoration: none
+    padding-left: 10px
+    margin-right: 20px
+    margin-top: 5px
+    text-shadow: #fff 0 0 4px
+
+a.accion
+  display: inline
+  color: $link-color
+  text-decoration: none
+  padding-left: 10px
+  margin-left: 20px
+  margin-top: 5px
+  text-shadow: #fff 0 0 4px
+
