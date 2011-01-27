@@ -1,5 +1,10 @@
 class TimesheetController < ApplicationController
+
   def index
+      redirect_to :action => :day
+  end
+
+  def day
     @clientesProyectos = Cliente.all.map do |cli|
       ClienteObj.new.tap do |c|
         c.id = cli.id
@@ -15,11 +20,22 @@ class TimesheetController < ApplicationController
     @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, @fecha)
   end
 
+  def week
+    
+  end
+
   def create
     iniciado = params[:iniciado]
+    minutos = 0
+    if !params[:tiempo_base].blank?
+      tiempo_base = params[:tiempo_base].split(":")
+      horas = tiempo_base[0];
+      minutos = horas.to_i * 60 + tiempo_base[1].to_i;
+    end 
     fecha_actual = Temporizador.fechaActual()
     @tempo = Temporizador.new(params[:temporizador])
     @tempo.iniciado = iniciado
+    @tempo.minutos = minutos
     @tempo.start = fecha_actual
     @tempo.stop = fecha_actual
     @tempo.save
@@ -33,7 +49,14 @@ class TimesheetController < ApplicationController
   end
 
   def edit
+    minutos = 0
+    if !params[:tiempo_base].blank?
+      tiempo_base = params[:tiempo_base].split(":")
+      horas = tiempo_base[0];
+      minutos = horas.to_i * 60 + tiempo_base[1].to_i;
+    end 
     @tempo = Temporizador.find(params[:id])
+    @tempo.minutos = minutos
     @tempo.update_attributes(params[:temporizador])
     fecha_actual = Temporizador.fechaActual()
     @fecha = params[:fecha]
@@ -47,13 +70,14 @@ class TimesheetController < ApplicationController
  
   def update
     @tempo = Temporizador.find(params[:id])
+
     begin
-      tiempos = params[:time].to_s.split(':')
-      stop = @tempo.start + (tiempos[0].to_i.hours + tiempos[1].to_i.minutes + tiempos[2].to_i.seconds + tiempos[3].to_i.days) 
+      fecha = Temporizador.fechaActual
       if (params[:accion] == 'start')
-        @tempo.update_attributes({:stop => stop, :iniciado => 1})
+        @tempo.update_attributes({:stop => fecha, :start => fecha, :iniciado => 1})
       elsif (params[:accion] == 'stop')  
-        @tempo.update_attributes({:stop => stop, :iniciado => 0})
+        minutos = @tempo.minutos + ((Temporizador.fechaActual - @tempo.start).to_i / 60).to_i
+        @tempo.update_attributes({:stop => fecha, :iniciado => 0, :minutos => minutos})
       end  
     rescue ActiveRecord::RecordNotFound
     end

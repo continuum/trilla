@@ -107,7 +107,7 @@ form {
   border-radius: 5px; }
 
 .component-timesheet {
-  background: #eeeeee;
+  background: #fdf7ed;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
   margin: 1px 5px 2px 5px;
@@ -130,7 +130,7 @@ form {
     text-shadow: white 0 0 4px; }
 
 .component-timesheet-header {
-  background: #eeeeee;
+  background: #f1b961;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
   margin: 0px 5px 0px 5px;

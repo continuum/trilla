@@ -1,0 +1,13 @@
+= render(:partial => "shared/timesheetmenu")
+.component-navigator-tabs
+  %ul
+    %li.tab-unselect.first
+      %a#tab-day{:href => "/timesheet"} Día
+    %li.tab-select.last
+      %a#tab-week{:href => "/timesheet/week"} Semana
+    %li.clearfix
+.component-search
+  .component-search-forms
+    Semanal :)
+  = render(:partial => "timesheetfooter")
+

@@ -6,7 +6,10 @@ var idInterval = -1;
 (function ($) {
 
 	$(document).ready(function () {
-		
+
+	        $('#temporizador_tiempo_base').timeEntry({show24Hours: true});	
+                $('#div-nuevo-timesheet').jqm({modal: true});
+
 		function setTemporizador(temporizador) {
 			$('#temporizador_id').val(temporizador.id);
 			$('#temporizador_descripcion').val(temporizador.descripcion);
@@ -45,21 +48,13 @@ var idInterval = -1;
 		 * @param {Object} event
 		 */
 		$('.lnk-nuevo-timesheet').click(function(event){
-			$('#lnk-span-guardar-timesheet').text('Guardar');
+                       	$('#lnk-span-guardar-timesheet').text('Guardar');
 			var temporizador = {id: -1, descripcion: '', proyecto_id: 1, tarea_id: 1};
 			setTemporizador(temporizador);
-			$('#div-nuevo-timesheet').show();
+                        $('#div-nuevo-timesheet').jqmShow();
 			event.preventDefault();
 		});
 		
-		/**
-		 * 
-		 * @param {Object} event
-		 */
-		$('#lnk-cancelar-timesheet').click(function(event){
-			$('#div-nuevo-timesheet').hide();
-			event.preventDefault();
-		});
 		
 		/**
 		 * 
@@ -67,7 +62,7 @@ var idInterval = -1;
 		 * @param {Object} callback
 		 */
 		function update(params, callback) {
-			$.get('/timesheet/update',params,function(data){
+			$.get('update',params,function(data){
 				 $('#tr_timesheet-' + params.id).empty().append(data);
 				 if (callback) {
 				 	 callback();
@@ -84,8 +79,7 @@ var idInterval = -1;
 		function create(form_params, iniciado, callback) {
 			
 			form_params+='&iniciado=' + iniciado;
-			
-			$.get('timesheet/create?' + form_params, function(div){
+			$.get('create?' + form_params, function(div){
 				$('#container-temporizadores').empty().append(div);
 				if (callback) {
 					callback();	
@@ -101,7 +95,7 @@ var idInterval = -1;
 		 */
 		function edit(form_params, callback) {
 			
-			$.get('timesheet/edit?' + form_params, function(div){
+			$.get('edit?' + form_params, function(div){
 				$('#container-temporizadores').empty().append(div);
 				if (callback) {
 					callback();	
@@ -134,7 +128,7 @@ var idInterval = -1;
 			
 				edit(form_params, function(){
 					bind_click_lnk_reloj();
-					$('#div-nuevo-timesheet').hide();
+					$('#div-nuevo-timesheet').jqmHide();
 				});
 			
 			} else {
@@ -159,7 +153,7 @@ var idInterval = -1;
 						create(form_params, 1, function(){
 							bind_click_lnk_reloj();
 							reset_times();
-							$('#div-nuevo-timesheet').hide();
+							$('#div-nuevo-timesheet').jqmHide();
 						});
 						
 					} else {
@@ -175,7 +169,7 @@ var idInterval = -1;
 					create(form_params, 1, function(){
 						bind_click_lnk_reloj();
 						reset_times();
-						$('#div-nuevo-timesheet').hide();
+						$('#div-nuevo-timesheet').jqmHide();
 					});
 				}
 			}
@@ -193,12 +187,12 @@ var idInterval = -1;
 			$('.lnk_editar_timesheet').unbind('click').click(function(event){
 			
 				$('#lnk-span-guardar-timesheet').text('Actualizar');
-			
+
 				var id = $(this).getIdSplit('-')[1];
 				var temporizador = jsonToObject($('#json_editar_timesheet-' + id).text()).temporizador;
 				
 				setTemporizador(temporizador);
-				$('#div-nuevo-timesheet').show();
+				$('#div-nuevo-timesheet').jqmShow();
 				
 				event.preventDefault();
 			});
@@ -213,7 +207,7 @@ var idInterval = -1;
 				
 				$.confirm('Estas seguro?', function(){
 				
-					$.getJSON('/timesheet/delete',{id: id}, function(json){
+					$.getJSON('delete',{id: id}, function(json){
 						if(json.success){
 							$('#tr_timesheet-' + id).fadeOut();
 						}
@@ -300,7 +294,7 @@ var idInterval = -1;
 			if(hora >= 9) {
 				$('#div-msg-salud').empty().append(msgImportante);
 			} 
-			
+		
 			idInterval = setInterval(function(){
 				
 				var relojRunning = $('#reloj-running');
@@ -358,7 +352,7 @@ var idInterval = -1;
 			onSelect: function(dateText, inst) { 
 				var form = $('#form-submit-timesheet form');
 				form.find('input[name=fecha]').val(dateText);
-				form.attr('action','timesheet');
+				form.attr('action','day');
 				form.submit();
 			}
 		});
