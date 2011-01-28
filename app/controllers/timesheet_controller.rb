@@ -4,6 +4,35 @@ class TimesheetController < ApplicationController
       redirect_to :action => :day
   end
 
+  def mobile
+    self.day
+    render(:file => 'timesheet/mobile', :layout => 'mobile')
+  end
+
+  def about
+    render(:file => 'timesheet/about', :layout => 'mobile')
+  end
+
+  def mobtracking
+    @fecha = Temporizador.fechaActual().to_date()
+    @usuario = session[:usuario]
+    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, @fecha)
+    render(:file => 'timesheet/mobtracking', :layout => 'mobile')
+  end
+
+  def mobedit
+    render(:file => 'timesheet/mobedit', :layout => 'mobile')
+  end
+
+  def mobweekly
+
+  end
+
+  def mobabout
+
+  end
+
+
   def day
     @clientesProyectos = Cliente.all.map do |cli|
       ClienteObj.new.tap do |c|

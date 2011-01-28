@@ -185,10 +185,12 @@ var idInterval = -1;
 			 * @param {Object} event
 			 */
 			$('.lnk_editar_timesheet').unbind('click').click(function(event){
-			
-				$('#lnk-span-guardar-timesheet').text('Actualizar');
-
+		                $('#lnk-span-guardar-timesheet').text('Actualizar');
+                                
 				var id = $(this).getIdSplit('-')[1];
+                                if ($('#lnk_reloj-' + id).attr("title") == "Detener")
+                                  $('#lnk_reloj-' + id).click();
+
 				var temporizador = jsonToObject($('#json_editar_timesheet-' + id).text()).temporizador;
 				
 				setTemporizador(temporizador);
@@ -205,14 +207,14 @@ var idInterval = -1;
 			
 				var id = $(this).getIdSplit('-')[1];
 				
-				$.confirm('Estas seguro?', function(){
+				if (confirm('Estas seguro?')) {
 				
 					$.getJSON('delete',{id: id}, function(json){
 						if(json.success){
 							$('#tr_timesheet-' + id).fadeOut();
 						}
 					});
-				});
+				}
 				
 				event.preventDefault();
 			});

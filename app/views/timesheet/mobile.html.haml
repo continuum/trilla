@@ -1,0 +1,41 @@
+:erb
+  <script type="text/javascript">
+      $(function() {
+      $(".lnk_reloj").click(function() {
+      /*
+        var theName = $.trim($("#theName").val());
+          $.ajax({
+          type: "POST",
+          url: "http://10.0.2.2/mobileajax/callajax.php",
+          data: ({name: theName}),
+          cache: false,
+          dataType: "text",
+          success: onSuccess
+          });
+        }*/
+        alert("hola Mundo");
+      });
+ 
+      function onSuccess(data)
+      {
+       // $("#resultLog").html("Result: " + data);
+      }
+ 
+      });
+  </script>
+
+%div{"data-role" => "page", "data-theme" => "a", :id =>"jqm"}
+  %div{"data-role" => "header", :id => "jqm"}
+    %h1 Continuum Trilla
+  %div{"data-role" => "content"}
+    %ul{"data-role" => "listview", "data-inset"=>"true", "data-theme"=>"c", "data-dividertheme"=>"a"}
+      %li{"data-role"=>"list-divider"}
+        Time Tracking
+      %li
+        %a{:href=>"mobtracking"}
+          Timesheets
+      %li
+        %a{:href=>"#"}
+          Weekly
+    %a.lnk_editar_time{:href=>"about", "data-transition"=>"pop", "data-role"=>"button", "data-rel"=>"dialog" }
+      About

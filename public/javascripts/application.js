@@ -15,3 +15,5 @@ function remove_fields(link) {
   }
   $(link).parents(".fields").hide();
 }
+
+

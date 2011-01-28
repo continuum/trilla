@@ -1,0 +1,16 @@
+
+
+%li{"data-icon"=>"alert"}
+  - if tempo.iniciado == 1
+    %img{:src=>"/harv/images/icons/animated_clock.gif", :class=>"ui-li-icon"}
+  %h3			      
+    %a{:href=>"mobedit", "data-transition"=>"flip", "data-rel"=>"dialog"}
+      = tempo.proyecto.descripcion
+    %span{:class=>"ui-li-count"}
+      = tempo.format_horas()
+  %p
+    = tempo.proyecto.cliente.descripcion
+    \/
+    = tempo.tarea.descripcion
+  %a.lnk_reloj{:href=>"javascript:;", :id=>"lnk_reloj-#{tempo.id}"}
+    Ok
