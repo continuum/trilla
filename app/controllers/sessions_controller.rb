@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   
   def new
     client = GData::Client::Contacts.new
-    next_url = 'http://localhost:3000/sessions/store'
+    next_url = request.url.gsub("new", "store")
     secure = false
     sess = true
     domain = 'continuum.cl' 
