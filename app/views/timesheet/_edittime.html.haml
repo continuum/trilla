@@ -41,4 +41,4 @@
 
 #form-submit-timesheet
   - form_remote_tag :url => { :action => 'index'} do
-    %input{:name => "fecha", :type => "hidden"}
+    %input{:id => "fecha", :name => "fecha", :type => "hidden", :value => "#{fecha}"}

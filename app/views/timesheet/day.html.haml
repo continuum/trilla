@@ -34,7 +34,7 @@
       .component-timesheet{:id => "tr_timesheet-#{tempo.id}"}
         = render(:partial => "clock", :locals => { :tempo => tempo})
 
-  = render(:partial => "edittime")
+  = render(:partial => "edittime", :locals => {:fecha => @fecha})
     
   = render(:partial => "timesheetfooter")
 
