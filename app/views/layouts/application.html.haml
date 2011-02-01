@@ -3,7 +3,7 @@
   %head
     %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
     %title
-      Pongale nombre a la Trilla
+      Trilla Time Tracking
     = javascript_include_tag "application" 
     %link{:href => "/harv/css/jquery-ui-1.8.6.custom.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/harv/css/componentes.css", :rel => "stylesheet", :type => "text/css"}/
@@ -24,7 +24,7 @@
     .app
       .component-message-result
         %p
-          %b  Pongale nombre a la Trilla
+          %b  Trilla Time Tracking
         %a.accion{:href => "/sessions/destroy"} Salir
         %a.accion{:href => "/usuarios/#{usuario.id}?p=1"} #{usuario.nombres.capitalize}
       = yield

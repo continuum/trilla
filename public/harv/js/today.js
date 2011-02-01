@@ -7,7 +7,7 @@ var idInterval = -1;
 
 	$(document).ready(function () {
 
-	        $('#temporizador_tiempo_base').timeEntry({show24Hours: true});	
+	        //$('#temporizador_tiempo_base').timeEntry({show24Hours: true});	
                 $('#div-nuevo-timesheet').jqm({modal: true});
 
 		function setTemporizador(temporizador) {
@@ -17,7 +17,7 @@ var idInterval = -1;
 			$('#temporizador_tarea_id').selectedValue(temporizador.tarea_id);
 			
 			var span = $('#lnk_reloj-' + temporizador.id).find('span');
-			$('#temporizador_tiempo_base').val($(span[1]).text());
+			$('#temporizador_tiempo_base').val($(span[1]).text().trim());
 		}
 		
 		$('#temporizador_descripcion').addValidateMaxLength();
@@ -94,7 +94,7 @@ var idInterval = -1;
 		 * @param {Object} callback
 		 */
 		function edit(form_params, callback) {
-			
+		
 			$.get('edit?' + form_params, function(div){
 				$('#container-temporizadores').empty().append(div);
 				if (callback) {
