@@ -1,10 +1,5 @@
 GEM
   remote: http://rubygems.org/
-  remote: http://rubygems.org/
-  remote: http://rubygems.org/
-  remote: http://gems.rubyforge.org/
-  remote: http://rubygems.org/
-  remote: http://gemcutter.org/
   specs:
     actionmailer (2.3.4)
       actionpack (= 2.3.4)
