@@ -4,8 +4,10 @@ Setup en desarrollo
 $ gem install bundler
 $ bundle install
 $ cp config/database.yml.example config/database.yml
+$ cp spec/support/google_credentials.rb.example spec/support/google_credentials.rb
 
-Editar config/database.yml.
+
+Editar config/database.yml y spec/support/google_credentials.rb
 
 $ rake db:create
 $ rake db:migrate
