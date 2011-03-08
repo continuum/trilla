@@ -8,10 +8,10 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: jarbest_development
+  database: trilla
   pool: 5
-  username: jarbest_user
-  password: jarbest_pass
+  username: user
+  password: pass
   host: 127.0.0.1
   socket: /tmp/mysqld.sock
 
