@@ -6,6 +6,18 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# Parche para RubyGems 1.5.x
+if Gem::VERSION >= "1.3.6"
+    module Rails
+        class GemDependency
+            def requirement
+                r = super
+                (r == Gem::Requirement.default) ? nil : r
+            end
+        end
+    end
+end
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -32,7 +44,7 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
   # config.active_record.default_timezone = 'GMT-04:00'
   #config.active_record.default_timezone = 'Santiago'
-  
+
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
   # config.time_zone = 'Santiago'
@@ -40,19 +52,19 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
- 
+
   config.time_zone = 'UTC'
 
-  config.action_mailer.delivery_method = :smtp 
-    config.action_mailer.smtp_settings = {  
-    :enable_starttls_auto => true,  
-    :address => "smtp.gmail.com",   
+  config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :address => "smtp.gmail.com",
     :port => 587,
-    :domain => "continuum.cl",   
-    :user_name => "abraham.barrera@continuum.cl",   
-    :password => "secreto",   
+    :domain => "continuum.cl",
+    :user_name => "abraham.barrera@continuum.cl",
+    :password => "secreto",
     :authentication => :plain
-  }    
-  
+  }
+
 
 end
