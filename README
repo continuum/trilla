@@ -3,5 +3,9 @@ Setup en desarrollo
 
 $ gem install bundler
 $ bundle install
+$ cp config/database.yml.example config/database.yml
+
+Editar config/database.yml.
+
 $ rake db:migrate
 $ script/server
