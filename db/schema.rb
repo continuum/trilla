@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(:version => 20110126202504) do
     t.boolean  "archivado"
     t.string   "codigo"
     t.integer  "estimacion"
-    t.integer  "minutos"
   end
 
   create_table "tareas", :force => true do |t|
