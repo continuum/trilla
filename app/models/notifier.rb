@@ -1,7 +1,7 @@
 class Notifier < ActionMailer::Base
-  def mail(recipient, link)     
+  def mail(recipient, link)
     recipients recipient
-    subject    "[JarBest] Proyectos #{recipient}"
+    subject    "[Trilla] Proyectos #{recipient}"
     body       :recipient => recipient, :link => link
-  end  
+  end
 end
