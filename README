@@ -12,3 +12,10 @@ Editar config/database.yml y spec/support/google_credentials.rb
 $ rake db:create
 $ rake db:migrate
 $ script/server
+
+Problemas
+=========
+
+Al ejecutar "bundle install" no puede instalar nokogiri, esto se soluciona ejecutando:
+
+sudo apt-get install libxslt-dev libxml2-dev
