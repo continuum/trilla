@@ -19,16 +19,15 @@ class ProyectosController < ApplicationController
     @usuarios = @proyecto.usuarios
   end
 
-  
+
   def email_sent(proyecto)
     proyecto.usuarios.all.each do |usuario|
-      Notifier::deliver_mail(usuario.email, url_for(proyecto))   
+      Notifier::deliver_mail(usuario.email, url_for(proyecto))
     end
   end
 
   def create
     @proyecto = Proyecto.new(params[:proyecto])
-    @proyecto.cliente_id = params[:cliente]
     if @proyecto.save
       flash[:notice] = 'Proyecto was successfully created.'
       email_sent(@proyecto)
@@ -49,19 +48,19 @@ class ProyectosController < ApplicationController
       render :action => "edit"
     end
   end
-  
+
   def restore
     @proyecto = @proyecto = Proyecto.find(params[:id])
     @proyecto.restore
     redirect_to(proyectos_url)
-  end 
+  end
 
   def archive
     @proyecto = Proyecto.find(params[:id])
     @proyecto.archive
     redirect_to(proyectos_url)
   end
-      
+
   def destroy
     @proyecto = Proyecto.find(params[:id])
     @proyecto.destroy
