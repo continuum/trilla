@@ -5,8 +5,8 @@
       %a#tab-form{:href => "javascript:void(0)"} Nuevo Cliente
     %li.clearfix
 .component-search
+  =error_messages_for :cliente, :header_message => "Errores:", :message => ""
   - form_for(@cliente) do |f|
-    = f.error_messages
     .component-search-forms.forms-two-cols
       = render :partial => 'fields', :locals => { :f => f}  
       .clearfix

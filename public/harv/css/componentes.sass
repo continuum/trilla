@@ -42,6 +42,14 @@ $link-color-hover: #A96D0F
 table
   border: none !important
 
+.fieldWithErrors label{
+  color: red;
+}
+
+.fieldWithErrors input{
+  border: 2px solid red !important;
+}
+
 /* Formularios */
 
 form
@@ -449,7 +457,6 @@ button
         color: $link-color
         outline: 0px
         padding: 13px 20px 13px 20px
-        background: url(../images/component-menu-separator.gif) 0 10px no-repeat
         &:hover
           background: none
           color: #030

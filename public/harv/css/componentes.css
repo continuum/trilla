@@ -33,6 +33,14 @@
 table {
   border: none !important; }
 
+.fieldWithErrors label{
+  color: red;
+}
+
+.fieldWithErrors input{
+  border: 2px solid red !important;
+}
+
 /* Formularios */
 form {
   padding: 0;
@@ -424,8 +432,7 @@ button {
         text-decoration: none;
         color: #a96d0f;
         outline: 0px;
-        padding: 13px 20px 13px 20px;
-        background: url(../images/component-menu-separator.gif) 0 10px no-repeat; }
+        padding: 13px 20px 13px 20px; }
         .component-navigator-menu ul li a:hover {
           background: none;
           color: #003300; }

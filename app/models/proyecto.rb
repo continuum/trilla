@@ -10,7 +10,7 @@ class Proyecto < ActiveRecord::Base
   accepts_nested_attributes_for :proyecto_usuarios, :reject_if => lambda { |a| a.values.all?(&:blank?) }, :allow_destroy => true
 
 
-  validates_presence_of :descripcion
+  validates_presence_of :descripcion, :message => "Se debe ingresar un nombre para el proyecto"
   validates_associated :tareas
 
   named_scope :no_archivados, :conditions => "not archivado"

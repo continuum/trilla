@@ -5,8 +5,8 @@
       %a#tab-form{:href => "javascript:void(0)"} Nueva Tarea
     %li.clearfix
 .component-search
+  =error_messages_for :tarea, :header_message => "Errores:", :message => ""
   - form_for(@tarea) do |f|
-    = f.error_messages
     .component-search-forms.forms-two-cols
       = render :partial => 'fields', :locals => { :f => f}  
       .clearfix
