@@ -77,7 +77,6 @@ var idInterval = -1;
       var id = $('#temporizador_id').val();
       var tiempo_base = $('#temporizador_tiempo_base').val();
 			var form_params = $('#form-nuevo').serialize() + "&" + $('#fecha').serialize();
-      alert(form_params);
       if (Number(id) != -1) {
 				edit(form_params, function(){
 					bind_click_lnk_reloj();
