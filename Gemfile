@@ -16,6 +16,7 @@ group :test, :development do
   gem "ruby-debug"
   gem "watchr"
   gem "database_cleaner"
+  gem "timecop"
 end
 
 group :test do

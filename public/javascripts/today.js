@@ -16,10 +16,7 @@ var idInterval = -1;
 		$('#temporizador_descripcion').addValidateMaxLength();
 
     $('#temporizador_tiempo_base').keypress(function (event) {
-			var otrosKeys = [0,8];
-			if ($(this).val().length == 2){
-				otrosKeys.push(58);
-      }
+			var otrosKeys = [0,8, 58];
 			if ($.inArray(event.which, otrosKeys) == -1 && (event.which < 48 || event.which > 57) || event.which == 13) {
 			  event.preventDefault();
 			  return false;
