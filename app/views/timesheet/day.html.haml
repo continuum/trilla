@@ -1,6 +1,8 @@
+- content_for :head do
+  = javascript_include_tag "today"
+
 = render(:partial => "shared/timesheetmenu")
-%script{:src => "/harv/js/today.js", :type => "text/javascript"}
-%script{:src => "/harv/js/jquery.timeentry.min.js", :type => "text/javascript"}  
+%script{:src => "/harv/js/jquery.timeentry.min.js", :type => "text/javascript"}
 
 .component-navigator-tabs
   %ul
@@ -35,6 +37,6 @@
         = render(:partial => "clock", :locals => { :tempo => tempo})
 
   = render(:partial => "edittime", :locals => {:fecha => @fecha})
-    
+
   = render(:partial => "timesheetfooter")
 

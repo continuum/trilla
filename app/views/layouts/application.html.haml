@@ -4,7 +4,7 @@
     %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
     %title
       Trilla Time Tracking
-    = javascript_include_tag "application" 
+    = javascript_include_tag "application"
     %link{:href => "/harv/css/jquery-ui-1.8.6.custom.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/harv/css/componentes.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href => "/harv/css/general.css", :rel => "stylesheet", :type => "text/css"}/
@@ -18,7 +18,8 @@
     %script{:src => "/harv/js/utils/utils_extra_all.min.js", :type => "text/javascript"}
     / jquery - continuum plugins
     %script{:src => "/harv/js/cplugins/jquery/continuum_plugins_all.min.js", :type => "text/javascript"}
-    %script{:src => "/harv/js/jqModal.js", :type => "text/javascript"}  
+    %script{:src => "/harv/js/jqModal.js", :type => "text/javascript"}
+    = yield :head
   %body
     - usuario = session[:usuario]
     .app
