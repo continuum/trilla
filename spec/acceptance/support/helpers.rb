@@ -17,6 +17,20 @@ module HelperMethods
     click_link "Logout" if page.has_link? "Logout" # logs out of google, english
     click_link "Salir" if page.has_link? "Salir" # logs out of google, spanish
   end
+
+  def click_stop_clock_button
+    find(:css, "a.stop").click
+  end
+end
+
+module Capybara::Node::Matchers
+  def has_clock_running?
+    has_css?(".clock.running")
+  end
+
+  def has_no_clock_running?
+    has_no_css?(".clock.running")
+  end
 end
 
 Spec::Runner.configuration.include(HelperMethods)
