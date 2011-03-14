@@ -3,8 +3,7 @@ var idInterval = -1;
 
 	$(document).ready(function () {
 
-	        //$('#temporizador_tiempo_base').timeEntry({show24Hours: true});
-                $('#div-nuevo-timesheet').jqm({modal: true});
+    $('#div-nuevo-timesheet').jqm({modal: true});
 
 		function setTemporizador(temporizador) {
 			$('#temporizador_id').val(temporizador.id);
@@ -39,10 +38,6 @@ var idInterval = -1;
 			}
 		});
 
-		/**
-		 *
-		 * @param {Object} event
-		 */
 		$('.lnk-nuevo-timesheet').click(function(event){
       $('#lnk-span-guardar-timesheet').text('Iniciar');
 			var temporizador = {id: -1, descripcion: '', proyecto_id: 1, tarea_id: 1};
@@ -52,11 +47,6 @@ var idInterval = -1;
 		});
 
 
-		/**
-		 *
-		 * @param {Object} params
-		 * @param {Object} callback
-		 */
 		function update(params, callback) {
 			$.get('update',params,function(data){
 				 $('#tr_timesheet-' + params.id).empty().append(data);
@@ -66,12 +56,6 @@ var idInterval = -1;
 			});
 		}
 
-		/**
-		 *
-		 * @param {Object} form_params
-		 * @param {Object} iniciado
-		 * @param {Object} callback
-		 */
 		function create(form_params, iniciado, callback) {
 
 			form_params+='&iniciado=' + iniciado;
@@ -83,12 +67,6 @@ var idInterval = -1;
 			});
 		}
 
-		/**
-		 *
-		 * @param {Object} form_params
-		 * @param {Object} iniciado
-		 * @param {Object} callback
-		 */
 		function edit(form_params, callback) {
 
 			$.get('edit?' + form_params, function(div){
@@ -99,19 +77,11 @@ var idInterval = -1;
 			});
 		}
 
-		/**
-		 *
-		 * @param {Object} event
-		 */
 		$('#lnk-guardar-timesheet').click(function(event){
 			create_update();
 			event.preventDefault();
 		});
 
-		/**
-		 *
-		 * @param {Object} id
-		 */
 		function create_update() {
 
 			var id = $('#temporizador_id').val();
@@ -171,15 +141,8 @@ var idInterval = -1;
 			}
 		}
 
-		/**
-		 *
-		 */
 		function bind_click_lnk_reloj() {
 
-			/**
-			 *
-			 * @param {Object} event
-			 */
 			$('.lnk_editar_timesheet').unbind('click').click(function(event){
 		                $('#lnk-span-guardar-timesheet').text('Actualizar');
 
@@ -195,10 +158,6 @@ var idInterval = -1;
 				event.preventDefault();
 			});
 
-			/**
-			 *
-			 * @param {Object} event
-			 */
 			$('.lnk_borrar_timesheet').unbind('click').click(function(event){
 
 				var id = $(this).getIdSplit('-')[1];
@@ -215,10 +174,6 @@ var idInterval = -1;
 				event.preventDefault();
 			});
 
-			/**
-			 *
-			 * @param {Object} event
-			 */
 			$('.lnk_reloj').unbind('click').click(function(event){
 
 				var el = $(this);
@@ -399,30 +354,18 @@ var idInterval = -1;
 		}
 
 
-		/**
-		 *
-		 * @param {Object} event
-		 */
 		$('#prev-day').click(function(event){
 			console.info('before-day',$( "#datepicker" ).val());
 			changeDate('prev');
 			event.preventDefault();
 		});
 
-		/**
-		 *
-		 * @param {Object} event
-		 */
 		$('#next-day').click(function(event){
 			console.info('after-day',$( "#datepicker" ).val());
 			changeDate('next');
 			event.preventDefault();
 		});
 
-		/**
-		 *
-		 * @param {Object} event
-		 */
 		$('.lnk-perfil-usuario').click(function(event){
 			location.href = $('#path-perfil-usuario').text();
 			event.preventDefault();
