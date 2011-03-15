@@ -31,6 +31,14 @@ module Capybara::Node::Matchers
   def has_no_clock_running?
     has_no_css?(".clock.running")
   end
+
+  def has_selected_tab?(name)
+    has_css?(".tab-select a", :text => name)
+  end
+
+  def has_unselected_tab?(name)
+    has_css?(".tab-unselect a", :text => name)
+  end
 end
 
 Spec::Runner.configuration.include(HelperMethods)
