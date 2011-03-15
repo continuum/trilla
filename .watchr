@@ -1,6 +1,13 @@
+def notify(msg)
+  if RUBY_PLATFORM =~ /darwin/
+    system "growlnotify watchr -m #{msg}"
+  end
+end
+
 def run(cmd)
   puts cmd
   system cmd
+  notify("FAILURE") if $? != 0
 end
 
 def feature(file)
