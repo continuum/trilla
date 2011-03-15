@@ -18,8 +18,19 @@ module HelperMethods
     click_link "Salir" if page.has_link? "Salir" # logs out of google, spanish
   end
 
+  def usuario
+    email = "#{USERNAME}@#{DOMAIN}"
+    Usuario.find_by_email(email) || Fabricate(:usuario, :email => email)
+  end
+
   def click_stop_clock_button
     find(:css, "a.stop").click
+  end
+
+  def within_timer_row(temporizador)
+    within(:css, "#tr_timesheet-#{temporizador.id}") do
+      yield
+    end
   end
 end
 
@@ -30,6 +41,10 @@ module Capybara::Node::Matchers
 
   def has_no_clock_running?
     has_no_css?(".clock.running")
+  end
+
+  def has_clock?
+    has_css?(".clock")
   end
 
   def has_selected_tab?(name)

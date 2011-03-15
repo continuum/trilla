@@ -16,7 +16,7 @@
     %a.lnk_reloj{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Iniciar"}
       %span{:id=>"reloj-#{tempo.id}", :title=>"#{tempo.id}", :style=>"display:none;"}
         = tempo.format_horas()
-      %span
+      %span.clock
         = tempo.format_horas()
       %img{:src=>"/images/start.png", :border=> "0", :style=>"vertical-align:middle;"}
 %p{:style => "width:400px;"}= tempo.descripcion
