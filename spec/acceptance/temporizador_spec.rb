@@ -13,6 +13,7 @@ feature "Temporizador" do
   background do
     login
     click_link "Timesheet"
+    click_link "Tiempo"
   end
 
   scenario "iniciando y parando el reloj" do
