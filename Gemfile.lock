@@ -27,6 +27,7 @@ GEM
     configuration (1.2.0)
     culerity (0.2.14)
     database_cleaner (0.6.5)
+    decent_exposure (1.0.1)
     fabrication (0.9.5)
     ffi (0.6.3)
       rake (>= 0.8.7)
@@ -84,6 +85,7 @@ PLATFORMS
 DEPENDENCIES
   capybara (= 0.4.0)
   database_cleaner
+  decent_exposure
   fabrication
   gdata (= 1.1.1)
   haml (= 3.0.25)
