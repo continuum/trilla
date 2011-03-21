@@ -3,7 +3,7 @@ source :rubygems
 gem "rails", "2.3.4"
 gem "haml", "3.0.25"
 gem "gdata", "1.1.1"
-gem "mysql"
+gem "pg"
 
 group :test, :development do
   gem "rspec", "1.3.1"

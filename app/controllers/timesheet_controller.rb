@@ -50,7 +50,7 @@ class TimesheetController < ApplicationController
   end
 
   def week
-    
+
   end
 
   def create
@@ -60,7 +60,7 @@ class TimesheetController < ApplicationController
       tiempo_base = params[:tiempo_base].split(":")
       horas = tiempo_base[0];
       minutos = horas.to_i * 60 + tiempo_base[1].to_i;
-    end 
+    end
     fecha_actual = Temporizador.fechaActual()
     @tempo = Temporizador.new(params[:temporizador])
     @tempo.iniciado = iniciado
@@ -68,9 +68,10 @@ class TimesheetController < ApplicationController
     @tempo.start = fecha_actual
     @tempo.stop = fecha_actual
     @tempo.save
-    @fecha = params[:fecha]
-    if @fecha.blank?
-      @fecha = fecha_actual.to_date()
+    if params[:fecha]
+      @fecha = Date.parse params[:fecha]
+    else
+      @fecha = fecha_actual.to_date
     end
     @usuario = session[:usuario]
     @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, @fecha)
@@ -83,7 +84,7 @@ class TimesheetController < ApplicationController
       tiempo_base = params[:tiempo_base].split(":")
       horas = tiempo_base[0];
       minutos = horas.to_i * 60 + tiempo_base[1].to_i;
-    end 
+    end
     @tempo = Temporizador.find(params[:id])
     @tempo.minutos = minutos
     @tempo.update_attributes(params[:temporizador])
@@ -96,7 +97,7 @@ class TimesheetController < ApplicationController
     @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, @fecha)
     render(:file => 'timesheet/create' )
   end
- 
+
   def update
     @tempo = Temporizador.find(params[:id])
 
@@ -104,10 +105,10 @@ class TimesheetController < ApplicationController
       fecha = Temporizador.fechaActual
       if (params[:accion] == 'start')
         @tempo.update_attributes({:stop => fecha, :start => fecha, :iniciado => 1})
-      elsif (params[:accion] == 'stop')  
+      elsif (params[:accion] == 'stop')
         minutos = @tempo.minutos + ((Temporizador.fechaActual - @tempo.start).to_i / 60).to_i
         @tempo.update_attributes({:stop => fecha, :iniciado => 0, :minutos => minutos})
-      end  
+      end
     rescue ActiveRecord::RecordNotFound
     end
     render(:file => 'timesheet/update' )
