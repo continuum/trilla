@@ -5,8 +5,8 @@
       %a#tab-form{:href => "javascript:void(0)"} Editar Proyecto
     %li.clearfix
 .component-search
+  =error_messages_for :proyecto, :header_message => "Errores:", :message => ""
   - form_for(@proyecto) do |f|
-    = f.error_messages
     .component-search-forms.forms-two-cols
       = render :partial => 'fields', :locals => { :f => f, :tareas => @tareas, :usuarios => @usuarios}  
       .clearfix

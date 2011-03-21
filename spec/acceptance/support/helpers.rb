@@ -31,6 +31,12 @@ module HelperMethods
       yield
     end
   end
+
+  def within_proyecto_row(proyecto)
+    within(:xpath, "//tr[@id='trProyecto-#{proyecto.id}']") do
+      yield
+    end
+  end
 end
 
 module Capybara::Node::Matchers
@@ -52,6 +58,10 @@ module Capybara::Node::Matchers
 
   def has_unselected_tab?(name)
     has_css?(".tab-unselect a", :text => name)
+  end
+
+  def has_proyecto?(proyecto)
+    has_xpath?("//tr[@id='trProyecto-#{proyecto.id}']")
   end
 end
 

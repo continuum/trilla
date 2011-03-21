@@ -14,6 +14,7 @@ group :test, :development do
   gem "test-unit", "1.2.3"
   gem "steak", "~> 0.3.0"
   gem "ruby-debug"
+  ##gem "ruby-debug-ide"
   gem "watchr"
   gem "database_cleaner"
   gem "timecop"

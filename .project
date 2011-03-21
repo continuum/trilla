@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>harv</name>
+	<name>trilla</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,4 +21,11 @@
 		<nature>org.rubypeople.rdt.core.rubynature</nature>
 		<nature>org.radrails.rails.core.railsnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>rails-2.3.4-src</name>
+			<type>2</type>
+			<location>/home/alter/src/rails-2.3.4-src</location>
+		</link>
+	</linkedResources>
 </projectDescription>

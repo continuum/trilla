@@ -1,18 +1,17 @@
-= error_messages_for :project
 %ol.forms-structure-rows
   %li
     .forms-row-single-division.left
-      = f.label :descripcion
+      = f.label :descripcion, "Nombre"
     .forms-row-single-division.right
       = f.text_field :descripcion
   %li
     .forms-row-single-division.left
-      = f.label :codigo
+      = f.label :codigo, "Código"
     .forms-row-single-division.right
       = f.text_field :codigo
   %li
     .forms-row-single-division.left
-      = f.label :estimacion
+      = f.label :estimacion, "Estimación"
     .forms-row-single-division.right
       = f.text_field :estimacion
   %li
@@ -25,14 +24,14 @@
       = f.label :cliente_id, "Cliente"
       - clientes_array = Cliente.all.map { |cli| [cli.descripcion, cli.id] }
     .forms-row-single-division.right
-      = f.select :cliente_id, options_for_select(clientes_array)
+      = f.select :cliente_id, options_for_select([["Selecciona un cliente",-1]].concat(clientes_array),@proyecto.cliente_id)
   %li
     .content-table
       %h4
         %table.two-columns
           %tr
             %td
-              Personas
+              Usuarios
               - if (usuarios)
                 ="(" + usuarios.all.size.to_s + ")"
     - f.fields_for :proyecto_usuarios do |proyecto_usuarios_form|
@@ -41,7 +40,7 @@
       = render :partial => 'proyecto_usuarios', :locals => { :f => proyecto_usuarios_form}
     .forms-row-single-division.wide
       - usuarios_array = Usuario.all.map { |usr| [usr.nombres, usr.id] }
-      = select_tag(:proyecto_usuarios_select, options_for_select(usuarios_array))
+      = select_tag(:proyecto_usuarios_select, options_for_select([["Selecciona un usuario",-1]].concat(usuarios_array)))
       = add_child_link "Agregar Persona", f, :proyecto_usuarios
 
 %ol.forms-structure-rows
@@ -60,7 +59,7 @@
       = render :partial => 'proyecto_tareas', :locals => { :f => proyecto_tareas_form}
     .forms-row-single-division.wide
       - tareas_array = Tarea.all.map { |tarea| [tarea.descripcion, tarea.id] }
-      = select_tag(:proyecto_tareas_select, options_for_select(tareas_array))
+      = select_tag(:proyecto_tareas_select, options_for_select([["Selecciona una tarea",-1]].concat(tareas_array)))
       = add_child_link "Agregar Tarea", f, :proyecto_tareas
 
 
