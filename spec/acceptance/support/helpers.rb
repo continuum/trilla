@@ -32,9 +32,25 @@ module HelperMethods
       yield
     end
   end
+
+  def click_start_clock_button
+    find(:css, "a.start").click
+  end
+
+  def click_start_timer(temporizador)
+    find(:css, "#tr_timesheet-#{temporizador.id} a.start").click
+  end
 end
 
 module Capybara::Node::Matchers
+  def has_timer_running?(temporizador)
+    has_css?("#tr_timesheet-#{temporizador.id} .clock.running")
+  end
+
+  def has_no_timer_running?(temporizador)
+    has_no_css?("#tr_timesheet-#{temporizador.id} .clock.running")
+  end
+
   def has_clock_running?
     has_css?(".clock.running")
   end

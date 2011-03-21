@@ -13,7 +13,7 @@
         = tempo.format_horas()
       %img{:src=>"/images/stop.gif", :border=> "0", :style=>"vertical-align:middle;"}
   - else
-    %a.lnk_reloj{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Iniciar"}
+    %a.lnk_reloj.start{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Iniciar"}
       %span{:id=>"reloj-#{tempo.id}", :title=>"#{tempo.id}", :style=>"display:none;"}
         = tempo.format_horas()
       %span.clock
