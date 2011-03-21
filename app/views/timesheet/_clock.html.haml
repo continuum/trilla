@@ -6,19 +6,19 @@
   = tempo.tarea.descripcion
 %p{:id => "panel-display-#{tempo.id}", :style => "width:120px;"}
   - if tempo.iniciado == 1
-    %a.lnk_reloj{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Detener", :style=>"color:blue;"}
-      %span{:id=>"reloj-running", :title=>"#{tempo.id}", :style=>"display:none;"}
+    %a.lnk_reloj.stop{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Detener", :style=>"color:blue;"}
+      %span#reloj-running{:title=>"#{tempo.id}", :style=>"display:none;"}
         = tempo.format_horas() + ":00:000"
-      %span{:id=>"reloj-running-display" }
+      %span#reloj-running-display.clock.running
         = tempo.format_horas()
       %img{:src=>"/images/stop.gif", :border=> "0", :style=>"vertical-align:middle;"}
   - else
     %a.lnk_reloj{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Iniciar"}
       %span{:id=>"reloj-#{tempo.id}", :title=>"#{tempo.id}", :style=>"display:none;"}
         = tempo.format_horas()
-      %span
+      %span.clock
         = tempo.format_horas()
-      %img{:src=>"/images/start.png", :border=> "0", :style=>"vertical-align:middle;"}      
+      %img{:src=>"/images/start.png", :border=> "0", :style=>"vertical-align:middle;"}
 %p{:style => "width:400px;"}= tempo.descripcion
 %a.lnk_borrar_timesheet.accion{:href => "javascript:;", :id => "lnk_borrar_timesheet-#{tempo.id}"} Borrar
 %a.lnk_editar_timesheet.accion{:href => "javascript:;", :id => "lnk_editar_timesheet-#{tempo.id}"} Editar

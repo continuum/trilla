@@ -2,14 +2,15 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Login" do
   background do
+    logout
     visit "/"
   end
 
-  scenario "System shows a google account login", :js => true do
-    page.should have_xpath("//form[@action='https://www.google.com/a/continuum.cl/LoginAction2?service=apps']")
+  scenario "sistema muestra un login de Google" do
+    page.should have_xpath("//form[contains(@action, 'https://www.google.com/accounts/ServiceLoginAuth')]")
   end
 
-  scenario "Logs in with the right credentials", :js => true do
+  scenario "usuario ingresa las credenciales correctas" do
     fill_in 'Email', :with => USERNAME
     fill_in 'Passwd', :with => PASSWORD
     click_button "signIn"

@@ -73,6 +73,7 @@ GEM
       rspec (>= 1.3.0)
     test-unit (1.2.3)
       hoe (>= 1.5.1)
+    timecop (0.3.5)
     watchr (0.7)
     xpath (0.1.3)
       nokogiri (~> 1.3)
@@ -95,4 +96,5 @@ DEPENDENCIES
   sqlite3-ruby (= 1.2.5)
   steak (~> 0.3.0)
   test-unit (= 1.2.3)
+  timecop
   watchr
