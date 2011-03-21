@@ -14,12 +14,13 @@ module HelperMethods
   def logout
     visit "/"
     click_link "Salir" if page.has_link? "Salir" # logs out of trilla
-    click_link "Sign out" if page.has_link? "Sign out" # logs out of google, english
+    click_link "Logout" if page.has_link? "Logout" # logs out of google, english
     click_link "Salir" if page.has_link? "Salir" # logs out of google, spanish
   end
 
   def usuario
-    Usuario.find_by_email(USERNAME) || Fabricate(:usuario, :email => USERNAME)
+    email = "#{USERNAME}@#{DOMAIN}"
+    Usuario.find_by_email(email) || Fabricate(:usuario, :email => email)
   end
 
   def click_stop_clock_button

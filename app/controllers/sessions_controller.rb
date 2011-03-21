@@ -1,16 +1,16 @@
 class SessionsController < ApplicationController
   skip_before_filter :ensure_signed_in
-
+  
   def new
     client = GData::Client::Contacts.new
     next_url = request.url.gsub("new", "store")
     secure = false
     sess = true
-    domain = nil
+    domain = 'continuum.cl' 
     authsub_link = client.authsub_url(next_url, secure, sess, domain)
     redirect_to(authsub_link)
   end
-
+  
   def store
     if params[:token].nil?
        destroy
@@ -41,10 +41,10 @@ class SessionsController < ApplicationController
     session[:usuario_perfil] = usuario.perfil
     redirect_to(session[:redirect_to])
   end
-
+  
   def destroy
     session[:usuario_id] = nil
     redirect_to(session[:redirect_to])
   end
-
+  
 end
