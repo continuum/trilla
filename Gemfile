@@ -3,7 +3,8 @@ source :rubygems
 gem "rails", "2.3.4"
 gem "haml", "3.0.25"
 gem "gdata", "1.1.1"
-gem "mysql"
+gem "pg"
+gem "decent_exposure"
 
 group :test, :development do
   gem "rspec", "1.3.1"
@@ -14,7 +15,6 @@ group :test, :development do
   gem "test-unit", "1.2.3"
   gem "steak", "~> 0.3.0"
   gem "ruby-debug"
-  ##gem "ruby-debug-ide"
   gem "watchr"
   gem "database_cleaner"
   gem "timecop"

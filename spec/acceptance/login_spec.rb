@@ -7,7 +7,7 @@ feature "Login" do
   end
 
   scenario "sistema muestra un login de Google" do
-    page.should have_xpath("//form[contains(@action, 'https://www.google.com/accounts/ServiceLoginAuth')]")
+    page.should have_xpath("//form[contains(@action, 'https://www.google.com/a/')]")
   end
 
   scenario "usuario ingresa las credenciales correctas" do

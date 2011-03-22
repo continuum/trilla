@@ -16,9 +16,9 @@
 
 .component-search
   .component-search-forms
-    %b= @fecha #Time.now.strftime("%a, %d %b")
+    %b= fecha
     %a#prev-day{:href => "javascript:;"} <<
-    %input#datepicker{:style => "width: 0px; border:0 solid;", :type => "text", :value => @fecha}/
+    %input#datepicker{:style => "width: 0px; border:0 solid;", :type => "text", :value => fecha}/
     %a#next-day{:href => "javascript:;"} >>
 
   .component-timesheet-header
@@ -36,7 +36,7 @@
       .component-timesheet{:id => "tr_timesheet-#{tempo.id}"}
         = render(:partial => "clock", :locals => { :tempo => tempo})
 
-  = render(:partial => "edittime", :locals => {:fecha => @fecha})
+  = render(:partial => "edittime", :locals => {:fecha => fecha})
 
   = render(:partial => "timesheetfooter")
 

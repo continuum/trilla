@@ -14,12 +14,13 @@ module HelperMethods
   def logout
     visit "/"
     click_link "Salir" if page.has_link? "Salir" # logs out of trilla
-    click_link "Sign out" if page.has_link? "Sign out" # logs out of google, english
+    click_link "Logout" if page.has_link? "Logout" # logs out of google, english
     click_link "Salir" if page.has_link? "Salir" # logs out of google, spanish
   end
 
   def usuario
-    Usuario.find_by_email(USERNAME) || Fabricate(:usuario, :email => USERNAME)
+    email = "#{USERNAME}@#{DOMAIN}"
+    Usuario.find_by_email(email) || Fabricate(:usuario, :email => email)
   end
 
   def click_stop_clock_button
@@ -37,9 +38,26 @@ module HelperMethods
       yield
     end
   end
+  
+  def click_start_clock_button
+    find(:css, "a.start").click
+  end
+
+  def click_start_timer(temporizador)
+    find(:css, "#tr_timesheet-#{temporizador.id} a.start").click
+  end
+  
 end
 
 module Capybara::Node::Matchers
+  def has_timer_running?(temporizador)
+    has_css?("#tr_timesheet-#{temporizador.id} .clock.running")
+  end
+
+  def has_no_timer_running?(temporizador)
+    has_no_css?("#tr_timesheet-#{temporizador.id} .clock.running")
+  end
+
   def has_clock_running?
     has_css?(".clock.running")
   end

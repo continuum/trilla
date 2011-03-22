@@ -15,27 +15,27 @@
         }*/
         alert("hola Mundo");
       });
- 
+
       function onSuccess(data)
       {
        // $("#resultLog").html("Result: " + data);
       }
- 
+
       });
   </script>
 
 %div{"data-role" => "page", "data-theme" => "a", :id =>"jqm-2"}
   %div{"data-role" => "header", :id => "jqm"}
-    %h1 Time Tracking	
+    %h1 Time Tracking
   %div{"data-role" => "content"}
     %ul{"data-role" => "listview", "data-inset"=>"true", "data-theme"=>"c", "data-dividertheme"=>"a", "data-splittheme"=>"a", "data-split-icon" => "gear"}
-      %li{"data-role"=>"list-divider"} 
-        =@fecha
+      %li{"data-role"=>"list-divider"}
+        = fecha
       - @temporizadores.each do |tempo|
         = render(:partial => "mobclock", :locals => { :tempo => tempo})
 
-   
 
-	
-      
+
+
+
 

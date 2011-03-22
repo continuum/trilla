@@ -16,6 +16,10 @@ $ script/server
 Problemas
 =========
 
-Al ejecutar "bundle install" no puede instalar nokogiri, esto se soluciona ejecutando:
+Al ejecutar "bundle install" no puede instalar 'nokogiri', esto se soluciona ejecutando:
 
 sudo apt-get install libxslt-dev libxml2-dev
+
+Para errores al instalar 'pg', ejecutar:
+
+sudo apt-get install libpq5 libpq-dev

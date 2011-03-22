@@ -1,4 +1,13 @@
 class TimesheetController < ApplicationController
+  expose(:fecha_actual) { Temporizador.fechaActual }
+
+  expose(:fecha) do
+    if params[:fecha] && params[:fecha].present?
+      Date.parse params[:fecha]
+    else
+      fecha_actual.to_date
+    end
+  end
 
   def index
       redirect_to :action => :day
@@ -14,9 +23,8 @@ class TimesheetController < ApplicationController
   end
 
   def mobtracking
-    @fecha = Temporizador.fechaActual().to_date()
     @usuario = session[:usuario]
-    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, @fecha)
+    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, fecha)
     render(:file => 'timesheet/mobtracking', :layout => 'mobile')
   end
 
@@ -43,14 +51,12 @@ class TimesheetController < ApplicationController
     end
     @tareas_facturables = Tarea.facturables
     @tareas_no_facturables = Tarea.no_facturables
-    @fecha = params[:fecha]
-    @fecha = Temporizador.fechaActual().to_date() if @fecha.blank?
     @usuario = session[:usuario]
-    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, @fecha)
+    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, fecha)
   end
 
   def week
-    
+
   end
 
   def create
@@ -60,20 +66,16 @@ class TimesheetController < ApplicationController
       tiempo_base = params[:tiempo_base].split(":")
       horas = tiempo_base[0];
       minutos = horas.to_i * 60 + tiempo_base[1].to_i;
-    end 
-    fecha_actual = Temporizador.fechaActual()
+    end
+
     @tempo = Temporizador.new(params[:temporizador])
     @tempo.iniciado = iniciado
     @tempo.minutos = minutos
     @tempo.start = fecha_actual
     @tempo.stop = fecha_actual
     @tempo.save
-    @fecha = params[:fecha]
-    if @fecha.blank?
-      @fecha = fecha_actual.to_date()
-    end
     @usuario = session[:usuario]
-    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, @fecha)
+    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, fecha)
     render(:file => 'timesheet/create' )
   end
 
@@ -83,31 +85,24 @@ class TimesheetController < ApplicationController
       tiempo_base = params[:tiempo_base].split(":")
       horas = tiempo_base[0];
       minutos = horas.to_i * 60 + tiempo_base[1].to_i;
-    end 
+    end
     @tempo = Temporizador.find(params[:id])
     @tempo.minutos = minutos
     @tempo.update_attributes(params[:temporizador])
-    fecha_actual = Temporizador.fechaActual()
-    @fecha = params[:fecha]
-    if @fecha.blank?
-      @fecha = fecha_actual.to_date()
-    end
     @usuario = session[:usuario]
-    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, @fecha)
+    @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, fecha)
     render(:file => 'timesheet/create' )
   end
- 
+
   def update
     @tempo = Temporizador.find(params[:id])
-
     begin
-      fecha = Temporizador.fechaActual
       if (params[:accion] == 'start')
-        @tempo.update_attributes({:stop => fecha, :start => fecha, :iniciado => 1})
-      elsif (params[:accion] == 'stop')  
-        minutos = @tempo.minutos + ((Temporizador.fechaActual - @tempo.start).to_i / 60).to_i
-        @tempo.update_attributes({:stop => fecha, :iniciado => 0, :minutos => minutos})
-      end  
+        @tempo.update_attributes({:stop => fecha_actual, :start => fecha_actual, :iniciado => 1})
+      elsif (params[:accion] == 'stop')
+        minutos = @tempo.minutos + ((fecha_actual - @tempo.start).to_i / 60).to_i
+        @tempo.update_attributes({:stop => fecha_actual, :iniciado => 0, :minutos => minutos})
+      end
     rescue ActiveRecord::RecordNotFound
     end
     render(:file => 'timesheet/update' )

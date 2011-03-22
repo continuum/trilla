@@ -1,12 +1,9 @@
 global: &global
-  adapter: mysql
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  username: user
-  password: pass
-  host: 127.0.0.1
-  socket: /tmp/mysqld.sock
+  username: trilla
+  password: trilla
 
 development:
   <<: *global
