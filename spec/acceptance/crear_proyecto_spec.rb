@@ -7,13 +7,11 @@ feature "Crear Proyecto" do
   background do
     Fabricate(:cliente, :descripcion => "Perico")
     p1 = Fabricate(:proyecto,
-      :id => 10,
       :descripcion => "Shuper Proyecto",
       :archivado => false,
       :cliente => Fabricate(:cliente, :descripcion => "Juanito")
     )
     p2 = Fabricate(:proyecto,
-      :id => 11,
       :descripcion => "Proyecto archivado",
       :archivado => true,
       :cliente => Fabricate(:cliente, :descripcion => "Pepito")
@@ -24,38 +22,70 @@ feature "Crear Proyecto" do
   end
 
   scenario "sin datos" do
-    click_link "Nuevo proyecto"
+    click_link "Crear proyecto"
     click_button "Crear"
     page.should have_content("Debe ingresar un nombre para el proyecto")
     page.should have_content("Debe seleccionar un cliente")
   end
   
-  scenario "con los datos basicos" do
-    click_link "Nuevo proyecto"
+  scenario "con los datos básicos" do
+    click_link "Crear proyecto"
+    fill_in "Nombre", :with => "Proyecto Trilla"
+    select "Perico", :from => "Cliente"
+    click_button "Crear"
+    page.should have_content("Proyecto Trilla")
+    page.should_not have_content "Nuevo Proyecto"
+    page.has_select?("proyecto_cliente_id", :selected =>"Perico")#...esto se debería haber caido
+    click_link "Proyecto Trilla"
+  end
+
+  scenario "con todos los datos" do
+    click_link "Crear proyecto"
     fill_in "Nombre", :with => "Proyecto Trilla"
     fill_in "Código", :with => "T3"
     fill_in "Estimación", :with => "100"
+    check "Archivado"
     select "Perico", :from => "Cliente"
     click_button "Crear"
     page.should have_content("Mis Proyectos")
     page.should have_content("Proyecto Trilla")
-    page.has_select?("proyecto_cliente_id", :selected =>"Perico")
+    save_and_open_page    
     click_link "Proyecto Trilla"
+    page.should have_select("Cliente", :selected =>"Perico")
+    page.should have_checked_field("Archivado")
+    field_labeled("Código").value.should == "T3"
+    field_labeled("Estimación").value.should == "100"
+  end
+
+  scenario "Editar proyecto" do
+    click_link "Shuper Proyecto"
+    fill_in "Nombre", :with => "Proyecto Trilla"
+    fill_in "Código", :with => "T3"
+    fill_in "Estimación", :with => "100"
+    check "Archivado"
+    select "Perico", :from => "Cliente"
+    click_button "Actualizar"
+    page.should_not have_content "Nuevo Proyecto"
+    page.should have_content "Proyecto Trilla"
+    page.should_not have_content "Shuper Proyecto"    
+    click_link "Proyecto Trilla"
+    page.should have_select("Cliente", :selected =>"Perico")
+    page.should have_checked_field("Archivado") 
     field_labeled("Código").value.should == "T3"
     field_labeled("Estimación").value.should == "100"
   end
 
   scenario "proyecto existente" do
-    click_link "Nuevo proyecto"
+    click_link "Crear proyecto"
     fill_in "Nombre", :with => p1.descripcion
     select "Juanito", :from => "Cliente"
     click_button "Crear"
     page.should have_content("Ya existe un proyecto con el mismo nombre")
   end
-
+  
   scenario "Archivar proyecto" do
     within_proyecto_row(p1) do
-      click_link "Archivar"
+      click_link "Archivar"   
     end
     within_proyecto_row(p1) do
       page.should have_content("Recuperar")
@@ -71,14 +101,20 @@ feature "Crear Proyecto" do
     end
   end
   
-  scenario "Borrar proyecto" do
+  scenario "Borrar proyectos" do
     page.evaluate_script("window.alert = function(msg) { return true; }")
     page.evaluate_script("window.confirm = function(msg) { return true; }")
     within_proyecto_row(p1) do
       click_link "Eliminar"
     end
     page.has_proyecto?(p1)
+    page.evaluate_script("window.alert = function(msg) { return true; }")
+    page.evaluate_script("window.confirm = function(msg) { return true; }")
+    within_proyecto_row(p2) do
+      click_link "Eliminar"
+    end
+    page.has_proyecto?(p2)
+    page.should have_content "No existen proyectos creados"
   end
 
-  
 end

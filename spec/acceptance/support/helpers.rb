@@ -34,7 +34,19 @@ module HelperMethods
   end
 
   def within_proyecto_row(proyecto)
-    within(:xpath, "//tr[@id='trProyecto-#{proyecto.id}']") do
+    within(:id, "tr_proyecto-#{proyecto.id}") do
+      yield
+    end
+  end
+  
+  def within_tarea_row(tarea)
+    within(:id, "tr_tarea-#{tarea.id}") do
+      yield
+    end
+  end
+  
+  def within_usuario_row(usuario)
+    within(:id, "tr_usuario-#{usuario.id}") do
       yield
     end
   end
@@ -79,7 +91,15 @@ module Capybara::Node::Matchers
   end
 
   def has_proyecto?(proyecto)
-    has_xpath?("//tr[@id='trProyecto-#{proyecto.id}']")
+    has_xpath?("//tr[@id='tr_proyecto-#{proyecto.id}']")
+  end
+
+  def has_tarea?(tarea)
+    has_xpath?("//tr[@id='tr_tarea-#{tarea.id}']")
+  end
+
+  def has_usuario?(usuario)
+    has_xpath?("//tr[@id='tr_usuario-#{usuario.id}']")
   end
 end
 

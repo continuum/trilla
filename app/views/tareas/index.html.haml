@@ -5,22 +5,25 @@
       %a#tab-form{:href => "javascript:void(0)"} Tareas
     %li.clearfix
 .component-datatable
-  .component-standar-grid
-    %table.standar-grid-model{:border => "0", :cellpadding => "0", :cellspacing => "0"}
-      %col{:width => ""}/
-      %col{:width => ""}/
-      %col{:width => "180px"}/
-      %tbody
-        %tr
-          %th Descripcion
-          %th Tipo
-          %th
-        - @tareas.each do |tarea|
+  -if @tareas.empty?
+    No existen tareas creadas
+  -else
+    .component-standar-grid
+      %table.standar-grid-model{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %col{:width => ""}/
+        %col{:width => ""}/
+        %col{:width => "180px"}/
+        %tbody
           %tr
-            %td #{link_to tarea.descripcion, edit_tarea_path(tarea)}
-            %td= h tarea.tipo
-            %td
-              \&nbsp;
-              = link_to 'Eliminar', tarea, :confirm => 'Está seguro?', :method => :delete
+            %th Nombre
+            %th Tipo
+            %th
+          - @tareas.each do |tarea|
+            %tr{:id => "tr_tarea-#{tarea.id}"}
+              %td #{link_to tarea.descripcion, edit_tarea_path(tarea)}
+              %td= h tarea.tipo
+              %td
+                \&nbsp;
+                = link_to 'Eliminar', tarea, :confirm => 'Está seguro?', :method => :delete
   %br/
-  = link_to 'Nueva tarea', new_tarea_path
+  = link_to 'Crear tarea', new_tarea_path
