@@ -3,5 +3,5 @@ Fabricator(:proyecto) do
   codigo "P1"
   estimacion "12"
   archivado false
-  cliente { Fabricate(:cliente) }
+  cliente(:force => true) { Fabricate(:cliente) }
 end
