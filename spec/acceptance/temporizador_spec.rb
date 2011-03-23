@@ -58,12 +58,12 @@ feature "Temporizador" do
 
   scenario "al iniciar un reloj se detienen los otros" do
     preparando_cafe = Fabricate(
-      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea),
+      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
       :descripcion => "Preparando café", :start => Date.today,
       :minutos => 5
     )
     lecture_and_beer = Fabricate(
-      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea),
+      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
       :descripcion => "Lecture & beer", :start => Date.today,
       :minutos => 10
     )
