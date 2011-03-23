@@ -14,7 +14,7 @@ feature "Crear Usuario" do
     click_link "Usuarios"
   end
 
-  scenario "Sin datos" do
+  scenario "sin datos" do
     click_link "Crear usuario"
     click_button "Crear"
     page.should have_content "Debe ingresar el nombre del usuario"
@@ -24,28 +24,28 @@ feature "Crear Usuario" do
     page.should_not have_content "Perfil inválido"
   end
   
-  scenario "E-mail inválido" do
+  scenario "con e-mail inválido" do
     click_link "Crear usuario"
     fill_in "E-mail", :with => "aeiou"
     click_button "Crear"
     page.should have_content "Formato de e-mail inválido"
   end
   
-  scenario "E-mail ya existente" do
+  scenario "con e-mail ya existente" do
     click_link "Crear usuario"
     fill_in "E-mail", :with => usuario.email
     click_button "Crear"
     page.should have_content "Ya existe un usuario con esta dirección de e-mail"
   end
   
-  scenario "Perfil inválido" do
+  scenario "con perfil inválido" do
     click_link "Crear usuario"
     fill_in "Perfil", :with => "torturador"
     click_button "Crear"
     page.should have_content "Perfil inválido"
   end
   
-  scenario "Perfiles válidos" do
+  scenario "con perfiles válidos" do
     click_link "Crear usuario"
     fill_in "Nombres", :with => "Osama"
     fill_in "E-mail", :with => "osama@ala.com"
