@@ -51,6 +51,12 @@ module HelperMethods
     end
   end
   
+  def within_cliente_row(cliente)
+    within(:id, "tr_cliente-#{cliente.id}") do
+      yield
+    end
+  end
+  
   def click_start_clock_button
     find(:css, "a.start").click
   end
@@ -100,6 +106,10 @@ module Capybara::Node::Matchers
 
   def has_usuario?(usuario)
     has_xpath?("//tr[@id='tr_usuario-#{usuario.id}']")
+  end
+
+  def has_cliente?(cliente)
+    has_xpath?("//tr[@id='tr_cliente-#{cliente.id}']")
   end
 end
 

@@ -1,14 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Crear Usuario" do
-  usuario = nil
-  
-  background do
-    usuario = Fabricate(:usuario,
+  let!(:ricardo) do
+    Fabricate(:usuario,
       :nombres => "Ricardo Meruane",
       :email => "gracias@nosemolesten.cl",
       :perfil => "ADMIN"
     )
+  end
+  
+  background do
     login
     click_link "Admin"
     click_link "Usuarios"
@@ -33,7 +34,7 @@ feature "Crear Usuario" do
   
   scenario "con e-mail ya existente" do
     click_link "Crear usuario"
-    fill_in "E-mail", :with => usuario.email
+    fill_in "E-mail", :with => "gracias@nosemolesten.cl"
     click_button "Crear"
     page.should have_content "Ya existe un usuario con esta dirección de e-mail"
   end
@@ -65,7 +66,7 @@ feature "Crear Usuario" do
   end
   
   scenario "Editar usuario" do
-    click_link usuario.nombres
+    click_link "Ricardo Meruane"
     fill_in "Nombres", :with => "Profesor salomon"
     fill_in "E-mail", :with => "salomon@mega.cl"
     fill_in "Perfil", :with => "USUARIO"
@@ -81,10 +82,10 @@ feature "Crear Usuario" do
   scenario "Borrar usuario" do
     page.evaluate_script("window.alert = function(msg) { return true; }")
     page.evaluate_script("window.confirm = function(msg) { return true; }")
-    within_usuario_row(usuario) do
+    within_usuario_row(ricardo) do
       click_link "Eliminar"
     end
-    page.has_usuario?(usuario)
+    page.has_usuario?(ricardo)
     page.should have_content "No existen usuarios creados"
   end
 

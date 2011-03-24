@@ -1,5 +1,5 @@
 class Cliente < ActiveRecord::Base
-  validates_presence_of :descripcion, :message => "Se debe ingresar un nombre para el cliente"
+  validates_presence_of :descripcion, :message => "Debe ingresar un nombre para el cliente"
 end
 
 class ClienteObj
