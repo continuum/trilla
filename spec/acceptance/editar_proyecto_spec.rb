@@ -12,7 +12,7 @@ feature "Editar Proyecto" do
     Fabricate(:proyecto,
       :descripcion => "Proyecto archivado",
       :archivado => true
-    )    
+    )
   end
   
   background do

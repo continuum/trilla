@@ -2,7 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Crear Proyecto" do
   p1 = nil
-  p2 = nil
   
   background do
     Fabricate(:cliente, :descripcion => "Perico")
