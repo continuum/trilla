@@ -893,7 +893,8 @@ table.grid-selection {
     border-bottom: 1px solid white;
     padding: 6px;
     text-align: left;
-    padding-left: 18px;
+    padding-left: 18px; }
+  table.grid-selection td.first {
     background: url(../images/vin-table-left.gif) no-repeat #fdf7ed 6px 5px; }
   table.grid-selection th {
     background: #fdf7ed;
