@@ -22,6 +22,7 @@ feature "Editar Proyecto" do
     click_link "Proyectos"
   end
 
+  #TODO: Falta editar tareas y usuarios ingresados
   scenario "cambiando datos basicos" do
     click_link "Shuper Proyecto"
     fill_in "Nombre", :with => "Proyecto Trilla"
