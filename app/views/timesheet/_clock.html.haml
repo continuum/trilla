@@ -3,7 +3,7 @@
   \/
   %b= tempo.proyecto.descripcion if tempo.proyecto
   %br
-  = tempo.tarea.descripcion
+  = tempo.tarea.descripcion if tempo.tarea
 %p{:id => "panel-display-#{tempo.id}", :style => "width:120px;"}
   - if tempo.iniciado == 1
     %a.lnk_reloj.stop{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Detener", :style=>"color:blue;"}
