@@ -4,6 +4,7 @@ class Tarea < ActiveRecord::Base
 
   validates_presence_of :descripcion, :message => "Debe ingresar un nombre para la tarea"
   validates_uniqueness_of :descripcion, :message => "Ya existe una tarea con el mismo nombre"
+  validates_inclusion_of :tipo, :in => ['Facturable', 'No Facturable'], :message => "Valores válidos de tipo: 'Facturable', 'No Facturable'"
 
   named_scope :facturables, :conditions => "tipo = 'Facturable'"
   named_scope :no_facturables, :conditions => "tipo = 'No Facturable'"
