@@ -73,6 +73,7 @@ class TimesheetController < ApplicationController
     @tempo.minutos = minutos
     @tempo.start = fecha_actual
     @tempo.stop = fecha_actual
+    @tempo.fecha_creacion = fecha
     @tempo.save
     @usuario = session[:usuario]
     @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, fecha)

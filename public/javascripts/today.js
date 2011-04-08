@@ -167,7 +167,7 @@ var idInterval = -1;
 				var params = {
 					accion: 'start',
 					id: id,
-					time: $('#reloj-' + id).text(),
+					time: $('#reloj-' + id).text().trim(),
 					format: 'html'
 	          	}
 				update(params, function(){
@@ -182,7 +182,7 @@ var idInterval = -1;
 				var params = {
 					accion: 'stop',
 					id: reloj_running.getTitle(),
-					time: reloj_running.text(),
+					time: reloj_running.text().trim(),
 					format: 'html'
 	          	}
 				update(params, function(){
@@ -208,7 +208,7 @@ var idInterval = -1;
 		var segundo = Number(tiempos[2]);
 		var minuto = Number(tiempos[1]);
 		var hora = Number(tiempos[0]);
-		
+		console.info(tiempos);
 		if(hora >= 9) {
 			$('#div-msg-salud').empty().append(msgImportante);
 		}
@@ -239,9 +239,10 @@ var idInterval = -1;
 				}
 	
 				relojRunning.text(hora + ':' + minuto + ':' + segundo + ':' + dia);
-	
+				//console.info(hora + ':' + minuto + ':' + segundo + ':' + dia);
 				var s = (hora.toString().length == 1 ? '0' + hora : hora) + ':' +
 	            		(minuto.toString().length == 1 ? '0' + minuto : minuto);
+						
 				$('#reloj-running-display').text(s);
 	        }
 		}, 1000);
