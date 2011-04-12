@@ -61,12 +61,12 @@ feature "Temporizador" do
     preparando_cafe = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
       :descripcion => "Preparando café", :start => Date.today,
-      :minutos => 5
+      :minutos => 5,:fecha_creacion => Date.today, :stop => Date.today
     )
     lecture_and_beer = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
       :descripcion => "Lecture & beer", :start => Date.today,
-      :minutos => 10
+      :minutos => 10,:fecha_creacion => Date.today, :stop => Date.today
     )
     click_link "Día"
     page.should have_no_clock_running
@@ -77,4 +77,27 @@ feature "Temporizador" do
     page.should have_timer_running(lecture_and_beer)
     page.should have_no_timer_running(preparando_cafe )
   end
+  
+  scenario "iniciando un reloj un día antes" do
+    lo_que_hice_el_dia_anterior = Fabricate(
+      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
+      :descripcion => "Esto lo hice ayer", :iniciado => 0, :start => Date.today - 1.day,
+      :fecha_creacion => Date.today - 1.day, :stop => Date.today - 1.day
+    )
+    click_link "Día"
+    page.should have_no_clock_running
+
+    click_link "<<"
+    page.should have_no_timer_running(lo_que_hice_el_dia_anterior)
+    page.should have_content "Esto lo hice ayer"
+    click_start_timer lo_que_hice_el_dia_anterior
+    
+    click_link ">>"
+    page.should have_no_clock_running
+    
+    click_link "<<"
+    page.should have_timer_running(lo_que_hice_el_dia_anterior)
+    page.should have_content "Esto lo hice ayer"
+  end
+  
 end
