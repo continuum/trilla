@@ -294,7 +294,7 @@ var idInterval = -1;
       	}
       	var fechaElegida = Number(anio + m + d);
       	var td = undefined;
-		if (fechaElegida <= fechaActual) {
+		if (fechaElegida <= fechaActual+4) {
 			td = '<td class="ui-datepicker-current-day"><a href="#" class="ui-state-default ui-state-active">' + dia + '</a></td>';
 		} else {
 			td = '<td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">' + dia + '</span></td>';
@@ -316,6 +316,15 @@ var idInterval = -1;
 
 	$('.lnk-perfil-usuario').click(function(event){
 		location.href = $('#path-perfil-usuario').text();
+		event.preventDefault();
+	});
+	
+	$('.lnk_enviar_timesheet').click(function(event){
+		
+		var form = $('#form-submit-timesheet form');
+		form.attr('action','approval');
+		form.submit();
+
 		event.preventDefault();
 	});
 	

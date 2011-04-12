@@ -1,4 +1,7 @@
 class TimesheetController < ApplicationController
+  
+  include TimesheetHelper
+  
   expose(:fecha_actual) { Temporizador.fechaActual }
 
   expose(:fecha) do
@@ -56,6 +59,57 @@ class TimesheetController < ApplicationController
   end
 
   def week
+    
+    logger.info "semana actual desde: #{fecha.beginning_of_week.day} hasta: #{(fecha.end_of_week - 2.day).day}"
+    @usuario = session[:usuario]
+
+    @listaDias = Array.new
+    @clientesProyectos = Hash.new
+    @clientesProyectosSuma = Hash.new
+    @dataPorDia = Hash.new
+
+    #se crea una hash con todos los nombres de los proyectos (cliente/proyecto/tarea)
+    Temporizador.find_by_usuario_semana_groupby_proyectos(@usuario, fecha).each do |t|
+        descripcion = "<b>#{t.proyecto.cliente.descripcion}</b> / #{t.proyecto.descripcion}<br>#{t.tarea.descripcion}"
+        llave_combinacion = "#{t.proyecto.cliente.id}#{t.proyecto.id}#{t.tarea.id}"
+        @clientesProyectos[descripcion] = llave_combinacion
+    end
+
+    #se recorren los 5 dias de la semana, se crea una matriz por cada dia y cliente/proyecto
+    5.times { |i|
+
+      dia = fecha.beginning_of_week + i.day 
+      
+      @listaDias << dia
+      
+      #se inicializan todos los valores para el dia en 0
+      @clientesProyectos.each do |descripcion, llave_combinacion|
+        @dataPorDia["#{llave_combinacion}-#{dia}"] = 0
+      end
+  
+      sumaDelDia = 0
+  
+      #se buscan los valores del dia
+      Temporizador.find_by_usuario_dia_groupby_proyectos_sum(@usuario, dia).each do |t|
+          llave_combinacion = "#{t.proyecto.cliente.id}#{t.proyecto.id}#{t.tarea.id}"
+          @dataPorDia["#{llave_combinacion}-#{dia}"] = t.sum
+          sumaDelDia+=t.sum.to_i
+      end
+      
+      @dataPorDia["sumaDelDia-#{dia}"] = sumaDelDia
+    }
+    
+    @sumaTotal = 0
+    @clientesProyectos.each do |descripcion, llave_combinacion|
+      
+      suma = 0;
+      @listaDias.each do | dia |
+        suma+= @dataPorDia["#{llave_combinacion}-#{dia}"].to_i
+      end
+    
+      @clientesProyectosSuma[llave_combinacion] = suma
+      @sumaTotal+= suma
+    end
 
   end
 
@@ -114,4 +168,11 @@ class TimesheetController < ApplicationController
     @temporizador.destroy
     render :json => {:msg => 'ok', :success => true}
   end
+  
+  def approval
+
+    redirect_to :action => :week
+    
+  end
+  
 end

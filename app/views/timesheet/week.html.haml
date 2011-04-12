@@ -8,6 +8,41 @@
     %li.clearfix
 .component-search
   .component-search-forms
-    Semanal :)
+    %h2="#{fecha.beginning_of_week.strftime("%d %b %Y")} - #{(fecha.end_of_week - 2.day).strftime("%d %b %Y")}"
+    
+  .component-search-forms
+    %div
+      %table
+        %tr{:style => 'text-align: right;'}
+          %td{:style => 'width: 500px'}
+          - @listaDias.each do |dia|
+            %td{:style => 'width:42px; padding-right: 20px;'}
+              %a.lnk_dia{:title => dia, :href => "/timesheet/day?fecha=#{dia}"}
+                = dia.strftime("%a<br>%b %d")
+          %td{:style => 'width: 100px;'}
+            %h2 Total
+        
+        -@clientesProyectos.each do |descripcion, llave_combinacion|
+          %tr{:style => 'text-align: right;'}
+            %td{:style => 'width: 500px; text-align: left;'}
+              =descripcion
+              -@listaDias.each do |dia|
+                %td{:style => 'width:42px; padding-right: 10px;'}
+                  -if @dataPorDia["#{llave_combinacion}-#{dia}"] == 0
+                    %input{:type => 'text', :style => 'width: 42px; text-align:center;', :value => ""}
+                  -else
+                    %input{:type => 'text', :style => 'width: 42px; text-align:center;', :value => "#{format_horas(@dataPorDia["#{llave_combinacion}-#{dia}"].to_i)}"}  
+                
+            %td{:style => 'width: 100px;'}
+              %b=format_horas(@clientesProyectosSuma[llave_combinacion])
+              
+        %tr{:style => 'text-align: right;'}
+          %td{:style => 'width: 500px; text-align: left;'}
+            -@listaDias.each do |dia|
+              %td{:style => 'width:42px; padding-right: 10px;'}
+                %b=format_horas(@dataPorDia["sumaDelDia-#{dia}"])  
+              
+          %td{:style => 'width: 100px;'}
+            %h2=format_horas(@sumaTotal)
+      
   = render(:partial => "timesheetfooter")
-
