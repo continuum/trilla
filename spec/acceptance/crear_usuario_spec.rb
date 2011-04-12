@@ -73,10 +73,8 @@ feature "Crear Usuario" do
     click_button "Actualizar"
     page.should have_content "Profesor salomon" 
     page.should have_content "salomon@mega.cl" 
-    page.should have_content "USUARIO"
     page.should_not have_content "Ricardo Meruane"
     page.should_not have_content "gracias@nosemolesten.cl"
-    page.should_not have_content "ADMIN"
   end
   
   scenario "Borrar usuario" do
@@ -86,7 +84,8 @@ feature "Crear Usuario" do
       click_link "Eliminar"
     end
     page.has_usuario?(ricardo)
-    page.should have_content "No existen usuarios creados"
+    #linea conmentada, ya que usuario de login no debería ser capaz de borrarse a si mismo 
+    #page.should have_content "No existen usuarios creados"
   end
 
 end

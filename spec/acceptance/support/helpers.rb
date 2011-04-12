@@ -1,6 +1,13 @@
 module HelperMethods
-  def login
-    visit "/"
+  def login(probador=nil)
+    if probador.nil?
+      probador = Fabricate(:usuario,
+        :nombres => "El probador de aplicaciones",
+        :email => "probador@continuum.cl",
+        :perfil => "ADMIN"
+      )
+    end
+    visit "/?id_mula=#{probador.id}"
     # By default google stores the session in our browser, so this might not
     # be needed
     if page.has_xpath? "//input[@id='signIn']"

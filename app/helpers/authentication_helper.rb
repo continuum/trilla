@@ -9,9 +9,14 @@ module AuthenticationHelper
   end
   
   def ensure_signed_in
-    unless signed_in?
-      session[:redirect_to] = request.request_uri
-      redirect_to(new_sessions_path)
+    if Rails.env.test? && !params[:id_mula].nil?
+        session[:usuario]  = Usuario.find(params[:id_mula])
+        session[:usuario_id] = params[:id_mula]
+    else
+      unless signed_in?
+        session[:redirect_to] = request.request_uri
+        redirect_to(new_sessions_path)
+      end
     end
   end
 

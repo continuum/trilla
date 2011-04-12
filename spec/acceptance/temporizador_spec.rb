@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Temporizador" do
+  let!(:pepito) {usuario}
   let!(:desarrollo) { Fabricate(:tarea, :descripcion => "Desarrollo") }
   let!(:megabank) { Fabricate(:cliente, :descripcion => "Mega Bank") }
   let!(:enterprisey) do
@@ -11,7 +12,7 @@ feature "Temporizador" do
   end
 
   background do
-    login
+    login(pepito)
     click_link "Timesheet"
     click_link "Tiempo"
   end
@@ -47,7 +48,7 @@ feature "Temporizador" do
     page.should have_clock_running
     logout
     Timecop.travel 15.minutes.from_now do
-      login
+      login(pepito)
       click_link "Timesheet"
       page.should have_clock_running
       click_stop_clock_button
@@ -58,12 +59,12 @@ feature "Temporizador" do
 
   scenario "al iniciar un reloj se detienen los otros" do
     preparando_cafe = Fabricate(
-      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
+      :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
       :descripcion => "Preparando café", :start => Date.today,
       :minutos => 5
     )
     lecture_and_beer = Fabricate(
-      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
+      :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
       :descripcion => "Lecture & beer", :start => Date.today,
       :minutos => 10
     )

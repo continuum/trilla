@@ -1,8 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Pagina Tiempo - Dia" do
+  let!(:pepito) {usuario}
+    
   background do
-    login
+    login(pepito)
     click_link "Timesheet"
     click_link "Tiempo"
   end
@@ -21,7 +23,7 @@ feature "Pagina Tiempo - Dia" do
 
   scenario "muestra las tareas del dia con reloj y opciones para eliminar y editar" do
     temporizador = Fabricate(
-      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea),
+      :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea),
       :descripcion => "Preparando café", :start => Date.today
     )
     click_link "Día"

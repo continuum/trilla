@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Editar temporizador" do
+  let!(:pepito) {usuario}
   let!(:tarea) { Fabricate(:tarea, :descripcion => "Reunion Interna") }
   let!(:internal) do
     Fabricate(
@@ -17,14 +18,14 @@ feature "Editar temporizador" do
   end
 
   background do
-    login
+    login(pepito)
     click_link "Timesheet"
     click_link "Tiempo"
   end
 
   scenario "temporizador existente" do
     lecture_and_beer = Fabricate(
-      :temporizador, :usuario => usuario,
+      :temporizador, :usuario => pepito,
       :tarea => tarea, :proyecto => next_big_thing,
       :descripcion => "Lecture & beer", :start => Date.today,
       :minutos => 90
