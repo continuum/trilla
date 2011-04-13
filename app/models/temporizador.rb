@@ -39,7 +39,8 @@ class Temporizador < ActiveRecord::Base
            :joins => ["left join proyectos on temporizadors.proyecto_id = proyectos.id",
                       "left join clientes on proyectos.cliente_id = clientes.id",
                       "left join tareas on temporizadors.tarea_id = tareas.id"],
-           :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week])
+           :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week],
+           :order => "id")
   end
 
   def self.fechaActual()

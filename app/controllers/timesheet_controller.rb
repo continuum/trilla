@@ -60,7 +60,7 @@ class TimesheetController < ApplicationController
 
   def week
     
-    logger.info "semana actual desde: #{fecha.beginning_of_week.day} hasta: #{fecha.end_of_week.day}"
+    logger.info "semana actual #{fecha} desde: #{fecha.beginning_of_week} hasta: #{fecha.end_of_week}"
     @usuario = session[:usuario]
 
     @listaDias = Array.new
@@ -171,7 +171,10 @@ class TimesheetController < ApplicationController
   
   def approval
 
+    @usuario = session[:usuario]
+
     Temporizador.find_by_usuario_semana(@usuario, fecha).each do |t|
+      logger.info "tempo #{t.id} - #{t.descripcion}"
       #t.update_attributes({:estado => 'POR_APROVAR'})
     end
 

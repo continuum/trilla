@@ -255,6 +255,7 @@ var idInterval = -1;
 		dateFormat: 'yy-mm-dd',
 		maxDate: "+0D",
 		minDate: "-1y",
+		firstDay: '1',
 		showOn: "button",
 		buttonImage: "/harv/images/icons/calendar.gif",
 		buttonImageOnly: true,
