@@ -319,15 +319,6 @@ var idInterval = -1;
 		event.preventDefault();
 	});
 	
-	$('.lnk_enviar_timesheet').click(function(event){
-		
-		var form = $('#form-submit-timesheet form');
-		form.attr('action','approval');
-		form.submit();
-
-		event.preventDefault();
-	});
-	
   });
   
 })(jQuery);

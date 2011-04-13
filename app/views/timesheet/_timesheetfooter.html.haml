@@ -1,5 +1,9 @@
-.component-search-actions
-  %button.lnk_enviar_timesheet{:href => "javascript:;", :id => "lnk_enviar_timesheet"}
+.component-search-actions{:style => 'text-align: right;'}
+  #form-submit-approval
+    -form_remote_tag :url => { :action => 'index'} do
+      %input{:id => "fecha", :name => "fecha", :type => "hidden", :value => "#{fecha}"}
+      
+  %button.lnk_approval_timesheet{:href => "javascript:;", :id => "lnk_approval_timesheet", :action => action}
     .div
       %span Enviar para Aprobación
 

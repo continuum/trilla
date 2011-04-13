@@ -20,7 +20,7 @@ feature "Temporizador" do
   scenario "iniciando y parando el reloj" do
     click_link "Agregar Entrada"
     select "Enterprisey", :from => "Cliente/Proyecto"
-    select "Desarrollo", :from => "Actividad"
+    select "Desarrollo", :from => "Tarea"
     click_button "Iniciar"
     page.should have_clock_running
     click_stop_clock_button
@@ -31,7 +31,7 @@ feature "Temporizador" do
   scenario "iniciando el reloj con un valor pre-existente" do
     click_link "Agregar Entrada"
     select "Enterprisey", :from => "Cliente/Proyecto"
-    select "Desarrollo", :from => "Actividad"
+    select "Desarrollo", :from => "Tarea"
     fill_in "Horas:Minutos", :with => "1:15"
     click_button "Guardar"
     page.should have_clock_running
@@ -43,7 +43,7 @@ feature "Temporizador" do
   scenario "iniciando el reloj, saliendo del sistema y deteniendolo mas tarde" do
     click_link "Agregar Entrada"
     select "Enterprisey", :from => "Cliente/Proyecto"
-    select "Desarrollo", :from => "Actividad"
+    select "Desarrollo", :from => "Tarea"
     click_button "Iniciar"
     page.should have_clock_running
     logout

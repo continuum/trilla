@@ -1,5 +1,6 @@
 - content_for :head do
   = javascript_include_tag "today"
+  = javascript_include_tag "approval"
 
 = render(:partial => "shared/timesheetmenu")
 %script{:src => "/harv/js/jquery.timeentry.min.js", :type => "text/javascript"}
@@ -16,7 +17,7 @@
 
 .component-search
   .component-search-forms
-    %b= fecha.strftime("%d %b %Y")
+    %b= fecha
     %a#prev-day{:href => "javascript:;"} <<
     %input#datepicker{:style => "width: 0px; border:0 solid;", :type => "text", :value => fecha}/
     %a#next-day{:href => "javascript:;"} >>
@@ -38,5 +39,5 @@
 
   = render(:partial => "edittime", :locals => {:fecha => fecha})
 
-  = render(:partial => "timesheetfooter")
+  = render(:partial => "timesheetfooter", :locals => {:action => 'week'})
 

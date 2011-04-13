@@ -12,13 +12,13 @@ feature "Editar Tarea" do
   scenario "cambiando todos sus datos" do
     click_link "Desarrollo"
     fill_in "Nombre", :with => "Tarea cambiada"
-    fill_in "Tipo", :with => "Importantísima!"
+    select "No Facturable"
     click_button "Actualizar"
+    #save_and_open_page
     page.should_not have_content "Nueva Tarea"
     page.should have_content "Tarea cambiada" 
-    page.should have_content "Importantísima!" 
+    page.should have_content "No Facturable"
     page.should_not have_content "Desarrollo"
-    page.should_not have_content "Facturable"
   end
   
   scenario "borrando y verificando que no existen mas tareas" do

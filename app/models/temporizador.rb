@@ -20,7 +20,7 @@ class Temporizador < ActiveRecord::Base
            :joins => ["left join proyectos on temporizadors.proyecto_id = proyectos.id",
                       "left join clientes on proyectos.cliente_id = clientes.id",
                       "left join tareas on temporizadors.tarea_id = tareas.id"],
-           :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week - 2.day],
+           :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week],
            :group => "proyecto_id, cliente_id, tarea_id")
   end
 
@@ -32,6 +32,14 @@ class Temporizador < ActiveRecord::Base
                       "left join tareas on temporizadors.tarea_id = tareas.id"],
            :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha, (fecha + 1.day)],
            :group => "proyectos.descripcion, proyecto_id, cliente_id, tarea_id")
+  end
+  
+  def self.find_by_usuario_semana(usuario, fecha)
+      find(:all, 
+           :joins => ["left join proyectos on temporizadors.proyecto_id = proyectos.id",
+                      "left join clientes on proyectos.cliente_id = clientes.id",
+                      "left join tareas on temporizadors.tarea_id = tareas.id"],
+           :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week])
   end
 
   def self.fechaActual()

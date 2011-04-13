@@ -60,7 +60,7 @@ class TimesheetController < ApplicationController
 
   def week
     
-    logger.info "semana actual desde: #{fecha.beginning_of_week.day} hasta: #{(fecha.end_of_week - 2.day).day}"
+    logger.info "semana actual desde: #{fecha.beginning_of_week.day} hasta: #{fecha.end_of_week.day}"
     @usuario = session[:usuario]
 
     @listaDias = Array.new
@@ -76,7 +76,7 @@ class TimesheetController < ApplicationController
     end
 
     #se recorren los 5 dias de la semana, se crea una matriz por cada dia y cliente/proyecto
-    5.times { |i|
+    7.times { |i|
 
       dia = fecha.beginning_of_week + i.day 
       
@@ -170,6 +170,10 @@ class TimesheetController < ApplicationController
   end
   
   def approval
+
+    Temporizador.find_by_usuario_semana(@usuario, fecha).each do |t|
+      #t.update_attributes({:estado => 'POR_APROVAR'})
+    end
 
     redirect_to :action => :week
     

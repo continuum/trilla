@@ -26,11 +26,12 @@ feature "Crear Tarea" do
   scenario "con todos los datos" do
     click_link "Crear tarea"
     fill_in "Nombre", :with => "Tarea para la casa"
-    fill_in "Tipo", :with => "Importantísima!"
+    #fill_in "Tipo", :with => "Importantísima!"
+    select "No Facturable"
     click_button "Crear"
     page.should_not have_content "Nueva Tarea"
     page.should have_content "Tarea para la casa"
-    page.should have_content "Importantísima!"
+    page.should have_content "No Facturable"
   end
 
   scenario "existente" do

@@ -1,3 +1,6 @@
+- content_for :head do
+  = javascript_include_tag "approval"
+  
 = render(:partial => "shared/timesheetmenu")
 .component-navigator-tabs
   %ul
@@ -8,7 +11,7 @@
     %li.clearfix
 .component-search
   .component-search-forms
-    %h2="#{fecha.beginning_of_week.strftime("%d %b %Y")} - #{(fecha.end_of_week - 2.day).strftime("%d %b %Y")}"
+    %h2="#{fecha.beginning_of_week.strftime("%d %b %Y")} - #{fecha.end_of_week.strftime("%d %b %Y")}"
     
   .component-search-forms
     %div
@@ -45,4 +48,4 @@
           %td{:style => 'width: 100px;'}
             %h2=format_horas(@sumaTotal)
       
-  = render(:partial => "timesheetfooter")
+  = render(:partial => "timesheetfooter", :locals => {:action => 'approval'})
