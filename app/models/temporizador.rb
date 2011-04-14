@@ -14,7 +14,7 @@ class Temporizador < ActiveRecord::Base
                    "left join tareas on temporizadors.tarea_id = tareas.id"])
   end
   
-  def self.find_by_usuario_semana_groupby_proyectos(usuario, fecha)
+  def self.find_by_usuario_semana_groupby_proyecto(usuario, fecha, filtro = {})
       find(:all, 
            :select => "proyecto_id, cliente_id, tarea_id",
            :joins => ["left join proyectos on temporizadors.proyecto_id = proyectos.id",
@@ -34,13 +34,35 @@ class Temporizador < ActiveRecord::Base
            :group => "proyectos.descripcion, proyecto_id, cliente_id, tarea_id")
   end
   
-  def self.find_by_usuario_semana(usuario, fecha)
-      find(:all, 
-           :joins => ["left join proyectos on temporizadors.proyecto_id = proyectos.id",
-                      "left join clientes on proyectos.cliente_id = clientes.id",
-                      "left join tareas on temporizadors.tarea_id = tareas.id"],
-           :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week],
-           :order => "id")
+  def self.update_estado_for_usuario_semana(usuario, fecha, estado)
+      
+      update_all("estado = '#{estado}'", ["usuario_id = ? and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week])
+      
+  end
+  
+  def self.delete_by_usuario_semana_groupby_proyecto(usuario, fecha, filtro = {})
+    
+    condiciones = nil
+    
+    if filtro.empty?
+      condiciones = ["usuario_id = ? and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week]
+    else
+
+      filtros = "";
+
+      if !filtro[:proyecto_id].nil?
+        filtros+= " and proyecto_id = #{filtro[:proyecto_id]}"
+      end
+      
+      if !filtro[:tarea_id].nil?
+        filtros+= " and tarea_id = #{filtro[:tarea_id]}"
+      end
+      
+      condiciones = ["usuario_id = ? #{filtros} and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week]
+    end
+    
+    delete_all(condiciones)
+    
   end
 
   def self.fechaActual()
@@ -65,7 +87,7 @@ class Temporizador < ActiveRecord::Base
       lMinutes = 0
       lHrs = lHrs + 1
     end
-    logger.info "FORMAT_HORAS: %02d:%02d" % [lHrs, lMinutes]
+
     return "%02d:%02d" % [lHrs, lMinutes]
   end
 

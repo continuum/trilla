@@ -1,0 +1,31 @@
+%div{:style => "height:120px; padding-left: 30px; padding-top: 10px; "}
+  #form-submit-new-row-week{:style => 'float: left;width: 630px; '} 
+    %form{:action => "newRowWeek"}
+      %div
+        %label{:for => "row_week_proyecto_id"}
+          %b Cliente/Proyecto
+        %select#temporizador_proyecto_id{:name => "row_week[proyecto_id]", :style => "width:240px;"}
+          - @clientesProyectos.each do |cli|
+            %optgroup{:label => cli.descripcion}
+              - cli.proyectos.each do |pro|
+                %option{:value => pro.id}= pro.descripcion
+        %label{:for => "row_week_tarea_id"}
+          %b Tarea
+        %select#temporizador_tarea_id{:name => "row_week[tarea_id]", :style => "width:240px;"}
+          %optgroup{:label => "Facturable"}
+            - @tareas_facturables.each do |t|
+              %option{:value => t.id}= t.descripcion
+          %optgroup{:label => "No Facturable"}
+            - @tareas_no_facturables.each do |t|
+              %option{:value => t.id}= t.descripcion
+  %div{:style => 'float: left;'}          
+    %button#lnk_acept_new_row_week
+      .div
+        %span Agregar
+    %button#lnk_cancel_new_row_week
+      .div
+        %span Cancelar
+        
+= javascript_include_tag "approval"        
+            
+          

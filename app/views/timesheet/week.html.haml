@@ -24,8 +24,9 @@
                 = dia.strftime("%a<br>%b %d")
           %td{:style => 'width: 100px;'}
             %h2 Total
+          %td  
         
-        -@clientesProyectos.each do |descripcion, llave_combinacion|
+        -@clientesProyectosTareas.each do |descripcion, llave_combinacion|
           %tr{:style => 'text-align: right;'}
             %td{:style => 'width: 500px; text-align: left;'}
               =descripcion
@@ -37,10 +38,13 @@
                     %input{:type => 'text', :style => 'width: 42px; text-align:center;', :value => "#{format_horas(@dataPorDia["#{llave_combinacion}-#{dia}"].to_i)}"}  
                 
             %td{:style => 'width: 100px;'}
-              %b=format_horas(@clientesProyectosSuma[llave_combinacion])
+              %b=format_horas(@clientesProyectosTareasSuma[llave_combinacion])
+            %td
+              %a.lnk_delete_row_week{:href => 'javascript:;', :title => "Eliminar", :id => "lnk_delete_row_week-#{llave_combinacion}"} (X)
               
         %tr{:style => 'text-align: right;'}
           %td{:style => 'width: 500px; text-align: left;'}
+            %a#lnk_add_row_week{:href => 'javascript:;', :title => "Agregar fila"} Agregar fila
             -@listaDias.each do |dia|
               %td{:style => 'width:42px; padding-right: 10px;'}
                 %b=format_horas(@dataPorDia["sumaDelDia-#{dia}"])  
@@ -48,4 +52,14 @@
           %td{:style => 'width: 100px;'}
             %h2=format_horas(@sumaTotal)
       
+  #form-submit-week
+    -form_remote_tag :url => { :action => 'index'} do
+      %input{:id => "fecha", :name => "fecha", :type => "hidden", :value => "#{fecha}"}
+      %input{:id => "filtro[cliente_id]", :name => "filtro[cliente_id]", :type => "hidden", :value => 0}      
+      %input{:id => "filtro[proyecto_id]", :name => "filtro[proyecto_id]", :type => "hidden", :value => 0}
+      %input{:id => "filtro[tarea_id]", :name => "filtro[tarea_id]", :type => "hidden", :value => 0}
+ 
+  #addrowweek{:style => 'display:none;'}  
+
   = render(:partial => "timesheetfooter", :locals => {:action => 'approval'})
+ 

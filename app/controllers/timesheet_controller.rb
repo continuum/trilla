@@ -43,9 +43,9 @@ class TimesheetController < ApplicationController
 
   end
 
-
-  def day
-    @clientesProyectos = Cliente.all.map do |cli|
+  def nuevoTemporizador
+    
+     @clientesProyectos = Cliente.all.map do |cli|
       ClienteObj.new.tap do |c|
         c.id = cli.id
         c.descripcion = cli.descripcion
@@ -54,6 +54,11 @@ class TimesheetController < ApplicationController
     end
     @tareas_facturables = Tarea.facturables
     @tareas_no_facturables = Tarea.no_facturables
+    
+  end
+
+  def day
+    self.nuevoTemporizador
     @usuario = session[:usuario]
     @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, fecha)
   end
@@ -64,15 +69,15 @@ class TimesheetController < ApplicationController
     @usuario = session[:usuario]
 
     @listaDias = Array.new
-    @clientesProyectos = Hash.new
-    @clientesProyectosSuma = Hash.new
+    @clientesProyectosTareas = Hash.new
+    @clientesProyectosTareasSuma = Hash.new
     @dataPorDia = Hash.new
 
     #se crea una hash con todos los nombres de los proyectos (cliente/proyecto/tarea)
-    Temporizador.find_by_usuario_semana_groupby_proyectos(@usuario, fecha).each do |t|
+    Temporizador.find_by_usuario_semana_groupby_proyecto(@usuario, fecha).each do |t|
         descripcion = "<b>#{t.proyecto.cliente.descripcion}</b> / #{t.proyecto.descripcion}<br>#{t.tarea.descripcion}"
-        llave_combinacion = "#{t.proyecto.cliente.id}#{t.proyecto.id}#{t.tarea.id}"
-        @clientesProyectos[descripcion] = llave_combinacion
+        llave_combinacion = "#{t.proyecto.cliente.id};#{t.proyecto.id};#{t.tarea.id}"
+        @clientesProyectosTareas[descripcion] = llave_combinacion
     end
 
     #se recorren los 5 dias de la semana, se crea una matriz por cada dia y cliente/proyecto
@@ -83,7 +88,7 @@ class TimesheetController < ApplicationController
       @listaDias << dia
       
       #se inicializan todos los valores para el dia en 0
-      @clientesProyectos.each do |descripcion, llave_combinacion|
+      @clientesProyectosTareas.each do |descripcion, llave_combinacion|
         @dataPorDia["#{llave_combinacion}-#{dia}"] = 0
       end
   
@@ -91,7 +96,7 @@ class TimesheetController < ApplicationController
   
       #se buscan los valores del dia
       Temporizador.find_by_usuario_dia_groupby_proyectos_sum(@usuario, dia).each do |t|
-          llave_combinacion = "#{t.proyecto.cliente.id}#{t.proyecto.id}#{t.tarea.id}"
+          llave_combinacion = "#{t.proyecto.cliente.id};#{t.proyecto.id};#{t.tarea.id}"
           @dataPorDia["#{llave_combinacion}-#{dia}"] = t.sum
           sumaDelDia+=t.sum.to_i
       end
@@ -100,14 +105,14 @@ class TimesheetController < ApplicationController
     }
     
     @sumaTotal = 0
-    @clientesProyectos.each do |descripcion, llave_combinacion|
+    @clientesProyectosTareas.each do |descripcion, llave_combinacion|
       
       suma = 0;
       @listaDias.each do | dia |
         suma+= @dataPorDia["#{llave_combinacion}-#{dia}"].to_i
       end
     
-      @clientesProyectosSuma[llave_combinacion] = suma
+      @clientesProyectosTareasSuma[llave_combinacion] = suma
       @sumaTotal+= suma
     end
 
@@ -172,11 +177,50 @@ class TimesheetController < ApplicationController
   def approval
 
     @usuario = session[:usuario]
+    
+    Temporizador.update_estado_for_usuario_semana(@usuario, fecha,'POR_APROVAR')
 
-    Temporizador.find_by_usuario_semana(@usuario, fecha).each do |t|
-      logger.info "tempo #{t.id} - #{t.descripcion}"
-      #t.update_attributes({:estado => 'POR_APROVAR'})
-    end
+    redirect_to :action => :week
+    
+  end
+  
+  def deleteRowWeek
+  
+    @usuario = session[:usuario]
+
+    Temporizador.delete_by_usuario_semana_groupby_proyecto(@usuario, fecha, params[:filtro])
+    
+    redirect_to :action => :week
+    
+  end
+  
+  def addRowWeek
+   
+    self.nuevoTemporizador
+    render(:file => 'timesheet/addrowweek' )
+    
+  end
+  
+  def newRowWeek
+   
+    @usuario = session[:usuario]
+    row_week = params[:row_week]
+    logger.info "row_week: #{row_week}"
+
+    7.times { |i|
+
+      dia = fecha.beginning_of_week + i.day
+        
+      t = Temporizador.new(params[:row_week])
+      t.usuario_id = @usuario.id
+      t.descripcion = '';
+      t.iniciado = 0
+      t.minutos = 1
+      t.start = fecha_actual
+      t.stop = fecha_actual
+      t.fecha_creacion = dia
+      t.save
+    }    
 
     redirect_to :action => :week
     
