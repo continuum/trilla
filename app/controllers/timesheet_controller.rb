@@ -97,7 +97,7 @@ class TimesheetController < ApplicationController
       #se buscan los valores del dia
       Temporizador.find_by_usuario_dia_groupby_proyectos_sum(@usuario, dia).each do |t|
           llave_combinacion = "#{t.proyecto.cliente.id};#{t.proyecto.id};#{t.tarea.id}"
-          @dataPorDia["#{llave_combinacion}-#{dia}"] = t.sum
+          @dataPorDia["#{llave_combinacion}-#{dia}"] = t.sum.to_i
           sumaDelDia+=t.sum.to_i
       end
       
@@ -215,7 +215,7 @@ class TimesheetController < ApplicationController
       t.usuario_id = @usuario.id
       t.descripcion = '';
       t.iniciado = 0
-      t.minutos = 1
+      t.minutos = 0
       t.start = fecha_actual
       t.stop = fecha_actual
       t.fecha_creacion = dia
