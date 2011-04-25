@@ -61,12 +61,14 @@ feature "Temporizador" do
     preparando_cafe = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
       :descripcion => "Preparando café", :start => Date.today,
-      :minutos => 5,:fecha_creacion => Date.today, :stop => Date.today
+      :minutos => 5,:fecha_creacion => Date.today, :stop => Date.today,
+      :proyecto => Fabricate(:proyecto)
     )
     lecture_and_beer = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
       :descripcion => "Lecture & beer", :start => Date.today,
-      :minutos => 10,:fecha_creacion => Date.today, :stop => Date.today
+      :minutos => 10,:fecha_creacion => Date.today, :stop => Date.today,
+      :proyecto => Fabricate(:proyecto)
     )
     click_link "Día"
     page.should have_no_clock_running
@@ -82,7 +84,8 @@ feature "Temporizador" do
     lo_que_hice_el_dia_anterior = Fabricate(
       :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
       :descripcion => "Esto lo hice ayer", :iniciado => 0, :start => Date.today - 1.day,
-      :fecha_creacion => Date.today - 1.day, :stop => Date.today - 1.day
+      :fecha_creacion => Date.today - 1.day, :stop => Date.today - 1.day,
+      :proyecto => Fabricate(:proyecto)
     )
     click_link "Día"
     page.should have_no_clock_running
