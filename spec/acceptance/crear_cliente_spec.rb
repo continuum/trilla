@@ -55,15 +55,5 @@ feature "Crear Cliente" do
     page.should_not have_content "Que venga la modelo!!!"
     page.should_not have_content "24500-03"
   end
-  
-  scenario "Borrar cliente" do
-    page.evaluate_script("window.alert = function(msg) { return true; }")
-    page.evaluate_script("window.confirm = function(msg) { return true; }")
-    within_cliente_row(mario) do
-      click_link "Eliminar"
-    end
-    page.has_cliente?(mario)
-    page.should have_content "No existen clientes creados"
-  end
 
 end
