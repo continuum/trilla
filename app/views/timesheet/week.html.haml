@@ -1,5 +1,5 @@
 - content_for :head do
-  = javascript_include_tag "approval"
+  = javascript_include_tag "week"
   
 = render(:partial => "shared/timesheetmenu")
 .component-navigator-tabs
@@ -33,9 +33,9 @@
               -@listaDias.each do |dia|
                 %td{:style => 'width:42px; padding-right: 10px;'}
                   -if @dataPorDia["#{llave_combinacion}-#{dia}"] == 0
-                    %input{:type => 'text', :style => 'width: 42px; text-align:center;', :value => "", :maxlength => 5}
+                    %input.temporizador_tiempo_base_week{:type => 'text', :style => 'width: 42px; text-align:center;', :value => "", :maxlength => 5}
                   -else
-                    %input{:type => 'text', :style => 'width: 42px; text-align:center;', :value => "#{format_horas(@dataPorDia["#{llave_combinacion}-#{dia}"])}", :maxlength => 5}  
+                    %input.temporizador_tiempo_base_week{:type => 'text', :style => 'width: 42px; text-align:center;', :value => "#{format_horas(@dataPorDia["#{llave_combinacion}-#{dia}"])}", :maxlength => 5}  
                 
             %td{:style => 'width: 100px;'}
               %b=format_horas(@clientesProyectosTareasSuma[llave_combinacion])

@@ -6,6 +6,10 @@ class Temporizador < ActiveRecord::Base
   belongs_to :tarea
   belongs_to :usuario
 
+  validates_numericality_of :proyecto_id, :greater_than => 0, :message => "Debe seleccionar un proyecto"
+  validates_numericality_of :tarea_id, :greater_than => 0, :message => "Debe seleccionar una tarea"
+  validates_numericality_of :usuario_id, :greater_than => 0, :message => "Temporizador no tiene asociado un usuario"
+  
   def self.find_por_usuario_fecha(usuario, fecha)
     find(:all,
         :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha, (fecha + 1.day)],

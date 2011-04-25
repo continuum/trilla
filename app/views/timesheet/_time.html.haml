@@ -1,0 +1,9 @@
+%p{:style => "width:480px;"}
+  = tempo.proyecto.cliente.descripcion if tempo.proyecto
+  \/
+  %b= tempo.proyecto.descripcion if tempo.proyecto
+  %br
+  = tempo.tarea.descripcion if tempo.tarea
+%p{:id => "panel-time-#{tempo.id}", :style => "width:50px;"}
+  %span.reloj_time{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Iniciar"}
+    = tempo.format_horas()
