@@ -37,7 +37,12 @@ class ClientesController < ApplicationController
 
   def destroy
     @cliente = Cliente.find(params[:id])
-    @cliente.destroy
-    redirect_to(clientes_url)
+    if @cliente.destroy
+      redirect_to(clientes_url)
+    else
+      index
+      render :action => "index"
+    end
+    
   end
 end

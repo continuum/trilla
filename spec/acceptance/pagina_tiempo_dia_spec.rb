@@ -25,7 +25,8 @@ feature "Pagina Tiempo - Dia" do
     temporizador = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea),
       :descripcion => "Preparando café", :start => Date.today,
-      :fecha_creacion => Date.today, :stop => Date.today
+      :fecha_creacion => Date.today, :stop => Date.today,
+      :proyecto => Fabricate(:proyecto)
     )
     click_link "Día"
     within_timer_row(temporizador) do

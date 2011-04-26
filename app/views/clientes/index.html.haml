@@ -5,6 +5,7 @@
       %a#tab-form{:href => "javascript:void(0)"} Clientes
     %li.clearfix
 .component-datatable
+  =error_messages_for :cliente, :header_message => "Errores:", :message => ""
   -if @clientes.empty?
     No existen clientes creados
   -else

@@ -9,4 +9,20 @@ class Tarea < ActiveRecord::Base
   named_scope :facturables, :conditions => "tipo = 'Facturable'"
   named_scope :no_facturables, :conditions => "tipo = 'No Facturable'"
   named_scope :ordered_by_tipo, :order => "tipo"
+
+  def before_destroy
+    if Tarea.cantidad_proyectos(self.id) > 0
+      errors.add_to_base "La tarea ha sido referenciada desde un proyecto"
+      false
+    end
+  end
+  
+  def self.cantidad_proyectos(tarea_id)
+    Proyecto.count( 
+      :joins => "left join proyecto_tareas on proyectos.id = proyecto_tareas.proyecto_id",
+      :conditions =>["tarea_id = ?", tarea_id]
+      )
+  end
+  
+
 end
