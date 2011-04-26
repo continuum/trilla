@@ -27,8 +27,8 @@ feature "Editar temporizador" do
     lecture_and_beer = Fabricate(
       :temporizador, :usuario => pepito,
       :tarea => tarea, :proyecto => next_big_thing,
-      :descripcion => "Lecture & beer", :start => Date.today,
-      :minutos => 90,:fecha_creacion => Date.today, :stop => Date.today
+      :descripcion => "Lecture & beer", :start => Temporizador.fechaActual,
+      :minutos => 90,:fecha_creacion => Temporizador.fechaActual, :stop => Temporizador.fechaActual
     )
     click_link "Día"
     within_timer_row(lecture_and_beer) { click_link "Editar" }

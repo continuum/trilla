@@ -52,12 +52,10 @@ feature "Crear Proyecto" do
     click_link "Agregar Persona"
     click_link "Agregar Tarea"
     click_button "Crear"
-    
     #Verificación de los datos del proyecto creado
     page.should have_content("Mis Proyectos")
     page.should have_content("Proyecto Trilla")
     click_link "Proyecto Trilla"
-    #save_and_open_page
     field_labeled("Código").value.should == "T3"
     field_labeled("Estimación").value.should == "100"
     page.should have_checked_field "Archivado"

@@ -79,16 +79,8 @@ module Capybara::Node::Matchers
     has_css?("#tr_timesheet-#{temporizador.id} .clock.running")
   end
 
-  def has_no_timer_running?(temporizador)
-    has_no_css?("#tr_timesheet-#{temporizador.id} .clock.running")
-  end
-
   def has_clock_running?
     has_css?(".clock.running")
-  end
-
-  def has_no_clock_running?
-    has_no_css?(".clock.running")
   end
 
   def has_clock?

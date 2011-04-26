@@ -24,8 +24,8 @@ feature "Pagina Tiempo - Dia" do
   scenario "muestra las tareas del dia con reloj y opciones para eliminar y editar" do
     temporizador = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea),
-      :descripcion => "Preparando café", :start => Date.today,
-      :fecha_creacion => Date.today, :stop => Date.today,
+      :descripcion => "Preparando café", :start => Temporizador.fechaActual,
+      :fecha_creacion => Temporizador.fechaActual, :stop => Temporizador.fechaActual,
       :proyecto => Fabricate(:proyecto)
     )
     click_link "Día"

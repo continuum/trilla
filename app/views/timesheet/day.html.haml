@@ -3,7 +3,7 @@
   = javascript_include_tag "week"
 
 = render(:partial => "shared/timesheetmenu")
-%script{:src => "/harv/js/jquery.timeentry.min.js", :type => "text/javascript"}
+= javascript_include_tag "jquery/plugins/jquery.timeentry.min.js"
 
 .component-navigator-tabs
   %ul

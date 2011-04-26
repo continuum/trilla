@@ -45,7 +45,7 @@ class TimesheetController < ApplicationController
 
   def nuevoTemporizador
     
-     @clientesProyectos = Cliente.all.map do |cli|
+    @clientesProyectos = Cliente.all.map do |cli|
       ClienteObj.new.tap do |c|
         c.id = cli.id
         c.descripcion = cli.descripcion
