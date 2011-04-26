@@ -37,7 +37,11 @@ class TareasController < ApplicationController
 
   def destroy
     @tarea = Tarea.find(params[:id])
-    @tarea.destroy
-    redirect_to(tareas_url)
+    if @tarea.destroy
+      redirect_to(tareas_url)
+    else
+      index
+      render :action => "index"
+    end
   end
 end

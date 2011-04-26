@@ -5,6 +5,7 @@
       %a#tab-form{:href => "javascript:void(0)"} Tareas
     %li.clearfix
 .component-datatable
+  =error_messages_for :tarea, :header_message => "Errores:", :message => ""
   -if @tareas.empty?
     No existen tareas creadas
   -else
