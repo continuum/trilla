@@ -22,7 +22,7 @@ feature "Temporizador" do
     click_button "Iniciar"
     page.should have_clock_running
     click_stop_clock_button
-    page.should have_no_clock_running
+    page.should_not have_clock_running
     page.should have_content "00:00"
   end
 
@@ -34,7 +34,7 @@ feature "Temporizador" do
     click_button "Guardar"
     page.should have_clock_running
     click_stop_clock_button
-    page.should have_no_clock_running
+    page.should_not have_clock_running
     page.should have_content "1:15"
   end
 
@@ -50,7 +50,7 @@ feature "Temporizador" do
       click_link "Timesheet"
       page.should have_clock_running
       click_stop_clock_button
-      page.should have_no_clock_running
+      page.should_not have_clock_running
       page.should have_content "0:15"
     end
   end
@@ -88,15 +88,15 @@ feature "Temporizador" do
       :proyecto => enterprisey
     )
     click_link "Día"
-    page.should have_no_clock_running
+    page.should_not have_clock_running
 
     click_link "<<"
-    page.should have_no_timer_running(lo_que_hice_el_dia_anterior)
+    page.should_not have_timer_running(lo_que_hice_el_dia_anterior)
     page.should have_content "Esto lo hice ayer"
     click_start_timer lo_que_hice_el_dia_anterior
     
     click_link ">>"
-    page.should have_no_clock_running
+    page.should_not have_clock_running
     
     click_link "<<"
     page.should have_timer_running(lo_que_hice_el_dia_anterior)
