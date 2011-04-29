@@ -16,12 +16,12 @@
               %b Tarea
             %br/
             %select#temporizador_tarea_id{:name => "temporizador[tarea_id]", :style => "width:240px;"}
-              %optgroup{:label => "Facturable"}
-                - @tareas_facturables.each do |t|
-                  %option{:value => t.id}= t.descripcion
-              %optgroup{:label => "No Facturable"}
-                - @tareas_no_facturables.each do |t|
-                  %option{:value => t.id}= t.descripcion
+              - agregados = Array.new
+              - @tareasProyecto.each do |t|
+                - if !agregados.include? t.tipo
+                  -agregados.push t.tipo
+                  %optgroup{:label => t.tipo}
+                %option{:value => t.id}= t.descripcion
       %div{:style => "width: 150px; height:120px; float: left; padding:5px;"}
         %p
           %label{:for => "temporizador_tiempo_base"} Horas:Minutos

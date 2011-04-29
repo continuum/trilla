@@ -44,16 +44,10 @@ class TimesheetController < ApplicationController
   end
 
   def nuevoTemporizador
-    
-    @clientesProyectos = Cliente.all.map do |cli|
-      ClienteObj.new.tap do |c|
-        c.id = cli.id
-        c.descripcion = cli.descripcion
-        c.proyectos = Proyecto.find(:all, :conditions => ["cliente_id = ? and not archivado = ?", cli.id, true])
-      end
-    end
-    @tareas_facturables = Tarea.facturables
-    @tareas_no_facturables = Tarea.no_facturables
+    @clientesProyectos = Cliente.find_with_proyectos_by_usuario session[:usuario_id]
+    @tareasProyecto = Tarea.find_by_clientes_proyectos @clientesProyectos
+#    @tareas_facturables = Tarea.facturables
+#    @tareas_no_facturables = Tarea.no_facturables
     
   end
 

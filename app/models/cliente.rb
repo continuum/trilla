@@ -1,4 +1,7 @@
 class Cliente < ActiveRecord::Base
+  has_many :proyectos
+  has_many :proyecto_usuarios, :through => :proyectos
+  
   validates_presence_of :descripcion, :message => "Debe ingresar un nombre para el cliente"
   
   def before_destroy
@@ -12,12 +15,12 @@ class Cliente < ActiveRecord::Base
     Proyecto.count :conditions =>["cliente_id = ?", cliente_id]
   end
   
-end
-
-class ClienteObj
-  
-  attr_accessor :id
-  attr_accessor :descripcion
-  attr_accessor :proyectos
+  def self.find_with_proyectos_by_usuario(usuario_id)
+    find(
+      :all,
+      :include => [:proyectos => :proyecto_usuarios],
+      :conditions => ["proyecto_usuarios.usuario_id = ? and proyectos.archivado = false", usuario_id]
+    )
+  end
   
 end
