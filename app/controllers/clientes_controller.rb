@@ -1,4 +1,6 @@
 class ClientesController < ApplicationController
+  before_filter :authorizate_admin
+  
   def index
     @clientes = Cliente.all
   end

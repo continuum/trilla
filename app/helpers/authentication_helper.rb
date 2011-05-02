@@ -20,5 +20,12 @@ module AuthenticationHelper
     end
   end
 
+  def authorizate_admin
+    unless session[:usuario].admin?
+      flash[:error] = "No posee perfil de administrador para acceder a esta opción"
+      redirect_to "/"
+      false
+    end
+  end
   
 end

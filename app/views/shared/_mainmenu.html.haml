@@ -1,0 +1,8 @@
+#tab.component-navigator-menu
+  %ul
+    %li.tab-select.first
+      %a#tab-timesheet{:href => root_path} Timesheet
+    - if session[:usuario].perfil == 'ADMIN'
+      %li.tab-unselect.last
+        %a#tab-admin{:href => proyectos_path} Admin
+    %li.clearfix

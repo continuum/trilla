@@ -1,4 +1,6 @@
 class TareasController < ApplicationController
+  before_filter :authorizate_admin
+  
   def index
     @tareas = Tarea.all
   end

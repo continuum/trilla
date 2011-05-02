@@ -34,6 +34,11 @@
           %b  Trilla Time Tracking
         %a.accion{:href => "/sessions/destroy"} Salir
         %a.accion{:href => "/usuarios/#{usuario.id}?p=1"} #{usuario.nombres.capitalize}
+      - if flash[:error]
+        .errorExplanation
+          %h2 Errores:
+          %ul
+            %li= flash[:error]
       = yield
 
 /= javascript_include_tag "controles-achs"

@@ -1,4 +1,6 @@
 class ProyectosController < ApplicationController
+  before_filter :authorizate_admin
+  
   def index
     @proyectos = Proyecto.all
   end

@@ -16,5 +16,10 @@ class Usuario < ActiveRecord::Base
 
   def self.autenticar(login, password)
     find(:first, :conditions => ["rut = ? and password = ?",login, password])
-  end  
+  end
+  
+  def admin?
+    self.perfil == "ADMIN"
+  end
+  
 end

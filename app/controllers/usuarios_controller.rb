@@ -1,4 +1,6 @@
 class UsuariosController < ApplicationController
+  before_filter :authorizate_admin
+  
   def index
     @usuarios = Usuario.all
   end
