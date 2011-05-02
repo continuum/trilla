@@ -6,7 +6,10 @@ feature "Temporizador" do
   let!(:megabank) { Fabricate(:cliente, :descripcion => "Mega Bank", :contacto => "Farkas") }
   let!(:enterprisey) do
     Fabricate(
-      :proyecto, :descripcion => "Enterprisey", :cliente => megabank,
+      :proyecto, 
+      :descripcion => "Enterprisey", 
+      :cliente => megabank,
+      :usuarios => [perico],
       :tareas => [desarrollo]
     )
   end
@@ -17,12 +20,13 @@ feature "Temporizador" do
 
   scenario "iniciando y parando el reloj" do
     click_link "Agregar Entrada"
+    fill_in "Descripción", :with => "Inicio de proyecto"
     select "Enterprisey", :from => "Cliente/Proyecto"
     select "Desarrollo", :from => "Tarea"
     click_button "Iniciar"
     page.should have_clock_running
     click_stop_clock_button
-    page.should_not have_clock_running
+    page.should have_no_clock_running
     page.should have_content "00:00"
   end
 
@@ -34,7 +38,7 @@ feature "Temporizador" do
     click_button "Guardar"
     page.should have_clock_running
     click_stop_clock_button
-    page.should_not have_clock_running
+    page.should have_no_clock_running
     page.should have_content "1:15"
   end
 
@@ -50,7 +54,7 @@ feature "Temporizador" do
       click_link "Timesheet"
       page.should have_clock_running
       click_stop_clock_button
-      page.should_not have_clock_running
+      page.should have_no_clock_running
       page.should have_content "0:15"
     end
   end
@@ -71,7 +75,7 @@ feature "Temporizador" do
       :proyecto => enterprisey
     )
     click_link "Día"
-    page.should_not have_clock_running
+    page.should have_no_clock_running
     click_start_timer preparando_cafe
     page.should have_timer_running(preparando_cafe)
     page.should_not have_timer_running(lecture_and_beer)
@@ -88,7 +92,7 @@ feature "Temporizador" do
       :proyecto => enterprisey
     )
     click_link "Día"
-    page.should_not have_clock_running
+    page.should have_no_clock_running
 
     click_link "<<"
     page.should_not have_timer_running(lo_que_hice_el_dia_anterior)
@@ -96,7 +100,7 @@ feature "Temporizador" do
     click_start_timer lo_que_hice_el_dia_anterior
     
     click_link ">>"
-    page.should_not have_clock_running
+    page.should have_no_clock_running
     
     click_link "<<"
     page.should have_timer_running(lo_que_hice_el_dia_anterior)

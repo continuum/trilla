@@ -20,7 +20,7 @@ feature "Crear Usuario" do
     click_button "Crear"
     page.should have_content "Debe ingresar el nombre del usuario"
     page.should have_content "Debe ingresar el e-mail del usuario"
-    page.should have_content "Debe ingresar un perfil"
+    #page.should have_content "Debe ingresar un perfil"
     page.should_not have_content "Formato de e-mail inválido"
     page.should_not have_content "Perfil inválido"
   end
@@ -38,19 +38,20 @@ feature "Crear Usuario" do
     click_button "Crear"
     page.should have_content "Ya existe un usuario con esta dirección de e-mail"
   end
-  
+=begin
+  #Ahora se ingresa el perfil con select, ya no es necesaria esta prueba  
   scenario "con perfil inválido" do
     click_link "Crear usuario"
     fill_in "Perfil", :with => "torturador"
     click_button "Crear"
     page.should have_content "Perfil inválido"
   end
-  
+=end  
   scenario "con perfiles válidos" do
     click_link "Crear usuario"
     fill_in "Nombres", :with => "Osama"
     fill_in "E-mail", :with => "osama@ala.com"
-    fill_in "Perfil", :with => "ADMIN"
+    select "Administrador"
     click_button "Crear"
     page.should_not have_content "Perfil inválido"
     page.should_not have_content "Nuevo Usuario"
@@ -58,7 +59,7 @@ feature "Crear Usuario" do
     click_link "Crear usuario"
     fill_in "Nombres", :with => "Obama"
     fill_in "E-mail", :with => "obama@usa.com"
-    fill_in "Perfil", :with => "USUARIO"
+    select "Usuario"
     click_button "Crear"
     page.should_not have_content "Perfil inválido"
     page.should_not have_content "Nuevo Usuario"
@@ -69,7 +70,7 @@ feature "Crear Usuario" do
     click_link "Ricardo Meruane"
     fill_in "Nombres", :with => "Profesor salomon"
     fill_in "E-mail", :with => "salomon@mega.cl"
-    fill_in "Perfil", :with => "USUARIO"
+    select "Usuario"
     click_button "Actualizar"
     page.should have_content "Profesor salomon" 
     page.should have_content "salomon@mega.cl" 

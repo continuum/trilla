@@ -83,6 +83,11 @@ module Capybara::Node::Matchers
     has_css?(".clock.running")
   end
 
+  #Se deja versión negada, ya que no funciona bien "should_not" con peticiones ajax 
+  def has_no_clock_running?
+    has_no_css?(".clock.running")
+  end
+
   def has_clock?
     has_css?(".clock")
   end
