@@ -1,6 +1,7 @@
 = render(:partial => "shared/mainmenu")
-%h4 
-  %a.accion{:href => proyectos_path} Proyectos   
-  %a.accion{:href => tareas_path} Tareas 
-  %a.accion{:href => usuarios_path} Usuarios
-  %a.accion{:href => clientes_path} Clientes 
+- if session[:usuario].perfil == 'ADMIN'
+  %h4 
+    %a.accion{:href => proyectos_path} Proyectos   
+    %a.accion{:href => tareas_path} Tareas 
+    %a.accion{:href => usuarios_path} Usuarios
+    %a.accion{:href => clientes_path} Clientes 

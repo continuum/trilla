@@ -115,7 +115,7 @@ class TimesheetController < ApplicationController
   def create
     iniciado = params[:iniciado]
     minutos = 0
-    if !params[:tiempo_base].blank?
+    unless params[:tiempo_base].blank?
       tiempo_base = params[:tiempo_base].split(":")
       horas = tiempo_base[0];
       minutos = horas.to_i * 60 + tiempo_base[1].to_i;
@@ -135,7 +135,7 @@ class TimesheetController < ApplicationController
 
   def edit
     minutos = 0
-    if !params[:tiempo_base].blank?
+    unless params[:tiempo_base].blank?
       tiempo_base = params[:tiempo_base].split(":")
       horas = tiempo_base[0];
       minutos = horas.to_i * 60 + tiempo_base[1].to_i;

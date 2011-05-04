@@ -35,10 +35,8 @@ class SessionsController < ApplicationController
       usuario.perfil = Usuario.all.length == 0 ? 'ADMIN' : 'USUARIO'
       usuario.save
     end
-    session[:usuario_id] = usuario.id
-    session[:login] = usuario.email
     session[:usuario] = usuario
-    session[:usuario_perfil] = usuario.perfil
+    session[:usuario_id] = usuario.id
     redirect_to(session[:redirect_to])
   end
   

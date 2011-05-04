@@ -15,6 +15,7 @@
     %p
       %b Perfil:
       = h @usuario.perfil
-    = link_to 'Editar', edit_usuario_path(@usuario)
+    = link_to_if @isPerfil, 'Editar', {:controller => "perfil", :action => "edit"} do
+      = link_to_if session[:usuario].admin?, 'Editar', edit_usuario_path(@usuario)
     | 
-    \#{link_to 'Listado', usuarios_path}
+    \#{link_to_if session[:usuario].admin?, 'Listado', usuarios_path}

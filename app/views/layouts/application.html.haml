@@ -33,7 +33,7 @@
         %p
           %b  Trilla Time Tracking
         %a.accion{:href => "/sessions/destroy"} Salir
-        %a.accion{:href => "/usuarios/#{usuario.id}?p=1"} #{usuario.nombres.capitalize}
+        %a.accion{:href => "/perfil"} #{usuario.nombres}
       - if flash[:error]
         .errorExplanation
           %h2 Errores:
