@@ -18,8 +18,16 @@ Problemas
 
 Al ejecutar "bundle install" no puede instalar 'nokogiri', esto se soluciona ejecutando:
 
+* En Debian/Ubuntu:
 sudo apt-get install libxslt-dev libxml2-dev
+
+* En Fedora/openSUSE:
+sudo yum install libxslt-devel libxml2-devel
 
 Para errores al instalar 'pg', ejecutar:
 
+* En Debian/Ubuntu:
 sudo apt-get install libpq5 libpq-dev
+
+* En Fedora/openSUSE:
+sudo yum install postgresql-devel
