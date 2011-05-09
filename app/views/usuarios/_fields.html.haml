@@ -9,6 +9,11 @@
       = f.label :email, "E-mail"
     .forms-row-single-division.right 
       = f.text_field :email
+  %li
+    .forms-row-single-division.left 
+      = f.label :time_zone, "Zona horaria"
+    .forms-row-single-division.right 
+      = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, :default => "Santiago" 
   -if (session[:usuario].admin?)
     %li
       .forms-row-single-division.left 

@@ -2,13 +2,13 @@ class TimesheetController < ApplicationController
   
   include TimesheetHelper
   
-  expose(:fecha_actual) { Temporizador.fechaActual }
+#  expose(:fecha_actual) { Temporizador.fechaActual }
 
   expose(:fecha) do
     if params[:fecha] && params[:fecha].present?
-      Date.parse params[:fecha]
+      Date.strptime params[:fecha], '%d/%m/%Y'
     else
-      fecha_actual.to_date
+      Time.now.to_date
     end
   end
 
@@ -124,8 +124,8 @@ class TimesheetController < ApplicationController
     @tempo = Temporizador.new(params[:temporizador])
     @tempo.iniciado = iniciado
     @tempo.minutos = minutos
-    @tempo.start = fecha_actual
-    @tempo.stop = fecha_actual
+    @tempo.start = Time.now
+    @tempo.stop = Time.now
     @tempo.fecha_creacion = fecha
     @tempo.save
     @usuario = session[:usuario]
@@ -152,10 +152,10 @@ class TimesheetController < ApplicationController
     @tempo = Temporizador.find(params[:id])
     begin
       if (params[:accion] == 'start')
-        @tempo.update_attributes({:stop => fecha_actual, :start => fecha_actual, :iniciado => 1})
+        @tempo.update_attributes({:stop => Time.now, :start => Time.now, :iniciado => 1})
       elsif (params[:accion] == 'stop')
-        minutos = @tempo.minutos + ((fecha_actual - @tempo.start).to_i / 60).to_i
-        @tempo.update_attributes({:stop => fecha_actual, :iniciado => 0, :minutos => minutos})
+        minutos = @tempo.minutos + ((Time.now - @tempo.start).to_i / 60).to_i
+        @tempo.update_attributes({:stop => Time.now, :iniciado => 0, :minutos => minutos})
       end
     rescue ActiveRecord::RecordNotFound
     end
@@ -210,8 +210,8 @@ class TimesheetController < ApplicationController
       t.descripcion = '';
       t.iniciado = 0
       t.minutos = 0
-      t.start = fecha_actual
-      t.stop = fecha_actual
+      t.start = Time.now
+      t.stop = Time.now
       t.fecha_creacion = dia
       t.save
     }    

@@ -62,15 +62,15 @@ feature "Temporizador" do
   scenario "al iniciar un reloj se detienen los otros" do
     preparando_cafe = Fabricate(
       :temporizador, :usuario => perico, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
-      :descripcion => "Preparando café", :start => Temporizador.fechaActual,
-      :minutos => 5,:fecha_creacion => Temporizador.fechaActual, :stop => Temporizador.fechaActual,
+      :descripcion => "Preparando café", :start => Time.now,
+      :minutos => 5,:fecha_creacion => Time.now, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
     lecture_and_beer = Fabricate(
       :temporizador, :usuario => perico, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
-      :descripcion => "Lecture & beer", :start => Temporizador.fechaActual,
-      :minutos => 10,:fecha_creacion => Temporizador.fechaActual, :stop => Temporizador.fechaActual,
+      :descripcion => "Lecture & beer", :start => Time.now,
+      :minutos => 10,:fecha_creacion => Time.now, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
@@ -87,8 +87,8 @@ feature "Temporizador" do
   scenario "iniciando un reloj un día antes" do
     lo_que_hice_el_dia_anterior = Fabricate(
       :temporizador, :usuario => usuario, :tarea => desarrollo,
-      :descripcion => "Esto lo hice ayer", :iniciado => 0, :start => Temporizador.fechaActual - 1.day,
-      :fecha_creacion => Temporizador.fechaActual - 1.day, :stop => Temporizador.fechaActual - 1.day,
+      :descripcion => "Esto lo hice ayer", :iniciado => 0, :start => Time.now - 1.day,
+      :fecha_creacion => Time.now - 1.day, :stop => Time.now - 1.day,
       :proyecto => enterprisey
     )
     click_link "Día"

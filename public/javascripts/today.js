@@ -252,7 +252,7 @@ var idInterval = -1;
 	reset_times();
 
 	$( "#datepicker" ).datepicker({
-		dateFormat: 'yy-mm-dd',
+		dateFormat: 'dd/mm/yy',
 		maxDate: "+0D",
 		minDate: "-1y",
 		firstDay: '1',
@@ -275,10 +275,10 @@ var idInterval = -1;
 	 * @param {Object} accion
 	 */
     function changeDate(accion){
-		var fecha = $( "#datepicker" ).val().split('-');
-		var dia = Number(fecha[2]);
+		var fecha = $( "#datepicker" ).val().split('/');
+		var dia = Number(fecha[0]);
 		var mes = Number(fecha[1]);
-  		var anio = Number(fecha[0]);
+  		var anio = Number(fecha[2]);
 		if (accion === 'next') {
 			dia++;
 		} else {

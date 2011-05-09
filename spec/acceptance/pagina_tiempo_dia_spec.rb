@@ -12,7 +12,7 @@ feature "Pagina Tiempo - Dia" do
   scenario "muestra la fecha actual" do
     Timecop.travel(Date.new(2011, 03, 02)) do
       click_link "Día"
-      page.should have_content "2011-03-02"
+      page.should have_content "02/03/2011"
     end
   end
 
@@ -24,8 +24,8 @@ feature "Pagina Tiempo - Dia" do
   scenario "muestra las tareas del dia con reloj y opciones para eliminar y editar" do
     temporizador = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea),
-      :descripcion => "Preparando café", :start => Temporizador.fechaActual,
-      :fecha_creacion => Temporizador.fechaActual, :stop => Temporizador.fechaActual,
+      :descripcion => "Preparando café", :start => Time.now,
+      :fecha_creacion => Time.now, :stop => Time.now,
       :proyecto => Fabricate(:proyecto)
     )
     click_link "Día"

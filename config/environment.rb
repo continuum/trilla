@@ -43,17 +43,20 @@ Rails::Initializer.run do |config|
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
   #config.active_record.default_timezone = 'GMT-04:00'
-  config.active_record.default_timezone = 'Santiago'
+  #config.active_record.default_timezone = 'Santiago'
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
-  # config.time_zone = 'Santiago'
+   config.time_zone = 'Santiago'
+   
+  # Para que muestre stacktrace en modo producción (Heroku)
+   config.action_controller.consider_all_requests_local = true
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
+   config.i18n.default_locale = :es
 
-  config.time_zone = 'UTC'
 
   config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
@@ -68,3 +71,7 @@ Rails::Initializer.run do |config|
 
 
 end
+
+#Formatos por defecto para hora y fecha mostrados en pantalla
+ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS[:default]='%d/%m/%Y %H:%M:%S' 
+ActiveSupport::CoreExtensions::Date::Conversions::DATE_FORMATS[:default]='%d/%m/%Y'

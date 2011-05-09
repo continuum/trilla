@@ -68,12 +68,7 @@ class Temporizador < ActiveRecord::Base
     delete_all(condiciones)
     
   end
-
-  def self.fechaActual()
-    #debe estar puesta la resta del timezone del usuario
-    return Time.zone.now-3.hours
-  end
-
+  
   def format_horas()
     segundos = 0
 
@@ -82,7 +77,7 @@ class Temporizador < ActiveRecord::Base
     end
   
     if (self.iniciado == 1)
-      segundos += (Temporizador.fechaActual - self.start).to_i
+      segundos += (Time.now - self.start).to_i
     end
 
     lHrs = (segundos / 3600).to_i
