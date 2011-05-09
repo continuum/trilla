@@ -18,6 +18,21 @@ class Proyecto < ActiveRecord::Base
 
   named_scope :no_archivados, :conditions => "not archivado"
   
+  def validate
+    if self.privado == true && self.proyecto_usuarios.size <= 0 && self.usuarios.size <= 0
+      errors.add_to_base "Debe asociar al menos un usuario a un proyecto privado"
+      false
+    end
+  end
+  
+  def self.find_all_accesibles(usuario_id)
+    find(
+      :all, 
+      :joins => "left join proyecto_usuarios on proyecto_usuarios.proyecto_id = proyectos.id", 
+      :conditions => ["privado = false or proyecto_usuarios.usuario_id = ?", usuario_id]
+    )
+  end
+  
   def archive
     self.update_attributes({:archivado => true})
   end 

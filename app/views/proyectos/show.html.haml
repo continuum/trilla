@@ -7,8 +7,20 @@
 .component-search
   .component-search-forms.forms-two-cols
     %p 
-      %b Descripcion:
+      %b Nombre:
       = h @proyecto.descripcion
+    %p 
+      %b Código:
+      = h @proyecto.codigo
+    %p 
+      %b Estimación:
+      = h @proyecto.estimacion
+    %p 
+      %b Archivado:
+      = h @proyecto.archivado
+    %p 
+      %b Privado:
+      = h @proyecto.privado
     %p
       %b Cliente:
       = h @proyecto.cliente.descripcion

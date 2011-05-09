@@ -21,6 +21,11 @@
       = f.check_box :archivado
   %li
     .forms-row-single-division.left
+      = f.label :privado
+    .forms-row-single-division.right
+      = f.check_box :privado
+  %li
+    .forms-row-single-division.left
       = f.label :cliente_id, "Cliente"
       - clientes_array = Cliente.all.map { |cli| [cli.descripcion, cli.id] }
     .forms-row-single-division.right

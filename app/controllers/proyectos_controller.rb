@@ -2,7 +2,7 @@ class ProyectosController < ApplicationController
   before_filter :authorizate_admin
   
   def index
-    @proyectos = Proyecto.all
+    @proyectos = Proyecto.find_all_accesibles session[:usuario_id]
   end
 
   def show
