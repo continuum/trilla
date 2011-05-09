@@ -20,7 +20,7 @@
             %th Fono
             %th
           - @clientes.each do |cliente|
-            %tr{:id => "tr_cliente-#{cliente.id}"}
+            %tr[cliente, :tr]
               %td #{link_to cliente.descripcion, edit_cliente_path(cliente)}
               %td 
                 = h cliente.contacto

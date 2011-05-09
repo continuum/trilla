@@ -42,7 +42,7 @@ var idInterval = -1;
 
 	function update(params, callback) {
 		$.get('update',params,function(data){
-			 $('#tr_timesheet-' + params.id).empty().append(data);
+			 $('#tr_temporizador_' + params.id).empty().append(data);
 			 if (callback) {
 			 	 callback();
 			 }
@@ -138,7 +138,7 @@ var idInterval = -1;
 			if (confirm('Estas seguro?')) {
 				$.getJSON('delete',{id: id}, function(json){
 					if(json.success){
-						$('#tr_timesheet-' + id).fadeOut();
+						$('#tr_temporizador_' + id).fadeOut();
 					}
 				});
 			}

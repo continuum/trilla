@@ -20,7 +20,7 @@
             %th Perfil
             %th
           - @usuarios.each do |usuario|
-            %tr{:id => "tr_usuario-#{usuario.id}"}
+            %tr[usuario, :tr]
               %td #{link_to usuario.nombres, edit_usuario_path(usuario)}
               %td= h usuario.email
               %td= h usuario.perfil
