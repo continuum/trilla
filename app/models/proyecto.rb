@@ -29,7 +29,7 @@ class Proyecto < ActiveRecord::Base
     find(
       :all, 
       :joins => "left join proyecto_usuarios on proyecto_usuarios.proyecto_id = proyectos.id", 
-      :conditions => ["privado = false or proyecto_usuarios.usuario_id = ?", usuario_id]
+      :conditions => ["privado = false or privado is null or proyecto_usuarios.usuario_id = ?", usuario_id]
     )
   end
   
