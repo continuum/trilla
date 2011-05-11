@@ -5,9 +5,9 @@
 .component-navigator-tabs
   %ul
     %li.tab-unselect.first
-      %a#tab-day{:href => "/timesheet"} Día
+      %a#tab-day{:href => "/timesheet/day?fecha=#{fecha}"} Día
     %li.tab-select.last
-      %a#tab-week{:href => "/timesheet/week"} Semana
+      %a#tab-week{:href => "/timesheet/week?fecha=#{fecha}"} Semana
     %li.clearfix
 .component-search
   .component-search-forms
@@ -32,19 +32,19 @@
               =descripcion
               -@listaDias.each do |dia|
                 %td{:style => 'width:42px; padding-right: 10px;'}
-                  -if @dataPorDia["#{llave_combinacion}-#{dia}"] == 0
-                    %input.temporizador_tiempo_base_week{:type => 'text', :style => 'width: 42px; text-align:center;', :value => "", :maxlength => 5}
+                  -if @dataPorDia["#{llave_combinacion};#{dia}"] == 0
+                    %input.temporizador_tiempo_base_week{:type => 'text', :id => "temporizador_tiempo_base_week;#{llave_combinacion};#{dia}",:style => 'width: 42px; text-align:center;', :value => "", :maxlength => 5}
                   -else
-                    %input.temporizador_tiempo_base_week{:type => 'text', :style => 'width: 42px; text-align:center;', :value => "#{format_horas(@dataPorDia["#{llave_combinacion}-#{dia}"])}", :maxlength => 5}  
+                    %input.temporizador_tiempo_base_week{:type => 'text', :id => "temporizador_tiempo_base_week;#{llave_combinacion};#{dia}", :style => 'width: 42px; text-align:center;', :value => "#{format_horas(@dataPorDia["#{llave_combinacion};#{dia}"])}", :maxlength => 5}  
                 
             %td{:style => 'width: 100px;'}
               %b=format_horas(@clientesProyectosTareasSuma[llave_combinacion])
             %td
-              %a.lnk_delete_row_week{:href => 'javascript:;', :title => "Eliminar", :id => "lnk_delete_row_week-#{llave_combinacion}"} (X)
+              %a.lnk_delete_row_week{:href => 'javascript:;', :title => "Eliminar registros", :id => "lnk_delete_row_week-#{llave_combinacion}"} (X)
               
         %tr{:style => 'text-align: right;'}
           %td{:style => 'width: 500px; text-align: left;'}
-            %a#lnk_add_row_week{:href => 'javascript:;', :title => "Agregar fila"} Agregar fila
+            %a#lnk_add_row_week{:href => 'javascript:;', :title => "Agregar registros"} Agregar entrada
             -@listaDias.each do |dia|
               %td{:style => 'width:42px; padding-right: 10px;'}
                 %b=format_horas(@dataPorDia["sumaDelDia-#{dia}"])  
@@ -61,5 +61,16 @@
  
   #addrowweek{:style => 'display:none;'}  
 
+  #form-submit-edit-week
+    -form_remote_tag :url => { :action => 'editOnWeek'} do
+      %input{:id => "fecha", :name => "fecha", :type => "hidden", :value => "#{fecha}"}
+      %input{:id => "tiempo_base", :name => "tiempo_base", :type => "hidden", :value => ""}      
+      %input{:id => "nuevo", :name => "nuevo", :type => "hidden", :value => ""}      
+      %input{:id => "temporizador[proyecto_id]", :name => "temporizador[proyecto_id]", :type => "hidden", :value => 0}
+      %input{:id => "temporizador[tarea_id]", :name => "temporizador[tarea_id]", :type => "hidden", :value => 0}
+      %input{:id => "temporizador[usuario_id]", :name => "temporizador[usuario_id]", :type => "hidden", :value => @usuario.id}
+      %input{:id => "temporizador[descripcion]", :name => "temporizador[descripcion]", :type => "hidden", :value => 'week'}
+
   = render(:partial => "timesheetfooter", :locals => {:action => 'approval'})
+ 
  

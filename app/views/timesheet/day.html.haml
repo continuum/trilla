@@ -8,20 +8,30 @@
 .component-navigator-tabs
   %ul
     %li.tab-select.first
-      %a#tab-day{:href => "/timesheet"} Día
+      %a#tab-day{:href => "/timesheet/day?fecha=#{fecha}"} Día
     %li.tab-unselect.last
-      %a#tab-week{:href => "/timesheet/week"} Semana
+      %a#tab-week{:href => "/timesheet/week?fecha=#{fecha}"} Semana
     %li.clearfix
   %div{:style => "float:right;"}
     %a{:href => "/timesheet"}
 
 .component-search
   .component-search-forms
+    -if (fecha.day != fecha_actual.day) || (fecha.day == fecha_actual.day && fecha.month != fecha_actual.month)
+      %a#hoy{:href => "/timesheet/day"} 
+        %span
+          %b Hoy  
+    - else
+      %a#hoy{:href => 'javascript:;', :style => 'color: grey;'} 
+        %span Hoy  
+    
+    %span -
+          
     %b= fecha
     %a#prev-day{:href => "javascript:;"} <<
     %input#datepicker{:style => "width: 0px; border:0 solid;", :type => "text", :value => fecha}/
-    %a#next-day{:href => "javascript:;"} >>
-
+    %a#next-day{:href => "javascript:;"} >> 
+    
   .component-timesheet-header
     %p{:style => "width:250px;"}
       %b Cliente/Proyecto

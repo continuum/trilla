@@ -24,7 +24,7 @@ class Temporizador < ActiveRecord::Base
            :joins => ["left join proyectos on temporizadors.proyecto_id = proyectos.id",
                       "left join clientes on proyectos.cliente_id = clientes.id",
                       "left join tareas on temporizadors.tarea_id = tareas.id"],
-           :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week],
+           :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, (fecha.end_of_week + 1.day)],
            :group => "proyecto_id, cliente_id, tarea_id")
   end
 
@@ -40,7 +40,7 @@ class Temporizador < ActiveRecord::Base
   
   def self.update_estado_for_usuario_semana(usuario, fecha, estado)
       
-      update_all("estado = '#{estado}'", ["usuario_id = ? and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week])
+      update_all("estado = '#{estado}'", ["usuario_id = ? and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, (fecha.end_of_week + 1.day)])
       
   end
   
@@ -49,7 +49,7 @@ class Temporizador < ActiveRecord::Base
     condiciones = nil
     
     if filtro.empty?
-      condiciones = ["usuario_id = ? and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week]
+      condiciones = ["usuario_id = ? and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week + 1.day]
     else
 
       filtros = "";
@@ -62,7 +62,7 @@ class Temporizador < ActiveRecord::Base
         filtros+= " and tarea_id = #{filtro[:tarea_id]}"
       end
       
-      condiciones = ["usuario_id = ? #{filtros} and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week]
+      condiciones = ["usuario_id = ? #{filtros} and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, fecha.end_of_week + 1.day]
     end
     
     delete_all(condiciones)

@@ -50,12 +50,46 @@
 		event.preventDefault();
 	});
 	
-	$('#temporizador_tiempo_base_week').keypress(function (event) {
+	var oldValue = '';
+	
+	function toMinutos(value) {
+		var tiempo_base = value.split(":")
+      	var horas = tiempo_base[0];
+      	return Number(horas) * 60 + Number(tiempo_base[1]);
+	}
+	
+	$('.temporizador_tiempo_base_week').keypress(function (event) {
 		var otrosKeys = [0,8, 58];
 		if ($.inArray(event.which, otrosKeys) == -1 && (event.which < 48 || event.which > 57) || event.which == 13) {
 		  event.preventDefault();
 		  return false;
       	}
+	}).focusout(function(event){
+		var newValue = $(this).val();
+
+		if (oldValue !== newValue) {
+			
+			var minutosOld = toMinutos(oldValue);
+			var minutosNew = toMinutos(newValue);
+			
+			var partes = $(this).getIdSplit(';');
+			var fecha = partes[2];
+			var filtro = partes[1].split('_');
+			
+			var form = $('#form-submit-edit-week form');
+			form.attr('action', 'editOnWeek');
+			
+			form.find('input[name=fecha]').val(fecha);
+			form.find('input[name=nuevo]').val(minutosNew > minutosOld);
+			form.find('input[name=temporizador[proyecto_id]]').val(filtro[1]);
+			form.find('input[name=temporizador[tarea_id]]').val(filtro[2]);
+			form.find('input[name=tiempo_base]').val(newValue);
+			
+			form.submit();
+		}
+		
+	}).focusin(function(event){
+		oldValue = $(this).val();
 	});
 	
   });
