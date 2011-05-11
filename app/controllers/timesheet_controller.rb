@@ -2,7 +2,7 @@ class TimesheetController < ApplicationController
   
   include TimesheetHelper
   
-#  expose(:fecha_actual) { Temporizador.fechaActual }
+  expose(:fecha_actual) { Time.zone.now }
 
   expose(:fecha) do
     if params[:fecha] && params[:fecha].present?
