@@ -32,7 +32,8 @@ class ProyectosController < ApplicationController
     @proyecto = Proyecto.new(params[:proyecto])
     if @proyecto.save
       flash[:notice] = 'Proyecto was successfully created.'
-      email_sent(@proyecto)
+      #TODO comentado hasta que se configure tema del correo
+      #email_sent(@proyecto)
       redirect_to(proyectos_url)
     else
       render :action => "new"
@@ -44,7 +45,8 @@ class ProyectosController < ApplicationController
     @proyecto.cliente_id = params[:cliente]
     if @proyecto.update_attributes(params[:proyecto])
       flash[:notice] = 'Proyecto was successfully updated.'
-      email_sent(@proyecto)
+      #TODO comentado hasta que se configure tema del correo
+      #email_sent(@proyecto)
       redirect_to(proyectos_url)
     else
       render :action => "edit"
