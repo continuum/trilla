@@ -21,7 +21,7 @@
             %th Creado el
             %th
           - @proyectos.each do |proyecto|
-            %tr{:id => "tr_proyecto-#{proyecto.id}"}
+            %tr[proyecto, :tr]
               %td #{link_to proyecto.descripcion, edit_proyecto_path(proyecto)}
               %td= h proyecto.cliente.descripcion
               %td= h proyecto.created_at

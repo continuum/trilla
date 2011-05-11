@@ -1,16 +1,18 @@
 class UsuariosController < ApplicationController
+  before_filter :authorizate_admin, :except => [:show, :edit, :update]
+  
   def index
     @usuarios = Usuario.all
   end
 
   def show
-    @usuario = Usuario.find(params[:id])
-    @usuario_sesion = session[:usuario]
-    @isPerfil = params[:p]
-    if (!@isPerfil.nil?)
-      if (@usuario.id != @usuario_sesion.id)
-        @usuario = @usuario_sesion
-      end
+    @isPerfil = params[:perfil]
+    if @isPerfil
+      @usuario = Usuario.find(session[:usuario_id])
+    elsif session[:usuario].admin?
+        @usuario = Usuario.find(params[:id])
+      else
+        authorizate_admin
     end
   end
 
@@ -19,14 +21,7 @@ class UsuariosController < ApplicationController
   end
 
   def edit
-    @usuario = Usuario.find(params[:id])
-    @usuario_sesion = session[:usuario]
-    @isPerfil = params[:p]
-    if (!@isPerfil.nil?)
-      if (@usuario.id != @usuario_sesion.id)
-        @usuario = @usuario_sesion
-      end
-    end
+    show
   end
 
   def create
@@ -40,8 +35,16 @@ class UsuariosController < ApplicationController
   end
 
   def update
-    @usuario = Usuario.find(params[:id])
+    show
+    usuarios_url = '/perfil' if @isPerfil
+    unless session[:usuario].admin?
+      params[:usuario][:perfil] = "USUARIO"
+      flash[:warning] = 'No tienen acceso para cambiar perfil. Cambiando a por defecto: USUARIO'
+    end
+     
+
     if @usuario.update_attributes(params[:usuario])
+      session[:usuario] = @usuario if session[:usuario].id == @usuario.id
       flash[:notice] = 'Usuario was successfully updated.'
       redirect_to(usuarios_url)
     else

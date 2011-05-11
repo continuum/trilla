@@ -1,24 +1,26 @@
 require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Temporizador" do
-  let!(:pepito) {usuario}
+  let!(:perico) {usuario}
   let!(:desarrollo) { Fabricate(:tarea, :descripcion => "Desarrollo") }
-  let!(:megabank) { Fabricate(:cliente, :descripcion => "Mega Bank") }
+  let!(:megabank) { Fabricate(:cliente, :descripcion => "Mega Bank", :contacto => "Farkas") }
   let!(:enterprisey) do
     Fabricate(
-      :proyecto, :descripcion => "Enterprisey", :cliente => megabank,
+      :proyecto, 
+      :descripcion => "Enterprisey", 
+      :cliente => megabank,
+      :usuarios => [perico],
       :tareas => [desarrollo]
     )
   end
 
   background do
-    login(pepito)
-    click_link "Timesheet"
-    click_link "Tiempo"
+    login(perico)
   end
 
   scenario "iniciando y parando el reloj" do
     click_link "Agregar Entrada"
+    fill_in "Descripción", :with => "Inicio de proyecto"
     select "Enterprisey", :from => "Cliente/Proyecto"
     select "Desarrollo", :from => "Tarea"
     click_button "Iniciar"
@@ -48,7 +50,7 @@ feature "Temporizador" do
     page.should have_clock_running
     logout
     Timecop.travel 15.minutes.from_now do
-      login(pepito)
+      login(perico)
       click_link "Timesheet"
       page.should have_clock_running
       click_stop_clock_button
@@ -59,39 +61,41 @@ feature "Temporizador" do
 
   scenario "al iniciar un reloj se detienen los otros" do
     preparando_cafe = Fabricate(
-      :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
-      :descripcion => "Preparando café", :start => Date.today,
-      :minutos => 5,:fecha_creacion => Date.today, :stop => Date.today,
+      :temporizador, :usuario => perico, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
+      :descripcion => "Preparando café", :start => Time.now,
+      :minutos => 5,:fecha_creacion => Time.now, :stop => Time.now,
+      :iniciado => 0,
       :proyecto => enterprisey
     )
     lecture_and_beer = Fabricate(
-      :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
-      :descripcion => "Lecture & beer", :start => Date.today,
-      :minutos => 10,:fecha_creacion => Date.today, :stop => Date.today,
+      :temporizador, :usuario => perico, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
+      :descripcion => "Lecture & beer", :start => Time.now,
+      :minutos => 10,:fecha_creacion => Time.now, :stop => Time.now,
+      :iniciado => 0,
       :proyecto => enterprisey
     )
     click_link "Día"
     page.should have_no_clock_running
     click_start_timer preparando_cafe
     page.should have_timer_running(preparando_cafe)
-    page.should have_no_timer_running(lecture_and_beer)
+    page.should_not have_timer_running(lecture_and_beer)
     click_start_timer lecture_and_beer
     page.should have_timer_running(lecture_and_beer)
-    page.should have_no_timer_running(preparando_cafe )
+    page.should_not have_timer_running(preparando_cafe )
   end
   
   scenario "iniciando un reloj un día antes" do
     lo_que_hice_el_dia_anterior = Fabricate(
-      :temporizador, :usuario => usuario, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
-      :descripcion => "Esto lo hice ayer", :iniciado => 0, :start => Date.today - 1.day,
-      :fecha_creacion => Date.today - 1.day, :stop => Date.today - 1.day,
-      :proyecto => Fabricate(:proyecto)
+      :temporizador, :usuario => usuario, :tarea => desarrollo,
+      :descripcion => "Esto lo hice ayer", :iniciado => 0, :start => Time.now - 1.day,
+      :fecha_creacion => Time.now - 1.day, :stop => Time.now - 1.day,
+      :proyecto => enterprisey
     )
     click_link "Día"
     page.should have_no_clock_running
 
     click_link "<<"
-    page.should have_no_timer_running(lo_que_hice_el_dia_anterior)
+    page.should_not have_timer_running(lo_que_hice_el_dia_anterior)
     page.should have_content "Esto lo hice ayer"
     click_start_timer lo_que_hice_el_dia_anterior
     

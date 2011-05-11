@@ -1,10 +1,8 @@
 class TareasController < ApplicationController
+  before_filter :authorizate_admin
+  
   def index
     @tareas = Tarea.all
-  end
-
-  def show
-    @tarea = Tarea.find(params[:id])
   end
 
   def new

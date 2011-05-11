@@ -35,31 +35,31 @@ module HelperMethods
   end
 
   def within_timer_row(temporizador)
-    within(:css, "#tr_timesheet-#{temporizador.id}") do
+    within(:css, "#tr_temporizador_#{temporizador.id}") do
       yield
     end
   end
 
   def within_proyecto_row(proyecto)
-    within(:id, "tr_proyecto-#{proyecto.id}") do
+    within(:id, "tr_proyecto_#{proyecto.id}") do
       yield
     end
   end
   
   def within_tarea_row(tarea)
-    within(:id, "tr_tarea-#{tarea.id}") do
+    within(:id, "tr_tarea_#{tarea.id}") do
       yield
     end
   end
   
   def within_usuario_row(usuario)
-    within(:id, "tr_usuario-#{usuario.id}") do
+    within(:id, "tr_usuario_#{usuario.id}") do
       yield
     end
   end
   
   def within_cliente_row(cliente)
-    within(:id, "tr_cliente-#{cliente.id}") do
+    within(:id, "tr_cliente_#{cliente.id}") do
       yield
     end
   end
@@ -69,24 +69,21 @@ module HelperMethods
   end
 
   def click_start_timer(temporizador)
-    find(:css, "#tr_timesheet-#{temporizador.id} a.start").click
+    find(:css, "#tr_temporizador_#{temporizador.id} a.start").click
   end
   
 end
 
 module Capybara::Node::Matchers
   def has_timer_running?(temporizador)
-    has_css?("#tr_timesheet-#{temporizador.id} .clock.running")
-  end
-
-  def has_no_timer_running?(temporizador)
-    has_no_css?("#tr_timesheet-#{temporizador.id} .clock.running")
+    has_css?("#tr_temporizador_#{temporizador.id} .clock.running")
   end
 
   def has_clock_running?
     has_css?(".clock.running")
   end
 
+  #Se deja versión negada, ya que no funciona bien "should_not" con peticiones ajax 
   def has_no_clock_running?
     has_no_css?(".clock.running")
   end
@@ -104,19 +101,19 @@ module Capybara::Node::Matchers
   end
 
   def has_proyecto?(proyecto)
-    has_xpath?("//tr[@id='tr_proyecto-#{proyecto.id}']")
+    has_xpath?("//tr[@id='tr_proyecto_#{proyecto.id}']")
   end
 
   def has_tarea?(tarea)
-    has_xpath?("//tr[@id='tr_tarea-#{tarea.id}']")
+    has_xpath?("//tr[@id='tr_tarea_#{tarea.id}']")
   end
 
   def has_usuario?(usuario)
-    has_xpath?("//tr[@id='tr_usuario-#{usuario.id}']")
+    has_xpath?("//tr[@id='tr_usuario_#{usuario.id}']")
   end
 
   def has_cliente?(cliente)
-    has_xpath?("//tr[@id='tr_cliente-#{cliente.id}']")
+    has_xpath?("//tr[@id='tr_cliente_#{cliente.id}']")
   end
 end
 

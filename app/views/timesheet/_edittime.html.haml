@@ -16,19 +16,20 @@
               %b Tarea
             %br/
             %select#temporizador_tarea_id{:name => "temporizador[tarea_id]", :style => "width:240px;"}
-              %optgroup{:label => "Facturable"}
-                - @tareas_facturables.each do |t|
-                  %option{:value => t.id}= t.descripcion
-              %optgroup{:label => "No Facturable"}
-                - @tareas_no_facturables.each do |t|
-                  %option{:value => t.id}= t.descripcion
+              - agregados = Array.new
+              - @tareasProyecto.each do |t|
+                - if !agregados.include? t.tipo
+                  -agregados.push t.tipo
+                  %optgroup{:label => t.tipo}
+                %option{:value => t.id}= t.descripcion
       %div{:style => "width: 150px; height:120px; float: left; padding:5px;"}
         %p
           %label{:for => "temporizador_tiempo_base"} Horas:Minutos
-          %input#temporizador_tiempo_base.timer{:maxlength => "5", :name => "tiempo_base", :style => "border:solid 1px; font-size: 38px; width: 140px; height:64px;"}/
+          %input#temporizador_tiempo_base.timer{:maxlength => "5", :name => "tiempo_base", :style => "border:solid 1px; font-size: 38px; width: 140px; height:65px;"}/
       %div{:style => "width: 400px; height:120px; float: left; padding:5px;"}
         %p
-          %textarea#temporizador_descripcion{:cols => "60", :maxlength => "500", :name => "temporizador[descripcion]", :style => "height:65px; width:450px; border:solid 1px; margin-top:15px;"}
+          %label{:for => "temporizador_descripcion"} Descripci&oacute;n
+          %textarea#temporizador_descripcion{:cols => "60", :maxlength => "500", :name => "temporizador[descripcion]", :style => "height:65px; width:450px; border:solid 1px;"}
         %input#temporizador_usuario_id{:name => "temporizador[usuario_id]", :type => "hidden", :value => @usuario.id}/
         %input#temporizador_id{:name => "id", :type => "hidden", :value => "-1"}/
   .component-search-actions

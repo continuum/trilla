@@ -4,21 +4,17 @@
     %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
     %title
       Trilla Time Tracking
-    = javascript_include_tag "application"
-    %link{:href => "/harv/css/jquery-ui-1.8.6.custom.css", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "/harv/css/componentes.css", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "/harv/css/general.css", :rel => "stylesheet", :type => "text/css"}/
-    %link{:href => "/harv/css/jqModal.css", :rel => "stylesheet", :type => "text/css"}/
+    = stylesheet_link_tag "jquery-ui-1.8.6.custom", "componentes", "general", "jqModal"
     / jQuery
-    %script{:src => "/harv/js/jquery/core/jquery.min.js", :type => "text/javascript"}
-    %script{:src => "/harv/js/jquery/ui/jquery-ui.min.js", :type => "text/javascript"}
+    = javascript_include_tag "jquery/jquery-1.5.2.min.js", "jquery/ui/jquery-ui.min.js"
+    / Plugins
+    = javascript_include_tag "jquery/plugins/jqModal", "jquery/plugins/jquery.tablednd_0_5", "jquery/plugins/jquery.bgiframe.min.js"
     / utils
-    %script{:src => "/harv/js/utils/utils_all.min.js", :type => "text/javascript"}
+    = javascript_include_tag "application", "utils/utils_all"
     / utils extra
-    %script{:src => "/harv/js/utils/utils_extra_all.min.js", :type => "text/javascript"}
+    /= javascript_include_tag "utils/utils_extra_all"
     / jquery - continuum plugins
-    %script{:src => "/harv/js/cplugins/jquery/continuum_plugins_all.min.js", :type => "text/javascript"}
-    %script{:src => "/harv/js/jqModal.js", :type => "text/javascript"}
+    = javascript_include_tag "cplugins/jquery/continuum_plugins_all.js"
     :javascript
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-326082-7']);
@@ -37,10 +33,13 @@
         %p
           %b  Trilla Time Tracking
         %a.accion{:href => "/sessions/destroy"} Salir
-        %a.accion{:href => "/usuarios/#{usuario.id}?p=1"} #{usuario.nombres.capitalize}
+        %a.accion{:href => "/perfil"} #{usuario.nombres}
+      - if flash[:error]
+        .errorExplanation
+          %h2 Errores:
+          %ul
+            %li= flash[:error]
       = yield
 
-%script{:src => "/harv/js/jquery.tablednd_0_5.js", :type => "text/javascript"}
-%script{:src => "/harv/js/controles-achs.js", :type => "text/javascript"}
-%script{:src => "/harv/js/jquery.bgiframe.min.js", :type => "text/javascript"}
+/= javascript_include_tag "controles-achs"
 

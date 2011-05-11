@@ -3,7 +3,7 @@
   = javascript_include_tag "week"
 
 = render(:partial => "shared/timesheetmenu")
-%script{:src => "/harv/js/jquery.timeentry.min.js", :type => "text/javascript"}
+= javascript_include_tag "jquery/plugins/jquery.timeentry.min.js"
 
 .component-navigator-tabs
   %ul
@@ -44,7 +44,7 @@
 
   #container-temporizadores
     - @temporizadores.each do |tempo|
-      .component-timesheet{:id => "tr_timesheet-#{tempo.id}"}
+      .component-timesheet[tempo, :tr]
         = render(:partial => "clock", :locals => { :tempo => tempo})
 
   = render(:partial => "edittime", :locals => {:fecha => fecha})

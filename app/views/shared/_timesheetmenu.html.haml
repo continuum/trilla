@@ -1,12 +1,5 @@
-#tab.component-navigator-menu
-  %ul
-    %li.tab-select.first
-      %a#tab-timesheet{:href => root_path} Timesheet
-    %li.tab-unselect.last
-      %a#tab-admin{:href => proyectos_path} Admin
-    %li.clearfix
+= render(:partial => "shared/mainmenu")
 %h4 
   %a.accion{:href => root_path} Tiempo   
   %a.accion{:href => root_path} Por Aprobar 
   %a.accion{:href => root_path} Archivo 
-

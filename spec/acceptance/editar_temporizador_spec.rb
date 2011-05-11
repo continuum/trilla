@@ -2,17 +2,23 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Editar temporizador" do
   let!(:pepito) {usuario}
-  let!(:tarea) { Fabricate(:tarea, :descripcion => "Reunion Interna") }
+  let!(:reunion) { Fabricate(:tarea, :descripcion => "Reunion Interna") }
   let!(:internal) do
     Fabricate(
-      :proyecto, :descripcion => "Internal", :tareas => [tarea],
+      :proyecto, 
+      :descripcion => "Internal", 
+      :tareas => [reunion],
+      :usuarios => [pepito],
       :cliente => Fabricate(:cliente, :descripcion => "Continuum")
     )
   end
 
   let!(:next_big_thing) do
     Fabricate(
-      :proyecto, :descripcion => "Next Big Thing", :tareas => [tarea],
+      :proyecto, 
+      :descripcion => "Next Big Thing", 
+      :tareas => [reunion],
+      :usuarios => [pepito],
       :cliente => Fabricate(:cliente, :descripcion => "Secret")
     )
   end
@@ -26,9 +32,9 @@ feature "Editar temporizador" do
   scenario "temporizador existente" do
     lecture_and_beer = Fabricate(
       :temporizador, :usuario => pepito,
-      :tarea => tarea, :proyecto => next_big_thing,
-      :descripcion => "Lecture & beer", :start => Date.today,
-      :minutos => 90,:fecha_creacion => Date.today, :stop => Date.today
+      :tarea => reunion, :proyecto => next_big_thing,
+      :descripcion => "Lecture & beer", :start => Time.now,
+      :minutos => 90,:fecha_creacion => Time.now, :stop => Time.now
     )
     click_link "Día"
     within_timer_row(lecture_and_beer) { click_link "Editar" }

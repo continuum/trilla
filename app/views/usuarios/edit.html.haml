@@ -6,6 +6,7 @@
     %li.clearfix
 .component-search
   - form_for(@usuario) do |f|
+    %input{:type => "hidden", :name => "perfil",:value => @isPerfil.to_s}
     = f.error_messages
     .component-search-forms.forms-two-cols    
       = render :partial => 'fields', :locals => { :f => f}   

@@ -33,18 +33,18 @@ class SessionsController < ApplicationController
       usuario.nombres = nombre_usuario
       usuario.email = email_usuario
       usuario.perfil = Usuario.all.length == 0 ? 'ADMIN' : 'USUARIO'
+      usuario.time_zone = Time.zone.name
       usuario.save
     end
-    session[:usuario_id] = usuario.id
-    session[:login] = usuario.email
     session[:usuario] = usuario
-    session[:usuario_perfil] = usuario.perfil
+    session[:usuario_id] = usuario.id
+    set_default_time_zone
     redirect_to(session[:redirect_to])
   end
   
   def destroy
-    session[:usuario_id] = nil
-    redirect_to(session[:redirect_to])
+    reset_session
+    redirect_to("/")
   end
   
 end

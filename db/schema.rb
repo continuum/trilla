@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110412193701) do
+ActiveRecord::Schema.define(:version => 20110509193929) do
 
   create_table "clientes", :force => true do |t|
     t.string   "descripcion"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20110412193701) do
     t.boolean  "archivado"
     t.string   "codigo"
     t.integer  "estimacion"
+    t.boolean  "privado"
   end
 
   create_table "tareas", :force => true do |t|
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20110412193701) do
     t.string   "perfil"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "time_zone"
   end
 
 end

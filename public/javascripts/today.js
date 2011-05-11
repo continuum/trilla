@@ -42,7 +42,7 @@ var idInterval = -1;
 
 	function update(params, callback) {
 		$.get('update',params,function(data){
-			 $('#tr_timesheet-' + params.id).empty().append(data);
+			 $('#tr_temporizador_' + params.id).empty().append(data);
 			 if (callback) {
 			 	 callback();
 			 }
@@ -89,7 +89,7 @@ var idInterval = -1;
 			//si existe un reloj corriendo
         	if (reloj_running.attr('id') != undefined) {
           		if (StringUtils.isBlank(tiempo_base)) {
-            			console.info('detener, crear, iniciar');
+//            			console.info('detener, crear, iniciar');
 						var params = {
 							accion: 'stop',
 							id: reloj_running.getTitle(),
@@ -103,13 +103,13 @@ var idInterval = -1;
 							$('#div-nuevo-timesheet').jqmHide();
             			});
           		} else {
-						console.info('crear');
+//						console.info('crear');
 						create(form_params, 0, function(){
 							bind_click_lnk_reloj();
 						});
           		}
 			} else {
-					console.info('crear, iniciar');
+//					console.info('crear, iniciar');
 					create(form_params, 1, function(){
 						bind_click_lnk_reloj();
 						reset_times();
@@ -138,7 +138,7 @@ var idInterval = -1;
 			if (confirm('Estas seguro?')) {
 				$.getJSON('delete',{id: id}, function(json){
 					if(json.success){
-						$('#tr_timesheet-' + id).fadeOut();
+						$('#tr_temporizador_' + id).fadeOut();
 					}
 				});
 			}
@@ -208,7 +208,7 @@ var idInterval = -1;
 		var segundo = Number(tiempos[2]);
 		var minuto = Number(tiempos[1]);
 		var hora = Number(tiempos[0]);
-		console.info(tiempos);
+//		console.info(tiempos);
 		if(hora >= 9) {
 			$('#div-msg-salud').empty().append(msgImportante);
 		}
@@ -252,7 +252,7 @@ var idInterval = -1;
 	reset_times();
 
 	$( "#datepicker" ).datepicker({
-		dateFormat: 'yy-mm-dd',
+		dateFormat: 'dd/mm/yy',
 		maxDate: "+0D",
 		minDate: "-1y",
 		firstDay: '1',
@@ -275,10 +275,10 @@ var idInterval = -1;
 	 * @param {Object} accion
 	 */
     function changeDate(accion){
-		var fecha = $( "#datepicker" ).val().split('-');
-		var dia = Number(fecha[2]);
+		var fecha = $( "#datepicker" ).val().split('/');
+		var dia = Number(fecha[0]);
 		var mes = Number(fecha[1]);
-  		var anio = Number(fecha[0]);
+  		var anio = Number(fecha[2]);
 		if (accion === 'next') {
 			dia++;
 		} else {
@@ -304,13 +304,13 @@ var idInterval = -1;
     }
 
 	$('#prev-day').click(function(event){
-		console.info('before-day',$( "#datepicker" ).val());
+//		console.info('before-day',$( "#datepicker" ).val());
 		changeDate('prev');
 		event.preventDefault();
 	});
 
 	$('#next-day').click(function(event){
-		console.info('after-day',$( "#datepicker" ).val());
+//		console.info('after-day',$( "#datepicker" ).val());
 		changeDate('next');
 		event.preventDefault();
 	});

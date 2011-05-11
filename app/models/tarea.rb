@@ -24,5 +24,13 @@ class Tarea < ActiveRecord::Base
       )
   end
   
+  def self.find_by_clientes_proyectos(cp)
+    find( :all,
+          :select => "distinct tareas.*",
+          :joins => "left join proyecto_tareas on proyecto_tareas.tarea_id = tareas.id",
+          :conditions => ["proyecto_tareas.proyecto_id in (?)", cp.map{|c| c.proyectos }.flatten.map{|p| p.id}],
+          :order => "tipo"
+    )
+  end
 
 end

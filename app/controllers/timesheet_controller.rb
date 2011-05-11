@@ -2,19 +2,20 @@ class TimesheetController < ApplicationController
   
   include TimesheetHelper
   
-  expose(:fecha_actual) { Temporizador.fechaActual }
+#  expose(:fecha_actual) { Temporizador.fechaActual }
 
   expose(:fecha) do
     if params[:fecha] && params[:fecha].present?
-      Date.parse params[:fecha]
+      Date.strptime params[:fecha], '%d/%m/%Y'
     else
-      fecha_actual.to_date
+      Time.now.to_date
     end
   end
   
   expose(:minutos) do
     minutos = 0
-    if params[:tiempo_base] && params[:tiempo_base].present?  
+#    if params[:tiempo_base] && params[:tiempo_base].present?
+    unless params[:tiempo_base].blank?  
       tiempo_base = params[:tiempo_base].split(":")
       horas = tiempo_base[0];
       minutos = horas.to_i * 60 + tiempo_base[1].to_i;
@@ -53,16 +54,10 @@ class TimesheetController < ApplicationController
   end
 
   def nuevoTemporizador
-    
-     @clientesProyectos = Cliente.all.map do |cli|
-      ClienteObj.new.tap do |c|
-        c.id = cli.id
-        c.descripcion = cli.descripcion
-        c.proyectos = Proyecto.find(:all, :conditions => ["cliente_id = ? and not archivado = ?", cli.id, true])
-      end
-    end
-    @tareas_facturables = Tarea.facturables
-    @tareas_no_facturables = Tarea.no_facturables
+    @clientesProyectos = Cliente.find_with_proyectos_by_usuario session[:usuario_id]
+    @tareasProyecto = Tarea.find_by_clientes_proyectos @clientesProyectos
+#    @tareas_facturables = Tarea.facturables
+#    @tareas_no_facturables = Tarea.no_facturables
     
   end
 
@@ -132,8 +127,8 @@ class TimesheetController < ApplicationController
     @tempo = Temporizador.new(params[:temporizador])
     @tempo.iniciado = iniciado
     @tempo.minutos = minutos
-    @tempo.start = fecha_actual
-    @tempo.stop = fecha_actual
+    @tempo.start = Time.now
+    @tempo.stop = Time.now
     @tempo.fecha_creacion = fecha
     @tempo.save
     @usuario = session[:usuario]
@@ -154,10 +149,10 @@ class TimesheetController < ApplicationController
     @tempo = Temporizador.find(params[:id])
     begin
       if (params[:accion] == 'start')
-        @tempo.update_attributes({:stop => fecha_actual, :start => fecha_actual, :iniciado => 1})
+        @tempo.update_attributes({:stop => Time.now, :start => Time.now, :iniciado => 1})
       elsif (params[:accion] == 'stop')
-        minutos = @tempo.minutos + ((fecha_actual - @tempo.start).to_i / 60).to_i
-        @tempo.update_attributes({:stop => fecha_actual, :iniciado => 0, :minutos => minutos})
+        minutos = @tempo.minutos + ((Time.now - @tempo.start).to_i / 60).to_i
+        @tempo.update_attributes({:stop => Time.now, :iniciado => 0, :minutos => minutos})
       end
     rescue ActiveRecord::RecordNotFound
     end
@@ -212,8 +207,8 @@ class TimesheetController < ApplicationController
       t.descripcion = '';
       t.iniciado = 0
       t.minutos = 0
-      t.start = fecha_actual
-      t.stop = fecha_actual
+      t.start = Time.now
+      t.stop = Time.now
       t.fecha_creacion = dia
       t.save
     }    

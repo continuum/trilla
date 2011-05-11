@@ -20,7 +20,7 @@
             %th Tipo
             %th
           - @tareas.each do |tarea|
-            %tr{:id => "tr_tarea-#{tarea.id}"}
+            %tr[tarea, :tr]
               %td #{link_to tarea.descripcion, edit_tarea_path(tarea)}
               %td= h tarea.tipo
               %td

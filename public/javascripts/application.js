@@ -2,14 +2,11 @@
 //TODO: Falta agregar validaciones para borrar/agregar usuarios/tareas
 function insert_fields(link, method, content) {
   var ex_id = ($("#" + method + "_select").val());
-  console.info('ex_id:',ex_id);
   if(ex_id > 0){
   	  var esta_agregado = false;
-	  console.info('.'+ method + '_hidden',$('.'+ method + '_hidden'));
       $('.'+ method + '_hidden').each(function(){
 	  	var campo = $(this);
 	  	var v = campo.val();
-		console.info('v:',v);
 		if(v == ex_id){
 			//Si está oculto, ya fue borrado anteriormente, por tanto, se vuelve a mostrar
 //			console.info(campo.is(':hidden'));
@@ -37,7 +34,6 @@ function insert_fields(link, method, content) {
 
 function remove_fields(link) {
   var hidden_field = $(link).prev("input[type=hidden]");
-  console.info(hidden_field);
   if (hidden_field) {
     hidden_field.attr("value", '1');
   }
