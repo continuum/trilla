@@ -2,17 +2,31 @@ class TimesheetController < ApplicationController
   
   include TimesheetHelper
   
+  expose(:fecha_actual) { Time.zone.now }
+
   expose(:fecha) do
-    if params[:year] && params[:year].present?  && params[:day_of_the_year] && params[:day_of_the_year].present?
-      begin
-        Date.strptime "#{params[:year]}-#{params[:day_of_the_year]}", "%Y-%j"
-      rescue ArgumentError
-        flash[:error] = "Fecha inválida. Cargando fecha de hoy por defecto"
+    begin
+      if params[:year] && params[:year].present?  && params[:day_of_the_year] && params[:day_of_the_year].present?
+          Date.strptime "#{params[:year]}-#{params[:day_of_the_year]}", "%Y-%j"
+      elsif params[:fecha] && params[:fecha].present?
+        Date.strptime params[:fecha], "%d/%m/%Y"
+      else
         Date.today
       end
-    else
+    rescue ArgumentError
+      flash[:error] = "Fecha inválida. Cargando fecha de hoy por defecto"
       Date.today
     end
+  end
+  
+  expose(:minutos) do
+    minutos = 0
+    unless params[:tiempo_base].blank?  
+      tiempo_base = params[:tiempo_base].split(":")
+      horas = tiempo_base[0];
+      minutos = horas.to_i * 60 + tiempo_base[1].to_i;
+    end
+    minutos
   end
 
   def index
@@ -72,7 +86,7 @@ class TimesheetController < ApplicationController
     #se crea una hash con todos los nombres de los proyectos (cliente/proyecto/tarea)
     Temporizador.find_by_usuario_semana_groupby_proyecto(@usuario, fecha).each do |t|
         descripcion = "<b>#{t.proyecto.cliente.descripcion}</b> / #{t.proyecto.descripcion}<br>#{t.tarea.descripcion}"
-        llave_combinacion = "#{t.proyecto.cliente.id};#{t.proyecto.id};#{t.tarea.id}"
+        llave_combinacion = "#{t.proyecto.cliente.id}_#{t.proyecto.id}_#{t.tarea.id}"
         @clientesProyectosTareas[descripcion] = llave_combinacion
     end
 
@@ -85,15 +99,15 @@ class TimesheetController < ApplicationController
       
       #se inicializan todos los valores para el dia en 0
       @clientesProyectosTareas.each do |descripcion, llave_combinacion|
-        @dataPorDia["#{llave_combinacion}-#{dia}"] = 0
+        @dataPorDia["#{llave_combinacion};#{dia}"] = 0
       end
   
       sumaDelDia = 0
   
       #se buscan los valores del dia
       Temporizador.find_by_usuario_dia_groupby_proyectos_sum(@usuario, dia).each do |t|
-          llave_combinacion = "#{t.proyecto.cliente.id};#{t.proyecto.id};#{t.tarea.id}"
-          @dataPorDia["#{llave_combinacion}-#{dia}"] = t.sum.to_i
+          llave_combinacion = "#{t.proyecto.cliente.id}_#{t.proyecto.id}_#{t.tarea.id}"
+          @dataPorDia["#{llave_combinacion};#{dia}"] = t.sum.to_i
           sumaDelDia+=t.sum.to_i
       end
       
@@ -105,7 +119,7 @@ class TimesheetController < ApplicationController
       
       suma = 0;
       @listaDias.each do | dia |
-        suma+= @dataPorDia["#{llave_combinacion}-#{dia}"].to_i
+        suma+= @dataPorDia["#{llave_combinacion};#{dia}"].to_i
       end
     
       @clientesProyectosTareasSuma[llave_combinacion] = suma
@@ -116,13 +130,6 @@ class TimesheetController < ApplicationController
 
   def create
     iniciado = params[:iniciado]
-    minutos = 0
-    unless params[:tiempo_base].blank?
-      tiempo_base = params[:tiempo_base].split(":")
-      horas = tiempo_base[0];
-      minutos = horas.to_i * 60 + tiempo_base[1].to_i;
-    end
-
     @tempo = Temporizador.new(params[:temporizador])
     @tempo.iniciado = iniciado
     @tempo.minutos = minutos
@@ -136,12 +143,6 @@ class TimesheetController < ApplicationController
   end
 
   def edit
-    minutos = 0
-    unless params[:tiempo_base].blank?
-      tiempo_base = params[:tiempo_base].split(":")
-      horas = tiempo_base[0];
-      minutos = horas.to_i * 60 + tiempo_base[1].to_i;
-    end
     @tempo = Temporizador.find(params[:id])
     @tempo.minutos = minutos
     @tempo.update_attributes(params[:temporizador])
@@ -220,6 +221,23 @@ class TimesheetController < ApplicationController
 
     redirect_to :action => :week
     
+  end
+  
+  def editOnWeek
+
+    if params[:nuevo] == true
+      @tempo = Temporizador.new(params[:temporizador])
+      @tempo.iniciado = 0
+      @tempo.minutos = minutos
+      @tempo.start = fecha
+      @tempo.stop = fecha
+      @tempo.fecha_creacion = fecha
+      @tempo.save
+    else
+      
+    end
+    
+    redirect_to :action => :week
   end
   
 end

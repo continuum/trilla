@@ -3,7 +3,7 @@
     -form_remote_tag :url => { :action => 'index'} do
       %input{:id => "fecha", :name => "fecha", :type => "hidden", :value => "#{fecha}"}
       
-  %button.lnk_approval_timesheet{:href => "javascript:;", :id => "lnk_approval_timesheet", :action => action}
+  %button.lnk_approval_timesheet{:href => "javascript:;", :id => "lnk_approval_timesheet", :action => "/timesheet/#{action}"}
     .div
       %span Enviar para Aprobación
 
