@@ -2,13 +2,16 @@ class TimesheetController < ApplicationController
   
   include TimesheetHelper
   
-#  expose(:fecha_actual) { Temporizador.fechaActual }
-
   expose(:fecha) do
-    if params[:fecha] && params[:fecha].present?
-      Date.strptime params[:fecha], '%d/%m/%Y'
+    if params[:year] && params[:year].present?  && params[:day_of_the_year] && params[:day_of_the_year].present?
+      begin
+        Date.strptime "#{params[:year]}-#{params[:day_of_the_year]}", "%Y-%j"
+      rescue ArgumentError
+        flash[:error] = "Fecha inválida. Cargando fecha de hoy por defecto"
+        Date.today
+      end
     else
-      Time.now.to_date
+      Date.today
     end
   end
 
@@ -46,8 +49,6 @@ class TimesheetController < ApplicationController
   def nuevoTemporizador
     @clientesProyectos = Cliente.find_with_proyectos_by_usuario session[:usuario_id]
     @tareasProyecto = Tarea.find_by_clientes_proyectos @clientesProyectos
-#    @tareas_facturables = Tarea.facturables
-#    @tareas_no_facturables = Tarea.no_facturables
     
   end
 
@@ -55,6 +56,7 @@ class TimesheetController < ApplicationController
     self.nuevoTemporizador
     @usuario = session[:usuario]
     @temporizadores = Temporizador.find_por_usuario_fecha(@usuario, fecha)
+    @atrasadas = Temporizador.find_all_delayed_by_usuario @usuario
   end
 
   def week

@@ -4,7 +4,12 @@
 
 = render(:partial => "shared/timesheetmenu")
 = javascript_include_tag "jquery/plugins/jquery.timeentry.min.js"
-
+-if @atrasadas.size > 0
+  .errorExplanation
+    Usted dejó timers corriendo. Favor de revisar los días:
+    %ul
+      -@atrasadas.each do |tempo|
+        %li= link_dia tempo.fecha_creacion 
 .component-navigator-tabs
   %ul
     %li.tab-select.first
@@ -18,9 +23,9 @@
 .component-search
   .component-search-forms
     %b= fecha
-    %a#prev-day{:href => "javascript:;"} <<
+    =link_dia_anterior fecha
     %input#datepicker{:style => "width: 0px; border:0 solid;", :type => "text", :value => fecha}/
-    %a#next-day{:href => "javascript:;"} >>
+    =link_dia_siguiente fecha
 
   .component-timesheet-header
     %p{:style => "width:250px;"}
