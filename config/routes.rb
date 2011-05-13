@@ -1,7 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :usuarios
   map.resources :tareas
-  map.resources :temporizadors
   map.resources :proyecto_tareas
   map.resources :proyecto_usuarios
   map.resources :usuarios
@@ -15,6 +14,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
-  map.connect 'perfil/:action/:id', :controller => "usuarios", :action => "show", :perfil => true
-  
+  map.connect '/perfil/:action/:id', :controller => "usuarios", :action => "show", :perfil => true
+  map.connect '/timesheet/day/:day_of_the_year/:year', :controller => "timesheet", :action => "day"
 end

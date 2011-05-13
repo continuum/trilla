@@ -18,7 +18,7 @@
 		if ($.confirm('estas seguro?', function(){
 
 			var form = $('#form-submit-week form');
-			form.attr('action','deleteRowWeek');
+			form.attr('action','/timesheet/deleteRowWeek');
 			
 			form.find('input[name=filtro[cliente_id]]').val(filtro[0])
 			form.find('input[name=filtro[proyecto_id]]').val(filtro[1])
@@ -38,7 +38,7 @@
 	$('#lnk_acept_new_row_week').unbind('click').click(function(event){
 		
 		var form = $('#form-submit-new-row-week form');
-		form.attr('action','newRowWeek');
+		form.attr('action','/timesheet/newRowWeek');
 		
 		form.submit();
 		
@@ -77,7 +77,7 @@
 			var filtro = partes[1].split('_');
 			
 			var form = $('#form-submit-edit-week form');
-			form.attr('action', 'editOnWeek');
+			form.attr('action', '/timesheet/editOnWeek');
 			
 			form.find('input[name=fecha]').val(fecha);
 			form.find('input[name=nuevo]').val(minutosNew > minutosOld);

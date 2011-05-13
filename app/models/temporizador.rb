@@ -38,6 +38,11 @@ class Temporizador < ActiveRecord::Base
            :group => "proyectos.descripcion, proyecto_id, cliente_id, tarea_id")
   end
   
+  def self.find_all_delayed_by_usuario(usuario, horas = 18.hours)
+      find( :all, 
+            :conditions => ["iniciado = 1 and usuario_id = ? and (? - temporizadors.start) > ? ",usuario.id, Time.zone.now, horas.to_s])
+  end
+  
   def self.update_estado_for_usuario_semana(usuario, fecha, estado)
       
       update_all("estado = '#{estado}'", ["usuario_id = ? and fecha_creacion between ? and ?", usuario.id, fecha.beginning_of_week, (fecha.end_of_week + 1.day)])

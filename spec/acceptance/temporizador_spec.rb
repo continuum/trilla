@@ -107,4 +107,19 @@ feature "Temporizador" do
     page.should have_content "Esto lo hice ayer"
   end
   
+  scenario "mostrando aviso de advertencia de atrasos en temporizadores" do
+    click_link "Agregar Entrada"
+    select "Enterprisey", :from => "Cliente/Proyecto"
+    select "Desarrollo", :from => "Tarea"
+    click_button "Iniciar"
+    Timecop.travel(Time.now + 17.hours + 59.minutes) do
+      click_link "Timesheet"
+      page.should_not have_content "Usted dejó timers corriendo. Favor de revisar"
+    end
+    Timecop.travel(Time.now + 18.hours + 1.minute) do
+      click_link "Timesheet"
+      page.should have_content "Usted dejó timers corriendo. Favor de revisar"
+    end
+  end
+
 end

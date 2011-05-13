@@ -41,7 +41,7 @@ var idInterval = -1;
 	});
 
 	function update(params, callback) {
-		$.get('update',params,function(data){
+		$.get('/timesheet/update',params,function(data){
 			 $('#tr_temporizador_' + params.id).empty().append(data);
 			 if (callback) {
 			 	 callback();
@@ -51,7 +51,7 @@ var idInterval = -1;
 
     function create(form_params, iniciado, callback) {
 		form_params+='&iniciado=' + iniciado;
-		$.get('create?' + form_params, function(div){
+		$.get('/timesheet/create?' + form_params, function(div){
 			$('#container-temporizadores').empty().append(div);
 			if (callback) {
 				callback();
@@ -60,7 +60,7 @@ var idInterval = -1;
 	}
 
     function edit(form_params, callback) {
-		$.get('edit?' + form_params, function(div){
+		$.get('/timesheet/edit?' + form_params, function(div){
 			$('#container-temporizadores').empty().append(div);
 			if (callback) {
 				callback();
@@ -136,7 +136,7 @@ var idInterval = -1;
 		$('.lnk_borrar_timesheet').unbind('click').click(function(event){
 			var id = $(this).getIdSplit('-')[1];
 			if (confirm('Estas seguro?')) {
-				$.getJSON('delete',{id: id}, function(json){
+				$.getJSON('/timesheet/delete',{id: id}, function(json){
 					if(json.success){
 						$('#tr_temporizador_' + id).fadeOut();
 					}
@@ -252,9 +252,9 @@ var idInterval = -1;
 	reset_times();
 
 	$( "#datepicker" ).datepicker({
-		dateFormat: 'dd/mm/yy',
+		dateFormat: 'dd/mm/yy',/*
 		maxDate: "+0D",
-		minDate: "-1y",
+		minDate: "-1y",*/
 		firstDay: '1',
 		showOn: "button",
 		buttonImage: "/harv/images/icons/calendar.gif",
@@ -263,9 +263,10 @@ var idInterval = -1;
 		changeMonth: true,
 		changeYear: true,
 		onSelect: function(dateText, inst) {
+			fecha = Date.parse(dateText);
 			var form = $('#form-submit-timesheet form');
-			form.find('input[name=fecha]').val(dateText);
-			form.attr('action','day');
+			var action = "/timesheet/day/" + (fecha.getDayOfYear() + 1) + "/" + fecha.getFullYear();
+			form.attr('action',action);
 			form.submit();
 		}
 	});
@@ -302,18 +303,6 @@ var idInterval = -1;
 		}
 		$.datepicker._selectDay('#datepicker', mes-1, anio, $(td));
     }
-
-	$('#prev-day').click(function(event){
-//		console.info('before-day',$( "#datepicker" ).val());
-		changeDate('prev');
-		event.preventDefault();
-	});
-
-	$('#next-day').click(function(event){
-//		console.info('after-day',$( "#datepicker" ).val());
-		changeDate('next');
-		event.preventDefault();
-	});
 
 	$('.lnk-perfil-usuario').click(function(event){
 		location.href = $('#path-perfil-usuario').text();

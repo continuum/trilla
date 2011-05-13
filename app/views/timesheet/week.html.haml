@@ -5,7 +5,7 @@
 .component-navigator-tabs
   %ul
     %li.tab-unselect.first
-      %a#tab-day{:href => "/timesheet/day?fecha=#{fecha}"} Día
+      = link_dia fecha, "Día"
     %li.tab-select.last
       %a#tab-week{:href => "/timesheet/week?fecha=#{fecha}"} Semana
     %li.clearfix
