@@ -5,6 +5,7 @@ gem "haml", "3.0.25"
 gem "gdata", "1.1.1"
 gem "pg"
 gem "decent_exposure"
+gem "fastercsv"
 
 group :test, :development do
   gem "rspec", "1.3.1"

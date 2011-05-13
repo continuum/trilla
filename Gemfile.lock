@@ -29,6 +29,7 @@ GEM
     database_cleaner (0.6.5)
     decent_exposure (1.0.1)
     fabrication (0.9.5)
+    fastercsv (1.5.4)
     ffi (0.6.3)
       rake (>= 0.8.7)
     gdata (1.1.1)
@@ -87,6 +88,7 @@ DEPENDENCIES
   database_cleaner
   decent_exposure
   fabrication
+  fastercsv
   gdata (= 1.1.1)
   haml (= 3.0.25)
   launchy
