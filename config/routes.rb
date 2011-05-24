@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :proyecto_usuarios
   map.resources :usuarios
   map.resources :proyectos, :member => { :archive => :get, :restore => :get }
+  map.resources :reportes
 
   map.resources :clientes
   map.resource :sessions
