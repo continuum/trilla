@@ -1,4 +1,4 @@
-class Proyecto < ActiveRecord::Base
+1class Proyecto < ActiveRecord::Base
   belongs_to :cliente
   has_many :proyecto_tareas
   has_many :tareas, :through => :proyecto_tareas
