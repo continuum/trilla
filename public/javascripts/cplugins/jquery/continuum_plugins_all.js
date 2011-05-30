@@ -487,7 +487,7 @@ window.viewport =
 			 var m = '<div id="div-dialog-cargando-continuum" style="display:none;">' + 
 				 	 '<div id="div-dialog-overlay-cargando-continuum" class="ui-widget-overlay" style="z-index: 100000;"></div>' +
 			 		 '<div id="div-dialog-container-cargando-continuum" style="position: absolute; z-index: 100001; border: 1px solid rgb(0, 0, 0); background-color: #FFFFFF; width: 300px; padding: 10px; -moz-border-radius: 5px 5px 5px 5px;">'+
-			 		 '<p align="center"><a href="javascript:void(0);" id="lnk-img-dialog-cargando-continuum" title="Click para cerrar"><img src="img/wait30trans.gif"></a></p><p align="center"><span id="span-dialog-cargando-continuum">' + opt.msg + '</span><span id="span-id-dialog-cargando-continuum" style="display:none;">' + ticket + '</span></p></div></div>';
+			 		 '<p align="center"><a href="javascript:void(0);" id="lnk-img-dialog-cargando-continuum" title="Click para cerrar"><img src="images/wait30trans.gif"></a></p><p align="center"><span id="span-dialog-cargando-continuum">' + opt.msg + '</span><span id="span-id-dialog-cargando-continuum" style="display:none;">' + ticket + '</span></p></div></div>';
 			 
 			 body.append(m);
 			 
@@ -794,7 +794,7 @@ window.viewport =
 	 */
 	$.fn.loading = function(url, parametros, callback) {
 		
-		var msg = $('<div><p align="center"><img src="img/wait30trans.gif"></p><p align="center">Cargando...</p></div>');
+		var msg = $('<div><p align="center"><img src="images/wait30trans.gif"></p><p align="center">Cargando...</p></div>');
 		
 		var div = $(this); 
 		
@@ -883,7 +883,7 @@ window.viewport =
 		// override the options (other options are ignored)
 		opt = $.extend(opt, options); 
 		 
-		var msg = $('<div><p align="#align#"><img src="img/wait30trans.gif" width="#widthImg#">&nbsp;#text#</p></div>'.populate(opt));
+		var msg = $('<div><p align="#align#"><img src="images/wait30trans.gif" width="#widthImg#">&nbsp;#text#</p></div>'.populate(opt));
 		return $(this).empty().append(msg);
 	}
 	

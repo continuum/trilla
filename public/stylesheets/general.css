@@ -177,3 +177,14 @@ div.grippie {
 	width:95%;
 	height: 20%;
 }  
+
+#div-nuevo-timesheet {
+	width: 900px;
+	margin-left: -450px !important;
+}
+
+#div-nuevo-reporte {
+	width: 300px;
+	margin-left: -150px !important;
+}
+

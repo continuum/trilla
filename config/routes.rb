@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :proyecto_usuarios
   map.resources :usuarios
   map.resources :proyectos, :member => { :archive => :get, :restore => :get }
-  map.resources :reportes
+  map.resources :reportes, :collection => { :sql => :get, :execute => :get}
 
   map.resources :clientes
   map.resource :sessions
@@ -16,4 +16,5 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id.:format'
   map.connect '/perfil/:action/:id', :controller => "usuarios", :action => "show", :perfil => true
   map.connect '/timesheet/day/:day_of_the_year/:year', :controller => "timesheet", :action => "day"
+
 end
