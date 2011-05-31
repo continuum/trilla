@@ -8,3 +8,4 @@ db/*.sqlite3
 config/database.yml
 spec/support/google_credentials.rb
 tmp/
+.rvmrc
