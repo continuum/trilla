@@ -34,7 +34,7 @@ class Proyecto < ActiveRecord::Base
    #TODO:  BUG N°: 13273349
    #        Probablemente existe una mejor forma de conseguir la unicidad de proyectos
    #        utilizando algo un poco más abstraido como la llamada comentada de arriba.
-   find_by_sql("SELECT  DISTINCT proyectos.descripcion,
+   find_by_sql ["SELECT  DISTINCT proyectos.descripcion,
                                  proyectos.id,
                                  proyectos.cliente_id,
                                  proyectos.created_at,
@@ -44,7 +44,7 @@ class Proyecto < ActiveRecord::Base
                                  proyectos.estimacion,
                                  proyectos.privado
                                FROM proyectos left join proyecto_usuarios on proyecto_usuarios.proyecto_id = proyectos.id
-                               WHERE privado = false or privado is null or proyecto_usuarios.usuario_id = #{usuario_id}")
+                               WHERE privado = ? or privado is null or proyecto_usuarios.usuario_id = ?", false, usuario_id]
   end
 
   def archive
