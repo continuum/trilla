@@ -43,6 +43,7 @@ GEM
     linecache (0.43)
     mime-types (1.16)
     nokogiri (1.4.4)
+    pg (0.11.0)
     rack (1.0.1)
     rack-test (0.5.7)
       rack (>= 1.0)
@@ -92,6 +93,7 @@ DEPENDENCIES
   gdata (= 1.1.1)
   haml (= 3.0.25)
   launchy
+  pg
   rails (= 2.3.4)
   rspec (= 1.3.1)
   rspec-rails (= 1.3.3)

@@ -6,6 +6,7 @@ gem "gdata", "1.1.1"
 gem "decent_exposure"
 gem "fastercsv"
 gem 'sqlite3'
+gem "pg"
 
 group :test, :development do
   gem "rspec", "1.3.1"

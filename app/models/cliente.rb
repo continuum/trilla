@@ -19,7 +19,7 @@ class Cliente < ActiveRecord::Base
     find(
       :all,
       :include => [:proyectos => :proyecto_usuarios],
-      :conditions => ["proyecto_usuarios.usuario_id = ? and proyectos.archivado = ?", usuario_id, false]
+      :conditions => ["(proyecto_usuarios.usuario_id = ? or proyectos.privado = ?) and proyectos.archivado = ?", usuario_id, false, false]
     )
   end
   
