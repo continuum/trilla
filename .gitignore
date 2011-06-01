@@ -4,7 +4,8 @@ config/environment.rb
 log/
 db/*.sqlite3
 .bundle/
-.redcar
+.redcar/
+.rvmrc
 config/database.yml
 spec/support/google_credentials.rb
 tmp/

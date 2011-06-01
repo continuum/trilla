@@ -2,6 +2,7 @@ class ProyectosController < ApplicationController
   before_filter :authorizate_admin
   
   def index
+    flash.keep
     @proyectos = Proyecto.find_all_accesibles session[:usuario_id]
   end
 
@@ -67,7 +68,13 @@ class ProyectosController < ApplicationController
 
   def destroy
     @proyecto = Proyecto.find(params[:id])
-    @proyecto.destroy
+    tempos = Temporizador.find(:all, :conditions => ["proyecto_id = #{@proyecto.id}"])
+    if tempos.any?
+      flash[:error] = "No se puede eliminar el proyecto #{@proyecto.codigo}, ya contiene horas registradas."
+    else
+      @proyecto.destroy
+      flash[:notice] = "Proyecto #{@proyecto.codigo} eliminado."
+    end
     redirect_to(proyectos_url)
   end
 end
