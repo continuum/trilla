@@ -8,14 +8,6 @@ module HelperMethods
       )
     end
     visit "/?id_mula=#{probador.id}"
-    # By default google stores the session in our browser, so this might not
-    # be needed
-    if page.has_xpath? "//input[@id='signIn']"
-      fill_in 'Email', :with => USERNAME
-      fill_in 'Passwd', :with => PASSWORD
-      click_button "signIn"
-      click_button "allow"
-    end
   end
 
   def logout
@@ -45,25 +37,25 @@ module HelperMethods
       yield
     end
   end
-  
+
   def within_tarea_row(tarea)
     within(:id, "tr_tarea_#{tarea.id}") do
       yield
     end
   end
-  
+
   def within_usuario_row(usuario)
     within(:id, "tr_usuario_#{usuario.id}") do
       yield
     end
   end
-  
+
   def within_cliente_row(cliente)
     within(:id, "tr_cliente_#{cliente.id}") do
       yield
     end
   end
-  
+
   def click_start_clock_button
     find(:css, "a.start").click
   end
@@ -71,7 +63,7 @@ module HelperMethods
   def click_start_timer(temporizador)
     find(:css, "#tr_temporizador_#{temporizador.id} a.start").click
   end
-  
+
 end
 
 module Capybara::Node::Matchers
@@ -83,7 +75,7 @@ module Capybara::Node::Matchers
     has_css?(".clock.running")
   end
 
-  #Se deja versión negada, ya que no funciona bien "should_not" con peticiones ajax 
+  #Se deja versión negada, ya que no funciona bien "should_not" con peticiones ajax
   def has_no_clock_running?
     has_no_css?(".clock.running")
   end
