@@ -1,8 +1,22 @@
 Setup en desarrollo
 ===================
 
+Instalar PostgreSQL. En Mac Bajar la versión 9.0 desde
+http://www.enterprisedb.com/products-services-training/pgdownload#osx, instalar, y luego ejecutar:
+
+Luego:
+
 $ gem install bundler
 $ bundle install
+
+Si bundle install falla en Mac, ejecutar lo siguiente:
+
+$ export PATH=$PATH:/Library/PostgreSQL/9.0/bin/
+
+E intentar ejecutar "bundle install" nuevamente
+
+Luego:
+
 $ cp config/database.yml.example config/database.yml
 $ cp spec/support/google_credentials.rb.example spec/support/google_credentials.rb
 
