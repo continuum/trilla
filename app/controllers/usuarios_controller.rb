@@ -45,7 +45,7 @@ class UsuariosController < ApplicationController
 
     if @usuario.update_attributes(params[:usuario])
       session[:usuario] = @usuario if session[:usuario].id == @usuario.id
-      flash[:notice] = 'Usuario was successfully updated.'
+      flash[:notice] = 'Usuario fue actualizado.'
       redirect_to(usuarios_url)
     else
       render :action => "edit"
@@ -54,7 +54,12 @@ class UsuariosController < ApplicationController
 
   def destroy
     @usuario = Usuario.find(params[:id])
-    @usuario.destroy
-    redirect_to(usuarios_url)
+    if @usuario.destroy
+      redirect_to(usuarios_url)
+    else
+      @usuario.errors.full_messages.map { |msg| flash[:error] = msg }
+      redirect_to(usuarios_url)
+    end
+    
   end
 end

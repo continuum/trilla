@@ -1,6 +1,7 @@
 class Usuario < ActiveRecord::Base
   has_many :proyecto_usuarios
-  has_many :proyectos, :through => :proyecto_usuarios
+  has_many :temporizadors
+  has_many :proyectos, :through => :proyecto_usuarios 
 
   validates_presence_of :nombres, :message => "Debe ingresar el nombre del usuario"
   validates_presence_of :email, :message => "Debe ingresar el e-mail del usuario"
@@ -21,5 +22,18 @@ class Usuario < ActiveRecord::Base
   def admin?
     self.perfil == "ADMIN"
   end
+  
+  def before_destroy
+    if self.proyectos.count > 0
+      errors.add_to_base "El usuario se encuentra en proyectos"
+      false
+    end
+    if self.temporizadors.count > 0
+      errors.add_to_base "El usuario tiene reportes de horas creados"
+      false
+    end
+    
+  end
+  
   
 end
