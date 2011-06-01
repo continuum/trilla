@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Pagina Tiempo - Dia" do
   let!(:pepito) {usuario}
-    
+
   background do
     login(pepito)
     click_link "Timesheet"
@@ -12,7 +12,6 @@ feature "Pagina Tiempo - Dia" do
   scenario "muestra la fecha actual" do
     Timecop.travel(Date.new(2011, 03, 02)) do
       click_link "Timesheet"
-      save_and_open_page
       page.should have_content "02/03/2011"
     end
   end
