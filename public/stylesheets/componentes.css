@@ -1,9 +1,104 @@
-/* Controles UI
- * CSS Obligatorio para todas las Aplicaciones
- * Desarrollado por Continuum Lltda. 2010 */
-.app {
-  width: 975px;
-  font-family: Arial; }
+ @charset "ISO-8859-1";
+
+/* CSS Document */
+/* Trilla */
+/* Desarrollado por Continuum Chile */
+/* 2011 */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt,
+var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+center, u, b, i {
+	margin: 0;
+	padding: 0;
+	font-weight:normal;
+}
+
+.hidden {
+	display:none;
+}
+
+strong {
+	font-weight:normal;
+	font-family:"HBold",  Arial, sans-serif;
+	*font-weight:bold;
+}
+
+.clearfix {
+	clear:both;
+	font-size:0.01em;
+}
+ @font-face {
+ font-family:HRoman;
+ src: url('fonts/H-Roman.otf');
+}
+
+ @font-face {
+ font-family:HLight;
+ src: url('fonts/H-Light.otf');
+}
+
+ @font-face {
+ font-family:HBold;
+ src: url('fonts/H-Bold.otf');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family:"HBold",  Arial, sans-serif;
+}
+
+body {
+	margin:0;
+	padding:0;
+	font-family:"HRoman", Arial, sans-serif;
+	font-weight:normal;
+	background:url(../images/bg-body-top.png) repeat-x 0 108px #658989;
+	font-size:12px;
+	color:#333;
+}
+
+.header{
+	clear:both;
+	background:#FFF;
+}
+
+.content-header{
+	width:980px;
+	margin:0 auto;
+	overflow:hidden;
+	padding:14px 0;
+}
+
+.header h1{
+	display:block;
+	float:left;
+}
+
+.header h1 a{
+	display:block;
+	background:url(../images/logo-trilla.png) no-repeat 0 0;
+	width:251px;
+	height:80px;
+	text-indent:-10000px;
+}
+ 
+.app{
+	margin-top:20px;
+}
+
+.content-app{
+	width:980px;
+	margin:0 auto;
+	overflow:hidden;
+	padding:14px 0;
+	background:#FFF;
+}
 
 /* Contenidos Generales */
 .contenedor-tipo-buscador {

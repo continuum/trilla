@@ -4,7 +4,7 @@
     %meta{:content => "text/html;charset=UTF-8", "http-equiv" => "content-type"}/
     %title
       Trilla Time Tracking
-    = stylesheet_link_tag "jquery-ui-1.8.6.custom", "componentes", "general", "jqModal", "jquery.autocomplete"
+    = stylesheet_link_tag "jquery-ui-1.8.6.custom", "componentes", "jqModal", "jquery.autocomplete"
     / jQuery
     = javascript_include_tag "jquery/jquery-1.5.2.min.js", "jquery/ui/jquery-ui.min.js"
     / Plugins
@@ -27,19 +27,22 @@
       })();
     = yield :head
   %body
-    - usuario = session[:usuario]
+    .header
+      .content-header
+        %h1.logo
+          %a(href="#" title="Trilla")
+            Trilla Time Tracking
+        - usuario = session[:usuario]
+        .user-session
+          %a.accion{:href => "/sessions/destroy"} Salir
+          %a.accion{:href => "/perfil"} #{usuario.nombres}
     .app
-      .component-message-result
-        %p
-          %b  Trilla Time Tracking
-        %a.accion{:href => "/sessions/destroy"} Salir
-        %a.accion{:href => "/perfil"} #{usuario.nombres}
-      - if flash[:error]
-        .errorExplanation
-          %h2 Errores:
-          %ul
-            %li= flash[:error]
-      = yield
-
-/= javascript_include_tag "controles-achs"
-
+      .content-app
+        .component-message-result
+          %p
+            - if flash[:error]
+              .errorExplanation
+                %h2 Errores:
+                %ul
+                  %li= flash[:error]
+        = yield
