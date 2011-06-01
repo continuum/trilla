@@ -1,4 +1,4 @@
-#tab.component-navigator-menu
+#tab.navigator-menu
   %ul
     -if self.controller_name == 'timesheet'
       - claseTime = 'tab-select'
@@ -8,11 +8,11 @@
       - claseTime = 'tab-unselect'
       - claseAdmin = 'tab-select'
       - claseReport = 'tab-unselect'
-    -else  
+    -else
       - claseTime = 'tab-unselect'
       - claseAdmin = 'tab-unselect'
       - claseReport = 'tab-select'
-      
+
     %li{:class => "#{claseTime} first"}
       %a#tab-timesheet{:href => root_path} Timesheet
     - if session[:usuario].perfil == 'ADMIN'

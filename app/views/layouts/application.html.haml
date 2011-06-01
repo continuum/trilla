@@ -34,15 +34,14 @@
             Trilla Time Tracking
         - usuario = session[:usuario]
         .user-session
+          %a.name{:href => "/perfil"} #{usuario.nombres}
           %a.accion{:href => "/sessions/destroy"} Salir
-          %a.accion{:href => "/perfil"} #{usuario.nombres}
     .app
+      - if flash[:error]
+        .errorExplanation
+          %h2
+            Errores:
+            %ul
+              %li= flash[:error]
       .content-app
-        .component-message-result
-          %p
-            - if flash[:error]
-              .errorExplanation
-                %h2 Errores:
-                %ul
-                  %li= flash[:error]
         = yield

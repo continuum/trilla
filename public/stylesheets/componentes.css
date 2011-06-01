@@ -89,16 +89,59 @@ body {
 }
  
 .app{
-	margin-top:20px;
+	margin-top:30px;
 }
 
 .content-app{
-	width:980px;
+	width:940px;
 	margin:0 auto;
 	overflow:hidden;
-	padding:14px 0;
+	padding:20px;
 	background:#FFF;
+	-moz-box-shadow:1px 1px 12px #335151;
+	-webkit-box-shadow:1px 1px 12px #335151;
+	box-shadow:1px 1px 12px #335151;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
+
+
+.user-session{
+	float:right;
+	padding-right: 10px;
+    padding-top: 49px;
+}
+
+.user-session .name{
+	font-weight:bold;
+	padding-right:8px;
+	border-right:1px solid #335151;
+	margin-right:5px;
+}
+
+.user-session a:hover{
+	text-decoration:underline;
+}
+
+.navigator-menu{
+	border-bottom:1px solid #335151;
+	overflow:hidden;
+}
+
+.navigator-menu ul{
+	list-style:none;
+}
+
+.navigator-menu ul li{
+	display:block;
+	float:left;
+	padding:10px 14px;
+	font-weight:bold;
+	border-right:1px solid #92abab;
+}
+
+
 
 /* Contenidos Generales */
 .contenedor-tipo-buscador {
@@ -529,7 +572,7 @@ button {
       .component-navigator-menu ul li a {
         display: block;
         text-decoration: none;
-        color: #a96d0f;
+        color: #2b5050;
         outline: 0px;
         padding: 13px 20px 13px 20px; }
         .component-navigator-menu ul li a:hover {
@@ -678,7 +721,7 @@ button {
   padding: 0;
   overflow: auto; }
   .component-standar-grid a {
-    color: #a96d0f;
+    color: #2b5050;
     font-weight: normal;
     text-decoration: none; }
   .component-standar-grid table {
@@ -704,7 +747,7 @@ button {
   text-decoration: underline !important; }
 .standar-grid-model td a {
   margin: 0 3px;
-  color: #a96d0f; }
+  color: #2b5050; }
 
 .filters-head-table label {
   margin: 0 5px; }
@@ -822,11 +865,11 @@ button {
   margin: 0 10px; }
 
 a, .links-content a, .grid-selection a {
-  color: #a96d0f;
+  color: #2b5050;
   text-decoration: none; }
 
 #app a:hover, .links-content a:hover, .grid-selection a:hover {
-  color: #00cc00;
+  color: #2b5050;
   text-decoration: underline; }
 
 .component-navigator-tabs a {
