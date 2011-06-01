@@ -5,7 +5,6 @@ gem "haml", "3.0.25"
 gem "gdata", "1.1.1"
 gem "decent_exposure"
 gem "fastercsv"
-gem 'sqlite3'
 gem "pg"
 
 group :test, :development do
