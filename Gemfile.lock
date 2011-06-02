@@ -56,6 +56,7 @@ GEM
       rake (>= 0.8.3)
     rake (0.8.7)
     rspec (1.3.1)
+    rspec-extra-formatters (0.3)
     rspec-rails (1.3.3)
       rack (>= 1.0.0)
       rspec (= 1.3.1)
@@ -94,6 +95,7 @@ DEPENDENCIES
   pg
   rails (= 2.3.4)
   rspec (= 1.3.1)
+  rspec-extra-formatters
   rspec-rails (= 1.3.3)
   ruby-debug
   steak (~> 0.3.0)
