@@ -21,6 +21,3 @@ group :test, :development do
   gem "timecop"
 end
 
-group :test do
-  gem "rspec-extra-formatters"
-end
