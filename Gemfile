@@ -20,3 +20,7 @@ group :test, :development do
   gem "database_cleaner"
   gem "timecop"
 end
+
+group :test do
+  gem "rspec-extra-formatters"
+end
