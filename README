@@ -27,6 +27,24 @@ $ rake db:create
 $ rake db:migrate
 $ script/server
 
+Deploy
+======
+
+Configuracion de git para que apunte a los repositorios en heroku:
+
+$ git remote add heroku git@heroku.com:trilla.git
+$ git remote add staging git@heroku.com:trilla-staging.git
+
+Luego para deployar en staging:
+
+$ git push staging master
+$ heroku rake db:migrate --app trilla-staging
+
+Para deployar en produccion:
+
+$ git push heroku master
+$ heroku rake db:migrate --app trilla
+
 Problemas
 =========
 

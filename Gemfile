@@ -20,7 +20,3 @@ group :test, :development do
   gem "database_cleaner"
   gem "timecop"
 end
-
-group :test do
-  gem "sqlite3-ruby", "1.2.5", :require => "sqlite3"
-end
