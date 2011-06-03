@@ -1,0 +1,15 @@
+= render(:partial => "shared/reportmenu")
+.component-navigator-tabs
+  %ul
+    %li.tab-select.first
+      %a#tab-form{:href => "javascript:void(0)"} Nuevo Reporte
+    %li.clearfix
+.component-search
+  =error_messages_for :reporte, :header_message => "Errores:", :message => ""
+  - form_for(@reporte) do |f|
+    .component-search-forms.forms-two-cols
+      = render :partial => 'fields', :locals => { :f => f}
+      .clearfix
+    .component-search-actions
+      = f.submit 'Crear'
+      = link_to 'Cancelar', reportes_path

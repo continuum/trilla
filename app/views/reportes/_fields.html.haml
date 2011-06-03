@@ -1,0 +1,23 @@
+%ol.forms-structure-rows
+  %li
+    .forms-row-single-division.left
+      = f.label :nombre, "Nombre"
+    .forms-row-single-division.right
+      = f.text_field :nombre
+  %li
+    .forms-row-single-division.left
+      = f.label :descripcion, "Descripción"
+    .forms-row-single-division.right
+      = f.text_field :descripcion
+  %li
+    .forms-row-single-division.left
+      = f.label :query, "Query"
+    .forms-row-single-division.right
+      = f.text_field :query
+  %li
+    .forms-row-single-division.left
+      = f.label :tipo, "Tipo"
+      - tipos_array = Reporte.all.map { |cli| [cli.tipo, cli.nombre] }
+    .forms-row-single-division.right
+      = f.select :tipo, options_for_select([["Selecciona un tipo",-1]].concat(@tipos),@reporte.tipo)
+

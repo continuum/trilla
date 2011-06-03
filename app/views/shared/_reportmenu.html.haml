@@ -1,0 +1,5 @@
+= render(:partial => "shared/mainmenu")
+- if session[:usuario].perfil == 'ADMIN'
+  %h4 
+    %a.accion{:href => reportes_path} Reportes
+    %a.accion{:href => "#{reportes_path}/sql" } Consultar reportes

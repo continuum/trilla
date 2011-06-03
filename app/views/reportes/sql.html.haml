@@ -1,0 +1,69 @@
+- content_for :head do
+  = javascript_include_tag "jquery/plugins/jquery.textarearesizer.compressed.js"
+  = javascript_include_tag "init.sql"
+  
+= render(:partial => "shared/reportmenu")
+
+%div 
+  %div
+    %a{:href => "javascript:void(0);", :id => "link-ayuda-sql", :title => "Ver ayuda"} Ayuda
+    %span{:style => "font-size: 10px;"} (click para ver/ocultar)
+    
+  %div{:id => "div-ayuda-sql" , :style => "display:none;"}
+    %table{:style => "border: 1px solid black; width: 100%;"}
+      %tr 
+        %td{:style => "border: 1px solid black; background-color: #FFFFFF;"} Sentencia
+        %td{:style => "border: 1px solid black; background-color: #FFFFFF;"} Ejemplo
+  		
+      %tr 
+        %td{:style => "border: 1px solid black;"} Invocar SQL:
+        %td{:style => "border: 1px solid black;"} { select * from GPS10REQ }
+  			
+      %tr 
+        %td{:style => "border: 1px solid black;"} Comentar una sentencia:
+        %td{:style => "border: 1px solid black;"}
+          %span{:style => "color: red; font-weight: bold;"} Los caracteres -- comentan todo un bloque
+          %br
+          %span --{select * from GPS10REQ}
+       
+%br
+
+
+#div-sql-select		
+  %span Rows: 
+  %input#maxrows{:type => "text", :maxlength => "10", :class => "number", :value => "100", :style => "width: 60px;"}
+  %input#isMaxrows{ :type => "checkbox"}
+  
+  %textarea{:id => "querys-sql", :class => "resizable", :style => "width: 900px; height: 200px;"}
+  %button{:id => "btn-ejecutar-sql"} 
+    %div
+      %span Ejecutar
+  
+  %div{:id => "resultados-sql", :style => "display:none;"}
+  
+#form-submit-reportes-csv
+  -form_remote_tag :url => { :action => 'export_csv'} do
+    %input{:id => "query", :name => "query", :type => "hidden", :value => ""}
+    %input{:id => "maxrows", :name => "maxrows", :type => "hidden", :value => ""}
+      
+
+#div-nuevo-reporte.component-container.jqmWindow
+  %span
+    %b Nombre:
+  %input{:id => "reporte_nombre", :name => "reporte[nombre]", :type => "text", :value => "", :maxlength => 12, :class => 'required'}
+  %br
+  %span
+    %b Descripcion:
+  %input{:id => "reporte_descripcion", :name => "reporte[descripcion]", :type => "text", :value => "", :maxlength => 100, :class => 'required'}
+  %br
+  %span
+    %b Tipo:
+  %input{:id => "reporte_tipo", :name => "reporte[tipo]", :type => "text", :value => "", :maxlength => 12, :class => 'required'}
+  .component-search-actions
+    %button#lnk-guardar-reporte
+      %div
+        %span#lnk-span-guardar-reporte Guardar
+    %button#lnk-cancelar-reporte.jqmClose
+      %div
+        %span#lnk-span-cancelar-reporte Cancelar
+  
