@@ -50,7 +50,11 @@
     - @temporizadores.each do |tempo|
       .component-timesheet[tempo, :tr]
         = render(:partial => "clock", :locals => { :tempo => tempo})
-
+  
+  #total_hours_of_day
+    Total:&nbsp;
+    %span#hours_of_day
+  
   = render(:partial => "edittime", :locals => {:fecha => fecha})
 
   = render(:partial => "timesheetfooter", :locals => {:action => 'week'})

@@ -96,11 +96,11 @@ feature "Crear Proyecto" do
     fill_in "Estimación", :with => "áéíóú"
     field_labeled("Estimación").value.should == ""
   end
-  
+
   scenario "con un valor numérico en el campo estimación" do
     click_link "Crear proyecto"
     fill_in "Estimación", :with => "170"
     field_labeled("Estimación").value.should == "170"
   end
-  
+
 end

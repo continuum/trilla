@@ -108,6 +108,15 @@ window.viewport =
 	var defaultClass = "ui-state-error";
 	var defaultErrText = "Valor inv&aacute;lido";
 	
+  $.leftPad = function(i,l,s) {
+    var o = i.toString();
+    if (!s) { s = '0'; }
+    while (o.length < l) {
+      o = s + o;
+    }
+    return o;
+  }; 
+  
 	/**
 	 * return true if all jquery objects are valids !
 	 * false in other cases

@@ -25,7 +25,13 @@ module HelperMethods
   def click_stop_clock_button
     find(:css, "a.stop").click
   end
-
+  
+  def within_total_hours_of_day
+    within(:css, "#total_hours_of_day #hours_of_day") do
+      yield
+    end
+  end
+  
   def within_timer_row(temporizador)
     within(:css, "#tr_temporizador_#{temporizador.id}") do
       yield

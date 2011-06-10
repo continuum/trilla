@@ -1,4 +1,5 @@
 var idInterval = -1;
+var REFRESH_EVENT = 'refreshTotalHours';
 
 (function ($) {
 
@@ -14,6 +15,7 @@ var idInterval = -1;
 
 		var span = $('#lnk_reloj-' + temporizador.id).find('span');
 		$('#temporizador_tiempo_base').val($(span[1]).text().trim());
+    
 	}
 
 	$('#temporizador_descripcion').addValidateMaxLength();
@@ -73,51 +75,59 @@ var idInterval = -1;
 		event.preventDefault();
 	});
 
-    function create_update() {
-		
-      	var id = $('#temporizador_id').val();
-      	var tiempo_base = $('#temporizador_tiempo_base').val();
-		var form_params = $('#form-nuevo').serialize() + "&" + $('#fecha').serialize();
-		
-		if (Number(id) != -1) {
-			edit(form_params, function(){
-				bind_click_lnk_reloj();
-				$('#div-nuevo-timesheet').jqmHide();
-			});
-		} else {
-        	var reloj_running = $('#reloj-running');
-			//si existe un reloj corriendo
-        	if (reloj_running.attr('id') != undefined) {
-          		if (StringUtils.isBlank(tiempo_base)) {
-//            			console.info('detener, crear, iniciar');
-						var params = {
-							accion: 'stop',
-							id: reloj_running.getTitle(),
-							time: reloj_running.text(),
-							format: 'html'
-						}
-            			update(params);
-						create(form_params, 1, function(){
-							bind_click_lnk_reloj();
-							reset_times();
-							$('#div-nuevo-timesheet').jqmHide();
-            			});
-          		} else {
-//						console.info('crear');
-						create(form_params, 0, function(){
-							bind_click_lnk_reloj();
-						});
-          		}
-			} else {
-//					console.info('crear, iniciar');
-					create(form_params, 1, function(){
-						bind_click_lnk_reloj();
-						reset_times();
-						$('#div-nuevo-timesheet').jqmHide();
-					});
-			}
-		}
-	}
+  function create_update(){
+      var id = $('#temporizador_id').val();
+      var tiempo_base = $('#temporizador_tiempo_base').val();
+      var form_params = $('#form-nuevo').serialize() + "&" + $('#fecha').serialize();
+      var link_guardar_timesheet = $('#lnk-guardar-timesheet');
+      
+      if (Number(id) != -1) {
+          edit(form_params, function(){
+              bind_click_lnk_reloj();
+              $('#div-nuevo-timesheet').jqmHide();
+              link_guardar_timesheet.trigger(REFRESH_EVENT);
+          });
+      }
+      else {
+          var reloj_running = $('#reloj-running');
+          //si existe un reloj corriendo
+          if (reloj_running.attr('id') != undefined) {
+              if (StringUtils.isBlank(tiempo_base)) {
+                  //            			console.info('detener, crear, iniciar');
+                  var params = {
+                      accion: 'stop',
+                      id: reloj_running.getTitle(),
+                      time: reloj_running.text(),
+                      format: 'html'
+                  }
+                  update(params);
+                  create(form_params, 1, function(){
+                      bind_click_lnk_reloj();
+                      reset_times();
+                      $('#div-nuevo-timesheet').jqmHide();
+                      link_guardar_timesheet.trigger(REFRESH_EVENT);
+                  });
+              }
+              else {
+                  //						console.info('crear');
+                  create(form_params, 0, function(){
+                      bind_click_lnk_reloj();
+                      link_guardar_timesheet.trigger(REFRESH_EVENT);
+                  });
+              }
+          }
+          else {
+              //					console.info('crear, iniciar');
+              create(form_params, 1, function(){
+                  bind_click_lnk_reloj();
+                  reset_times();
+                  $('#div-nuevo-timesheet').jqmHide();
+                  link_guardar_timesheet.trigger(REFRESH_EVENT);
+              });
+          }
+          
+      }
+  }
 
     function bind_click_lnk_reloj() {
 		
@@ -138,7 +148,11 @@ var idInterval = -1;
 			if (confirm('Estas seguro?')) {
 				$.getJSON('/timesheet/delete',{id: id}, function(json){
 					if(json.success){
-						$('#tr_temporizador_' + id).fadeOut();
+						$('#tr_temporizador_' + id).fadeOut(function(){
+              var currentTarget = $(event.currentTarget);
+              currentTarget.parents('.tr_temporizador').remove();
+              currentTarget.trigger(REFRESH_EVENT);
+            });
 					}
 				});
 			}
@@ -189,7 +203,8 @@ var idInterval = -1;
 					bind_click_lnk_reloj();
 				});
 			}
-	
+	    
+      $(event.currentTarget).trigger(REFRESH_EVENT);
 			event.preventDefault();
 		});
 	}
@@ -309,6 +324,29 @@ var idInterval = -1;
 		event.preventDefault();
 	});
 	
-  });
+  $.refreshTotalHours = function(event){
+    var hours_of_day = $('#total_hours_of_day #hours_of_day');
+    var temporizadores = $('#container-temporizadores .component-timesheet:visible');
+    console.debug("Cantidad de temporizadores: %i", temporizadores.length);
+    if (temporizadores.length == 0)
+      hours_of_day.html('00:00');
+    else{
+      var horas_temporizadores = [];
+      temporizadores.each(function(i, temporizador){
+        var hora_temporizador = $(temporizador).find('.clock').html().trim();
+        horas_temporizadores.push(hora_temporizador);
+      });
+      hours_of_day.html(sumArrayHours(horas_temporizadores));
+    }
+    if (event && !event.isPropagationStopped())
+      event.stopPropagation();
+  };
   
+  $('.lnk_borrar_timesheet').die(REFRESH_EVENT).live(REFRESH_EVENT, $.refreshTotalHours);
+  $('#lnk-guardar-timesheet').die(REFRESH_EVENT).live(REFRESH_EVENT, $.refreshTotalHours);
+  $('.lnk_reloj').die(REFRESH_EVENT).live(REFRESH_EVENT, $.refreshTotalHours);
+  
+  $.refreshTotalHours();
+  
+  });
 })(jQuery);

@@ -40,6 +40,41 @@ function remove_fields(link) {
   $(link).parents(".fields").hide();
 };
 
+/**
+ * @param {integer} minutes
+ * @return {string} "HH:MM"
+ */
+function minutesToHours(minutes){
+    var division = minutes / 60;
+    var hours = parseInt(division);
+    var minutes = Math.round((division - hours) * 60);
+    return $.leftPad(hours, 2) + ":" + $.leftPad(minutes,2);
+};
+
+/**
+ * @param {string} hour1 "HH:MM"
+ * @param {string} hour2 "HH:MM" 
+ * @return {string} "HH:MM"
+ */
+function sumTwoHours(hour1, hour2){
+  var hours_and_minutes1 = hour1.split(':'),
+      hours_and_minutes2 = hour2.split(':'),
+      total_minutes = parseInt(hours_and_minutes1[1]) + parseInt(hours_and_minutes2[1]) + 
+                      ((parseInt(hours_and_minutes1[0]) + parseInt(hours_and_minutes2[0])) * 60);
+  return minutesToHours(total_minutes);
+};
+
+/**
+ * @param {array} arrayHours ["HH:MM","HH:MM","HH:MM"]
+ * @return {string} "HH:MM"
+ */
+function sumArrayHours(arrayHours){
+  var i;
+  var acumulativeHour = "00:00";
+  for (i = 0; i < arrayHours.length; i++)
+    acumulativeHour = sumTwoHours(acumulativeHour, arrayHours[i]);
+  return acumulativeHour;
+};
 
 $('#proyecto_estimacion').die('keypress').live('keypress', function(event){
   var otrosKeys = [0,8];
