@@ -29,7 +29,7 @@
       %div{:style => "width: 400px; height:120px; float: left; padding:5px;"}
         %p
           %label{:for => "temporizador_descripcion"} Descripci&oacute;n
-          %textarea#temporizador_descripcion{:cols => "60", :maxlength => "500", :name => "temporizador[descripcion]", :style => "height:65px; width:450px; border:solid 1px;"}
+          %textarea#temporizador_descripcion{:cols => "60", :maxlength => "255", :name => "temporizador[descripcion]", :style => "height:65px; width:450px; border:solid 1px;"}
         %input#temporizador_usuario_id{:name => "temporizador[usuario_id]", :type => "hidden", :value => @usuario.id}/
         %input#temporizador_id{:name => "id", :type => "hidden", :value => "-1"}/
   .component-search-actions

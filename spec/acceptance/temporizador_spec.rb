@@ -121,5 +121,15 @@ feature "Temporizador" do
       page.should have_content "Usted dejó timers corriendo. Favor de revisar"
     end
   end
+  
+  scenario "Ingresando más caracteres de los permitidos en la descripción del temporizador." do 
+    click_link "Agregar Entrada"
+    select "Enterprisey", :from => "Cliente/Proyecto"
+    select "Desarrollo", :from => "Tarea"
+    fill_in "Descripción", :with => "0123456789" * 55
+    click_button "Iniciar"
+    page.should have_clock_running
+    
+  end
 
 end
