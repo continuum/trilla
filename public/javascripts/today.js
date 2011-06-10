@@ -327,7 +327,6 @@ var REFRESH_EVENT = 'refreshTotalHours';
   $.refreshTotalHours = function(event){
     var hours_of_day = $('#total_hours_of_day #hours_of_day');
     var temporizadores = $('#container-temporizadores .component-timesheet:visible');
-    console.debug("Cantidad de temporizadores: %i", temporizadores.length);
     if (temporizadores.length == 0)
       hours_of_day.html('00:00');
     else{
