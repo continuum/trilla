@@ -1,6 +1,6 @@
 class TareasController < ApplicationController
   before_filter :authorizate_admin
-  
+
   def index
     @tareas = Tarea.all
   end
@@ -38,8 +38,9 @@ class TareasController < ApplicationController
     if @tarea.destroy
       redirect_to(tareas_url)
     else
-      index
-      render :action => "index"
+      flash[:error] = 'No se puede borrar una tarea que está relacionada a un proyecto'
+      redirect_to(tareas_url)
     end
   end
+
 end

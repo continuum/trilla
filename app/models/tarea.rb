@@ -1,4 +1,9 @@
 class Tarea < ActiveRecord::Base
+  before_destroy do |tarea|
+    unless ProyectoTarea.find(:first, :conditions => "tarea_id = #{tarea.id}").nil?
+     false
+    end
+  end
   has_many :proyecto_tareas
   has_many :proyectos, :through => :proyecto_tareas
 

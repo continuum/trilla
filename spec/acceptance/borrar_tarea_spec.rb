@@ -30,8 +30,7 @@ feature "Borrar Tarea" do
       click_link "Eliminar"
     end
     page.should have_tarea shuper
-    page.should_not have_content "No existen tareas creadas"
-    page.should have_content "La tarea ha sido referenciada desde un proyecto"
+    page.should have_content "No se puede borrar una tarea que está relacionada a un proyecto"
   end
 
 end
