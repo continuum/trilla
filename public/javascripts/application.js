@@ -30,7 +30,7 @@ function insert_fields(link, method, content) {
 		  $(link).parent().before(content.replace(regexp, new_id));
 	  }
   }
-}
+};
 
 function remove_fields(link) {
   var hidden_field = $(link).prev("input[type=hidden]");
@@ -38,6 +38,15 @@ function remove_fields(link) {
     hidden_field.attr("value", '1');
   }
   $(link).parents(".fields").hide();
-}
+};
+
+
+$('#proyecto_estimacion').die('keypress').live('keypress', function(event){
+  var otrosKeys = [0,8];
+  if(jQuery.inArray(event.which, otrosKeys) == -1 && (event.which < 48 || event.which > 57) || event.which == 13) {
+    event.preventDefault();
+    return false;
+  }
+});
 
 

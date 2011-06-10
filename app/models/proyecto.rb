@@ -13,6 +13,7 @@ class Proyecto < ActiveRecord::Base
   validates_presence_of :descripcion, :message => "Debe ingresar un nombre para el proyecto"
   validates_uniqueness_of :descripcion, :message => "Ya existe un proyecto con el mismo nombre"
   validates_numericality_of :cliente_id, :greater_than => 0, :message => "Debe seleccionar un cliente"
+  validates_numericality_of :estimacion, :message => "Debe ingresar un valor numérico para la estimación", :allow_nil => true
   #validates_associated :tareas
   #validates_associated :cliente
 
