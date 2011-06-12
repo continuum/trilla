@@ -7,25 +7,52 @@ var REFRESH_EVENT = 'refreshTotalHours';
 
     $('#div-nuevo-timesheet').jqm({modal: true});
 
+  function calculateTimeExpression(event){
+    var temporizadorTiempoBase = $(event.currentTarget),
+        temporizadorTiempoBaseValue = temporizadorTiempoBase.val(),
+        itIsExpression = function(value){return /^\d{0,2}:\d{2}([+-]\d{0,2}:\d{2})+$/.test(value)};
+    if (itIsExpression(temporizadorTiempoBaseValue)){
+      var operators = temporizadorTiempoBaseValue.split(/\d{0,2}:\d{2}/),
+          times     = temporizadorTiempoBaseValue.split(/[+-]/);
+      var calculatedTime, i;
+      for (i = 0; i < times.length; i++) {
+        if (i == 0){
+          calculatedTime = times[i];
+          continue;
+        }
+        if (operators[i] == '+'){
+          calculatedTime = sumTwoHours(calculatedTime, times[i]);
+        }else
+        if (operators[i] == '-'){
+          calculatedTime = subtractTwoHours(calculatedTime, times[i]);
+        }
+      }
+      temporizadorTiempoBase.val(calculatedTime);
+    }else{
+      var match = /^(\d{0,2}:\d{2}).*$/.exec(temporizadorTiempoBaseValue);
+      if (match)
+        temporizadorTiempoBase.val(match[1]);
+    }
+  };
+
 	function setTemporizador(temporizador) {
 		$('#temporizador_id').val(temporizador.id);
 		$('#temporizador_descripcion').val(temporizador.descripcion);
 		$('#temporizador_proyecto_id').selectedValue(temporizador.proyecto_id);
 		$('#temporizador_tarea_id').selectedValue(temporizador.tarea_id);
-
 		var span = $('#lnk_reloj-' + temporizador.id).find('span');
 		$('#temporizador_tiempo_base').val($(span[1]).text().trim());
-    
+    $('#temporizador_tiempo_base').unbind('change').change(calculateTimeExpression);
 	}
 
 	$('#temporizador_descripcion').addValidateMaxLength();
 
-    $('#temporizador_tiempo_base').keypress(function (event) {
-		var otrosKeys = [0,8, 58];
+  $('#temporizador_tiempo_base').keypress(function (event) {
+		var otrosKeys = [0,8, 58, 43, 45]; // 43 == + y 45 == -
 		if ($.inArray(event.which, otrosKeys) == -1 && (event.which < 48 || event.which > 57) || event.which == 13) {
 		  event.preventDefault();
 		  return false;
-      	}
+    }
 	}).keyup(function(e){
 		if ($(this).val() === '') {
 			$('#lnk-span-guardar-timesheet').text('Iniciar');
@@ -75,12 +102,22 @@ var REFRESH_EVENT = 'refreshTotalHours';
 		event.preventDefault();
 	});
 
+  function isValidTimeField(timeField){
+    var timeFieldValue = timeField.replace(/\s/g, '');
+    return /^\d{0,2}:\d{2}([+-]\d{0,2}:\d{2})*$/.test(timeFieldValue) || timeFieldValue.blank();
+  }
+
   function create_update(){
       var id = $('#temporizador_id').val();
       var tiempo_base = $('#temporizador_tiempo_base').val();
       var form_params = $('#form-nuevo').serialize() + "&" + $('#fecha').serialize();
       var link_guardar_timesheet = $('#lnk-guardar-timesheet');
       
+      if (!isValidTimeField(tiempo_base)){
+        alert('El formato de la hora ingresada no es válido. Debe ser HH:MM([+-]HH:MM)*');
+        return;
+      }
+
       if (Number(id) != -1) {
           edit(form_params, function(){
               bind_click_lnk_reloj();

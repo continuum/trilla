@@ -53,15 +53,31 @@ function minutesToHours(minutes){
 
 /**
  * @param {string} hour1 "HH:MM"
- * @param {string} hour2 "HH:MM" 
+ * @param {string} hour2 "HH:MM"
  * @return {string} "HH:MM"
  */
 function sumTwoHours(hour1, hour2){
   var hours_and_minutes1 = hour1.split(':'),
       hours_and_minutes2 = hour2.split(':'),
-      total_minutes = parseInt(hours_and_minutes1[1]) + parseInt(hours_and_minutes2[1]) + 
-                      ((parseInt(hours_and_minutes1[0]) + parseInt(hours_and_minutes2[0])) * 60);
+      total_minutes = parseInt(hours_and_minutes1[1]) + parseInt(hours_and_minutes2[1]) +
+                      ((parseInt(hours_and_minutes1[0].blank() ? 0:hours_and_minutes1[0]) +
+                        parseInt(hours_and_minutes2[0].blank() ? 0:hours_and_minutes2[0])) * 60);
   return minutesToHours(total_minutes);
+};
+
+/**
+ * @param {string} hour1 "HH:MM"
+ * @param {string} hour2 "HH:MM"
+ * @return {string} "HH:MM"
+ */
+function subtractTwoHours(hour1, hour2){
+    var hours_and_minutes1 = hour1.split(':'),
+      hours_and_minutes2 = hour2.split(':'),
+      total_minutes = ((parseInt(hours_and_minutes1[0].blank() ? 0:hours_and_minutes1[0])*60) + parseInt(hours_and_minutes1[1])) - 
+                      ((parseInt(hours_and_minutes2[0].blank() ? 0:hours_and_minutes2[0])*60) + parseInt(hours_and_minutes2[1]));
+    if (total_minutes < 0)
+      total_minutes = 0;
+    return minutesToHours(total_minutes);
 };
 
 /**

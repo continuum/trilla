@@ -129,7 +129,46 @@ feature "Temporizador" do
     fill_in "Descripción", :with => "0123456789" * 55
     click_button "Iniciar"
     page.should have_clock_running
-    
+  end
+
+  scenario "Sumando horas en el campo de texto del tiempo." do
+    click_link "Agregar Entrada"
+
+    fill_in "Horas:Minutos", :with => "1:15+:45"
+    fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
+    find_field('Horas:Minutos').value == "02:00"
+
+    fill_in "Horas:Minutos", :with => "1:15+1:45"
+    fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
+    find_field('Horas:Minutos').value == "03:00"
+
+    fill_in "Horas:Minutos", :with => "1:15+:45+:20+2:00"
+    fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
+    find_field('Horas:Minutos').value == "04:20"
+  end
+
+  scenario "Restando horas en el campo de texto del tiempo." do
+    click_link "Agregar Entrada"
+
+    fill_in "Horas:Minutos", :with => "1:15-:45"
+    fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
+    find_field('Horas:Minutos').value == "00:30"
+
+    fill_in "Horas:Minutos", :with => "1:15-1:45"
+    fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
+    find_field('Horas:Minutos').value == "00:00"
+
+    fill_in "Horas:Minutos", :with => "1:15-:45-:20-0:05"
+    fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
+    find_field('Horas:Minutos').value == "00:05"
+  end
+
+  scenario "Sumando y restando en el campo de texto del tiempo." do
+    click_link "Agregar Entrada"
+
+    fill_in "Horas:Minutos", :with => "1:15-:45+:20-:10+2:05"
+    fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
+    find_field('Horas:Minutos').value == "02:45"
   end
 
 end
