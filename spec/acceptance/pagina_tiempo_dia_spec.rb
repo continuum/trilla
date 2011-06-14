@@ -36,7 +36,7 @@ feature "Pagina Tiempo - Dia" do
     temporizador = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café 2", :start => Time.now,
-      :fecha_creacion => Time.now, :stop => Time.now,
+      :fecha_creacion => Date.today, :stop => Time.now,
       :proyecto => enterprisey
     )
     click_link "Día"
@@ -86,7 +86,7 @@ feature "Mostrar el total de horas del día" do
      tarea = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
       :descripcion => "Preparando café", :start => Time.now,
-      :minutos => 5,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 5,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
@@ -100,21 +100,21 @@ feature "Mostrar el total de horas del día" do
      tarea1 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café", :start => Time.now,
-      :minutos => 5,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 5,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
     tarea2 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Leyendo el diario", :start => Time.now,
-      :minutos => 70,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 70,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
     tarea3 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Jugando ping pong", :start => Time.now,
-      :minutos => 124,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 124,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
@@ -129,14 +129,14 @@ feature "Mostrar el total de horas del día" do
     tarea1 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café", :start => Time.now,
-      :minutos => 87,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 87,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
     tarea2 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Leyendo el diario", :start => Time.now,
-      :minutos => 39,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 39,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
@@ -155,7 +155,7 @@ feature "Mostrar el total de horas del día" do
     tarea1 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café", :start => Time.now,
-      :minutos => 87,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 87,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
@@ -175,14 +175,14 @@ feature "Mostrar el total de horas del día" do
     tarea1 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café 1", :start => Time.now,
-      :minutos => 87,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 87,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
     tarea2 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café 2", :start => Time.now,
-      :minutos => 29,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 29,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
@@ -199,7 +199,7 @@ feature "Mostrar el total de horas del día" do
      tarea1 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café 1", :start => Time.now,
-      :minutos => 87,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 87,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
@@ -207,7 +207,7 @@ feature "Mostrar el total de horas del día" do
     click_start_timer tarea1
     Timecop.travel 15.minutes.from_now do
       click_stop_clock_button
-      sleep 2
+      sleep 5
       within_total_hours_of_day do
         page.should have_content "1:42"
       end

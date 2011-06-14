@@ -34,7 +34,7 @@ feature "Editar temporizador" do
       :temporizador, :usuario => pepito,
       :tarea => reunion, :proyecto => next_big_thing,
       :descripcion => "Lecture & beer", :start => Time.now,
-      :minutos => 90,:fecha_creacion => Time.now, :stop => Time.now
+      :minutos => 90,:fecha_creacion => Date.today, :stop => Time.now
     )
     click_link "Día"
     within_timer_row(lecture_and_beer) { click_link "Editar" }

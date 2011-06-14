@@ -63,14 +63,14 @@ feature "Temporizador" do
     preparando_cafe = Fabricate(
       :temporizador, :usuario => perico, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
       :descripcion => "Preparando café", :start => Time.now,
-      :minutos => 5,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 5,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
     lecture_and_beer = Fabricate(
       :temporizador, :usuario => perico, :tarea => Fabricate(:tarea, :descripcion => "Reunión"),
       :descripcion => "Lecture & beer", :start => Time.now,
-      :minutos => 10,:fecha_creacion => Time.now, :stop => Time.now,
+      :minutos => 10,:fecha_creacion => Date.today, :stop => Time.now,
       :iniciado => 0,
       :proyecto => enterprisey
     )
@@ -88,7 +88,7 @@ feature "Temporizador" do
     lo_que_hice_el_dia_anterior = Fabricate(
       :temporizador, :usuario => usuario, :tarea => desarrollo,
       :descripcion => "Esto lo hice ayer", :iniciado => 0, :start => Time.now - 1.day,
-      :fecha_creacion => Time.now - 1.day, :stop => Time.now - 1.day,
+      :fecha_creacion => Date.today - 1.day, :stop => Time.now - 1.day,
       :proyecto => enterprisey
     )
     click_link "Día"
@@ -122,7 +122,7 @@ feature "Temporizador" do
     end
   end
   
-  scenario "Ingresando más caracteres de los permitidos en la descripción del temporizador." do 
+  scenario "Ingresando más caracteres de los permitidos en la descripción del temporizador." do
     click_link "Agregar Entrada"
     select "Enterprisey", :from => "Cliente/Proyecto"
     select "Desarrollo", :from => "Tarea"
