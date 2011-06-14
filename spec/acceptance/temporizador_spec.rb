@@ -131,6 +131,45 @@ feature "Temporizador" do
     page.should have_clock_running
   end
 
+  scenario "Dialogo de temporizador se oculta cuando se inicia y crea un temporizador mientras otro temporizador esté corriendo." do
+    click_link "Agregar Entrada"
+    select "Enterprisey", :from => "Cliente/Proyecto"
+    select "Desarrollo", :from => "Tarea"
+    fill_in "Descripción", :with => "Descripción del primer temporizador"
+    click_button "Iniciar"
+    sleep 3
+    find('#div-nuevo-timesheet').should_not be_visible
+
+    click_link "Agregar Entrada"
+    select "Enterprisey", :from => "Cliente/Proyecto"
+    select "Desarrollo", :from => "Tarea"
+    fill_in "Descripción", :with => "Descripción del segundo temporizador"
+    fill_in "Horas:Minutos", :with => "1:15"
+    click_button "Guardar"
+    sleep 3
+    find('#div-nuevo-timesheet').should_not be_visible
+  end
+
+end
+
+feature "Temporizador - Sumando y restando horas" do
+  let!(:perico) {usuario}
+  let!(:desarrollo) { Fabricate(:tarea, :descripcion => "Desarrollo") }
+  let!(:megabank) { Fabricate(:cliente, :descripcion => "Mega Bank", :contacto => "Farkas") }
+  let!(:enterprisey) do
+    Fabricate(
+      :proyecto,
+      :descripcion => "Enterprisey",
+      :cliente => megabank,
+      :usuarios => [perico],
+      :tareas => [desarrollo]
+    )
+  end
+
+  background do
+    login(perico)
+  end
+
   scenario "Sumando horas en el campo de texto del tiempo." do
     click_link "Agregar Entrada"
 
@@ -170,5 +209,4 @@ feature "Temporizador" do
     fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
     find_field('Horas:Minutos').value == "02:45"
   end
-
 end

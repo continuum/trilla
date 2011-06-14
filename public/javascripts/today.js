@@ -149,6 +149,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
                   //						console.info('crear');
                   create(form_params, 0, function(){
                       bind_click_lnk_reloj();
+                      $('#div-nuevo-timesheet').jqmHide();
                       link_guardar_timesheet.trigger(REFRESH_EVENT);
                   });
               }

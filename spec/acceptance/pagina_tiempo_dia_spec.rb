@@ -52,7 +52,6 @@ feature "Pagina Tiempo - Dia" do
     click_link "Día"
     page.should have_button "Enviar para Aprobación"
   end
-
 end
 
 feature "Mostrar el total de horas del día" do
