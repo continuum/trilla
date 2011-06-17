@@ -70,6 +70,7 @@
       %input{:id => "temporizador[tarea_id]", :name => "temporizador[tarea_id]", :type => "hidden", :value => 0}
       %input{:id => "temporizador[usuario_id]", :name => "temporizador[usuario_id]", :type => "hidden", :value => @usuario.id}
       %input{:id => "temporizador[descripcion]", :name => "temporizador[descripcion]", :type => "hidden", :value => 'week'}
+      %input{:id => "minutos_old", :name => "minutos_old", :type => "hidden", :value => 0}
 
   = render(:partial => "timesheetfooter", :locals => {:action => 'approval'})
  

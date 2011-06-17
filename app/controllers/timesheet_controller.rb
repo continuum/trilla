@@ -225,10 +225,12 @@ class TimesheetController < ApplicationController
 
   def editOnWeek
 
-    if params[:nuevo] == true
+    minutos_old = params[:minutos_old].to_i
+
+    if params[:nuevo] == true || minutos > minutos_old
       @tempo = Temporizador.new(params[:temporizador])
+      @tempo.minutos = (minutos > minutos_old) ? (minutos - minutos_old) : minutos
       @tempo.iniciado = 0
-      @tempo.minutos = minutos
       @tempo.start = fecha
       @tempo.stop = fecha
       @tempo.fecha_creacion = fecha
