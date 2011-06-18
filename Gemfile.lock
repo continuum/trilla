@@ -32,6 +32,8 @@ GEM
     fastercsv (1.5.4)
     ffi (0.6.3)
       rake (>= 0.8.7)
+    ffi (0.6.3-x86-mingw32)
+      rake (>= 0.8.7)
     gdata (1.1.1)
     haml (3.0.25)
     hoe (2.8.0)
@@ -43,7 +45,9 @@ GEM
     linecache (0.43)
     mime-types (1.16)
     nokogiri (1.4.4)
+    nokogiri (1.4.4-x86-mingw32)
     pg (0.11.0)
+    pg (0.11.0-x86-mingw32)
     rack (1.0.1)
     rack-test (0.5.7)
       rack (>= 1.0)
@@ -81,6 +85,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   capybara (= 0.4.0)
