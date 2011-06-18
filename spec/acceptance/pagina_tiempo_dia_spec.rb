@@ -74,7 +74,7 @@ feature "Mostrar el total de horas del día" do
     click_link "Tiempo"
   end
 
-    scenario "Muestra el total de horas por día sin haber agregado ninguna tarea" do
+  scenario "Muestra el total de horas por día sin haber agregado ninguna tarea" do
     click_link "Día"
     within_total_hours_of_day do
       page.should have_content "00:00"
@@ -82,7 +82,7 @@ feature "Mostrar el total de horas del día" do
   end
 
   scenario "Muestra el total de horas por día con una tarea agregada de 5 minutos" do
-     tarea = Fabricate(
+    tarea = Fabricate(
       :temporizador, :usuario => pepito, :tarea => Fabricate(:tarea, :descripcion => "Cosas varias"),
       :descripcion => "Preparando café", :start => Time.now,
       :minutos => 5,:fecha_creacion => Date.today, :stop => Time.now,
@@ -96,7 +96,7 @@ feature "Mostrar el total de horas del día" do
   end
 
   scenario "Muestra el total de horas por día con tres tareas agregadas al inicio" do
-     tarea1 = Fabricate(
+    tarea1 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café", :start => Time.now,
       :minutos => 5,:fecha_creacion => Date.today, :stop => Time.now,
@@ -195,7 +195,7 @@ feature "Mostrar el total de horas del día" do
   end
 
   scenario "Actualiza las horas trabajadas del día cuando se detiene el timer de alguna tarea" do
-     tarea1 = Fabricate(
+    tarea1 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
       :descripcion => "Preparando café 1", :start => Time.now,
       :minutos => 87,:fecha_creacion => Date.today, :stop => Time.now,
@@ -208,7 +208,7 @@ feature "Mostrar el total de horas del día" do
     Timecop.travel 15.minutes.from_now do
       click_stop_clock_button
       within_total_hours_of_day do
-        page.should have_content "1:42"
+        page.should have_content "01:42"
       end
     end
   end

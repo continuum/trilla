@@ -16,6 +16,7 @@ feature "Crear Usuario" do
   end
 
   scenario "sin datos" do
+    pending 'Story ID: 14106807'
     click_link "Crear usuario"
     click_button "Crear"
     page.should have_content "Debe ingresar el nombre del usuario"
@@ -26,6 +27,7 @@ feature "Crear Usuario" do
   end
   
   scenario "con e-mail inválido" do
+    pending 'Story ID: 14106807'
     click_link "Crear usuario"
     fill_in "E-mail", :with => "aeiou"
     click_button "Crear"
@@ -33,6 +35,7 @@ feature "Crear Usuario" do
   end
   
   scenario "con e-mail ya existente" do
+    pending 'Story ID: 14106807'
     click_link "Crear usuario"
     fill_in "E-mail", :with => "gracias@nosemolesten.cl"
     click_button "Crear"
@@ -48,6 +51,7 @@ feature "Crear Usuario" do
   end
 =end  
   scenario "con perfiles válidos" do
+    pending 'Story ID: 14106807'
     click_link "Crear usuario"
     fill_in "Nombres", :with => "Osama"
     fill_in "E-mail", :with => "osama@ala.com"
