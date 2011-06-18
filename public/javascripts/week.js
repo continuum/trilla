@@ -81,9 +81,10 @@
 			
 			form.find('input[name=fecha]').val(fecha);
 			form.find('input[name=nuevo]').val(minutosNew > minutosOld);
-			form.find('input[name=temporizador[proyecto_id]]').val(filtro[1]);
-			form.find('input[name=temporizador[tarea_id]]').val(filtro[2]);
+			form.find('input[name="temporizador[proyecto_id]"]').val(filtro[1]);
+			form.find('input[name="temporizador[tarea_id]"]').val(filtro[2]);
 			form.find('input[name=tiempo_base]').val(newValue);
+			form.find('input[name=minutos_old]').val(minutosOld);
 			
 			form.submit();
 		}

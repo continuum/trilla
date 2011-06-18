@@ -6,14 +6,14 @@ feature "Pagina Tiempo - Dia" do
   let!(:megabank) { Fabricate(:cliente, :descripcion => "Mega Bank", :contacto => "Farkas") }
   let!(:enterprisey) do
     Fabricate(
-      :proyecto, 
-      :descripcion => "Enterprisey", 
+      :proyecto,
+      :descripcion => "Enterprisey",
       :cliente => megabank,
       :usuarios => [pepito],
       :tareas => [desarrollo]
     )
   end
-  
+
   background do
     login(pepito)
     click_link "Timesheet"
@@ -60,20 +60,20 @@ feature "Mostrar el total de horas del día" do
   let!(:megabank) { Fabricate(:cliente, :descripcion => "Mega Bank", :contacto => "Farkas") }
   let!(:enterprisey) do
     Fabricate(
-      :proyecto, 
-      :descripcion => "Enterprisey", 
+      :proyecto,
+      :descripcion => "Enterprisey",
       :cliente => megabank,
       :usuarios => [pepito],
       :tareas => [desarrollo]
     )
   end
-  
+
   background do
     login(pepito)
     click_link "Timesheet"
     click_link "Tiempo"
   end
-  
+
     scenario "Muestra el total de horas por día sin haber agregado ninguna tarea" do
     click_link "Día"
     within_total_hours_of_day do
@@ -139,7 +139,7 @@ feature "Mostrar el total de horas del día" do
       :iniciado => 0,
       :proyecto => enterprisey
     )
-    
+
     click_link "Día"
     page.evaluate_script("window.confirm = function(msg) { return true; }")
     within_timer_row(tarea2) do
@@ -169,7 +169,7 @@ feature "Mostrar el total de horas del día" do
       page.should have_content "2:42"
     end
   end
-  
+
   scenario "Actualiza las horas trabajadas del día cuando se modifica la hora de una tarea" do
     tarea1 = Fabricate(
       :temporizador, :usuario => pepito, :tarea => desarrollo,
@@ -204,9 +204,9 @@ feature "Mostrar el total de horas del día" do
     )
     click_link "Día"
     click_start_timer tarea1
+    page.should have_clock_running
     Timecop.travel 15.minutes.from_now do
       click_stop_clock_button
-      sleep 5
       within_total_hours_of_day do
         page.should have_content "1:42"
       end

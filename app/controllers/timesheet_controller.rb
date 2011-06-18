@@ -1,7 +1,7 @@
 class TimesheetController < ApplicationController
-  
+
   include TimesheetHelper
-  
+
   expose(:fecha_actual) { Time.zone.now }
 
   expose(:fecha) do
@@ -18,10 +18,10 @@ class TimesheetController < ApplicationController
       Date.today
     end
   end
-  
+
   expose(:minutos) do
     minutos = 0
-    unless params[:tiempo_base].blank?  
+    unless params[:tiempo_base].blank?
       tiempo_base = params[:tiempo_base].split(":")
       horas = tiempo_base[0];
       minutos = horas.to_i * 60 + tiempo_base[1].to_i;
@@ -63,7 +63,7 @@ class TimesheetController < ApplicationController
   def nuevoTemporizador
     @clientesProyectos = Cliente.find_with_proyectos_by_usuario session[:usuario_id]
     @tareasProyecto = Tarea.find_by_clientes_proyectos @clientesProyectos
-    
+
   end
 
   def day
@@ -74,7 +74,7 @@ class TimesheetController < ApplicationController
   end
 
   def week
-    
+
     logger.info "semana actual #{fecha} desde: #{fecha.beginning_of_week} hasta: #{fecha.end_of_week}"
     @usuario = session[:usuario]
 
@@ -93,35 +93,35 @@ class TimesheetController < ApplicationController
     #se recorren los 5 dias de la semana, se crea una matriz por cada dia y cliente/proyecto
     7.times { |i|
 
-      dia = fecha.beginning_of_week + i.day 
-      
+      dia = fecha.beginning_of_week + i.day
+
       @listaDias << dia
-      
+
       #se inicializan todos los valores para el dia en 0
       @clientesProyectosTareas.each do |descripcion, llave_combinacion|
         @dataPorDia["#{llave_combinacion};#{dia}"] = 0
       end
-  
+
       sumaDelDia = 0
-  
+
       #se buscan los valores del dia
       Temporizador.find_by_usuario_dia_groupby_proyectos_sum(@usuario, dia).each do |t|
           llave_combinacion = "#{t.proyecto.cliente.id}_#{t.proyecto.id}_#{t.tarea.id}"
           @dataPorDia["#{llave_combinacion};#{dia}"] = t.sum.to_i
           sumaDelDia+=t.sum.to_i
       end
-      
+
       @dataPorDia["sumaDelDia-#{dia}"] = sumaDelDia
     }
-    
+
     @sumaTotal = 0
     @clientesProyectosTareas.each do |descripcion, llave_combinacion|
-      
+
       suma = 0;
       @listaDias.each do | dia |
         suma+= @dataPorDia["#{llave_combinacion};#{dia}"].to_i
       end
-    
+
       @clientesProyectosTareasSuma[llave_combinacion] = suma
       @sumaTotal+= suma
     end
@@ -170,36 +170,36 @@ class TimesheetController < ApplicationController
     @temporizador.destroy
     render :json => {:msg => 'ok', :success => true}
   end
-  
+
   def approval
 
     @usuario = session[:usuario]
-    
+
     Temporizador.update_estado_for_usuario_semana(@usuario, fecha,'POR_APROVAR')
 
     redirect_to :action => :week
-    
+
   end
-  
+
   def deleteRowWeek
-  
+
     @usuario = session[:usuario]
 
     Temporizador.delete_by_usuario_semana_groupby_proyecto(@usuario, fecha, params[:filtro])
-    
+
     redirect_to :action => :week
-    
+
   end
-  
+
   def addRowWeek
-   
+
     self.nuevoTemporizador
     render(:file => 'timesheet/addrowweek' )
-    
+
   end
-  
+
   def newRowWeek
-   
+
     @usuario = session[:usuario]
     row_week = params[:row_week]
     logger.info "row_week: #{row_week}"
@@ -207,7 +207,7 @@ class TimesheetController < ApplicationController
     7.times { |i|
 
       dia = fecha.beginning_of_week + i.day
-        
+
       t = Temporizador.new(params[:row_week])
       t.usuario_id = @usuario.id
       t.descripcion = '';
@@ -217,27 +217,29 @@ class TimesheetController < ApplicationController
       t.stop = Time.now
       t.fecha_creacion = dia
       t.save
-    }    
+    }
 
     redirect_to :action => :week
-    
+
   end
-  
+
   def editOnWeek
 
-    if params[:nuevo] == true
+    minutos_old = params[:minutos_old].to_i
+
+    if params[:nuevo] == true || minutos > minutos_old
       @tempo = Temporizador.new(params[:temporizador])
+      @tempo.minutos = (minutos > minutos_old) ? (minutos - minutos_old) : minutos
       @tempo.iniciado = 0
-      @tempo.minutos = minutos
       @tempo.start = fecha
       @tempo.stop = fecha
       @tempo.fecha_creacion = fecha
       @tempo.save
     else
-      
+
     end
-    
+
     redirect_to :action => :week
   end
-  
+
 end
