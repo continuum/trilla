@@ -112,13 +112,14 @@ feature "Temporizador" do
     select "Enterprisey", :from => "Cliente/Proyecto"
     select "Desarrollo", :from => "Tarea"
     click_button "Iniciar"
+    page.should have_clock_running
     Timecop.travel(Time.now + 17.hours + 59.minutes) do
       click_link "Timesheet"
-      page.should_not have_content "Usted dejó timers corriendo. Favor de revisar"
+      page.should_not have_content "Usted dejó timers corriendo. Favor de revisar los días"
     end
     Timecop.travel(Time.now + 18.hours + 1.minute) do
       click_link "Timesheet"
-      page.should have_content "Usted dejó timers corriendo. Favor de revisar"
+      page.should have_content "Usted dejó timers corriendo. Favor de revisar los días"
     end
   end
   

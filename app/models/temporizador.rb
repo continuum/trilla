@@ -39,8 +39,8 @@ class Temporizador < ActiveRecord::Base
   end
   
   def self.find_all_delayed_by_usuario(usuario, horas = 18.hours)
-      find( :all, 
-            :conditions => ["iniciado = 1 and usuario_id = ? and (? - temporizadors.start) > ? ",usuario.id, Time.zone.now, horas.to_s])
+    find( :all,
+          :conditions => ["iniciado = 1 and usuario_id = ? and (? - temporizadors.start) > ?", usuario.id, Time.now.utc, horas.to_s])
   end
   
   def self.update_estado_for_usuario_semana(usuario, fecha, estado)

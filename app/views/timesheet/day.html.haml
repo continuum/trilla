@@ -4,9 +4,9 @@
 
 = render(:partial => "shared/timesheetmenu")
 = javascript_include_tag "jquery/plugins/jquery.timeentry.min.js"
--if @atrasadas.size > 0
+-unless @atrasadas.empty?
   .errorExplanation
-    Usted dejó timers corriendo. Favor de revisar los días:
+    Usted dej&oacute; timers corriendo. Favor de revisar los d&iacute;as:
     %ul
       -@atrasadas.each do |tempo|
         %li= link_dia tempo.fecha_creacion 
