@@ -15,7 +15,8 @@ class Temporizador < ActiveRecord::Base
         :conditions => ["usuario_id = ? and temporizadors.fecha_creacion between ? and ?", usuario.id, fecha, (fecha + 1.day)],
         :joins => ["left join proyectos on temporizadors.proyecto_id = proyectos.id",
                    "left join clientes on proyectos.cliente_id = clientes.id",
-                   "left join tareas on temporizadors.tarea_id = tareas.id"])
+                   "left join tareas on temporizadors.tarea_id = tareas.id"],
+        :order => "created_at asc")
   end
   
   def self.find_by_usuario_semana_groupby_proyecto(usuario, fecha, filtro = {})
