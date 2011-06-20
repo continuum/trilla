@@ -43,6 +43,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
 		var span = $('#lnk_reloj-' + temporizador.id).find('span');
 		$('#temporizador_tiempo_base').val($(span[1]).text().trim());
     $('#temporizador_tiempo_base').unbind('change').change(calculateTimeExpression);
+    $('#lnk-guardar-timesheet').attr('disabled', '');
 	}
 
 	$('#temporizador_descripcion').addValidateMaxLength();
@@ -78,7 +79,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
 		});
 	}
 
-    function create(form_params, iniciado, callback) {
+  function create(form_params, iniciado, callback) {
 		form_params+='&iniciado=' + iniciado;
 		$.get('/timesheet/create?' + form_params, function(div){
 			$('#container-temporizadores').empty().append(div);
@@ -88,7 +89,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
 		});
 	}
 
-    function edit(form_params, callback) {
+  function edit(form_params, callback) {
 		$.get('/timesheet/edit?' + form_params, function(div){
 			$('#container-temporizadores').empty().append(div);
 			if (callback) {
@@ -112,25 +113,36 @@ var REFRESH_EVENT = 'refreshTotalHours';
       var tiempo_base = $('#temporizador_tiempo_base').val();
       var form_params = $('#form-nuevo').serialize() + "&" + $('#fecha').serialize();
       var link_guardar_timesheet = $('#lnk-guardar-timesheet');
+      link_guardar_timesheet.attr('disabled', 'disabled');
+
+      var _create_edit_fn = function(_function, mustReset, secondParam){
+        var commonCallBack = function(){
+          bind_click_lnk_reloj();
+          if (mustReset)
+            reset_times();
+          $('#div-nuevo-timesheet').jqmHide();
+          link_guardar_timesheet.trigger(REFRESH_EVENT);
+        };
+        if (secondParam != undefined){
+          _function(form_params, secondParam, commonCallBack);
+        } else {
+          _function(form_params, commonCallBack);
+        }
+      };
       
       if (!isValidTimeField(tiempo_base)){
         alert('El formato de la hora ingresada no es válido. Debe ser HH:MM([+-]HH:MM)*');
+        link_guardar_timesheet.attr('disabled', '');
         return;
       }
 
       if (Number(id) != -1) {
-          edit(form_params, function(){
-              bind_click_lnk_reloj();
-              $('#div-nuevo-timesheet').jqmHide();
-              link_guardar_timesheet.trigger(REFRESH_EVENT);
-          });
-      }
-      else {
+        _create_edit_fn(edit);
+      } else {
           var reloj_running = $('#reloj-running');
           //si existe un reloj corriendo
           if (reloj_running.attr('id') != undefined) {
               if (StringUtils.isBlank(tiempo_base)) {
-                  //            			console.info('detener, crear, iniciar');
                   var params = {
                       accion: 'stop',
                       id: reloj_running.getTitle(),
@@ -138,37 +150,18 @@ var REFRESH_EVENT = 'refreshTotalHours';
                       format: 'html'
                   }
                   update(params);
-                  create(form_params, 1, function(){
-                      bind_click_lnk_reloj();
-                      reset_times();
-                      $('#div-nuevo-timesheet').jqmHide();
-                      link_guardar_timesheet.trigger(REFRESH_EVENT);
-                  });
+                  _create_edit_fn(create, true, 1);
+              } else {
+                _create_edit_fn(create, false, 0);
               }
-              else {
-                  //						console.info('crear');
-                  create(form_params, 0, function(){
-                      bind_click_lnk_reloj();
-                      $('#div-nuevo-timesheet').jqmHide();
-                      link_guardar_timesheet.trigger(REFRESH_EVENT);
-                  });
-              }
+          } else {
+              //console.info('crear, iniciar');
+              _create_edit_fn(create, true, 1);
           }
-          else {
-              //					console.info('crear, iniciar');
-              create(form_params, 1, function(){
-                  bind_click_lnk_reloj();
-                  reset_times();
-                  $('#div-nuevo-timesheet').jqmHide();
-                  link_guardar_timesheet.trigger(REFRESH_EVENT);
-              });
-          }
-          
       }
   }
 
-    function bind_click_lnk_reloj() {
-		
+  function bind_click_lnk_reloj() {
 		$('.lnk_editar_timesheet').unbind('click').click(function(event){
 			$('#lnk-span-guardar-timesheet').text('Actualizar');
 			var id = $(this).getIdSplit('-')[1];
@@ -188,8 +181,8 @@ var REFRESH_EVENT = 'refreshTotalHours';
 					if(json.success){
 						$('#tr_temporizador_' + id).fadeOut(function(){
               var currentTarget = $(event.currentTarget);
-              currentTarget.parents('.tr_temporizador').remove();
               currentTarget.trigger(REFRESH_EVENT);
+              currentTarget.parents('.tr_temporizador').remove();
             });
 					}
 				});
@@ -212,7 +205,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
 						time: reloj_running.text(),
 						format: 'html'
 					}
-					update(params);
+          update(params, function(){$(event.currentTarget).trigger(REFRESH_EVENT);});
 				}
 	
 				//inicia el reloj seleccionado
@@ -225,6 +218,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
 				update(params, function(){
 					bind_click_lnk_reloj();
 					reset_times();
+          $(event.currentTarget).trigger(REFRESH_EVENT);
 				});
 	
 			} else {
@@ -239,10 +233,9 @@ var REFRESH_EVENT = 'refreshTotalHours';
 	          	}
 				update(params, function(){
 					bind_click_lnk_reloj();
+          $(event.currentTarget).trigger(REFRESH_EVENT);
 				});
 			}
-	    
-      $(event.currentTarget).trigger(REFRESH_EVENT);
 			event.preventDefault();
 		});
 	}
@@ -373,17 +366,23 @@ var REFRESH_EVENT = 'refreshTotalHours';
         var hora_temporizador = $(temporizador).find('.clock').html().trim();
         horas_temporizadores.push(hora_temporizador);
       });
-      hours_of_day.html(sumArrayHours(horas_temporizadores));
+      var hours_sum = sumArrayHours(horas_temporizadores);
+      hours_of_day.html(hours_sum);
     }
     if (event && !event.isPropagationStopped())
       event.stopPropagation();
   };
   
-  $('.lnk_borrar_timesheet').die(REFRESH_EVENT).live(REFRESH_EVENT, $.refreshTotalHours);
-  $('#lnk-guardar-timesheet').die(REFRESH_EVENT).live(REFRESH_EVENT, $.refreshTotalHours);
+  $('.lnk_borrar_timesheet').bind(REFRESH_EVENT, $.refreshTotalHours);
+  $('#lnk-guardar-timesheet').bind(REFRESH_EVENT, $.refreshTotalHours);
   $('.lnk_reloj').die(REFRESH_EVENT).live(REFRESH_EVENT, $.refreshTotalHours);
   
   $.refreshTotalHours();
   
+  // Actualiza el total de horas del día cada un minuto.
+  if ($.intervalRefreshTotalHoursId == undefined){
+    $.intervalRefreshTotalHoursId = window.setInterval($.refreshTotalHours, 60000);
+  }
+
   });
 })(jQuery);
