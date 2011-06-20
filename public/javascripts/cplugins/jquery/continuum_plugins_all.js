@@ -50,14 +50,18 @@ window.viewport =
 		$('<div class="errorDialogContainer"></div>').appendTo('body').ajaxError(function(event, request, settings){
 			
 			//console.info(event, request, settings, inGlobalError, new Date().getTime());
-
+      if (request.status == 403){
+        $.alert("Su sesi&oacute;n ha expirado. Haga click en 'Cerrar' para recargar esta página.", function(event){
+          window.open('/','_self');
+        });
+      }else
 			if (request.status != 200){
 
 				var statusText = request.statusText;
 				
 				if (statusText !== 'OK' && statusText !== ''){
 				
-					if (request.status == 401 || request.status == 403) {
+					if (request.status == 401) {
 						statusText = 'Usted no cuenta con permisos suficientes para ejecutar esta acci\u00F3n o su sesi\u00F3n ha expirado';
 					}
 					
@@ -78,7 +82,7 @@ window.viewport =
 							inGlobalError = false;
 						});
 						
-						if (request.status == 401 || request.status == 403) {
+						if (request.status == 401) {
 							$('.data-app').empty();
 							$('.contenedor-principal').append('<div style="overflow:hidden;"><iframe width="100%" height="100%" frameborder="0" src="no-tiene-acceso.html"></iframe></div>');
 							$('.ajax-msg-empty').remove();
