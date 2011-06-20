@@ -369,7 +369,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
       var hours_sum = sumArrayHours(horas_temporizadores);
       hours_of_day.html(hours_sum);
     }
-    if (event && !event.isPropagationStopped())
+    if (event && (typeof event.isPropagationStopped) == 'function' && !event.isPropagationStopped())
       event.stopPropagation();
   };
   
