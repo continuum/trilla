@@ -15,61 +15,6 @@ feature "Crear Usuario" do
     click_link "Usuarios"
   end
 
-  scenario "sin datos" do
-    pending 'Story ID: 14106807'
-    click_link "Crear usuario"
-    click_button "Crear"
-    page.should have_content "Debe ingresar el nombre del usuario"
-    page.should have_content "Debe ingresar el e-mail del usuario"
-    #page.should have_content "Debe ingresar un perfil"
-    page.should_not have_content "Formato de e-mail inválido"
-    page.should_not have_content "Perfil inválido"
-  end
-  
-  scenario "con e-mail inválido" do
-    pending 'Story ID: 14106807'
-    click_link "Crear usuario"
-    fill_in "E-mail", :with => "aeiou"
-    click_button "Crear"
-    page.should have_content "Formato de e-mail inválido"
-  end
-  
-  scenario "con e-mail ya existente" do
-    pending 'Story ID: 14106807'
-    click_link "Crear usuario"
-    fill_in "E-mail", :with => "gracias@nosemolesten.cl"
-    click_button "Crear"
-    page.should have_content "Ya existe un usuario con esta dirección de e-mail"
-  end
-=begin
-  #Ahora se ingresa el perfil con select, ya no es necesaria esta prueba  
-  scenario "con perfil inválido" do
-    click_link "Crear usuario"
-    fill_in "Perfil", :with => "torturador"
-    click_button "Crear"
-    page.should have_content "Perfil inválido"
-  end
-=end  
-  scenario "con perfiles válidos" do
-    pending 'Story ID: 14106807'
-    click_link "Crear usuario"
-    fill_in "Nombres", :with => "Osama"
-    fill_in "E-mail", :with => "osama@ala.com"
-    select "Administrador"
-    click_button "Crear"
-    page.should_not have_content "Perfil inválido"
-    page.should_not have_content "Nuevo Usuario"
-    page.should have_content "ADMIN"
-    click_link "Crear usuario"
-    fill_in "Nombres", :with => "Obama"
-    fill_in "E-mail", :with => "obama@usa.com"
-    select "Usuario"
-    click_button "Crear"
-    page.should_not have_content "Perfil inválido"
-    page.should_not have_content "Nuevo Usuario"
-    page.should have_content "USUARIO"
-  end
-  
   scenario "Editar usuario" do
     click_link "Ricardo Meruane"
     fill_in "Nombres", :with => "Profesor salomon"

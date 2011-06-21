@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :usuarios, :except => [:new]
+  map.resources :usuarios
   map.resources :tareas
   map.resources :proyecto_tareas
   map.resources :proyecto_usuarios

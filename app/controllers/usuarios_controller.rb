@@ -16,10 +16,6 @@ class UsuariosController < ApplicationController
     end
   end
 
-  def new
-    @usuario = Usuario.new
-  end
-
   def edit
     show
   end
