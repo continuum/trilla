@@ -105,7 +105,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
 
   function isValidTimeField(timeField){
     var timeFieldValue = timeField.replace(/\s/g, '');
-    return /^\d{0,2}:\d{2}([+-]\d{0,2}:\d{2})*$/.test(timeFieldValue) || timeFieldValue.blank();
+    return /^\d{0,2}(:\d{2})?([+-]\d{0,2}:\d{2})*$/.test(timeFieldValue) || timeFieldValue.blank();
   }
 
   function create_update(){

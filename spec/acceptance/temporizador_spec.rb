@@ -174,9 +174,9 @@ feature "Temporizador - Sumando y restando horas" do
   scenario "Sumando horas en el campo de texto del tiempo." do
     click_link "Agregar Entrada"
 
-    fill_in "Horas:Minutos", :with => "1:15+:45"
+    fill_in "Horas:Minutos", :with => "1:15+:45+00:09"
     fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
-    find_field('Horas:Minutos').value == "02:00"
+    find_field('Horas:Minutos').value == "02:09"
 
     fill_in "Horas:Minutos", :with => "1:15+1:45"
     fill_in "Descripción", :with => "Cambiando de foco del campo Horas:Minutos"
