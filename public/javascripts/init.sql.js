@@ -179,7 +179,7 @@
 		/**
 		 * muestra los resultados sql
 		 */
-		$.muestraResultados = function(div, json) {
+    $.muestraResultados = function(div, json) {
 			
 			div.append('<br>').show();
 			
@@ -227,8 +227,9 @@
 				tr+='</tbody></table>';
 				
 				div.append($('<div style="overflow: auto;height:auto; max-height:400px;">' + tr + '</div>').resizable());
-				
-			}else {
+				div.append('<a class="export_csv" query="' + json.sql + '" maxrows="' + json.maxrows  + '" href="javascript:void(0)">Descargar CSV</a>');
+			  div.append('<br><br>');
+    } else {
 			
 				var detalle = [];
 				

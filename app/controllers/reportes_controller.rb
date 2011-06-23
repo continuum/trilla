@@ -72,7 +72,6 @@ class ReportesController < ApplicationController
   
   
   def export_csv
-    
     query = params[:query]
     maxrows = params[:maxrows].to_i
     

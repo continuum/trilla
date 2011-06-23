@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature "Consultar Reportes" do
+  require 'net/http'
   let!(:pepito) {usuario}
   
   background do
@@ -39,8 +40,18 @@ feature "Consultar Reportes" do
     end
   end
 
+  scenario "Descargar archivo CSV de los resultados obtenidos en la consulta" do
+    usuario1 = Fabricate(:usuario, :nombres => 'Carlos Casselli', :email => 'carloscasselli@goleador.cl')
+    usuario2 = Fabricate(:usuario, :nombres => 'Rey Arturo', :email => 'reyarturo@mesaredonda.cl')
+    fill_in 'querys-sql', :with => 'SELECT * FROM usuarios'
+    click_button 'Ejecutar'
+    page.should have_link 'Descargar CSV'
+    result = Net::HTTP.post_form(URI.parse('http://localhost:3000/reportes/export_csv'),
+                                          { 'query' => 'SELECT * FROM usuarios',
+                                            'maxrows' => '-1'})
+    result == Net::HTTPFound
+  end
 end
-
 
 feature "Nuevo Reporte" do
   let!(:pepito) {usuario}
