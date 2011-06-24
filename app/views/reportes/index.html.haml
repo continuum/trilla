@@ -23,7 +23,7 @@
             %th
           - @reportes.each do |reporte|
             %tr[reporte, :tr]
-              %td #{link_to reporte.nombre, edit_reporte_path(reporte)}
+              %td= h reporte.nombre
               %td= h reporte.descripcion
               %td= h reporte.query
               %td= h reporte.tipo

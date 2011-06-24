@@ -3,7 +3,7 @@ require 'fastercsv'
 class ReportesController < ApplicationController
     
   def index
-    @tipos = ActiveRecord::Base.connection.execute('SELECT distinct(r.tipo) FROM reportes r where r.tipo is not null')#.map { |cli| [cli.tipo, cli.nombre] }
+    @tipos = Reporte.tipos
     @reportes = Reporte.all
   end
 
@@ -13,6 +13,7 @@ class ReportesController < ApplicationController
 
   def new
     @reporte = Reporte.new
+    @tipos = Reporte.tipos
   end
 
   def edit
@@ -28,45 +29,28 @@ class ReportesController < ApplicationController
   def create
     @reporte = Reporte.new(params[:reporte])
     if @reporte.save
+      @tipos = Reporte.tipos
       flash[:notice] = 'Reporte was successfully created.'
       redirect_to(reportes_url)
     else
+      @tipos = Reporte.tipos
       render :action => "new"
     end
   end  
     
   def execute
-    
     querys = params[:querys]
     maxrows = params[:maxrows] || -1
     maxrows= maxrows.to_i
-    
     s = querys.split("}SQL")
-
-    count = 0
-   
+    s.select { |sql| sql.upcase.start_with? 'SELECT' }
     result = {:msg => 'ok', :success => true}
-   
-    s.each do |d|
-      
+    s.each_with_index do |d, count|
       query = d.sub('SQL{','')
-      
-      #if query.upcase.start_with?("SELECT ")
-        
-        if maxrows > 0
-          res = ActiveRecord::Base.connection.execute("#{query} limit #{maxrows}")
-        else
-          res = ActiveRecord::Base.connection.execute(query)
-        end
-        
-        result.merge!({"result#{count}" => {:data => res, :sql => query, :maxrows => maxrows }})
-        count+= 1
-      #end
-      
+      res = ActiveRecord::Base.connection.execute("#{query} " + (maxrows > 0 ? "limit #{maxrows}" : ""))
+      result.merge!({"result#{count}" => {:data => res, :sql => query, :maxrows => maxrows }})
     end
-   
-    result.merge!({:countResults => count})
-   
+    result.merge!({:countResults => s.length})
     render :json => result
   end
   
@@ -74,42 +58,28 @@ class ReportesController < ApplicationController
   def export_csv
     query = params[:query]
     maxrows = params[:maxrows].to_i
-    
-    if maxrows > 0
-      res = ActiveRecord::Base.connection.execute("#{query} limit #{maxrows}")
-    else
-      res = ActiveRecord::Base.connection.execute(query)
-    end
-  
+    res = ActiveRecord::Base.connection.execute("#{query} " + (maxrows > 0 ? "limit #{maxrows}" : ""))
     csv_string = FasterCSV.generate(:col_sep => ";", :row_sep => "\r\n") { |csv|
       csv << res[0].keys
       res.each do |obj|
         csv << obj.values
       end
     }
-
     outfile = "export_" + Time.now.strftime("%m-%d-%Y") + ".xls"
-
-    send_data csv_string, :type => 'application/vnd.ms-excel; charset=UTF-8; header=present', :disposition => "attachment; filename=#{outfile}"
-    
+    send_data csv_string, :type => 'application/vnd.ms-excel; charset=UTF-8; header=present',
+                          :disposition => "attachment; filename=#{outfile}"
   end
   
   def save_query_report
-    
     reporte = Reporte.new(params[:reporte])
     reporte.save
-    
     render :json => {:msg => 'ok', :success => true}
   end
   
   def tipos_reportes
-    tipos = ActiveRecord::Base.connection.execute('SELECT distinct(r.tipo) FROM reportes r where r.tipo is not null')
+    tipos = Reporte.tipos
     result = {:msg => 'ok', :success => true, :tipos => tipos}
     render :json => result
-  end
-  
-  def sql
-    
   end
   
 end

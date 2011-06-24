@@ -8,16 +8,14 @@
     .forms-row-single-division.left
       = f.label :descripcion, "Descripción"
     .forms-row-single-division.right
-      = f.text_field :descripcion
+      = f.text_area :descripcion, :cols => 30, :rows => 3
   %li
     .forms-row-single-division.left
       = f.label :query, "Query"
     .forms-row-single-division.right
-      = f.text_field :query
+      = f.text_area :query, :cols => 30, :rows => 5
   %li
     .forms-row-single-division.left
       = f.label :tipo, "Tipo"
-      - tipos_array = Reporte.all.map { |cli| [cli.tipo, cli.nombre] }
     .forms-row-single-division.right
-      = f.select :tipo, options_for_select([["Selecciona un tipo",-1]].concat(@tipos),@reporte.tipo)
-
+      = f.text_field :tipo

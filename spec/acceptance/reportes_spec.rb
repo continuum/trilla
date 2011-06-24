@@ -68,7 +68,8 @@ feature "Nuevo Reporte" do
   end
 
   scenario "Se visualiza el formulario de creación del reporte." do
-    pending
+    click_link "Reportes"
+    click_link "Crear reporte"
     page.should have_field 'Nombre'
     page.should have_field 'Descripción'
     page.should have_field 'Query'
@@ -78,12 +79,13 @@ feature "Nuevo Reporte" do
   end
   
   scenario "Se crea el reporte exitosamente" do
-    pending
     reporte1 = Fabricate(:reporte, :nombre => "Reporte 2011", :tipo => 'Registro Horas')
+    click_link "Reportes"
+    click_link "Crear reporte"
     fill_in 'Nombre', :with => 'Nuevo Reporte 2013'
     fill_in 'Descripción', :with => 'Descripción del nuevo reporte'
     fill_in 'Query', :with => 'SELECT * FROM temporizadors'
-    select 'Registro Horas', :from => 'Tipo'
+    fill_in 'Tipo', :with => 'Tipo nuevo'
     click_button 'Crear'
     page.should have_content 'Nuevo Reporte 2013'
   end
