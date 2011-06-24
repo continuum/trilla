@@ -1,25 +1,34 @@
-%p{:style => "width:250px;"}
-  = tempo.proyecto.cliente.descripcion if tempo.proyecto
-  \/
-  %b= tempo.proyecto.descripcion if tempo.proyecto
-  %br
-  = tempo.tarea.descripcion if tempo.tarea
-%p{:id => "panel-display-#{tempo.id}", :style => "width:120px;"}
-  - if tempo.iniciado == 1
-    %a.lnk_reloj.stop{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Detener", :style=>"color:blue;"}
-      %span#reloj-running{:title=>"#{tempo.id}", :style=>"display:none;"}
-        = tempo.format_horas() + ":00:000"
-      %span#reloj-running-display.clock.running
-        = tempo.format_horas()
-      %img{:src=>"/images/stop.gif", :border=> "0", :style=>"vertical-align:middle;"}
-  - else
-    %a.lnk_reloj.start{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Iniciar"}
-      %span{:id=>"reloj-#{tempo.id}", :title=>"#{tempo.id}", :style=>"display:none;"}
-        = tempo.format_horas()
-      %span.clock
-        = tempo.format_horas()
-      %img{:src=>"/images/start.png", :border=> "0", :style=>"vertical-align:middle;"}
-%p{:style => "width:400px;"}= tempo.descripcion
-%a.lnk_borrar_timesheet.accion{:href => "javascript:;", :id => "lnk_borrar_timesheet-#{tempo.id}"} Borrar
-%a.lnk_editar_timesheet.accion{:href => "javascript:;", :id => "lnk_editar_timesheet-#{tempo.id}"} Editar
+%table.timeday(cellspadding="0" cellpadding="0" border="0" width="100%")
+  %col(width="250px")
+  %col(width="170px")
+  %col
+  %tr
+    %td
+      = tempo.proyecto.cliente.descripcion if tempo.proyecto
+      \/
+      %b= tempo.proyecto.descripcion if tempo.proyecto
+      %br
+      = tempo.tarea.descripcion if tempo.tarea
+    %td
+      %p{:id => "panel-display-#{tempo.id}"}
+        - if tempo.iniciado == 1
+          %a.lnk_reloj.stop{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Detener"}
+            %span#reloj-running{:title=>"#{tempo.id}", :style=>"display:none;"}
+              = tempo.format_horas() + ":00:000"
+            %span#reloj-running-display.clock.running
+              = tempo.format_horas()
+            %img{:src=>"/images/stop.gif", :border=> "0", :style=>"vertical-align:middle;"}
+        - else
+          %a.lnk_reloj.start{:id=>"lnk_reloj-#{tempo.id}", :href=>"javascript:;", :title=>"Iniciar"}
+            %span{:id=>"reloj-#{tempo.id}", :title=>"#{tempo.id}", :style=>"display:none;"}
+              = tempo.format_horas()
+            %span.clock
+              = tempo.format_horas()
+            %img{:src=>"/images/start.png", :border=> "0", :style=>"vertical-align:middle;"}
+    %td.descripcion
+      %p= tempo.descripcion
+      .acciones
+        %a.lnk_borrar_timesheet.accion{:href => "javascript:;", :id => "lnk_borrar_timesheet-#{tempo.id}"} Borrar
+        |
+        %a.lnk_editar_timesheet.accion{:href => "javascript:;", :id => "lnk_editar_timesheet-#{tempo.id}"} Editar
 %span{:id => "json_editar_timesheet-#{tempo.id}", :style => "display:none;"}= tempo.to_json

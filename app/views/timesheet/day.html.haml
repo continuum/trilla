@@ -9,7 +9,7 @@
     Usted dej&oacute; timers corriendo. Favor de revisar los d&iacute;as:
     %ul
       -@atrasadas.each do |tempo|
-        %li= link_dia tempo.fecha_creacion 
+        %li= link_dia tempo.fecha_creacion
 .component-navigator-tabs
   %ul
     %li.tab-select.first
@@ -23,38 +23,43 @@
 .component-search
   .component-search-forms
     -if (fecha.day != fecha_actual.day) || (fecha.day == fecha_actual.day && fecha.month != fecha_actual.month)
-      %a#hoy{:href => "/timesheet/day"} 
+      %a#hoy{:href => "/timesheet/day"}
         %span
-          %b Hoy  
+          %b Hoy
     - else
-      %a#hoy{:href => 'javascript:;', :style => 'color: grey;'} 
-        %span Hoy  
-    
+      %a#hoy{:href => 'javascript:;'}
+        %span Hoy
+
     %span -
-          
+
     %b= fecha
     =link_dia_anterior fecha
-    %input#datepicker{:style => "width: 0px; border:0 solid;", :type => "text", :value => fecha}/
+    %input#datepicker{:type => "text", :value => fecha}/
     =link_dia_siguiente fecha
   .component-timesheet-header
-    %p{:style => "width:250px;"}
-      %b Cliente/Proyecto
-    %p{:style => "width:120px;"}
-      %b Tiempo
-    %p
-      %b Descripci&oacute;n
-    %a.lnk-nuevo-timesheet.accion{:href => "javascript:;"}
-      %b Agregar Entrada
+    %table.timeday(cellspadding="0" cellpadding="0" border="0" width="100%")
+      %col(width="250px")
+      %col(width="170px")
+      %col
+      %tr
+        %th
+          Cliente/Proyecto
+        %th
+          Tiempo
+        %th
+          Descripci&oacute;n
 
   #container-temporizadores
     - @temporizadores.each do |tempo|
       .component-timesheet[tempo, :tr]
         = render(:partial => "clock", :locals => { :tempo => tempo})
-  
+
   #total_hours_of_day
-    Total:&nbsp;
-    %span#hours_of_day
-  
+    %p
+      Total:&nbsp;
+      %span#hours_of_day
+    %a.lnk-nuevo-timesheet.accion{:href => "javascript:;"}
+      %b Agregar Entrada
   = render(:partial => "edittime", :locals => {:fecha => fecha})
 
   = render(:partial => "timesheetfooter", :locals => {:action => 'week'})

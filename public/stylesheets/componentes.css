@@ -1387,3 +1387,47 @@ table.tablesorter thead tr .header {
       margin: 0;
       padding: 0;
       list-style: none; }
+
+
+.timeday{
+
+}
+
+.timeday td{
+	border-bottom:1px solid #ccc;
+	padding:6px 4px;
+}
+
+.timeday td.descripcion p{
+	float:left;
+}
+
+.timeday td.descripcion .acciones{
+	float:right;
+	padding-right:14px;
+}
+
+.timeday th{
+	border-bottom:1px solid #ccc;
+	text-align:left;
+	font-weight:bold;
+	padding:6px 4px;
+}
+
+#total_hours_of_day p{
+	display:block;
+	padding:10px;
+	font-weight:bold;
+	font-size:18px;
+	margin-bottom:10px;
+}
+
+#total_hours_of_day a{
+	border:1px solid #ccc;
+	padding:8px;
+	margin-left:10px;
+}
+
+#total_hours_of_day a:hover{
+	background:#e1e1e1;
+}
