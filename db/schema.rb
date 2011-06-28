@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110513162118) do
+ActiveRecord::Schema.define(:version => 20110628195108) do
 
   create_table "clientes", :force => true do |t|
     t.string   "descripcion"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20110513162118) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "time_zone"
+    t.string   "api_key",    :limit => 40, :default => ""
   end
 
 end
