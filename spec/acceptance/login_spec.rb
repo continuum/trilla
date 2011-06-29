@@ -20,3 +20,17 @@ feature "Login" do
     page.should have_content("Trilla Time Tracking")
   end
 end
+
+feature "Login con API Key" do
+  let!(:pepito) {usuario}
+  
+  background do
+     logout
+   end
+   
+  scenario "usuario ingresa con token" do
+    pepito.enable_api!
+    visit "/?api_key=" + pepito.api_key
+    page.should have_content("Trilla Time Tracking")
+  end
+end

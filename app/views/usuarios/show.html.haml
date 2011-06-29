@@ -18,6 +18,17 @@
     %p
       %b Perfil:
       = h @usuario.perfil
+    - if @usuario.api_is_enabled? 
+      %p
+        Tu API Key:
+        = @usuario.api_key
+        = link_to "re-generar", api_key_path, :method => :post 
+        = link_to "deshabilitar", api_key_path, :method => :delete 
+         
+    - else
+      %p 
+        Necesitas una  Key para hacer llamadas al API de Trilla 
+        = link_to("[Obtener Key]", api_key_path, :method => :post)
     = link_to_if @isPerfil, 'Editar', {:controller => "perfil", :action => "edit"} do
       = link_to_if session[:usuario].admin?, 'Editar', edit_usuario_path(@usuario)
     | 

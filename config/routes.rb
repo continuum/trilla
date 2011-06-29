@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :clientes
   map.resource :sessions
+  map.resource :api_key
     
   map.root :controller => 'timesheet'
 

@@ -1,11 +1,19 @@
 module AuthenticationHelper
   
   def signed_in?
-    !session[:usuario_id].nil?
+    !session[:usuario_id].nil? || login_from_api_key
   end
   
   def current_user
-    @current_user ||= User.find(session[:usuario_id])
+    @current_user ||= (Usuario.find(session[:usuario_id]) || login_from_api_key)
+  end
+  
+  def login_from_api_key
+    if !params[:api_key].nil?
+      @current_user = Usuario.find_by_api_key(params[:api_key]) unless params[:api_key].empty?
+      session[:usuario] = @current_user
+      session[:usuario_id] = @current_user.id
+    end
   end
   
   def ensure_signed_in
