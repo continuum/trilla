@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :contactos
+  map.resources :contactos
   map.resources :usuarios
   map.resources :tareas
   map.resources :proyecto_tareas
