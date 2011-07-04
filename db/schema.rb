@@ -19,6 +19,22 @@ ActiveRecord::Schema.define(:version => 20110628195108) do
     t.string   "contacto"
   end
 
+  create_table "contactos", :force => true do |t|
+    t.string   "nombre"
+    t.string   "email"
+    t.string   "telefono"
+    t.integer  "cliente_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "proyecto_contactos", :force => true do |t|
+    t.integer  "contacto_id"
+    t.integer  "proyecto_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "proyecto_tareas", :force => true do |t|
     t.integer  "proyecto_id"
     t.integer  "tarea_id"

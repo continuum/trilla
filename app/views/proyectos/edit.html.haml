@@ -8,7 +8,10 @@
   =error_messages_for :proyecto, :header_message => "Errores:", :message => ""
   - form_for(@proyecto) do |f|
     .component-search-forms.forms-two-cols
-      = render :partial => 'fields', :locals => { :f => f, :tareas => @tareas, :usuarios => @usuarios}  
+      = render :partial => 'fields', :locals => { :f => f,
+                                                  :tareas => @tareas,
+                                                  :contactos => @contactos,
+                                                  :usuarios => @usuarios}
       .clearfix
     .component-search-actions
       = f.submit 'Actualizar'

@@ -9,7 +9,7 @@ class Usuario < ActiveRecord::Base
   #TODO Cuando se definan estándar de perfiles, cambiar esta validación
   validates_inclusion_of :perfil, :in => %w( ADMIN USUARIO ), :if => :perfil?, :message => "Perfil inválido. Valores válidos son: ADMIN, USUARIO"
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :if => :email?, :message => 'Formato de e-mail inválido'
-  validates_uniqueness_of :email, :message => "Ya existe un usuario con esta dirección de e-mail"
+  validates_uniqueness_of :email, :message => "Ya existe un usuario con esta dirección de e-mail",:on => :create
   
   def self.find_by_login(login)
     find(:first, :conditions => ["rut = ?",login])

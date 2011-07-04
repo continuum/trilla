@@ -1,0 +1,36 @@
+= render(:partial => "shared/adminmenu")
+.component-navigator-tabs
+  %ul
+    %li.tab-select.first
+      %a#tab-form{:href => "javascript:void(0)"} Contactos
+    %li.clearfix
+.component-datatable
+  -if @contactos.empty?
+    No existen contactos
+  -else
+    .component-standar-grid
+      %table.standar-grid-model{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+        %col{:width => ""}/
+        %col{:width => ""}/
+        %col{:width => ""}/
+        %col{:width => "200px"}/
+        %col{:width => "180px"}/
+        %tbody
+          %tr
+            %th Nombre
+            %th Email
+            %th Tel&eacute;fono
+            %th Cliente
+            %th
+          - @contactos.each do |contacto|
+            %tr[contacto, :tr]
+              %td #{link_to contacto.nombre, edit_contacto_path(contacto)}
+              %td= contacto.email
+              %td= contacto.telefono
+              %td= contacto.cliente.descripcion
+              %td
+                \&nbsp;
+                \#{link_to 'Editar', edit_contacto_path(contacto)}
+                \#{link_to 'Eliminar', contacto, :confirm => 'Está seguro?', :method => :delete}
+      %br/
+  = link_to 'Nuevo Contacto', new_contacto_path

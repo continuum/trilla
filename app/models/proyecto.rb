@@ -1,5 +1,9 @@
 class Proyecto < ActiveRecord::Base
   belongs_to :cliente
+  has_many :proyecto_contactos
+  has_many :contactos, :through => :proyecto_contactos
+  accepts_nested_attributes_for :proyecto_contactos, :reject_if => lambda { |a| a.values.all?(&:blank?) }, :allow_destroy => true
+
   has_many :proyecto_tareas
   has_many :tareas, :through => :proyecto_tareas
   accepts_nested_attributes_for :proyecto_tareas, :reject_if => lambda { |a| a.values.all?(&:blank?) }, :allow_destroy => true
@@ -14,8 +18,6 @@ class Proyecto < ActiveRecord::Base
   validates_uniqueness_of :descripcion, :message => "Ya existe un proyecto con el mismo nombre"
   validates_numericality_of :cliente_id, :greater_than => 0, :message => "Debe seleccionar un cliente"
   validates_numericality_of :estimacion, :message => "Debe ingresar un valor numérico para la estimación", :allow_nil => true
-  #validates_associated :tareas
-  #validates_associated :cliente
 
   named_scope :no_archivados, :conditions => "not archivado"
 
@@ -27,14 +29,6 @@ class Proyecto < ActiveRecord::Base
   end
 
   def self.find_all_accesibles(usuario_id)
-   # find(
-   #   :all,
-   #   :joins => "left join proyecto_usuarios on proyecto_usuarios.proyecto_id = proyectos.id",
-   #   :conditions => ["privado = false or privado is null or proyecto_usuarios.usuario_id = ?", usuario_id]
-   # )
-   #TODO:  BUG N°: 13273349
-   #        Probablemente existe una mejor forma de conseguir la unicidad de proyectos
-   #        utilizando algo un poco más abstraido como la llamada comentada de arriba.
    find_by_sql ["SELECT  DISTINCT proyectos.descripcion,
                                  proyectos.id,
                                  proyectos.cliente_id,

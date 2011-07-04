@@ -67,5 +67,21 @@
       = select_tag(:proyecto_tareas_select, options_for_select([["Selecciona una tarea",-1]].concat(tareas_array)))
       = add_child_link "Agregar Tarea", f, :proyecto_tareas
 
-
-
+%ol.forms-structure-rows
+  %li
+    .content-table
+      %h4
+        %table.two-columns
+          %tr
+            %td
+              Contactos
+              - if (contactos)
+                ="(" + contactos.all.size.to_s + ")"
+    - f.fields_for :proyecto_contactos do |proyecto_contactos_form|
+      - if (contactos)
+        - @contacto =  contactos.find(id = proyecto_contactos_form.object.contacto_id)
+      = render :partial => 'proyecto_contactos', :locals => {:f => proyecto_contactos_form}
+    .forms-row-single-division.wide
+      - contactos_array = Contacto.all.map { |contacto| [contacto.nombre, contacto.id] }
+      = select_tag(:proyecto_contactos_select, options_for_select([["Selecciona un contacto",-1]].concat(contactos_array)))
+      = add_child_link "Agregar Contacto", f, :proyecto_contactos

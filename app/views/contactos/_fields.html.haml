@@ -1,0 +1,21 @@
+%ol.forms-structure-rows
+  %li
+    .forms-row-single-division.left 
+      = f.label :nombre
+    .forms-row-single-division.right 
+      = f.text_field :nombre
+  %li
+    .forms-row-single-division.left 
+      = f.label :email
+    .forms-row-single-division.right 
+      = f.text_field :email
+  %li
+    .forms-row-single-division.left 
+      = f.label :telefono
+    .forms-row-single-division.right 
+      = f.text_field :telefono
+  %li
+    .forms-row-single-division.left 
+      = f.label :cliente
+    .forms-row-single-division.right
+      = collection_select(:contacto, :cliente_id, Cliente.all, :id, :descripcion)

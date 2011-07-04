@@ -1,0 +1,15 @@
+= render(:partial => "shared/adminmenu")
+.component-navigator-tabs
+  %ul
+    %li.tab-select.first
+      %a#tab-form{:href => "javascript:void(0)"} Contactos
+    %li.clearfix
+.component-search
+  - form_for(@contacto) do |f|
+    = f.error_messages
+    .component-search-forms.forms-two-cols
+      = render :partial => 'fields', :locals => {:f => f}
+      .clearfix
+    .component-search-actions
+      = f.submit 'Crear'
+      = link_to 'Cancelar', contactos_path

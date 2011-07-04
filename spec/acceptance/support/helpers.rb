@@ -44,6 +44,12 @@ module HelperMethods
     end
   end
 
+  def within_contacto_row(contacto)
+    within(:id, "tr_contacto_#{contacto.id}") do
+      yield
+    end
+  end
+
   def within_tarea_row(tarea)
     within(:id, "tr_tarea_#{tarea.id}") do
       yield
@@ -112,6 +118,10 @@ module Capybara::Node::Matchers
 
   def has_cliente?(cliente)
     has_xpath?("//tr[@id='tr_cliente_#{cliente.id}']")
+  end
+
+  def has_contacto?(contacto)
+    has_xpath?("//tr[@id='tr_contacto_#{contacto.id}']")
   end
 end
 

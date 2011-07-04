@@ -1,6 +1,7 @@
 class Cliente < ActiveRecord::Base
   has_many :proyectos
   has_many :proyecto_usuarios, :through => :proyectos
+  has_many :contactos
   
   validates_presence_of :descripcion, :message => "Debe ingresar un nombre para el cliente"
   

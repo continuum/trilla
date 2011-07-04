@@ -14,12 +14,14 @@ class ProyectosController < ApplicationController
     @proyecto = Proyecto.new
     @tareas = @proyecto.tareas
     @usuarios = @proyecto.usuarios
+    @contactos = @proyecto.contactos
   end
 
   def edit
     @proyecto = Proyecto.find(params[:id])
     @tareas = @proyecto.tareas
     @usuarios = @proyecto.usuarios
+    @contactos = @proyecto.contactos
   end
 
 
@@ -33,8 +35,8 @@ class ProyectosController < ApplicationController
     @proyecto = Proyecto.new(params[:proyecto])
     if @proyecto.save
       flash[:notice] = 'Proyecto was successfully created.'
-      #TODO comentado hasta que se configure tema del correo
-      #email_sent(@proyecto)
+      # TODO comentado hasta que se configure tema del correo
+      # email_sent(@proyecto)
       redirect_to(proyectos_url)
     else
       render :action => "new"
