@@ -43,7 +43,7 @@ class ReportesController < ApplicationController
     maxrows = params[:maxrows] || -1
     maxrows= maxrows.to_i
     s = querys.split("}SQL")
-    s.select { |sql| sql.upcase.start_with? 'SELECT' }
+    s = s.select { |sql| sql.upcase.start_with? 'SELECT' }
     result = {:msg => 'ok', :success => true}
     s.each_with_index do |d, count|
       query = d.sub('SQL{','')
