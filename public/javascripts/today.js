@@ -111,9 +111,20 @@ var REFRESH_EVENT = 'refreshTotalHours';
   function create_update(){
       var id = $('#temporizador_id').val();
       var tiempo_base = $('#temporizador_tiempo_base').val();
-      var form_params = $('#form-nuevo').serialize() + "&" + $('#fecha').serialize();
       var link_guardar_timesheet = $('#lnk-guardar-timesheet');
+      var descripcion_temporizador = $('#temporizador_descripcion');
       link_guardar_timesheet.attr('disabled', 'disabled');
+
+      if (descripcion_temporizador.val().length > 255){
+        if (confirm('Ha ingresado una descripción demasiado extensa. ¿Desea que truncarla hasta el máximo permitido?')){
+          descripcion_temporizador.val(descripcion_temporizador.val().substring(0,255));
+        }else{
+          link_guardar_timesheet.attr('disabled', '');
+          return;
+        }
+      }
+
+      var form_params = $('#form-nuevo').serialize() + "&" + $('#fecha').serialize();
 
       var _create_edit_fn = function(_function, mustReset, secondParam){
         var commonCallBack = function(){
@@ -129,7 +140,7 @@ var REFRESH_EVENT = 'refreshTotalHours';
           _function(form_params, commonCallBack);
         }
       };
-      
+
       if (!isValidTimeField(tiempo_base)){
         alert('El formato de la hora ingresada no es válido. Debe ser HH:MM([+-]HH:MM)*');
         link_guardar_timesheet.attr('disabled', '');
@@ -155,7 +166,6 @@ var REFRESH_EVENT = 'refreshTotalHours';
                 _create_edit_fn(create, false, 0);
               }
           } else {
-              //console.info('crear, iniciar');
               _create_edit_fn(create, true, 1);
           }
       }
