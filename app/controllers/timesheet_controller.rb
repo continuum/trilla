@@ -6,10 +6,12 @@ class TimesheetController < ApplicationController
 
   expose(:fecha) do
     begin
-      if params[:year] && params[:year].present?  && params[:day_of_the_year] && params[:day_of_the_year].present?
-          Date.strptime "#{params[:year]}-#{params[:day_of_the_year]}", "%Y-%j"
-      elsif params[:fecha] && params[:fecha].present?
+      if params_present?([:year, :day_of_the_year])
+        Date.strptime "#{params[:year]}-#{params[:day_of_the_year]}", "%Y-%j"
+      elsif param_present?(:fecha)
         Date.strptime params[:fecha], "%d/%m/%Y"
+      elsif params_present?([:day, :month, :year])
+        Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
       else
         Date.today
       end
@@ -63,7 +65,6 @@ class TimesheetController < ApplicationController
   def nuevoTemporizador
     @clientesProyectos = Cliente.find_with_proyectos_by_usuario session[:usuario_id]
     @tareasProyecto = Tarea.find_by_clientes_proyectos @clientesProyectos
-
   end
 
   def day

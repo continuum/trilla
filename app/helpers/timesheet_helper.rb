@@ -30,4 +30,20 @@ module TimesheetHelper
     link_dia((fecha + 1.day), ">>")
   end
   
+  def param_present?(symbol)
+    if params[symbol] && params[symbol].present?
+       true 
+    else
+      false
+    end
+  end
+  
+  def params_present?(symbols)
+    is_present = true
+    symbols.each do |symbol|
+      is_present &&= param_present?(symbol)
+    end
+    return is_present
+  end
+  
 end
