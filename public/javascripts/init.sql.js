@@ -195,12 +195,12 @@
 					tr = '<table  cellpadding="0" cellspacing="0" style="border: 1px solid black; width:100%;"><tr>' +
 						 '<td style="background-color: #cccccc; width: 40px;border: 1px solid black;">SQL</td>' +
 						 '<td style="border: 1px solid black;">' + json.sql + '</td>' +
-						 '<td style="width: 50px;border: 1px solid black; padding:2px;">' +
+						 '<td style="width: 135px;border: 1px solid black; padding:2px;">' +
 						 '<a href="javascript:;" style="padding:2px;" class="export_csv" query="' + json.sql + '" maxrows="' + json.maxrows + '" title="Descargar a excel">' +
 						 '<img src="./images/docExcel.png" border="0">' +
 						 '</a>' +
 						 '<a href="javascript:;" style="padding:5px;" class="save_query_report" query="' + json.sql + '" maxrows="' + json.maxrows + '" title="Guardar query">' +
-						 '<img src="images/save.png" border="0">' +
+						 '<img src="/images/save.png" border="0">&nbsp;Guardar Reporte' +
 						 '</a>' +
 						 '</td>' +
 						 '</tr></table>';

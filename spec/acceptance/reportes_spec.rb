@@ -53,13 +53,24 @@ feature "Consultar Reportes" do
   end
 end
 
-feature "Nuevo Reporte" do
+feature "Crear Reportes" do
   let!(:pepito) {usuario}
 
   background do
     login(pepito)
   end
-
+  
+  scenario "Se guarda el reporte desde consulta" do
+    click_link "Reportes"
+    click_link "Consultar reportes"
+    fill_in "querys-sql", :with => "{SELECT * FROM temporizadors}"
+    click_button 'Ejecutar'
+    within(:id, 'resultados-sql') do
+      click_link 'Guardar Reporte'
+    end
+    
+  end
+  
   scenario "Se visualiza la lista de reportes creados" do
     reporte1 = Fabricate(:reporte, :nombre => "Reporte 2011")
     reporte2 = Fabricate(:reporte, :nombre => "Reporte 2012")
